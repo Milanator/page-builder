@@ -12,7 +12,7 @@ const onSave = (value: any) => {
 
 <template>
   <!--  <RichTextEditor></RichTextEditor>-->
-  <PageBuilder css-url="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  <PageBuilder
                @onSave="onSave"></PageBuilder>
 </template>
 
