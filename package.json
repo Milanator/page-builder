@@ -1,5 +1,5 @@
 {
-  "name": "@binarycastle/page-builder",
+  "name": "page-builder",
   "description": "Page Builder",
   "private": false,
   "homepage": "https://github.com/binary-castle/page-builder",
@@ -21,7 +21,8 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@binarycastle/vue-html-editor": "^1.0.8",
