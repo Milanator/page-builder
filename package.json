@@ -35,7 +35,8 @@
     "@tiptap/extension-text-style": "^2.10.4",
     "tailwindcss": "^4.1.11",
     "uuid": "^11.0.3",
-    "vue": "^3.5.12"
+    "vue": "^3.5.12",
+    "vue-i18n": "^11.2.2"
   },
   "devDependencies": {
     "@tiptap/extension-bubble-menu": "^2.10.3",

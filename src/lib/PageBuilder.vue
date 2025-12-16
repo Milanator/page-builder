@@ -13,12 +13,18 @@ interface Props {
   cssUrl?: string;
   renderList?: Block[],
   meta?: Array<Record<string, string>>,
-  pageTitle?: string
+  pageTitle?: string,
+  trans?: Record<string, string>,
 }
 
 const props = withDefaults(defineProps<Props>(), {
   cssUrl: '',
-})
+  trans: (): Record<string, string> => ({
+    save: 'Save',
+    back_to_editor: "Back to editor",
+    preview_mode: "Preview Mode"
+  })
+});
 
 const emit = defineEmits<{
   (event: 'onSave', value: any): void,
@@ -113,7 +119,7 @@ console.log('test')
     <!-- Secondary Close Button for Mobile/Touch -->
     <div
         class="preview-mode-indicator bcpb:fixed bcpb:top-4 bcpb:left-4 bcpb:z-[99998] bcpb:bg-black/80 bcpb:text-white bcpb:px-4 bcpb:py-2 bcpb:rounded-full bcpb:text-sm bcpb:font-medium bcpb:backdrop-blur-sm">
-      Preview Mode
+      {{ trans.preview_mode }}
     </div>
 
     <!-- Floating Action Bar -->
@@ -123,7 +129,7 @@ console.log('test')
           @click="isPreview = false"
           class="bcpb:bg-blue-600 hover:bcpb:bg-blue-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-blue-500/20"
       >
-        ← Back to Editor
+        ← {{ trans.back_to_editor }}
       </button>
 
       <!-- Save Button in Preview -->
@@ -131,7 +137,7 @@ console.log('test')
           @click="exportPage($event)"
           class="bcpb:bg-green-600 hover:bcpb:bg-green-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-green-500/20"
       >
-        💾 Save Page
+        💾 {{ trans.save }}
       </button>
     </div>
 
