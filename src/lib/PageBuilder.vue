@@ -1,30 +1,24 @@
 <script setup lang="ts">
-
 import Sidebar from "./layouts/Sidebar.vue";
 import ToolBar from "./layouts/ToolBar.vue";
+import PagePreview from "./PagePreview.vue";
 import {Block} from "./utils/types.ts";
 import {usePageBuilder} from "./PageBuilder.ts";
 import {useLoadCSS} from "./useLoadCSS.ts";
 import {onMounted, onUnmounted, ref, Ref, watchEffect} from "vue";
 import {previewComponentMap, previewOptionMap} from "./utils/registry.ts";
-import PagePreview from "./PagePreview.vue";
+import { Language } from "./utils/types.ts";
+import { initLocale, t } from "./translations.ts";
 
 interface Props {
   cssUrl?: string;
   renderList?: Block[],
   meta?: Array<Record<string, string>>,
   pageTitle?: string,
-  trans?: Record<string, string>,
+  language: Language,
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  cssUrl: '',
-  trans: (): Record<string, string> => ({
-    save: 'Save',
-    back_to_editor: "Back to editor",
-    preview_mode: "Preview Mode"
-  })
-});
+const props = withDefaults(defineProps<Props>(), { cssUrl: ''});
 
 const emit = defineEmits<{
   (event: 'onSave', value: any): void,
@@ -51,6 +45,7 @@ const {
 
 const {loadCSS, removeCSS} = useLoadCSS()
 
+initLocale(props.language)
 
 // ESC key listener for preview mode
 const handleKeyDown = (event: KeyboardEvent) => {
@@ -96,12 +91,8 @@ const devices: Record<'desktop' | 'tab' | 'mobile', string> = {
   'tab': 'bcpb:w-4xl bcpb:mx-auto',
   'mobile': 'bcpb:w-full bcpb:max-w-sm bcpb:mx-auto bcpb:px-4',
 }
-
-console.log('test')
 </script>
-
 <template>
-
   <!-- Enhanced Preview Modal -->
   <div v-if="isPreview"
        class="bcpb:fixed bcpb:inset-0 bcpb:bg-white bcpb:w-full bcpb:h-screen bcpb:z-[9999] bcpb:overflow-auto">
@@ -119,7 +110,7 @@ console.log('test')
     <!-- Secondary Close Button for Mobile/Touch -->
     <div
         class="preview-mode-indicator bcpb:fixed bcpb:top-4 bcpb:left-4 bcpb:z-[99998] bcpb:bg-black/80 bcpb:text-white bcpb:px-4 bcpb:py-2 bcpb:rounded-full bcpb:text-sm bcpb:font-medium bcpb:backdrop-blur-sm">
-      {{ trans.preview_mode }}
+      {{ t('preview_mode') }}
     </div>
 
     <!-- Floating Action Bar -->
@@ -129,7 +120,7 @@ console.log('test')
           @click="isPreview = false"
           class="bcpb:bg-blue-600 hover:bcpb:bg-blue-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-blue-500/20"
       >
-        ← {{ trans.back_to_editor }}
+        ← {{ t('back_to_editor') }}
       </button>
 
       <!-- Save Button in Preview -->
@@ -137,7 +128,7 @@ console.log('test')
           @click="exportPage($event)"
           class="bcpb:bg-green-600 hover:bcpb:bg-green-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-green-500/20"
       >
-        💾 {{ trans.save }}
+        💾 {{ t('save') }}
       </button>
     </div>
 

@@ -2,11 +2,12 @@
 import {BubbleMenu, Editor, EditorContent} from "@tiptap/vue-3";
 import {StarterKit} from "@tiptap/starter-kit";
 import {Placeholder} from "@tiptap/extension-placeholder";
-import {onBeforeUnmount} from "vue";
+import {onBeforeUnmount, onMounted} from "vue";
 import {TextStyle} from "@tiptap/extension-text-style";
 import {Color} from "@tiptap/extension-color";
 import EditorMenu from "./EditorMenu.vue";
 import {TextAlign} from "@tiptap/extension-text-align";
+import { setLocale,t } from "../../translations";
 
 interface Props {
   bubbleMenu?: boolean
@@ -18,12 +19,14 @@ withDefaults(defineProps<Props>(), {
   bubbleMenu: true
 })
 
+setLocale()
+
 const editor = new Editor({
   content: model.value || "",
   extensions: [
     StarterKit,
     Placeholder.configure({
-      placeholder: "Start writing your content...",
+      placeholder: t('start_writing_content'),
       emptyEditorClass: 'is-editor-empty',
       emptyNodeClass: 'is-empty-node',
     }),

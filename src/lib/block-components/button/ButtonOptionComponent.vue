@@ -5,36 +5,41 @@ import BaseOption from "../BaseOption.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from "../../controls/SliderToggle.vue";
 import ColorInput from "../../controls/ColorInput.vue";
+import { setLocale, t } from "../../translations.ts";
+import { onMounted } from "vue";
 
 interface Props {
   blockInfo: ButtonBlock
 }
 
 defineProps<Props>()
-</script>
 
+onMounted(()=>{
+  setLocale()
+})
+</script>
 <template>
-  <BaseOption title="Button">
+  <BaseOption :title="t('Button')">
     <!-- Basic Settings -->
     <div class="bcpb:space-y-1">
-      <option-widget title="Has Container">
+      <option-widget :title="t('has_container')">
         <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
       </option-widget>
 
-      <option-widget title="Background Color">
+      <option-widget :title="t('background_color')">
         <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
       </option-widget>
 
-      <option-widget title="Background Image" align="vertical">
+      <option-widget :title="t('background_image')" align="vertical">
         <input 
           type="url" 
           v-model="blockInfo.options.backgroundImage" 
-          placeholder="Apply Image URL"
+:placeholder="t('apply_image_url')"
           class="bg-page-builder-input"
         >
       </option-widget>
 
-      <option-widget title="Alignment">
+      <option-widget :title="t('alignment')">
         <div class="bcpb:flex bcpb:rounded-lg bcpb:border bcpb:border-gray-300 bcpb:overflow-hidden">
           <button 
             @click="blockInfo.options.buttonAlign = 'left'" 
@@ -43,7 +48,7 @@ defineProps<Props>()
               'bcpb:bg-blue-600 bcpb:text-white': blockInfo.options.buttonAlign === 'left',
               'bcpb:bg-white bcpb:text-gray-700 hover:bcpb:bg-gray-50': blockInfo.options.buttonAlign !== 'left'
             }"
-            title="Align Left"
+:title="t('align_left')"
           >
             <span class="icon-text-left"></span>
           </button>
@@ -54,7 +59,7 @@ defineProps<Props>()
               'bcpb:bg-blue-600 bcpb:text-white': blockInfo.options.buttonAlign === 'center',
               'bcpb:bg-white bcpb:text-gray-700 hover:bcpb:bg-gray-50': blockInfo.options.buttonAlign !== 'center'
             }"
-            title="Align Center"
+            :title="t('align_center')"
           >
             <span class="icon-text-center"></span>
           </button>
@@ -65,7 +70,7 @@ defineProps<Props>()
               'bcpb:bg-blue-600 bcpb:text-white': blockInfo.options.buttonAlign === 'right',
               'bcpb:bg-white bcpb:text-gray-700 hover:bcpb:bg-gray-50': blockInfo.options.buttonAlign !== 'right'
             }"
-            title="Align Right"
+            :title="t('align_right')"
           >
             <span class="icon-text-right"></span>
           </button>
@@ -76,25 +81,25 @@ defineProps<Props>()
     <!-- Button Content & Actions -->
     <div class="bcpb:mt-6 bcpb:border-t bcpb:border-gray-100 bcpb:pt-4">
       <div class="bcpb:space-y-1">
-        <option-widget title="Button Text">
+        <option-widget :title="t('button_text')">
           <input 
             type="text" 
             v-model="blockInfo.options.text"
-            placeholder="Enter button text"
+            :placeholder="t('enter_button_text')"
             class="bg-page-builder-input"
           >
         </option-widget>
 
-        <option-widget title="Click Action" align="vertical">
+        <option-widget :title="t('click_action')" align="vertical">
           <div class="bcpb:space-y-3">
             <div class="bcpb:relative">
               <select 
                 v-model="blockInfo.options.buttonAction.type"
                 class="bg-page-builder-input bg-page-builder-select"
               >
-                <option :value="null">Select an action</option>
-                <option value="external_link">Visit external link</option>
-                <option value="internal_link">Visit internal link</option>
+                <option :value="null">{{ t('select_action') }}</option>
+                <option value="external_link">{{ t('visit_external_link') }}</option>
+                <option value="internal_link">{{ t('visit_internal_link') }}</option>
               </select>
               <div class="bcpb:absolute bcpb:inset-y-0 bcpb:right-0 bcpb:flex bcpb:items-center bcpb:pr-3 bcpb:pointer-events-none">
                 <svg class="bcpb:w-4 bcpb:h-4 bcpb:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,29 +112,25 @@ defineProps<Props>()
               v-if="blockInfo.options.buttonAction.type"
               type="url"
               v-model="blockInfo.options.buttonAction.url"
-              placeholder="Enter URL"
+              :placeholder="t('enter_url')"
               class="bg-page-builder-input"
             >
           </div>
         </option-widget>
 
-        <option-widget title="CSS Classes" align="vertical">
+        <option-widget :title="t('css_classes')" align="vertical">
           <textarea 
             v-model="blockInfo.options.styleClass"
             rows="3"
-            placeholder="Enter CSS classes..."
+            :placeholder="t('enter_css_classes')"
             class="bg-page-builder-input bg-page-builder-textarea"
           ></textarea>
         </option-widget>
 
-        <option-widget title="Custom Styles" align="vertical" :is-expandable="true">
+        <option-widget :title="t('custom_styles')" align="vertical" :is-expandable="true">
           <CodeMirrorEditor v-model="blockInfo.options.styles" language="text/css"></CodeMirrorEditor>
         </option-widget>
       </div>
     </div>
   </BaseOption>
 </template>
-
-<style scoped>
-/* Pure CSS only - no Tailwind utilities */
-</style>

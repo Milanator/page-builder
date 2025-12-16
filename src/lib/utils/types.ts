@@ -57,3 +57,5 @@ export interface Block {
 
     type: BlockType
 }
+
+export type Language = 'sk' | 'en'

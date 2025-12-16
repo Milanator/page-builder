@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import {computed, ref} from 'vue'
+import {computed, onMounted, ref} from 'vue'
 import {usePageBuilder} from "../PageBuilder.ts";
 import {blockRegistry} from "../utils/registry.ts";
 import type {Block} from "../utils/types.ts";
+import { setLocale, t } from '../translations.ts';
 
 const {startDrag} = usePageBuilder()
 
@@ -60,19 +61,22 @@ const filteredUIComponents = computed(() => {
     element.description.toLowerCase().includes(search)
   )
 })
-</script>
 
+onMounted(()=>{
+  setLocale()
+})
+</script>
 <template>
   <!-- Right Side - Elements Panel -->
   <div class="bcpb:w-100 bcpb:bg-white bcpb:flex bcpb:flex-col bcpb:border-l bcpb:border-gray-100">
     <!-- Panel Header -->
     <div class="bcpb:px-6 bcpb:py-3 bcpb:border-b bcpb:border-gray-100">
-      <h2 class="bcpb:text-xl bcpb:font-semibold bcpb:text-gray-900 bcpb:mb-1">Elements</h2>
-      <p class="bcpb:text-sm bcpb:text-gray-600">Drag components to your canvas</p>
+      <h2 class="bcpb:text-xl bcpb:font-semibold bcpb:text-gray-900 bcpb:mb-1">{{ t('elements') }}</h2>
+      <p class="bcpb:text-sm bcpb:text-gray-600">{{ t('drag_components') }}</p>
     </div>
 
     <!-- Search -->
-    <div class="bcpb:px-6 bcpb:py-4 bcpb:border-b bcpb:border-gray-100">
+    <div id="filter-input" class="bcpb:px-6 bcpb:py-4 bcpb:border-b bcpb:border-gray-100">
       <div class="bcpb:relative">
         <input 
           type="text" 
@@ -91,10 +95,11 @@ const filteredUIComponents = computed(() => {
     <div class="bcpb:flex-1 bcpb:overflow-y-auto">
       <!-- Basic Elements -->
       <div v-if="filteredBasicElements.length > 0" class="bcpb:px-6 bcpb:py-6">
-        <h3 class="bcpb:text-sm bcpb:font-semibold bcpb:text-gray-900 bcpb:mb-4 bcpb:uppercase bcpb:tracking-wide">Basic Elements</h3>
+        <h3 class="bcpb:text-sm bcpb:font-semibold bcpb:text-gray-900 bcpb:mb-4 bcpb:uppercase bcpb:tracking-wide">{{ t('base_elements') }}</h3>
         <div class="bcpb:space-y-3">
           <div v-for="element in filteredBasicElements" :key="element.id"
                draggable="true" @dragstart="handleDragStart($event, element)" @dragend="handleDragEnd"
+               :class="`element-${element.name}`"
                class="drag-item group bcpb:bg-white bcpb:border bcpb:border-gray-100 bcpb:rounded-xl bcpb:p-4 bcpb:cursor-grab hover:bcpb:cursor-grab active:bcpb:cursor-grabbing hover:bcpb:border-blue-300 hover:bcpb:bg-gradient-to-r hover:bcpb:from-blue-50/70 hover:bcpb:to-blue-100/50 hover:bcpb:shadow-md hover:bcpb:shadow-blue-100/50 hover:bcpb:-translate-y-1 hover:bcpb:scale-[1.02] bcpb:transition-all bcpb:duration-300 bcpb:ease-out active:bcpb:scale-[0.98] active:bcpb:shadow-lg active:bcpb:shadow-blue-200/60 active:bcpb:border-blue-400">
             <div class="bcpb:flex bcpb:items-center bcpb:space-x-3">
               <div
@@ -102,10 +107,8 @@ const filteredUIComponents = computed(() => {
                 <div class="bcpb:text-blue-600 group-hover:bcpb:text-blue-700 group-hover:bcpb:scale-110 bcpb:transition-all bcpb:duration-300" v-html="element.icon"></div>
               </div>
               <div class="bcpb:flex-1">
-                <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-blue-900 bcpb:transition-colors bcpb:duration-200">{{ element.title }}</p>
-                <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-blue-700 bcpb:transition-colors bcpb:duration-200">{{ element.description }} | {{
-                    element.type
-                  }}</p>
+                <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-blue-900 bcpb:transition-colors bcpb:duration-200">{{ t(element.title) }}</p>
+                <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-blue-700 bcpb:transition-colors bcpb:duration-200">{{ element.description }}</p>
               </div>
             </div>
           </div>
@@ -115,10 +118,11 @@ const filteredUIComponents = computed(() => {
 
       <!-- Layout Elements -->
       <div v-if="filteredLayoutElements.length > 0" class="bcpb:px-6 bcpb:py-6 bcpb:border-t bcpb:border-gray-100">
-        <h3 class="bcpb:text-sm bcpb:font-semibold bcpb:text-gray-900 bcpb:mb-4 bcpb:uppercase bcpb:tracking-wide">Layout</h3>
+        <h3 class="bcpb:text-sm bcpb:font-semibold bcpb:text-gray-900 bcpb:mb-4 bcpb:uppercase bcpb:tracking-wide">{{ t('Layout') }}</h3>
         <div class="bcpb:space-y-3">
           <div v-for="element in filteredLayoutElements" :key="element.id"
                draggable="true" @dragstart="handleDragStart($event, element)" @dragend="handleDragEnd"
+                :class="`element-${element.name}`"
                class="drag-item group bcpb:bg-white bcpb:border bcpb:border-gray-100 bcpb:rounded-xl bcpb:p-4 bcpb:cursor-grab hover:bcpb:cursor-grab active:bcpb:cursor-grabbing hover:bcpb:border-indigo-300 hover:bcpb:bg-gradient-to-r hover:bcpb:from-indigo-50/70 hover:bcpb:to-indigo-100/50 hover:bcpb:shadow-md hover:bcpb:shadow-indigo-100/50 hover:bcpb:-translate-y-1 hover:bcpb:scale-[1.02] bcpb:transition-all bcpb:duration-300 bcpb:ease-out active:bcpb:scale-[0.98] active:bcpb:shadow-lg active:bcpb:shadow-indigo-200/60 active:bcpb:border-indigo-400">
             <div class="bcpb:flex bcpb:items-center bcpb:space-x-3">
               <div
@@ -129,9 +133,9 @@ const filteredUIComponents = computed(() => {
                 </svg>
               </div>
               <div class="bcpb:flex-1">
-                <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-indigo-900 bcpb:transition-colors bcpb:duration-200">{{ element.title }}</p>
+                <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-indigo-900 bcpb:transition-colors bcpb:duration-200">{{ t(element.title) }}</p>
                 <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-indigo-700 bcpb:transition-colors bcpb:duration-200">
-                  {{ element.description }} | {{ element.type }}
+                  {{ element.description }}
                 </p>
               </div>
             </div>
@@ -177,7 +181,6 @@ const filteredUIComponents = computed(() => {
     </div>
   </div>
 </template>
-
 <style scoped>
 /* Custom styles for drag and drop effects */
 .drag-item {

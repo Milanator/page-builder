@@ -23,16 +23,8 @@ onUnmounted(() => {
   removeCSS(props.cssUrl)
 })
 </script>
-
 <template>
   <div v-for="(block, index) of renderList" :key="`r_item_${index}`">
-    <component :is="previewComponentMap[block.name]" :blockInfo="block">
-
-    </component>
+    <component :is="previewComponentMap[block.name]" :blockInfo="block"/>
   </div>
-
 </template>
-
-<style scoped>
-
-</style>
