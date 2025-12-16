@@ -22,7 +22,8 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "semantic-release": "semantic-release",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "lint": "eslint --ext .ts,.vue src"
   },
   "dependencies": {
     "@binarycastle/vue-html-editor": "^1.0.8",

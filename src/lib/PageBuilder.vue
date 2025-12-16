@@ -189,19 +189,10 @@ const devices: Record<'desktop' | 'tab' | 'mobile', string> = {
 
                 <!-- Content -->
                 <div class="bcpb:space-y-4">
-                  <h3 class="bcpb:text-xl bcpb:font-semibold bcpb:text-gray-800">Ready to build something amazing?</h3>
+                  <h3 class="bcpb:text-xl bcpb:font-semibold bcpb:text-gray-800">Plocha pre elementy</h3>
                   <p class="bcpb:text-gray-600 bcpb:leading-relaxed">
-                    Your canvas is empty and ready for creativity. Drag components from the sidebar and drop them here
-                    to start building your page.
+                    Plocha pre elementy
                   </p>
-
-                  <!-- Call to Action -->
-                  <div
-                      class="bcpb:mt-6 bcpb:p-4 bcpb:bg-gradient-to-r bcpb:from-blue-50 bcpb:to-purple-50 bcpb:rounded-lg bcpb:border bcpb:border-blue-100">
-                    <p class="bcpb:text-sm bcpb:text-blue-700 bcpb:font-medium">💡 Pro Tip: Start with a layout component
-                      like columns
-                      or containers</p>
-                  </div>
                 </div>
               </div>
             </div>

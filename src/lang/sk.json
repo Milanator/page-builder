@@ -32,5 +32,7 @@
     "enter_url": "Zadaj URL",
     "css_classes": "CSS triedy",
     "enter_css_classes": "Zadaj CSS triedy...",
-    "custom_styles": "Vlastné štýly"
+    "custom_styles": "Vlastné štýly",
+    "columns":"Stĺpce",
+    "column":"Stĺpec"
 }

@@ -108,7 +108,7 @@ onMounted(()=>{
               </div>
               <div class="bcpb:flex-1">
                 <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-blue-900 bcpb:transition-colors bcpb:duration-200">{{ t(element.title) }}</p>
-                <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-blue-700 bcpb:transition-colors bcpb:duration-200">{{ element.description }}</p>
+                <!-- <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-blue-700 bcpb:transition-colors bcpb:duration-200">{{ element.description }}</p> -->
               </div>
             </div>
           </div>
@@ -134,9 +134,9 @@ onMounted(()=>{
               </div>
               <div class="bcpb:flex-1">
                 <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-indigo-900 bcpb:transition-colors bcpb:duration-200">{{ t(element.title) }}</p>
-                <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-indigo-700 bcpb:transition-colors bcpb:duration-200">
+                <!-- <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-indigo-700 bcpb:transition-colors bcpb:duration-200">
                   {{ element.description }}
-                </p>
+                </p> -->
               </div>
             </div>
           </div>

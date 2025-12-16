@@ -6,6 +6,7 @@ import {onMounted, ref, watch} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from "../../controls/SliderToggle.vue";
 import ColorInput from "../../controls/ColorInput.vue";
+import { setLocale, t } from "../../translations.ts";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -20,7 +21,7 @@ const onSelectColumn = (columnIndex: number) => {
 }
 
 onMounted(() => {
-
+setLocale()
 })
 
 watch(
@@ -54,27 +55,27 @@ watch(
 </script>
 
 <template>
-  <BaseOption title="Column">
+  <BaseOption :title="t('Columns')">
     <!-- Main Column Settings -->
     <div class="bcpb:space-y-1">
-      <option-widget title="Has Container">
+      <option-widget :title="t('has_container')">
         <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
       </option-widget>
       
-      <option-widget title="Background Color">
+      <option-widget :title="t('background_color')">
         <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
       </option-widget>
       
-      <option-widget title="Background Image" align="vertical">
+      <option-widget :title="t('background_image')" align="vertical">
         <input 
           type="url" 
-          placeholder="Apply Image URL" 
+          :placeholder="t('apply_image_url')" 
           v-model="blockInfo.options.backgroundImage"
           class="bg-page-builder-input"
         >
       </option-widget>
 
-      <option-widget title="Columns">
+      <option-widget :title="t('columns')">
         <div class="bcpb:flex bcpb:flex-wrap bcpb:gap-2">
           <button
             v-for="colNum in 6"
@@ -86,12 +87,12 @@ watch(
               'bcpb:bg-white bcpb:text-gray-700 bcpb:border-gray-300 hover:bcpb:bg-gray-50 hover:bcpb:border-gray-400': blockInfo.options.columns !== colNum
             }"
           >
-            {{ colNum }} Col
+            {{ colNum }} {{ t('columns') }}
           </button>
         </div>
       </option-widget>
 
-      <option-widget title="Styles" align="vertical" :is-expandable="true">
+      <option-widget :title="t('custom_styles')" align="vertical" :is-expandable="true">
         <CodeMirrorEditor v-model="blockInfo.options.styles"></CodeMirrorEditor>
       </option-widget>
     </div>
@@ -109,40 +110,35 @@ watch(
             'bcpb:text-gray-500 bcpb:border-transparent hover:bcpb:text-gray-700 hover:bcpb:border-gray-300': selectedColumn !== column
           }"
         >
-          Column {{ column }}
+          {{ t('column') }} {{ column }}
         </button>
       </div>
     </div>
 
     <!-- Individual Column Settings -->
-    <div class="bcpb:mt-4 bcpb:space-y-1">
-      <div class="bcpb:mb-3">
-        <h4 class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-700 bcpb:mb-2">Column {{ selectedColumn }} Settings</h4>
-      </div>
-      
-      <option-widget title="CSS Class" align="vertical">
+    <div class="bcpb:mt-4 bcpb:space-y-1">      
+      <option-widget :title="t('css_classes')" align="vertical">
         <textarea 
           v-model="blockInfo.options.columnStyles[selectedColumn].styleClass"
           rows="2"
           class="bg-page-builder-input bg-page-builder-textarea"
-          placeholder="Enter CSS classes..."
         ></textarea>
       </option-widget>
       
-      <option-widget title="Background Color">
+      <option-widget :title="t('background_color')">
         <ColorInput v-model="blockInfo.options.columnStyles[selectedColumn].backgroundColor"></ColorInput>
       </option-widget>
       
-      <option-widget title="Background Image" align="vertical">
+      <option-widget :title="t('background_image')" align="vertical">
         <input 
           type="url" 
-          placeholder="Apply Image URL"
+          :placeholder="t('apply_image_url')"
           v-model="blockInfo.options.columnStyles[selectedColumn].backgroundImage"
           class="bg-page-builder-input"
         >
       </option-widget>
       
-      <option-widget title="Style" align="vertical" :is-expandable="true">
+      <option-widget :title="t('custom_styles')" align="vertical" :is-expandable="true">
         <CodeMirrorEditor v-model="blockInfo.options.columnStyles[selectedColumn].styles"></CodeMirrorEditor>
       </option-widget>
     </div>
