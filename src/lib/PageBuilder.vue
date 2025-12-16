@@ -90,6 +90,8 @@ const devices: Record<'desktop' | 'tab' | 'mobile', string> = {
   'tab': 'bcpb:w-4xl bcpb:mx-auto',
   'mobile': 'bcpb:w-full bcpb:max-w-sm bcpb:mx-auto bcpb:px-4',
 }
+
+console.log('test')
 </script>
 
 <template>
