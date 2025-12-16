@@ -2,9 +2,9 @@
 import { ref } from 'vue';
 
 interface Props {
-  min: number,
-  max: number,
-  step: number
+  min: string,
+  max: string,
+  step: string
 }
 
 defineProps<Props>()
