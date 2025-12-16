@@ -1,6 +1,6 @@
-import {Block, BlockType, VueComponent} from "../types.ts";
-import {markRaw} from "vue";
-import {registerBlock} from "../registry.ts";
+import { Block, BlockType, VueComponent } from "../types.ts";
+import { markRaw } from "vue";
+import { registerBlock } from "../registry.ts";
 import TextComponent from "../../block-components/text/TextComponent.vue";
 import TextOptionComponent from "../../block-components/text/TextOptionComponent.vue";
 
@@ -14,7 +14,8 @@ export class TextBlock implements Block {
         backgroundColor: "#ffffff",
         backgroundImage: "",
         cssClasses: "",
-        styles: ""
+        styles: "",
+        fontSize: 1, //rem
     }
     description: string = 'Paragraph Block';
     icon: string = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">\n' +

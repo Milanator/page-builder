@@ -7,6 +7,7 @@ import SliderToggle from "../../controls/SliderToggle.vue";
 import ColorInput from "../../controls/ColorInput.vue";
 import { setLocale, t } from "../../translations.ts";
 import { onMounted } from "vue";
+import RangeInput from "../../controls/RangeInput.vue";
 
 interface Props {
   blockInfo: TextBlock
@@ -22,7 +23,16 @@ onMounted(()=>{
   <BaseOption title="Text">
 
     <option-widget :title="t('has_container')">
-      <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
+      <SliderToggle v-model="blockInfo.options.hasContainer"/>
+    </option-widget>
+
+    <option-widget :title="t('font_size')">
+      <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
+        <div class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:p-2 bcpb:bg-gray-50 bcpb:rounded-lg bcpb:border bcpb:border-gray-200">
+<RangeInput v-model="blockInfo.options.fontSize" min="1" max="10" step="0.1"/>
+        <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.fontSize }}rem</small>
+        </div>
+      </div>
     </option-widget>
 
     <option-widget :title="t('background_color')">

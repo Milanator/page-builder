@@ -10,7 +10,8 @@ import {TextAlign} from "@tiptap/extension-text-align";
 import { setLocale,t } from "../../translations";
 
 interface Props {
-  bubbleMenu?: boolean
+  bubbleMenu?: boolean,
+  fontSize: number
 }
 
 const model = defineModel()
@@ -65,7 +66,7 @@ onBeforeUnmount(() => {
 
     <!-- Editor Content -->
     <div class="editor-content-wrapper">
-      <editor-content :editor="editor" class="editor-content"/>
+      <editor-content :editor="editor" class="editor-content" :style="{ 'fontSize': `${fontSize}rem` }"/>
     </div>
   </div>
 </template>
@@ -100,7 +101,6 @@ onBeforeUnmount(() => {
   width: 100%;
   min-height: 120px;
   padding: 12px 16px;
-  font-size: 14px;
   line-height: 1.6;
   color: #1f2937;
   background-color: white;
