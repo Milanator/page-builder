@@ -1,7 +1,13 @@
 import sk from './../lang/sk.json'
+import en from './../lang/en.json'
 import { Language } from './utils/types'
 
-const messages = { sk }
+interface MessageSet {
+    [key: string]: string;
+}
+
+
+const messages: Record<Language, MessageSet> = { sk, en }
 
 let locale: Language
 
