@@ -33,7 +33,12 @@
     "css_classes": "CSS triedy",
     "enter_css_classes": "Zadaj CSS triedy...",
     "custom_styles": "Vlastné štýly",
-    "columns":"Stĺpce",
-    "column":"Stĺpec",
-    "font_size":"Veľkosť písma"
+    "columns": "Stĺpce",
+    "column": "Stĺpec",
+    "font_size": "Veľkosť písma",
+    "place_for_elements": "Plocha pre elementy",
+    "confirm_deletion": "Potvrdenie odstránenia",
+    "cancel": "Zrušiť",
+    "delete": "Odstrániť",
+    "deletion_text": "Naozaj chcete odstrániť túto položku?"
 }

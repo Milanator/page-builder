@@ -15,39 +15,9 @@ withDefaults(defineProps<Props>(), {
 })
 
 const model = defineModel()
-
-// Get display name for language
-const getLanguageDisplay = (lang: string) => {
-  const langMap: Record<string, string> = {
-    'text/css': 'CSS',
-    'text/html': 'HTML',
-    'htmlmixed': 'HTML',
-    'javascript': 'JavaScript',
-    'text/javascript': 'JavaScript'
-  }
-  return langMap[lang] || 'Code'
-}
 </script>
-
 <template>
-  <div class="bcpb:bg-white bcpb:border bcpb:border-gray-200 bcpb:rounded-lg bcpb:overflow-hidden bcpb:shadow-sm">
-    <!-- Editor Header -->
-    <div class="bcpb:flex bcpb:items-center bcpb:justify-between bcpb:px-3 bcpb:py-2 bcpb:bg-gray-50 bcpb:border-b bcpb:border-gray-200">
-      <div class="bcpb:flex bcpb:items-center bcpb:gap-2">
-        <div class="bcpb:flex bcpb:gap-1">
-          <div class="bcpb:w-3 bcpb:h-3 bcpb:bg-red-400 bcpb:rounded-full"></div>
-          <div class="bcpb:w-3 bcpb:h-3 bcpb:bg-yellow-400 bcpb:rounded-full"></div>
-          <div class="bcpb:w-3 bcpb:h-3 bcpb:bg-green-400 bcpb:rounded-full"></div>
-        </div>
-        <span class="tbcpb:ext-xs bcpb:font-medium bcpb:text-gray-600 bcpb:ml-2">
-          {{ getLanguageDisplay(language) }}
-        </span>
-      </div>
-      <div class="bcpb:text-xs bcpb:text-gray-500">
-        {{ theme }}
-      </div>
-    </div>
-    
+  <div class="bcpb:bg-white bcpb:border bcpb:border-gray-200 bcpb:rounded-lg bcpb:overflow-hidden bcpb:shadow-sm">    
     <!-- Editor Content -->
     <div class="relative">
       <Codemirror 
@@ -69,7 +39,6 @@ const getLanguageDisplay = (lang: string) => {
 </template>
 
 <style scoped>
-/* CodeMirror custom styling */
 :deep(.CodeMirror) {
   height: auto;
   min-height: 120px;

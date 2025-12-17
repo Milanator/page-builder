@@ -28,6 +28,6 @@ const onReset=()=>{
     >
       ↺
     </button>
-      <input type="range" value="50" class="bcpb:w-full h-2 bg-neutral-quaternary rounded-full appearance-none cursor-pointer" :min="min" :max="max" :step="step" v-model="model">
+      <input type="range" class="bcpb:w-full h-2 bg-neutral-quaternary rounded-full appearance-none cursor-pointer" :min="min" :max="max" :step="step" v-model="model">
   </div>
 </template>

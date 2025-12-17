@@ -75,22 +75,6 @@ onMounted(()=>{
       <p class="bcpb:text-sm bcpb:text-gray-600">{{ t('drag_components') }}</p>
     </div>
 
-    <!-- Search -->
-    <div id="filter-input" class="bcpb:px-6 bcpb:py-4 bcpb:border-b bcpb:border-gray-100">
-      <div class="bcpb:relative">
-        <input 
-          type="text" 
-          placeholder="Search elements..."
-          v-model="searchTerm"
-          class="bcpb:w-full bcpb:px-4 bcpb:py-3 bcpb:pl-11 bcpb:text-sm bcpb:border bcpb:border-gray-200 bcpb:rounded-xl focus:bcpb:outline-none focus:bcpb:ring-2 focus:bcpb:ring-blue-500 focus:bcpb:border-transparent bcpb:bg-gray-50 focus:bcpb:bg-white bcpb:transition-colors">
-        <svg class="bcpb:absolute bcpb:left-4 bcpb:top-3.5 bcpb:w-4 bcpb:h-4 bcpb:text-gray-400" fill="none" stroke="currentColor"
-             viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-      </div>
-    </div>
-
     <!-- Elements List -->
     <div class="bcpb:flex-1 bcpb:overflow-y-auto">
       <!-- Basic Elements -->

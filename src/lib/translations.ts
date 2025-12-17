@@ -6,7 +6,6 @@ interface MessageSet {
     [key: string]: string;
 }
 
-
 const messages: Record<Language, MessageSet> = { sk, en }
 
 let locale: Language

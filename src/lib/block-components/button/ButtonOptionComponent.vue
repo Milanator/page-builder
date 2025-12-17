@@ -50,7 +50,7 @@ onMounted(()=>{
             }"
 :title="t('align_left')"
           >
-            <span class="icon-text-left"></span>
+            <img src="@/assets/icons/align-left.svg" alt="Align left" class="bcpb:w- bcpb:h-4 bcpb:cursor-pointer">
           </button>
           <button 
             @click="blockInfo.options.buttonAlign = 'center'" 
@@ -61,7 +61,7 @@ onMounted(()=>{
             }"
             :title="t('align_center')"
           >
-            <span class="icon-text-center"></span>
+<img src="@/assets/icons/align-center.svg" alt="Align center" class="bcpb:w- bcpb:h-4 bcpb:cursor-pointer">
           </button>
           <button 
             @click="blockInfo.options.buttonAlign = 'right'" 
@@ -72,7 +72,7 @@ onMounted(()=>{
             }"
             :title="t('align_right')"
           >
-            <span class="icon-text-right"></span>
+            <img src="@/assets/icons/align-right.svg" alt="Align right" class="bcpb:w- bcpb:h-4 bcpb:cursor-pointer">
           </button>
         </div>
       </option-widget>

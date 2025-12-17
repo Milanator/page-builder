@@ -34,5 +34,10 @@
   "enter_css_classes": "Enter CSS classes...",
   "custom_styles": "Custom styles",
   "columns": "Columns",
-  "column": "Column"
+  "column": "Column",
+  "place_for_elements": "Place for elements",
+  "confirm_deletion": "Confirm Deletion",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "deletion_text": "Are you sure you want to delete this item?"
 }

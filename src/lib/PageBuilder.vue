@@ -189,10 +189,7 @@ const devices: Record<'desktop' | 'tab' | 'mobile', string> = {
 
                 <!-- Content -->
                 <div class="bcpb:space-y-4">
-                  <h3 class="bcpb:text-xl bcpb:font-semibold bcpb:text-gray-800">Plocha pre elementy</h3>
-                  <!-- <p class="bcpb:text-gray-600 bcpb:leading-relaxed">
-                    Plocha pre elementy
-                  </p> -->
+                  <h3 class="bcpb:text-xl bcpb:font-semibold bcpb:text-gray-800">{{t('place_for_elements')}}</h3>
                 </div>
               </div>
             </div>

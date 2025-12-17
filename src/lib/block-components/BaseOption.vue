@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {ref, Ref} from "vue";
+import {onMounted, ref, Ref} from "vue";
+import { setLocale,t } from "../translations";
 
 defineProps<{
   title: string,
@@ -24,8 +25,11 @@ const onDeleteItem = ($event: Event) => {
   $event.preventDefault()
   emit('onDelete', true)
 }
-</script>
 
+onMounted(()=>{
+  setLocale()
+})
+</script>
 <template>
   <div class="bcpb:h-full bcpb:flex bcpb:flex-col bcpb:bg-white">
     <!-- Header -->
@@ -48,17 +52,17 @@ const onDeleteItem = ($event: Event) => {
         <button
             @click="showDeletePopup = true"
             type="button"
-            class="bcpb:px-4 bcpb:py-2 bcpb:text-red-500 hover:bcpb:text-red-700 hover:bcpb:bg-red-50 bcpb:rounded-md bcpb:transition-colors bcpb:duration-200"
+            class="bcpb:p-2 bcpb:text-red-500 hover:bcpb:text-red-700 hover:bcpb:bg-red-50 bcpb:rounded-md bcpb:transition-colors bcpb:duration-200"
             title="Delete"
         >
-          <span class="icon-trash bcpb:text-sm"></span>
+<img src="@/assets/icons/trash.svg" alt="Trash" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">
         </button>
         <button
             @click="closeOptionDrawer($event)"
             class="bcpb:p-2 bcpb:text-gray-400 hover:bcpb:text-gray-600 hover:bcpb:bg-gray-100 bcpb:rounded-md bcpb:transition-colors bcpb:duration-200"
             title="Close"
         >
-          <span class="icon-x-lg bcpb:text-sm"></span>
+<img src="@/assets/icons/cancel.svg" alt="Cancel" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">
         </button>
       </div>
     </div>
@@ -78,14 +82,13 @@ const onDeleteItem = ($event: Event) => {
     <div class="bcpb:w-full bcpb:max-w-md bcpb:bg-white bcpb:rounded-xl bcpb:shadow-xl bcpb:border bcpb:border-gray-100 bcpb:overflow-hidden">
       <!-- Modal Header -->
       <div class="bcpb:px-6 bcpb:py-4 bcpb:border-b bcpb:border-gray-100">
-        <h3 class="bcpb:text-lg bcpb:font-semibold bcpb:text-gray-900">Confirm Deletion</h3>
+        <h3 class="bcpb:text-lg bcpb:font-semibold bcpb:text-gray-900">{{ t('confirm_deletion') }}</h3>
       </div>
 
       <!-- Modal Content -->
       <div class="bcpb:px-6 bcpb:py-4">
         <p class="bcpb:text-sm bcpb:text-gray-600 bcpb:leading-relaxed">
-          Are you sure you want to delete this item? This action cannot be undone and all changes to this block will be
-          permanently lost.
+          {{ t('deletion_text') }}
         </p>
       </div>
 
@@ -95,13 +98,13 @@ const onDeleteItem = ($event: Event) => {
             @click="showDeletePopup = false"
             class="bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-gray-700 bcpb:bg-white bcpb:border bcpb:border-gray-300 bcpb:rounded-lg hover:bcpb:bg-gray-50 focus:bcpb:outline-none focus:bcpb:ring-2 focus:bcpb:ring-gray-200 bcpb:transition-colors bcpb:duration-200"
         >
-          Cancel
+          {{ t('cancel') }}
         </button>
         <button
             @click="onDeleteItem($event)"
             class="bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-white bcpb:bg-red-600 bcpb:border bcpb:border-red-600 bcpb:rounded-lg hover:bcpb:bg-red-700 focus:bcpb:outline-none focus:bcpb:ring-2 focus:bcpb:ring-red-200 bcpb:transition-colors bcpb:duration-200"
         >
-          Delete
+          {{ t('delete') }}
         </button>
       </div>
     </div>

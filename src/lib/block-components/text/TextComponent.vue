@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import BasePreview from "../BasePreview.vue";
 import RichTextEditor from "../../editors/TextEditor/RichTextEditor.vue";
 import {TextBlock} from "../../utils/blocks/TextBlock.ts";
@@ -10,9 +9,7 @@ interface Props {
 }
 
 defineProps<Props>()
-
 </script>
-
 <template>
   <BasePreview :inEditor="inEditor"
                :has-container="blockInfo.options.hasContainer"
@@ -24,12 +21,8 @@ defineProps<Props>()
       </div>
     </template>
     <template v-else>
-      <div :class="blockInfo.options.cssClasses" :style="blockInfo.options.styles"
+      <div :class="blockInfo.options.cssClasses" :style="[blockInfo.options.styles, {fontSize: `${blockInfo.options.fontSize}rem`}]" 
            v-html="blockInfo.options.text"></div>
     </template>
   </BasePreview>
 </template>
-
-<style scoped>
-
-</style>

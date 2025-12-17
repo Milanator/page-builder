@@ -54,7 +54,7 @@ const toggleExpand = ($event: Event) => {
           class="bcpb:ml-2 bcpb:p-1 bcpb:text-gray-400 hover:bcpb:text-gray-600 hover:bcpb:bg-gray-100 bcpb:rounded bcpb:transition-colors bcpb:duration-200"
           title="Expand"
       >
-        <i class="icon-arrows-angle-expand bcpb:text-xs"></i>
+        <img src="@/assets/icons/expand.svg" alt="Expand" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">
       </button>
     </div>
 
@@ -76,7 +76,7 @@ const toggleExpand = ($event: Event) => {
             class="bcpb:p-2 bcpb:text-gray-400 hover:bcpb:text-gray-600 hover:bcpb:bg-gray-100 bcpb:rounded-lg bcpb:transition-colors bcpb:duration-200"
             title="Close"
         >
-          <i class="icon-x-lg bcpb:text-sm"></i>
+<img src="@/assets/icons/cancel.svg" alt="Cancel" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">
         </button>
       </div>
 
