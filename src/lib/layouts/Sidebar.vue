@@ -92,7 +92,6 @@ onMounted(()=>{
               </div>
               <div class="bcpb:flex-1">
                 <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-blue-900 bcpb:transition-colors bcpb:duration-200">{{ t(element.title) }}</p>
-                <!-- <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-blue-700 bcpb:transition-colors bcpb:duration-200">{{ element.description }}</p> -->
               </div>
             </div>
           </div>
@@ -111,16 +110,10 @@ onMounted(()=>{
             <div class="bcpb:flex bcpb:items-center bcpb:space-x-3">
               <div
                   class="bcpb:w-10 bcpb:h-10 bcpb:bg-gradient-to-br bcpb:from-indigo-50 bcpb:to-indigo-100 bcpb:rounded-lg bcpb:flex bcpb:items-center bcpb:justify-center group-hover:bcpb:from-indigo-100 group-hover:bcpb:to-indigo-200 group-hover:bcpb:shadow-sm bcpb:transition-all bcpb:duration-300">
-                <svg class="bcpb:w-5 bcpb:h-5 bcpb:text-indigo-600 group-hover:bcpb:text-indigo-700 group-hover:bcpb:scale-110 bcpb:transition-all bcpb:duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
-                </svg>
+               <div class="bcpb:text-blue-600 group-hover:bcpb:text-blue-700 group-hover:bcpb:scale-110 bcpb:transition-all bcpb:duration-300" v-html="element.icon"></div>
               </div>
               <div class="bcpb:flex-1">
                 <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-indigo-900 bcpb:transition-colors bcpb:duration-200">{{ t(element.title) }}</p>
-                <!-- <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-indigo-700 bcpb:transition-colors bcpb:duration-200">
-                  {{ element.description }}
-                </p> -->
               </div>
             </div>
           </div>

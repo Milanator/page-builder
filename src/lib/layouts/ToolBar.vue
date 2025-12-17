@@ -23,9 +23,7 @@ onMounted(()=>{
           type="button"
           @click="emit('onBack')"
           class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-gray-600 hover:bcpb:text-gray-900 hover:bcpb:bg-gray-50 bcpb:rounded-lg bcpb:transition-colors bcpb:duration-200">
-        <svg class="bcpb:w-4 bcpb:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-        </svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#4a5565" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer bcpb:mr-1"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg>
         {{ t('back') }}
       </button>
 

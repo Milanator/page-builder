@@ -118,17 +118,19 @@ const devices: Record<'desktop' | 'tab' | 'mobile', string> = {
       <!-- Back to Editor Button -->
       <button
           @click="isPreview = false"
-          class="bcpb:bg-blue-600 hover:bcpb:bg-blue-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-blue-500/20"
+          class="bcpb:bg-blue-600 hover:bcpb:bg-blue-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-blue-500/20 bcpb:flex bcpb:items-center"
       >
-        ← {{ t('back_to_editor') }}
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer bcpb:mr-1"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg>
+        {{ t('back_to_editor') }}
       </button>
 
       <!-- Save Button in Preview -->
       <button
           @click="exportPage($event)"
-          class="bcpb:bg-green-600 hover:bcpb:bg-green-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-green-500/20"
+          class="bcpb:bg-green-600 hover:bcpb:bg-green-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-green-500/20 bcpb:flex bcpb:items-center"
       >
-        💾 {{ t('save') }}
+      <img src="@/assets/icons/save.svg" alt="Save" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer bcpb:mr-1">  
+      {{ t('save') }}
       </button>
     </div>
 
