@@ -1,12 +1,10 @@
-import {ref, Ref} from "vue";
-import {v4 as uuidv4} from 'uuid';
-import {ButtonBlock} from "./utils/blocks/ButtonBlock.ts";
-import {ColumnBlock} from "./utils/blocks/ColumnBlock.ts";
-// import {ListBlock} from "./utils/blocks/ListBlock.ts";
-import {Block} from "./utils/types.ts";
-import {HtmlBlock} from "./utils/blocks/HtmlBlock.ts";
-import {TextBlock} from "./utils/blocks/TextBlock.ts";
-// import {CardUiComponent} from "./utils/ui-components/CardUiComponent.ts";
+import { ref, Ref } from "vue";
+import { v4 as uuidv4 } from 'uuid';
+import { ButtonBlock } from "./utils/blocks/ButtonBlock.ts";
+import { ColumnBlock } from "./utils/blocks/ColumnBlock.ts";
+import { Block } from "./utils/types.ts";
+import { HtmlBlock } from "./utils/blocks/HtmlBlock.ts";
+import { TextBlock } from "./utils/blocks/TextBlock.ts";
 
 const draggedItem: Ref<Block | null> = ref(null)
 const renderList: Ref<Array<Block>> = ref([])
@@ -88,6 +86,7 @@ export function usePageBuilder() {
     const startDragItem = ($event: DragEvent, item: Block, index: number) => {
         innerDragElement.value = item
         innerDragElementIndex.value = index
+        console.log(JSON.stringify(item))
         $event.dataTransfer?.setData('text/plain', JSON.stringify(item));
     }
 
