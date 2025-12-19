@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import {BubbleMenu, Editor, EditorContent} from "@tiptap/vue-3";
-import {StarterKit} from "@tiptap/starter-kit";
-import {Placeholder} from "@tiptap/extension-placeholder";
-import {onBeforeUnmount} from "vue";
-import {TextStyle} from "@tiptap/extension-text-style";
-import {Color} from "@tiptap/extension-color";
+import { BubbleMenu, Editor, EditorContent } from "@tiptap/vue-3";
+import { StarterKit } from "@tiptap/starter-kit";
+import { Placeholder } from "@tiptap/extension-placeholder";
+import { onBeforeUnmount } from "vue";
+import { TextStyle } from "@tiptap/extension-text-style";
+import { Color } from "@tiptap/extension-color";
 import EditorMenu from "./EditorMenu.vue";
-import {TextAlign} from "@tiptap/extension-text-align";
-import { setLocale,t } from "../../translations";
+import { TextAlign } from "@tiptap/extension-text-align";
+import { setLocale, t } from "../../translations";
 
 interface Props {
   bubbleMenu?: boolean,
@@ -37,7 +37,7 @@ const editor = new Editor({
       types: ['heading', 'paragraph']
     })
   ],
-  onUpdate: ({editor}) => {
+  onUpdate: ({ editor }) => {
     model.value = editor.getHTML()
   }
 })
@@ -50,23 +50,19 @@ onBeforeUnmount(() => {
 <template>
   <div class="rich-text-editor">
     <!-- Bubble Menu (floating toolbar) -->
-    <bubble-menu
-        :editor="editor"
-        :tippy-options="{ duration: 100, theme: 'light-border' }"
-        v-if="bubbleMenu"
-        class="bubble-menu-container"
-    >
-      <EditorMenu :editor="editor" :bubble-menu="bubbleMenu"/>
+    <bubble-menu :editor="editor" :tippy-options="{ duration: 100, theme: 'light-border' }" v-if="bubbleMenu"
+      class="bubble-menu-container">
+      <EditorMenu :editor="editor" :bubble-menu="bubbleMenu" />
     </bubble-menu>
 
     <!-- Fixed Menu (toolbar above editor) -->
     <div v-else class="fixed-menu-container">
-      <EditorMenu :editor="editor" :bubble-menu="bubbleMenu"/>
+      <EditorMenu :editor="editor" :bubble-menu="bubbleMenu" />
     </div>
 
     <!-- Editor Content -->
     <div class="editor-content-wrapper">
-      <editor-content :editor="editor" class="editor-content" :style="{ 'fontSize': `${fontSize}rem` }"/>
+      <editor-content :editor="editor" class="editor-content" :style="{ 'fontSize': `${fontSize}rem` }" />
     </div>
   </div>
 </template>
@@ -115,7 +111,7 @@ onBeforeUnmount(() => {
 }
 
 /* When used with fixed menu, remove top border radius */
-.fixed-menu-container + .editor-content-wrapper :deep(.ProseMirror) {
+.fixed-menu-container+.editor-content-wrapper :deep(.ProseMirror) {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top: 0;
