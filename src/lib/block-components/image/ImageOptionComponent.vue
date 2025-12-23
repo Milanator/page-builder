@@ -10,7 +10,7 @@ import { useConfig } from '@/store/Config.ts';
 
 import 'element-plus/dist/index.css';
 
-defineProps<{
+const props = defineProps<{
     blockInfo: ImageBlock;
     inEditor?: boolean;
 }>();

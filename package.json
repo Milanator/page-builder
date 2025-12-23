@@ -22,7 +22,7 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "semantic-release": "semantic-release",
-    "prepare": "pnpm install && pnpm run build"
+    "prepare": "pnpm run build"
   },
   "dependencies": {
     "@binarycastle/vue-html-editor": "^1.0.8",
