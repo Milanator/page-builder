@@ -10,6 +10,7 @@ export class ColumnBlock implements Block {
     optionComponent: VueComponent = markRaw(ColumnOptionComponent);
     options: Record<string, any> = {
         columns: 3,
+        switchCols: false,
         hasContainer: false,
         backgroundColor: "#ffffff",
         backgroundImage: '',

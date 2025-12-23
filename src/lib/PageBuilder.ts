@@ -5,6 +5,7 @@ import { ColumnBlock } from "./utils/blocks/ColumnBlock.ts";
 import { Block } from "./utils/types.ts";
 import { HtmlBlock } from "./utils/blocks/HtmlBlock.ts";
 import { TextBlock } from "./utils/blocks/TextBlock.ts";
+import { Template1 } from "./utils/blocks/Template1Block.ts";
 
 const draggedItem: Ref<Block | null> = ref(null)
 const renderList: Ref<Array<Block>> = ref([])
@@ -20,6 +21,7 @@ const blocks: Ref<Array<Block>> = ref([
     new ButtonBlock(),
     new TextBlock(),
     new ColumnBlock(),
+    new Template1(),
     // new ListBlock(),
     new HtmlBlock(),
     // new CardUiComponent(),

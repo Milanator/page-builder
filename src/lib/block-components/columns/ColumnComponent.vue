@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
-import {previewComponentMap} from "../../utils/registry.ts";
-import {Block} from "../../utils/types.ts";
+import { ColumnBlock } from "../../utils/blocks/ColumnBlock.ts";
+import { previewComponentMap } from "../../utils/registry.ts";
+import { Block } from "../../utils/types.ts";
 import BasePreview from "../BasePreview.vue";
-import {v4 as uuidv4} from "uuid";
-import {ref, Ref} from "vue";
+import { v4 as uuidv4 } from "uuid";
+import { ref, Ref } from "vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -39,9 +39,9 @@ const onDrop = ($event: DragEvent, index: number): void => {
   // If the dropped item has children, exit early
   if (parsedItem.children) return;
 
-  const {value: innerElement} = innerDragElement;
-  const {value: innerColumn} = innerDragColumn;
-  const {value: innerElementInbox} = innerDragElementInbox;
+  const { value: innerElement } = innerDragElement;
+  const { value: innerColumn } = innerDragColumn;
+  const { value: innerElementInbox } = innerDragElementInbox;
 
   // Handle inner drag item
   if (innerElement && innerColumn != null && innerElementInbox != null) {
@@ -129,31 +129,25 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 
 <template>
   <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
-               :background-image="blockInfo.options.backgroundImage"
-               :background-color="blockInfo.options.backgroundColor">
-    <div class="bc--page-builder-row" :style="inEditor ? { minHeight: '200px', margin: '20px 0' } : {}">
-      <div v-for="(index) in blockInfo.options.columns"
-           :style="[
-               blockInfo.options.columnStyles[index]?.styles,
-               {'background-color': blockInfo.options.columnStyles[index]?.backgroundColor},
-               {'background-image': 'url(' + blockInfo.options.columnStyles[index]?.backgroundImage + ')'},
-               ]"
-           :class="[{'column-item': inEditor, 'column-dragged-over':  dragOverRow === index && inEditor}, blockInfo.options.columnStyles[index]?.styleClass]"
-           @drop="onDrop($event, index)"
-           @dragenter.prevent
-           @dragleave="onDragLeave"
-           @dragover="onDragOverRow(index)">
+    :background-image="blockInfo.options.backgroundImage" :background-color="blockInfo.options.backgroundColor">
+    <div class="bc--page-builder-row" :style="[
+      inEditor ? { minHeight: '200px', margin: '20px 0' } : {},
+      { flexDirection: blockInfo.options.switchCols ? 'row-reverse' : 'row' }
+    ]">
+      <div v-for="(index) in blockInfo.options.columns" :style="[
+        blockInfo.options.columnStyles[index]?.styles,
+        { 'background-color': blockInfo.options.columnStyles[index]?.backgroundColor },
+        { 'background-image': 'url(' + blockInfo.options.columnStyles[index]?.backgroundImage + ')' },
+      ]"
+        :class="[{ 'column-item': inEditor, 'column-dragged-over': dragOverRow === index && inEditor }, blockInfo.options.columnStyles[index]?.styleClass]"
+        @drop="onDrop($event, index)" @dragenter.prevent @dragleave="onDragLeave" @dragover="onDragOverRow(index)">
 
         <template v-for="(item, columnIndex) of blockInfo.children[index]">
-          <div :style="inEditor ? {height: '10px', width: '100%'} : {}"
-               :class="{'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex}"></div>
-          <component :is="previewComponentMap[item.name]"
-                     :blockInfo="item"
-                     :inEditor="inEditor"
-                     :draggable="!!inEditor"
-                     @dragover="onDragOverColumn($event, columnIndex)"
-                     @dragstart="onDragStart($event, item, index, columnIndex)"
-                     @click="onRenderItemClick($event, item)"></component>
+          <div :style="inEditor ? { height: '10px', width: '100%' } : {}"
+            :class="{ 'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex }"></div>
+          <component :is="previewComponentMap[item.name]" :blockInfo="item" :inEditor="inEditor" :draggable="!!inEditor"
+            @dragover="onDragOverColumn($event, columnIndex)" @dragstart="onDragStart($event, item, index, columnIndex)"
+            @click="onRenderItemClick($event, item)"></component>
         </template>
 
       </div>
@@ -163,7 +157,6 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 </template>
 
 <style scoped lang="scss">
-
 .bc--page-builder-row {
   display: flex;
 }
@@ -184,7 +177,6 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
   &:not(:last-child) {
     border-right: 1px dashed blue;
   }
-
 }
 
 .column-dragged-over {
