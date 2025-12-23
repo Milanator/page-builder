@@ -21,7 +21,7 @@ const { t } = useTranslator();
 const { uploader: Config } = useConfig()
 
 if (!Config) {
-    console.error('Uploader config is not defined');
+    throw new Error('Uploader config is not defined')
 }
 
 const onImageUpload = ({ files }: any) => {
