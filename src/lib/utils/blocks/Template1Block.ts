@@ -2,6 +2,7 @@ import { Block, BlockType } from "../types.ts";
 import { registerBlock } from "../registry.ts";
 import { TextBlock } from "./TextBlock.ts";
 import { ColumnBlock } from "./ColumnBlock.ts";
+import { ImageBlock } from "./ImageBlock.ts";
 
 export class Template1 extends ColumnBlock implements Block {
     name: string = 'template_1';
@@ -24,15 +25,10 @@ export class Template1 extends ColumnBlock implements Block {
     }
     children: { [key: string | number]: Block[] } = {
         1: [
-            // {
-            //     type: 'element',
-            //     name: IMAGE_COMPONENT_NAME,
-            //     title: 'Obrázok',
-            //     options: {
-            //         hasContainer: true,
-            //         cssClasses: 'px-4',
-            //     },
-            // },
+            new ImageBlock({
+                hasContainer: true,
+                cssClasses: 'px-4',
+            })
         ],
         2: [
             new TextBlock({

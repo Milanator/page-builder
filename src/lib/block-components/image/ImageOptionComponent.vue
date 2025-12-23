@@ -1,0 +1,19 @@
+<script setup lang="ts">
+import BaseOption from '@/lib/block-components/BaseOption.vue';
+import OptionWidget from '@/lib/widgets/OptionWidget.vue';
+import { TextBlock } from '@/lib/utils/blocks/TextBlock.ts';
+
+const props = defineProps<{
+    blockInfo: TextBlock;
+    inEditor?: boolean;
+}>();
+</script>
+<template>
+    <BaseOption title="Obrázok">
+        <OptionWidget title="Nahrať obrázok" align="vertical">
+            <!-- Uploader -->
+            <slot />
+        </OptionWidget>
+    </BaseOption>
+</template>
+<style scoped></style>
