@@ -5,8 +5,7 @@ import BaseOption from "../BaseOption.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from "../../controls/SliderToggle.vue";
 import ColorInput from "../../controls/ColorInput.vue";
-import { setLocale, t } from "../../translations.ts";
-import { onMounted } from "vue";
+import { useTranslator } from '@/lib/Translator';
 
 interface Props {
   blockInfo: ButtonBlock
@@ -14,9 +13,7 @@ interface Props {
 
 defineProps<Props>()
 
-onMounted(() => {
-  setLocale()
-})
+const { t } = useTranslator();
 </script>
 <template>
   <BaseOption :title="t('Button')">

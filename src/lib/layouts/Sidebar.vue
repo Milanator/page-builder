@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { usePageBuilder } from "../PageBuilder.ts";
 import { blockRegistry } from "../utils/registry.ts";
 import type { Block } from "../utils/types.ts";
-import { setLocale, t } from '../translations.ts';
+import { useTranslator } from '@/lib/Translator';
 
 const { startDrag } = usePageBuilder()
+const { t } = useTranslator();
 
 // Search functionality
 const searchTerm = ref('')
@@ -60,10 +61,6 @@ const filteredUIComponents = computed(() => {
     element.name.toLowerCase().includes(search) ||
     element.description.toLowerCase().includes(search)
   )
-})
-
-onMounted(() => {
-  setLocale()
 })
 </script>
 <template>

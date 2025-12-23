@@ -2,11 +2,11 @@
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import { ColumnBlock } from "../../utils/blocks/ColumnBlock.ts";
-import { onMounted, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from "../../controls/SliderToggle.vue";
 import ColorInput from "../../controls/ColorInput.vue";
-import { setLocale, t } from "../../translations.ts";
+import { useTranslator } from '@/lib/Translator';
 
 interface Props {
   blockInfo: ColumnBlock
@@ -16,13 +16,11 @@ const props = defineProps<Props>()
 
 const selectedColumn = ref(1);
 
+const { t } = useTranslator();
+
 const onSelectColumn = (columnIndex: number) => {
   selectedColumn.value = columnIndex
 }
-
-onMounted(() => {
-  setLocale()
-})
 
 watch(
   () => props.blockInfo.options.columns,

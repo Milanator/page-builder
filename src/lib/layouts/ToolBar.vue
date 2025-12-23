@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, PropType } from 'vue'
-import { setLocale, t } from '../translations';
+import { PropType } from 'vue'
+import { useTranslator } from '@/lib/Translator';
 
 defineProps({
   device: {
@@ -8,11 +8,10 @@ defineProps({
     default: 'desktop',
   }
 })
+
 const emit = defineEmits(['onPreview', 'onSave', 'onBack', 'onDevice'])
 
-onMounted(() => {
-  setLocale()
-})
+const { t } = useTranslator();
 </script>
 <template>
   <!-- Toolbar -->

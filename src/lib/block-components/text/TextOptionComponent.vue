@@ -2,11 +2,10 @@
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
-import {TextBlock} from "../../utils/blocks/TextBlock.ts";
+import { TextBlock } from "../../utils/blocks/TextBlock.ts";
 import SliderToggle from "../../controls/SliderToggle.vue";
 import ColorInput from "../../controls/ColorInput.vue";
-import { setLocale, t } from "../../translations.ts";
-import { onMounted } from "vue";
+import { useTranslator } from '@/lib/Translator';
 import RangeInput from "../../controls/RangeInput.vue";
 
 interface Props {
@@ -15,22 +14,21 @@ interface Props {
 
 defineProps<Props>()
 
-onMounted(()=>{
-  setLocale()
-})
+const { t } = useTranslator();
 </script>
 <template>
   <BaseOption title="Text">
 
     <option-widget :title="t('has_container')">
-      <SliderToggle v-model="blockInfo.options.hasContainer"/>
+      <SliderToggle v-model="blockInfo.options.hasContainer" />
     </option-widget>
 
     <option-widget :title="t('font_size')">
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
-        <div class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:p-2 bcpb:bg-gray-50 bcpb:rounded-lg bcpb:border bcpb:border-gray-200">
-<RangeInput v-model="blockInfo.options.fontSize" min="1" max="10" step="0.1"/>
-        <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.fontSize }}rem</small>
+        <div
+          class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:p-2 bcpb:bg-gray-50 bcpb:rounded-lg bcpb:border bcpb:border-gray-200">
+          <RangeInput v-model="blockInfo.options.fontSize" min="1" max="10" step="0.1" />
+          <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.fontSize }}rem</small>
         </div>
       </div>
     </option-widget>
@@ -41,7 +39,7 @@ onMounted(()=>{
 
     <option-widget :title="t('background_image')" align="vertical">
       <input type="url" class="bg-page-builder-input" v-model="blockInfo.options.backgroundImage"
-             :placeholder="t('apply_image_url')">
+        :placeholder="t('apply_image_url')">
     </option-widget>
 
     <option-widget :title="t('css_classes')" align="vertical" :is-expandable="true">

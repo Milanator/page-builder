@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref, Ref } from "vue";
-import { setLocale, t } from "../translations";
+import { ref, Ref } from "vue";
+import { useTranslator } from '@/lib/Translator';
 
 defineProps<{
   title: string,
@@ -16,6 +16,8 @@ const emit = defineEmits<{
 
 const showDeletePopup: Ref<boolean> = ref(false)
 
+const { t } = useTranslator();
+
 const closeOptionDrawer = ($event: Event) => {
   $event.preventDefault()
   emit('onClose', true)
@@ -25,10 +27,6 @@ const onDeleteItem = ($event: Event) => {
   $event.preventDefault()
   emit('onDelete', true)
 }
-
-onMounted(() => {
-  setLocale()
-})
 </script>
 <template>
   <div class="bcpb:h-full bcpb:flex bcpb:flex-col bcpb:bg-white">

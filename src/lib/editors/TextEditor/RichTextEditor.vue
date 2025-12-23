@@ -7,7 +7,7 @@ import { TextStyle } from "@tiptap/extension-text-style";
 import { Color } from "@tiptap/extension-color";
 import EditorMenu from "./EditorMenu.vue";
 import { TextAlign } from "@tiptap/extension-text-align";
-import { setLocale, t } from "../../translations";
+import { useTranslator } from '@/lib/Translator';
 
 interface Props {
   bubbleMenu?: boolean,
@@ -20,7 +20,7 @@ withDefaults(defineProps<Props>(), {
   bubbleMenu: true
 })
 
-setLocale()
+const { t } = useTranslator();
 
 const editor = new Editor({
   content: model.value || "",

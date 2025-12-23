@@ -59,3 +59,14 @@ export interface Block {
 }
 
 export type Language = 'sk' | 'en'
+
+export type Mode = 'editor' | 'editor_preview' | 'preview'
+
+interface UploaderConfig {
+    url: string;
+    headers?: Record<string, string>;
+}
+export interface Config {
+    uploader?: UploaderConfig;
+    language: Language;
+}

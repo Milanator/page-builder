@@ -2,23 +2,21 @@
 import Sidebar from "./layouts/Sidebar.vue";
 import ToolBar from "./layouts/ToolBar.vue";
 import PagePreview from "./PagePreview.vue";
-import { Block } from "./utils/types.ts";
 import { usePageBuilder } from "./PageBuilder.ts";
 import { useLoadCSS } from "./useLoadCSS.ts";
-import { onMounted, onUnmounted, ref, watchEffect } from "vue";
+import { onMounted, onUnmounted, provide, ref, watchEffect } from "vue";
 import { previewComponentMap, previewOptionMap } from "./utils/registry.ts";
-import { Language } from "./utils/types.ts";
-import { initLocale, t } from "./translations.ts";
-
-type Mode = 'editor' | 'editor_preview' | 'preview'
+import { Mode, Block, Config } from "./utils/types.ts";
+import { useTranslator } from '@/lib/Translator';
+import { ConfigKey } from "@/store/Config.ts";
 
 interface Props {
   cssUrl?: string;
   renderList?: Block[],
   meta?: Array<Record<string, string>>,
   pageTitle?: string,
-  language: Language,
-  mode?: Mode
+  mode?: Mode,
+  config: Config
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -61,7 +59,9 @@ const {
 
 const { loadCSS, removeCSS } = useLoadCSS()
 
-initLocale(props.language)
+provide(ConfigKey, props.config)
+
+const { t } = useTranslator(props.config.language);
 
 onMounted(() => {
   loadCSS(props.cssUrl)
@@ -113,12 +113,6 @@ const exportPage = ($event: Event) => {
       title="Close Preview (ESC)" aria-label="Close Preview">
       <img src="@/assets/icons/cancel.svg" alt="Cancel" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">
     </button> -->
-
-      <!-- Secondary Close Button for Mobile/Touch -->
-      <!-- <div
-        class="preview-mode-indicator bcpb:fixed bcpb:top-4 bcpb:left-4 bcpb:z-[99998] bcpb:bg-black/80 bcpb:text-white bcpb:px-4 bcpb:py-2 bcpb:rounded-full bcpb:text-sm bcpb:font-medium bcpb:backdrop-blur-sm">
-      {{ t('preview_mode') }}
-    </div> -->
 
       <!-- Floating Action Bar -->
       <div class="floating-action-bar bcpb:fixed bcpb:bottom-6 bcpb:right-6 bcpb:z-[99998] bcpb:flex bcpb:gap-3">

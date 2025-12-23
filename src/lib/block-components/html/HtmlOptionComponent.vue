@@ -2,9 +2,8 @@
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
-import {HtmlBlock} from "../../utils/blocks/HtmlBlock.ts";
-import { setLocale, t } from "../../translations.ts";
-import { onMounted } from "vue";
+import { HtmlBlock } from "@/lib/utils/blocks/HtmlBlock.ts";
+import { useTranslator } from '@/lib/Translator.ts';
 
 interface Props {
   blockInfo: HtmlBlock
@@ -12,9 +11,7 @@ interface Props {
 
 defineProps<Props>()
 
-onMounted(()=>{
-  setLocale()
-})
+const { t } = useTranslator();
 </script>
 <template>
   <BaseOption title="HTML">

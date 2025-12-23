@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { PageBuilder } from "./lib";
+import { Config } from "@/lib/utils/types.ts";
+import { PageBuilder } from "@/lib";
 
-const onSave = (value: any) => {
-  console.log(value)
+const config: Config = {
+  language: 'sk',
+  uploader: {
+    headers: { a: 'b' },
+    url: 'AZBCD'
+  }
 }
+
+const onSave = (value: any) => { }
 </script>
 <template>
-  <PageBuilder language="sk" @onSave="onSave"></PageBuilder>
+  <PageBuilder :config="config" @onSave="onSave" />
 </template>
