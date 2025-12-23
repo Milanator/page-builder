@@ -24,7 +24,7 @@ if (!Config) {
     console.error('Uploader config is not defined');
 }
 
-const onImageUpload = ({ files }) => {
+const onImageUpload = ({ files }: any) => {
     setImage(files[0].public_url);
 };
 
@@ -33,6 +33,7 @@ const onImageRemove = () => {
 };
 
 const setImage = (url: string | undefined) => {
+    // @ts-ignore
     props.blockInfo.options.imageUrl = url;
 };
 </script>
