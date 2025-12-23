@@ -4,11 +4,21 @@ import { registerBlock } from "../registry.ts";
 import TextComponent from "../../block-components/text/TextComponent.vue";
 import TextOptionComponent from "../../block-components/text/TextOptionComponent.vue";
 
+type TextOptions = {
+    text: string;
+    hasContainer: boolean;
+    fontSize: number;
+    cssClasses: string;
+    backgroundColor: string;
+    backgroundImage: string;
+    styles: string;
+};
+
 export class TextBlock implements Block {
     name: string = 'text';
     component: VueComponent = markRaw(TextComponent);
     optionComponent: VueComponent = markRaw(TextOptionComponent);
-    options: Record<string, any> = {
+    options: TextOptions = {
         text: "",
         hasContainer: false,
         backgroundColor: "#ffffff",
@@ -24,6 +34,14 @@ export class TextBlock implements Block {
     title: string = 'Text';
     type: BlockType = 'element';
 
+    constructor(options?: TextOptions) {
+        if (options) {
+            this.options = {
+                ...this.options,
+                ...options,
+            };
+        }
+    }
 }
 
 registerBlock(new TextBlock());
