@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import BaseOption from '@/lib/block-components/BaseOption.vue';
 import OptionWidget from '@/lib/widgets/OptionWidget.vue';
-import { TextBlock } from '@/lib/utils/blocks/TextBlock.ts';
+import { ImageBlock } from '@/lib/utils/blocks/ImageBlock.ts';
 
-const props = defineProps<{
-    blockInfo: TextBlock;
+defineProps<{
+    blockInfo: ImageBlock;
     inEditor?: boolean;
 }>();
 </script>

@@ -7,6 +7,7 @@ import ImageComponent from "@/lib/block-components/image/ImageComponent.vue";
 type ImageOptions = {
     hasContainer: boolean;
     cssClasses: string;
+    imageUrl?: string;
 };
 
 export class ImageBlock implements Block {

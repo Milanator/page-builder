@@ -57,6 +57,17 @@ export function usePageBuilder() {
             if (droppedItem) {
                 const _droppedItem = JSON.parse(droppedItem);
                 _droppedItem.id = uuidv4();
+
+                // set id for child blocks - solved delete issue
+                if (_droppedItem?.children && Object.keys(_droppedItem.children).length > 0) {
+                    for (const key in _droppedItem.children) {
+                        _droppedItem.children[key] = _droppedItem.children[key].map((child: Block) => ({
+                            ...child,
+                            id: uuidv4()
+                        }))
+                    }
+                }
+
                 if (dragOverIndex.value === null) {
                     renderList.value.push(_droppedItem)
                 } else {

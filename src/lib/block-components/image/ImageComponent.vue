@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import BasePreview from '@/lib/block-components/BasePreview.vue';
-import { TextBlock } from '@/lib/utils/blocks/TextBlock';
+import { ImageBlock } from '@/lib/utils/blocks/ImageBlock';
 
 defineProps<{
-    blockInfo: TextBlock;
+    blockInfo: ImageBlock;
     inEditor?: boolean;
 }>();
 </script>

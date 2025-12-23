@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {Block} from "./utils/types.ts";
-import {previewComponentMap} from "./utils/registry.ts";
-import {useLoadCSS} from "./useLoadCSS.ts";
-import {onMounted, onUnmounted} from "vue";
+import { Block } from "./utils/types.ts";
+import { previewComponentMap } from "./utils/registry.ts";
+import { useLoadCSS } from "./useLoadCSS.ts";
+import { onMounted, onUnmounted } from "vue";
 
 interface Props {
   renderList: Block[]
@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<Props>(), {
   cssUrl: ''
 })
 
-const {loadCSS, removeCSS} = useLoadCSS()
+const { loadCSS, removeCSS } = useLoadCSS()
 
 onMounted(() => {
   loadCSS(props.cssUrl)
@@ -25,6 +25,6 @@ onUnmounted(() => {
 </script>
 <template>
   <div v-for="(block, index) of renderList" :key="`r_item_${index}`">
-    <component :is="previewComponentMap[block.name]" :blockInfo="block"/>
+    <component :is="previewComponentMap[block.name]" :blockInfo="block" />
   </div>
 </template>
