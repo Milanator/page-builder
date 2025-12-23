@@ -11,7 +11,6 @@ import BaseOption from "./block-components/BaseOption.vue";
 export * from "./utils/types";
 export * from "./utils/registry";
 
-
 export {
     PageBuilder,
     PagePreview,
@@ -21,5 +20,5 @@ export {
     BasePreview,
     BaseOption,
     ColorInput,
-    SliderToggle
+    SliderToggle,
 }

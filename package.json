@@ -3,7 +3,7 @@
   "description": "Page Builder",
   "private": false,
   "homepage": "https://github.com/binary-castle/page-builder",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "license": "LGPL-3.0-only",
   "type": "module",
   "main": "./dist/index.umd.js",
