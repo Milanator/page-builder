@@ -66,7 +66,15 @@ onBeforeUnmount(() => {
     </div>
   </div>
 </template>
+<style>
+.editor-content ul {
+  list-style: disc;
+}
 
+.editor-content ol {
+  list-style: decimal;
+}
+</style>
 <style scoped>
 /* Rich Text Editor Container */
 .rich-text-editor {
