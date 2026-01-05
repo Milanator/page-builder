@@ -9,7 +9,6 @@ type TextOptions = {
     hasContainer: boolean;
     fontSize: number;
     cssClasses: string;
-    textColor: string;
     backgroundImage: string;
     styles: string;
 };
@@ -21,7 +20,6 @@ export class TextBlock implements Block {
     options: TextOptions = {
         text: "",
         hasContainer: false,
-        textColor: "#000000",
         backgroundImage: "",
         cssClasses: "",
         styles: "",

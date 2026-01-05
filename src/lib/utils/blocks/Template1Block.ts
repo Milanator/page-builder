@@ -28,6 +28,7 @@ export class Template1 extends ColumnBlock implements Block {
             new ImageBlock({
                 hasContainer: true,
                 cssClasses: 'px-4',
+                stretched: false,
             })
         ],
         2: [
@@ -36,7 +37,6 @@ export class Template1 extends ColumnBlock implements Block {
                 fontSize: 2,
                 hasContainer: true,
                 cssClasses: 'pb-4 px-4',
-                backgroundColor: '',
                 backgroundImage: '',
                 styles: '',
             }),
@@ -45,7 +45,6 @@ export class Template1 extends ColumnBlock implements Block {
                 fontSize: 1,
                 hasContainer: true,
                 cssClasses: 'pb-4 px-4',
-                backgroundColor: '',
                 backgroundImage: '',
                 styles: '',
             }),

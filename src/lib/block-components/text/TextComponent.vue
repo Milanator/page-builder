@@ -14,15 +14,13 @@ defineProps<Props>()
   <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
     :background-image="blockInfo.options.backgroundImage">
     <template v-if="inEditor">
-      <div :class="blockInfo.options.cssClasses"
-        :style="[blockInfo.options.styles, { color: blockInfo.options.textColor }]">
-        <RichTextEditor v-model="blockInfo.options.text" :font-size="blockInfo.options.fontSize"
-          :text-color="blockInfo.options.textColor" />
+      <div :class="blockInfo.options.cssClasses" :style="[blockInfo.options.styles]">
+        <RichTextEditor v-model="blockInfo.options.text" :font-size="blockInfo.options.fontSize" />
       </div>
     </template>
     <template v-else>
       <div :class="blockInfo.options.cssClasses"
-        :style="[blockInfo.options.styles, { fontSize: `${blockInfo.options.fontSize}rem`, color: blockInfo.options.textColor }]"
+        :style="[blockInfo.options.styles, { fontSize: `${blockInfo.options.fontSize}rem` }]"
         v-html="blockInfo.options.text"></div>
     </template>
   </BasePreview>

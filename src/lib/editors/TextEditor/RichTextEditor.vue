@@ -12,7 +12,6 @@ import { useTranslator } from '@/lib/Translator';
 interface Props {
   bubbleMenu?: boolean,
   fontSize: number,
-  textColor: string
 }
 
 const model = defineModel()
@@ -51,8 +50,8 @@ onBeforeUnmount(() => {
 <template>
   <div class="rich-text-editor">
     <!-- Bubble Menu (floating toolbar) -->
-    <bubble-menu :editor="editor" :tippy-options="{ duration: 100, theme: 'light-border' }" v-if="bubbleMenu"
-      class="bubble-menu-container">
+    <bubble-menu :editor="editor" :tippy-options="{ duration: 100, theme: 'light-border', maxWidth: 400 }"
+      v-if="bubbleMenu" class="bubble-menu-container">
       <EditorMenu :editor="editor" :bubble-menu="bubbleMenu" />
     </bubble-menu>
 
@@ -63,8 +62,7 @@ onBeforeUnmount(() => {
 
     <!-- Editor Content -->
     <div class="editor-content-wrapper">
-      <editor-content :editor="editor" class="editor-content"
-        :style="{ 'fontSize': `${fontSize}rem`, 'color': textColor, '--placeholder-text-color': textColor }" />
+      <editor-content :editor="editor" class="editor-content" :style="{ 'fontSize': `${fontSize}rem` }" />
     </div>
   </div>
 </template>

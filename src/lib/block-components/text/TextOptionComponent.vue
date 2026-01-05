@@ -4,7 +4,6 @@ import OptionWidget from "../../widgets/OptionWidget.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import { TextBlock } from "../../utils/blocks/TextBlock.ts";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
-import ColorInput from "@/lib/controls/ColorInput.vue";
 import { useTranslator } from '@/lib/Translator';
 import RangeInput from "@/lib/controls/RangeInput.vue";
 
@@ -31,10 +30,6 @@ const { t } = useTranslator();
           <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.fontSize }}rem</small>
         </div>
       </div>
-    </option-widget>
-
-    <option-widget :title="t('text_color')">
-      <ColorInput v-model="blockInfo.options.textColor"></ColorInput>
     </option-widget>
 
     <option-widget :title="t('background_image')" align="vertical">
