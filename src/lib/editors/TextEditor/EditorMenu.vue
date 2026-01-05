@@ -7,7 +7,7 @@ defineProps<{
   bubbleMenu: boolean;
 }>();
 
-const dropDownMenus = ref({
+const dropDownMenus = ref<Record<string, boolean>>({
   paragraph: false,
   list: false,
   align: false
