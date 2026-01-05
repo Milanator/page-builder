@@ -10,8 +10,10 @@ defineProps<{
 <template>
     <BasePreview :in-editor="inEditor" :has-container="blockInfo.options.hasContainer">
         <div class="image-container" :class="blockInfo.options.cssClasses">
-            <img v-if="blockInfo.options.imageUrl" :src="blockInfo.options.imageUrl" alt="Image url">
-            <img v-else src="https://placehold.co/600x400/EEE/31343C" alt="Placeholder">
+            <img v-if="blockInfo.options.mediaUrl" :src="blockInfo.options.mediaUrl" class="bcpb:object-cover"
+                :class="{ 'bcpb:w-full': blockInfo.options.stretched }" alt="Image url">
+            <img v-else src="https://placehold.co/200x200/EEE/31343C" alt="Placeholder" class="bcpb:object-cover"
+                :class="{ 'bcpb:w-full': blockInfo.options.stretched }">
         </div>
     </BasePreview>
 </template>

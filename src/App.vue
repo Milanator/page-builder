@@ -5,8 +5,8 @@ import { PageBuilder } from "@/lib";
 const config: Config = {
   language: 'sk',
   uploader: {
-    headers: { a: 'b' },
-    url: 'AZBCD'
+    headers: {},
+    url: ''
   }
 }
 

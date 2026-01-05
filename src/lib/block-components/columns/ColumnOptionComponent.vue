@@ -4,8 +4,8 @@ import OptionWidget from "../../widgets/OptionWidget.vue";
 import { ColumnBlock } from "../../utils/blocks/ColumnBlock.ts";
 import { ref, watch } from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
-import SliderToggle from "../../controls/SliderToggle.vue";
-import ColorInput from "../../controls/ColorInput.vue";
+import SliderToggle from '@/lib/controls/SliderToggle.vue';
+import ColorInput from "@/lib/controls/ColorInput.vue";
 import { useTranslator } from '@/lib/Translator';
 
 interface Props {

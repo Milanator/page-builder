@@ -3,8 +3,8 @@ import { ButtonBlock } from "../../utils/blocks/ButtonBlock.ts";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import BaseOption from "../BaseOption.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
-import SliderToggle from "../../controls/SliderToggle.vue";
-import ColorInput from "../../controls/ColorInput.vue";
+import SliderToggle from '@/lib/controls/SliderToggle.vue';
+import ColorInput from "@/lib/controls/ColorInput.vue";
 import { useTranslator } from '@/lib/Translator';
 
 interface Props {

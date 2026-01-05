@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BaseOption from '@/lib/block-components/BaseOption.vue';
 import OptionWidget from '@/lib/widgets/OptionWidget.vue';
+import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { ImageBlock } from '@/lib/utils/blocks/ImageBlock.ts';
 import { ElUpload, ElIcon } from 'element-plus';
 import { UploadFilled } from '@element-plus/icons-vue';
@@ -12,7 +13,6 @@ import 'element-plus/dist/index.css';
 
 const props = defineProps<{
     blockInfo: ImageBlock;
-    inEditor?: boolean;
 }>();
 
 const background = ref([]);
@@ -34,11 +34,12 @@ const onImageRemove = () => {
 
 const setImage = (url: string | undefined) => {
     // @ts-ignore
-    props.blockInfo.options.imageUrl = url;
+    props.blockInfo.options.mediaUrl = url;
 };
 </script>
 <template>
     <BaseOption title="Obrázok">
+        <!-- Upload -->
         <OptionWidget title="Nahrať obrázok" align="vertical">
             <ElUpload v-model:file-list="background" class="upload-image" drag :action="Config?.url"
                 :headers="Config?.headers" :on-success="onImageUpload" :on-remove="onImageRemove"
@@ -57,6 +58,11 @@ const setImage = (url: string | undefined) => {
                     </div>
                 </template>
             </ElUpload>
+        </OptionWidget>
+
+        <!-- Object fit -->
+        <OptionWidget :title="t('stretch_image')">
+            <SliderToggle v-model="blockInfo.options.stretched" />
         </OptionWidget>
     </BaseOption>
 </template>

@@ -3,10 +3,10 @@ import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import { TextBlock } from "../../utils/blocks/TextBlock.ts";
-import SliderToggle from "../../controls/SliderToggle.vue";
-import ColorInput from "../../controls/ColorInput.vue";
+import SliderToggle from '@/lib/controls/SliderToggle.vue';
+import ColorInput from "@/lib/controls/ColorInput.vue";
 import { useTranslator } from '@/lib/Translator';
-import RangeInput from "../../controls/RangeInput.vue";
+import RangeInput from "@/lib/controls/RangeInput.vue";
 
 interface Props {
   blockInfo: TextBlock
