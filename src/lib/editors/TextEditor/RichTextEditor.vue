@@ -11,7 +11,8 @@ import { useTranslator } from '@/lib/Translator';
 
 interface Props {
   bubbleMenu?: boolean,
-  fontSize: number
+  fontSize: number,
+  textColor: string
 }
 
 const model = defineModel()
@@ -62,7 +63,8 @@ onBeforeUnmount(() => {
 
     <!-- Editor Content -->
     <div class="editor-content-wrapper">
-      <editor-content :editor="editor" class="editor-content" :style="{ 'fontSize': `${fontSize}rem` }" />
+      <editor-content :editor="editor" class="editor-content"
+        :style="{ 'fontSize': `${fontSize}rem`, 'color': textColor, '--placeholder-text-color': textColor }" />
     </div>
   </div>
 </template>
@@ -98,9 +100,8 @@ onBeforeUnmount(() => {
   min-height: 120px;
   padding: 12px 16px;
   line-height: 1.6;
-  color: #1f2937;
-  background-color: white;
-  border: 1px solid #e5e7eb;
+  background-color: transparent;
+  /* border: 1px solid #e5e7eb; */
   border-radius: 8px;
   outline: none;
 }
@@ -120,14 +121,14 @@ onBeforeUnmount(() => {
 /* Empty state styling */
 :deep(.ProseMirror.is-editor-empty::before) {
   content: attr(data-placeholder);
-  color: #9ca3af;
+  color: var(--placeholder-text-color);
   pointer-events: none;
   position: absolute;
 }
 
 :deep(.ProseMirror .is-empty-node::before) {
   content: attr(data-placeholder);
-  color: #9ca3af;
+  color: var(--placeholder-text-color);
   pointer-events: none;
   float: left;
   height: 0;

@@ -33,8 +33,8 @@ const { t } = useTranslator();
       </div>
     </option-widget>
 
-    <option-widget :title="t('background_color')">
-      <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
+    <option-widget :title="t('text_color')">
+      <ColorInput v-model="blockInfo.options.textColor"></ColorInput>
     </option-widget>
 
     <option-widget :title="t('background_image')" align="vertical">

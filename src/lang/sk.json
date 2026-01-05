@@ -46,5 +46,6 @@
   "click_to_upload": "kliknite pre nahratie",
   "upload_rules": "Podporované formáty: png, jpeg, heic, heif s veľkosťou menšou ako 10 MB.",
   "image_height": "Výška obrázka",
-  "stretch_image": "Natiahnuť na plnú šírku"
+  "stretch_image": "Natiahnuť na plnú šírku",
+  "text_color": "Farba textu"
 }
