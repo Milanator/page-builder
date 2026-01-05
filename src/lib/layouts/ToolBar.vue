@@ -16,7 +16,7 @@ const { t } = useTranslator();
 <template>
   <!-- Toolbar -->
   <div
-    class="bcpb:bg-white bcpb:border-b bcpb:border-gray-100 bcpb:px-8 bcpb:py-4 bcpb:flex bcpb:items-center bcpb:justify-between">
+    class="bcpb:bg-white bcpb:border-b bcpb:border-gray-100 bcpb:px-8 bcpb:py-4 bcpb:flex bcpb:items-center bcpb:justify-between bcpb:h-20">
     <div class="bcpb:flex bcpb:items-center bcpb:space-x-6">
       <button type="button" @click="emit('onBack')"
         class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-gray-600 hover:bcpb:text-gray-900 hover:bcpb:bg-gray-50 bcpb:rounded-lg bcpb:transition-colors bcpb:duration-200">
