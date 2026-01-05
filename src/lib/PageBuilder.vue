@@ -13,7 +13,6 @@ import { ConfigKey } from "@/store/Config.ts";
 interface Props {
   cssUrl?: string;
   renderList?: Block[],
-  meta?: Array<Record<string, string>>,
   pageTitle?: string,
   mode?: Mode,
   config: Config
@@ -40,7 +39,6 @@ const emit = defineEmits<{
 }>()
 
 const {
-  meta,
   renderList,
   dragOverIndex,
   selectedOptionComponent,
@@ -74,7 +72,6 @@ onMounted(() => {
 
 watchEffect(() => {
   renderList.value = props.renderList ? [...props.renderList] : []
-  meta.value = props.meta ? [...props.meta] : []
 })
 
 onUnmounted(() => {
@@ -97,7 +94,6 @@ const exportPage = ($event: Event) => {
   $event.preventDefault();
   emit('onSave', {
     renderList: renderList.value,
-    meta: meta.value
   })
 }
 </script>

@@ -10,7 +10,6 @@ import { ImageBlock } from "./utils/blocks/ImageBlock.ts";
 
 const draggedItem: Ref<Block | null> = ref(null)
 const renderList: Ref<Array<Block>> = ref([])
-const meta: Ref<Array<Record<string, string>>> = ref([])
 const dragOverIndex: Ref<number | null> = ref(null)
 const dragOverDropZone: Ref<boolean> = ref(false)
 const innerDragElement: Ref<Block | null> = ref(null)
@@ -168,7 +167,6 @@ export function usePageBuilder() {
 
     return {
         blocks,
-        meta,
         renderList,
         draggedItem,
         dragOverIndex,
