@@ -112,7 +112,6 @@ const exportPage = ($event: Event) => {
           </svg>
           {{ t('back_to_editor') }}
         </button>
-
         <!-- Save Button in Preview -->
         <button @click="exportPage($event)"
           class="bcpb:bg-green-600 hover:bcpb:bg-green-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-green-500/20 bcpb:flex bcpb:items-center">
