@@ -4,7 +4,7 @@ import ToolBar from "./layouts/ToolBar.vue";
 import PagePreview from "./PagePreview.vue";
 import { usePageBuilder } from "./PageBuilder.ts";
 import { useLoadCSS } from "./useLoadCSS.ts";
-import { onMounted, onUnmounted, provide, ref, watchEffect } from "vue";
+import { onMounted, onUnmounted, provide, ref, watch, watchEffect } from "vue";
 import { previewComponentMap, previewOptionMap } from "./utils/registry.ts";
 import { Mode, Block, Config } from "./utils/types.ts";
 import { useTranslator } from '@/lib/Translator';
@@ -63,8 +63,6 @@ const { t } = useTranslator(props.config.language);
 
 onMounted(() => {
   loadCSS(props.cssUrl)
-  document.body.style.height = '100%';
-  document.body.style.overflow = 'hidden';
 
   // Add ESC key listener
   document.addEventListener('keydown', handleKeyDown);
@@ -74,10 +72,21 @@ watchEffect(() => {
   renderList.value = props.renderList ? [...props.renderList] : []
 })
 
+watch(
+  () => props.mode,
+  (value: Mode) => {
+    if (value === 'preview') {
+      document.body.style.height = 'auto';
+      document.body.style.overflow = 'auto';
+    } else {
+      document.body.style.height = '100%';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+)
+
 onUnmounted(() => {
   removeCSS(props.cssUrl)
-  document.body.style.height = 'auto';
-  document.body.style.overflow = 'auto';
 
   // Cleanup ESC key listener
   document.removeEventListener('keydown', handleKeyDown);
@@ -99,7 +108,8 @@ const exportPage = ($event: Event) => {
 </script>
 <template>
   <!-- Preview (editor) -->
-  <div v-if="mode !== 'editor'" class="bcpb:bg-white bcpb:w-full bcpb:h-screen bcpb:z-[9999] bcpb:overflow-auto">
+  <div v-if="mode !== 'editor'" class="bcpb:bg-white bcpb:w-full bcpb:h-screen bcpb:z-[9999] bcpb:overflow-auto"
+    :class="{ 'bcpb:fixed bcpb:inset-0': mode === 'editor_preview' }">
     <template v-if="mode === 'editor_preview'">
       <!-- Floating Action Bar -->
       <div class="floating-action-bar bcpb:fixed bcpb:bottom-6 bcpb:right-6 bcpb:z-[99998] bcpb:flex bcpb:gap-3">
