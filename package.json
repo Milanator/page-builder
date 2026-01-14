@@ -1,9 +1,9 @@
 {
-  "name": "page-builder",
+  "name": "@antik-web/page-builder",
   "description": "Page Builder",
   "private": false,
   "homepage": "https://github.com/binary-castle/page-builder",
-  "version": "0.0.15",
+  "version": "1.0.0",
   "license": "LGPL-3.0-only",
   "type": "module",
   "main": "./dist/index.umd.js",
