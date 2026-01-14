@@ -28,6 +28,7 @@
     "@binarycastle/vue-html-editor": "^1.0.8",
     "@element-plus/icons-vue": "^2.3.2",
     "@popperjs/core": "^2.11.8",
+    "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/vite": "^4.1.11",
     "@tiptap/extension-color": "^2.10.4",
     "@tiptap/extension-heading": "^2.10.4",
