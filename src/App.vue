@@ -2,8 +2,6 @@
 import { Config } from "@/lib/utils/types.ts";
 import { PageBuilder } from "@/lib";
 
-// just a tmp comment, remove anytime
-
 const config: Config = {
   language: 'sk',
   uploader: {
