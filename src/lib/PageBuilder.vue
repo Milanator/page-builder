@@ -98,18 +98,9 @@ const exportPage = ($event: Event) => {
 }
 </script>
 <template>
-  <!-- Enhanced Preview Modal -->
-  <div v-if="mode !== 'editor'"
-    class="bcpb:fixed bcpb:inset-0 bcpb:bg-white bcpb:w-full bcpb:h-screen bcpb:z-[9999] bcpb:overflow-auto">
-
+  <!-- Preview (editor) -->
+  <div v-if="mode !== 'editor'" class="bcpb:bg-white bcpb:w-full bcpb:h-screen bcpb:z-[9999] bcpb:overflow-auto">
     <template v-if="mode === 'editor_preview'">
-      <!-- Always Visible Close Button with Enhanced Styling -->
-      <!-- <button @click="mode = 'editor'"
-      class="preview-close-button bcpb:fixed bcpb:top-4 bcpb:right-4 bcpb:z-[99999] bcpb:w-12 bcpb:h-12 bcpb:bg-white bcpb:text-gray-700 bcpb:rounded-full bcpb:shadow-2xl bcpb:border-2 bcpb:border-gray-200 hover:bcpb:bg-gray-50 hover:bcpb:border-gray-300 hover:bcpb:text-gray-900 hover:bcpb:scale-110 bcpb:transition-all bcpb:duration-200 bcpb:flex bcpb:items-center bcpb:justify-center focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-blue-500/20 bcpb:backdrop-blur-sm"
-      title="Close Preview (ESC)" aria-label="Close Preview">
-      <img src="@/assets/icons/cancel.svg" alt="Cancel" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">
-    </button> -->
-
       <!-- Floating Action Bar -->
       <div class="floating-action-bar bcpb:fixed bcpb:bottom-6 bcpb:right-6 bcpb:z-[99998] bcpb:flex bcpb:gap-3">
         <!-- Back to Editor Button -->
@@ -137,7 +128,8 @@ const exportPage = ($event: Event) => {
     </div>
   </div>
 
-  <div class="bcpb:flex bcpb:h-screen bcpb:bg-gray-50">
+  <!-- Full editor -->
+  <div v-else class="bcpb:flex bcpb:h-screen bcpb:bg-gray-50">
     <!-- Left Side - Canvas/Drop Zone -->
     <div class="bcpb:flex-1 bcpb:bg-white bcpb:border-r bcpb:border-gray-100 bcpb:flex bcpb:flex-col">
 
@@ -197,7 +189,7 @@ const exportPage = ($event: Event) => {
       </div>
     </div>
 
-    <!--    Sidebar portion where the element will be shown and user can modify selected elements-->
+    <!-- Sidebar portion where the element will be shown and user can modify selected elements-->
     <Sidebar></Sidebar>
 
     <!-- Options Panel with Transition -->
