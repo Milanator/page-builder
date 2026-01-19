@@ -108,8 +108,8 @@ const exportPage = ($event: Event) => {
 </script>
 <template>
   <!-- Preview (editor) -->
-  <div v-if="mode !== 'editor'" class="bcpb:bg-white bcpb:w-full bcpb:h-screen bcpb:z-[9999] bcpb:overflow-auto"
-    :class="{ 'bcpb:fixed bcpb:inset-0': mode === 'editor_preview' }">
+  <div v-if="mode !== 'editor'" class="bcpb:bg-white bcpb:w-full bcpb:h-screen bcpb:z-[9999]"
+    :class="{ 'bcpb:fixed bcpb:inset-0 bcpb:overflow-auto': mode === 'editor_preview' }">
     <template v-if="mode === 'editor_preview'">
       <!-- Floating Action Bar -->
       <div class="floating-action-bar bcpb:fixed bcpb:bottom-6 bcpb:right-6 bcpb:z-[99998] bcpb:flex bcpb:gap-3">
@@ -124,7 +124,7 @@ const exportPage = ($event: Event) => {
         </button>
         <!-- Save Button in Preview -->
         <button @click="exportPage($event)"
-          class="bcpb:bg-green-600 hover:bcpb:bg-green-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-green-500/20 bcpb:flex bcpb:items-center">
+          class="bcpb:bg-green-600 hover:bcpb:bg-green-700 bcpb:text-white bcpb:px-6 bcpb:py-3 bcpb:rounded-full bcpb:shadow-lg hover:bcpb:shadow-xl bcpb:font-medium bcpb:transition-all bcpb:duration-200 hover:bcpb:scale-105 focus:bcpb:outline-none focus:bcpb:ring-4 focus:bcpb:ring-green-500/20 bcpb:flex bcpb:items-center bcpb:cursor-pointer">
           <img src="@/assets/icons/save.svg" alt="Save" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer bcpb:mr-1">
           {{ t('save') }}
         </button>
