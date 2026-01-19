@@ -42,8 +42,8 @@ const setImage = (url: string | undefined) => {
         <!-- Upload -->
         <OptionWidget title="Nahrať obrázok" align="vertical">
             <ElUpload v-model:file-list="background" class="upload-image" drag :action="Config?.url"
-                :headers="Config?.headers" :on-success="onImageUpload" :on-remove="onImageRemove"
-                accept="image/png, image/jpeg, image/jpg, image/heic, image/heif">
+                :headers="Config?.headers" :on-success="onImageUpload" :on-remove="onImageRemove" multiple
+                accept="image/png, image/jpeg, image/jpg, image/heic, image/heif" name="files[]">
                 <div class="py-5 group w-full">
                     <ElIcon class="el-icon--upload group-hover:text-sky-500">
                         <UploadFilled />
