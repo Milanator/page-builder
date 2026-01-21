@@ -41,11 +41,6 @@ export interface Block {
     title: string;
 
     /**
-     * Description will appear in the block tooltip
-     */
-    description: string;
-
-    /**
      * Icon will appear in the block section
      */
     icon: string;

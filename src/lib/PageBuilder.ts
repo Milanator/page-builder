@@ -7,6 +7,7 @@ import { HtmlBlock } from "./utils/blocks/HtmlBlock.ts";
 import { TextBlock } from "./utils/blocks/TextBlock.ts";
 import { Template1 } from "./utils/blocks/Template1Block.ts";
 import { ImageBlock } from "./utils/blocks/ImageBlock.ts";
+import { Template2 } from "./utils/blocks/Template2Block.ts";
 
 const draggedItem: Ref<Block | null> = ref(null)
 const renderList: Ref<Array<Block>> = ref([])
@@ -20,8 +21,9 @@ const dragOverChildElement: Ref<boolean> = ref(false)
 const blocks: Ref<Array<Block>> = ref([
     new ButtonBlock(),
     new TextBlock(),
-    new ColumnBlock(),
+    new Template2(),
     new Template1(),
+    new ColumnBlock(),
     // new ListBlock(),
     new HtmlBlock(),
     // new CardUiComponent(),
