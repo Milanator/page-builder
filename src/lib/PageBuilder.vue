@@ -138,7 +138,7 @@ const exportPage = ($event: Event) => {
   </div>
   <!-- Full editor -->
   <div v-else class="bcpb:flex bcpb:h-screen bcpb:bg-gray-50">
-    <!-- Left Side - Canvas/Drop Zone -->
+    <!-- Left Side - Drop Zone -->
     <div class="bcpb:flex-1 bcpb:bg-white bcpb:border-r bcpb:border-gray-100 bcpb:flex bcpb:flex-col">
       <ToolBar @on-preview="mode = 'editor_preview'" @on-save="exportPage" @on-back="emit('onBack', true)"
         @on-settings="onItemSelect(setting)" @on-device="(event) => selectedDevice = event" :device="selectedDevice">
