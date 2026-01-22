@@ -150,7 +150,6 @@ const exportPage = ($event: Event) => {
           <div @drop="onDrop($event)" @dragenter.prevent @dragleave.prevent="onDragLeave()"
             @dragover.prevent="onDragOver($event)" :style="setting.options"
             class="drop-zone bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300">
-
             <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"
               @dragover="onDragOverItem($event, index)" @dragstart="startDragItem($event, block, index)">
               <div :class="{ 'drag-over': dragOverIndex == index && !dragOverChildElement }">
