@@ -10,7 +10,9 @@ const config: Config = {
   }
 }
 
-const onSave = () => { }
+const onSave = ({ renderList, settings }) => {
+  console.log(renderList, settings)
+}
 </script>
 <template>
   <PageBuilder :config="config" @onSave="onSave" />

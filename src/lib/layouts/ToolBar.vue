@@ -9,7 +9,7 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['onPreview', 'onSave', 'onBack', 'onDevice'])
+const emit = defineEmits(['onPreview', 'onSave', 'onBack', 'onDevice', 'onSettings'])
 
 const { t } = useTranslator();
 </script>
@@ -67,6 +67,17 @@ const { t } = useTranslator();
     </div>
 
     <div class="bcpb:flex bcpb:items-center bcpb:space-x-3">
+      <!-- Preview Button -->
+      <button type="button" @click="emit('onSettings', true)"
+        class="bcpb:cursor-pointer bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-gray-700 bcpb:bg-white bcpb:border bcpb:border-gray-300 bcpb:rounded-lg hover:bcpb:bg-gray-50 hover:bcpb:border-gray-400 bcpb:transition-all bcpb:duration-200 bcpb:shadow-sm">
+        <svg class="bcpb:w-4 bcpb:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+        {{ t('settings') }}
+      </button>
+
       <!-- Preview Button -->
       <button type="button" @click="emit('onPreview', true)"
         class="bcpb:cursor-pointer bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-gray-700 bcpb:bg-white bcpb:border bcpb:border-gray-300 bcpb:rounded-lg hover:bcpb:bg-gray-50 hover:bcpb:border-gray-400 bcpb:transition-all bcpb:duration-200 bcpb:shadow-sm">

@@ -47,5 +47,6 @@
   "upload_rules": "Podporované formáty: png, jpeg, heic, heif s veľkosťou menšou ako 10 MB.",
   "image_height": "Výška obrázka",
   "stretch_image": "Natiahnuť na plnú šírku",
-  "text_color": "Farba textu"
+  "text_color": "Farba textu",
+  "settings": "Nastavenia"
 }

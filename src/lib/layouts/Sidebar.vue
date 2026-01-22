@@ -36,8 +36,7 @@ const filteredBasicElements = computed(() => {
 
   const search = searchTerm.value.toLowerCase()
   return elements.filter((element: Block) =>
-    element.name.toLowerCase().includes(search) ||
-    element.description.toLowerCase().includes(search)
+    element.name.toLowerCase().includes(search)
   )
 })
 
@@ -47,8 +46,7 @@ const filteredLayoutElements = computed(() => {
 
   const search = searchTerm.value.toLowerCase()
   return elements.filter((element: Block) =>
-    element.name.toLowerCase().includes(search) ||
-    element.description.toLowerCase().includes(search)
+    element.name.toLowerCase().includes(search)
   )
 })
 
@@ -58,8 +56,7 @@ const filteredUIComponents = computed(() => {
 
   const search = searchTerm.value.toLowerCase()
   return elements.filter((element: Block) =>
-    element.name.toLowerCase().includes(search) ||
-    element.description.toLowerCase().includes(search)
+    element.name.toLowerCase().includes(search)
   )
 })
 </script>
@@ -145,9 +142,6 @@ const filteredUIComponents = computed(() => {
                 <p
                   class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-teal-900 bcpb:transition-colors bcpb:duration-200">
                   {{ element.title }}</p>
-                <p
-                  class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-teal-700 bcpb:transition-colors bcpb:duration-200">
-                  {{ element.description }}</p>
               </div>
             </div>
           </div>

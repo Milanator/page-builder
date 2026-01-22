@@ -2,7 +2,7 @@ export type VueComponent = {
     new(): import("vue").Component;
 }
 
-export type BlockType = 'element' | 'ui-component' | 'layout';
+export type BlockType = 'element' | 'ui-component' | 'layout' | 'setting';
 
 export interface Block {
     /**
@@ -21,7 +21,7 @@ export interface Block {
     /**
      * Just a basic vue component and the component accept blockInfo as props
      */
-    component: VueComponent;
+    component: VueComponent | undefined;
 
     /**
      * Just a basic vue component adn the component accept blockInfo as props

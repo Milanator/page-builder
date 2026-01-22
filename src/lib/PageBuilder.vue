@@ -5,17 +5,18 @@ import PagePreview from "./PagePreview.vue";
 import { usePageBuilder } from "./PageBuilder.ts";
 import { useLoadCSS } from "./useLoadCSS.ts";
 import { onMounted, onUnmounted, provide, ref, watch, watchEffect } from "vue";
-import { previewComponentMap, previewOptionMap } from "./utils/registry.ts";
-import { Mode, Block, Config } from "./utils/types.ts";
+import { previewComponentMap, previewOptionMap } from "@/lib/utils/registry.ts";
+import { Mode, Block, Config } from "@/lib/utils/types.ts";
 import { useTranslator } from '@/lib/Translator';
 import { ConfigKey } from "@/store/Config.ts";
+import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
 
 interface Props {
   cssUrl?: string;
   renderList?: Block[],
-  pageTitle?: string,
   mode?: Mode,
   config: Config
+  settings: SettingBlock
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -24,6 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const mode = ref<Mode>(props.mode);
+const settings = ref(props.settings || new SettingBlock)
 
 const selectedDevice = ref<'desktop' | 'tab' | 'mobile'>('desktop')
 
@@ -101,8 +103,10 @@ const handleKeyDown = (event: KeyboardEvent) => {
 
 const exportPage = ($event: Event) => {
   $event.preventDefault();
+
   emit('onSave', {
-    renderList: renderList.value,
+    renderList: renderList.value.map(({ component, optionComponent, icon, ...rest }: Block) => rest),
+    settings: (({ optionComponent, component, icon, ...rest }: SettingBlock) => rest)(settings.value)
   })
 }
 </script>
@@ -142,16 +146,17 @@ const exportPage = ($event: Event) => {
     <!-- Left Side - Canvas/Drop Zone -->
     <div class="bcpb:flex-1 bcpb:bg-white bcpb:border-r bcpb:border-gray-100 bcpb:flex bcpb:flex-col">
 
-      <ToolBar @on-preview="mode = 'editor_preview'" @on-save="exportPage" @onBack="emit('onBack', true)"
-        @on-device="(event) => selectedDevice = event" :device="selectedDevice"></ToolBar>
+      <ToolBar @on-preview="mode = 'editor_preview'" @on-save="exportPage" @on-back="emit('onBack', true)"
+        @on-settings="onItemSelect(settings)" @on-device="(event) => selectedDevice = event" :device="selectedDevice">
+      </ToolBar>
 
       <!-- Canvas Area -->
       <div class="bcpb:flex-1 bcpb:p-4 bcpb:overflow-auto">
         <div :class="devices[selectedDevice]">
           <!-- Drop Zone -->
           <div @drop="onDrop($event)" @dragenter.prevent @dragleave.prevent="onDragLeave()"
-            @dragover.prevent="onDragOver($event)"
-            class="drop-zone bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:bg-gradient-to-br bcpb:from-blue-50/30 bcpb:via-white bcpb:to-purple-50/20 bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300 hover:bcpb:border-gray-300 hover:bcpb:bg-gradient-to-br hover:bcpb:from-blue-50/40 hover:bcpb:to-purple-50/30">
+            @dragover.prevent="onDragOver($event)" :style="settings.options"
+            class="drop-zone bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300">
 
             <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"
               @dragover="onDragOverItem($event, index)" @dragstart="startDragItem($event, block, index)">
