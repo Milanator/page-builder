@@ -12,10 +12,10 @@ import { ConfigKey } from "@/store/Config.ts";
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
 
 interface Props {
-  cssUrl?: string;
-  renderList?: Block[],
-  mode?: Mode,
   config: Config
+  cssUrl?: string
+  renderList?: Block[]
+  mode?: Mode
   settings?: SettingBlock
 }
 
@@ -25,9 +25,8 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const mode = ref<Mode>(props.mode);
-const setting = ref<SettingBlock>(props.settings || new SettingBlock)
-
 const selectedDevice = ref<Device>('desktop')
+const settings = ref<SettingBlock>(props.settings || new SettingBlock)
 
 const devices: Record<Device, string> = {
   'desktop': 'bcpb:w-full',
@@ -74,6 +73,13 @@ watchEffect(() => {
 })
 
 watch(
+  () => props.settings,
+  val => {
+    if (val) settings.value = val
+  }
+)
+
+watch(
   () => props.mode,
   (value: Mode) => {
     if (value === 'preview') {
@@ -103,7 +109,7 @@ const exportPage = ($event: Event) => {
   $event.preventDefault();
   emit('onSave', {
     renderList: renderList.value,
-    settings: setting.value
+    settings: settings.value
   })
 }
 </script>
@@ -141,14 +147,14 @@ const exportPage = ($event: Event) => {
     <!-- Left Side - Drop Zone -->
     <div class="bcpb:flex-1 bcpb:bg-white bcpb:border-r bcpb:border-gray-100 bcpb:flex bcpb:flex-col">
       <ToolBar @on-preview="mode = 'editor_preview'" @on-save="exportPage" @on-back="emit('onBack', true)"
-        @on-settings="onItemSelect(setting)" @on-device="(event) => selectedDevice = event" :device="selectedDevice">
+        @on-settings="onItemSelect(settings)" @on-device="(event) => selectedDevice = event" :device="selectedDevice">
       </ToolBar>
       <!-- Canvas Area -->
       <div class="bcpb:flex-1 bcpb:p-4 bcpb:overflow-auto">
         <div :class="devices[selectedDevice]">
           <!-- Drop Zone -->
           <div @drop="onDrop($event)" @dragenter.prevent @dragleave.prevent="onDragLeave()"
-            @dragover.prevent="onDragOver($event)" :style="setting.options"
+            @dragover.prevent="onDragOver($event)" :style="settings.options"
             class="drop-zone bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300">
             <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"
               @dragover="onDragOverItem($event, index)" @dragstart="startDragItem($event, block, index)">

@@ -7,6 +7,7 @@ import SliderToggle from "./controls/SliderToggle.vue";
 import PagePreview from "./PagePreview.vue";
 import BasePreview from "./block-components/BasePreview.vue";
 import BaseOption from "./block-components/BaseOption.vue";
+import { SettingBlock } from "./utils/blocks/SettingBlock";
 
 export * from "./utils/types";
 export * from "./utils/registry";
@@ -21,4 +22,5 @@ export {
     BaseOption,
     ColorInput,
     SliderToggle,
+    SettingBlock,
 }
