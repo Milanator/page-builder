@@ -16,7 +16,7 @@ interface Props {
   renderList?: Block[],
   mode?: Mode,
   config: Config
-  settings: SettingBlock
+  settings?: SettingBlock
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const mode = ref<Mode>(props.mode);
-const settings = ref(props.settings || new SettingBlock)
+const setting = ref<SettingBlock>(props.settings || new SettingBlock)
 
 const selectedDevice = ref<Device>('desktop')
 
@@ -102,8 +102,8 @@ const handleKeyDown = (event: KeyboardEvent) => {
 const exportPage = ($event: Event) => {
   $event.preventDefault();
   emit('onSave', {
-    renderList: renderList.value.map(({ component, optionComponent, icon, ...rest }: Block) => rest),
-    settings: (({ optionComponent, component, icon, ...rest }: SettingBlock) => rest)(settings.value)
+    renderList: renderList.value,
+    settings: setting.value
   })
 }
 </script>
@@ -141,14 +141,14 @@ const exportPage = ($event: Event) => {
     <!-- Left Side - Canvas/Drop Zone -->
     <div class="bcpb:flex-1 bcpb:bg-white bcpb:border-r bcpb:border-gray-100 bcpb:flex bcpb:flex-col">
       <ToolBar @on-preview="mode = 'editor_preview'" @on-save="exportPage" @on-back="emit('onBack', true)"
-        @on-settings="onItemSelect(settings)" @on-device="(event) => selectedDevice = event" :device="selectedDevice">
+        @on-settings="onItemSelect(setting)" @on-device="(event) => selectedDevice = event" :device="selectedDevice">
       </ToolBar>
       <!-- Canvas Area -->
       <div class="bcpb:flex-1 bcpb:p-4 bcpb:overflow-auto">
         <div :class="devices[selectedDevice]">
           <!-- Drop Zone -->
           <div @drop="onDrop($event)" @dragenter.prevent @dragleave.prevent="onDragLeave()"
-            @dragover.prevent="onDragOver($event)" :style="settings.options"
+            @dragover.prevent="onDragOver($event)" :style="setting.options"
             class="drop-zone bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300">
 
             <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"

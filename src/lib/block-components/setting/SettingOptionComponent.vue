@@ -9,7 +9,7 @@ interface Props {
     blockInfo: SettingBlock
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const { t } = useTranslator();
 </script>

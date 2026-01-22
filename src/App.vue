@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Config } from "@/lib/utils/types.ts";
-import { PageBuilder } from "@/lib";
+import { PageBuilder, SavePayload } from "@/lib";
 
 const config: Config = {
   language: 'sk',
@@ -10,7 +10,7 @@ const config: Config = {
   }
 }
 
-const onSave = ({ renderList, settings }) => {
+const onSave = ({ renderList, settings }: SavePayload) => {
   console.log(renderList, settings)
 }
 </script>

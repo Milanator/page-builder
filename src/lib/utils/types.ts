@@ -1,3 +1,5 @@
+import { SettingBlock } from "./blocks/SettingBlock";
+
 export type VueComponent = {
     new(): import("vue").Component;
 }
@@ -66,4 +68,9 @@ interface UploaderConfig {
 export interface Config {
     uploader?: UploaderConfig;
     language: Language;
+}
+
+export interface SavePayload {
+    renderList: Block[]
+    settings: SettingBlock
 }
