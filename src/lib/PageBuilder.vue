@@ -6,7 +6,7 @@ import { usePageBuilder } from "./PageBuilder.ts";
 import { useLoadCSS } from "./useLoadCSS.ts";
 import { onMounted, onUnmounted, provide, ref, watch, watchEffect } from "vue";
 import { previewComponentMap, previewOptionMap } from "@/lib/utils/registry.ts";
-import { Mode, Block, Config } from "@/lib/utils/types.ts";
+import { Mode, Block, Config, Device } from "@/lib/utils/types.ts";
 import { useTranslator } from '@/lib/Translator';
 import { ConfigKey } from "@/store/Config.ts";
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
@@ -27,9 +27,9 @@ const props = withDefaults(defineProps<Props>(), {
 const mode = ref<Mode>(props.mode);
 const settings = ref(props.settings || new SettingBlock)
 
-const selectedDevice = ref<'desktop' | 'tab' | 'mobile'>('desktop')
+const selectedDevice = ref<Device>('desktop')
 
-const devices: Record<'desktop' | 'tab' | 'mobile', string> = {
+const devices: Record<Device, string> = {
   'desktop': 'bcpb:w-full',
   'tab': 'bcpb:w-4xl bcpb:mx-auto',
   'mobile': 'bcpb:w-full bcpb:max-w-sm bcpb:mx-auto bcpb:px-4',
@@ -65,7 +65,6 @@ const { t } = useTranslator(props.config.language);
 
 onMounted(() => {
   loadCSS(props.cssUrl)
-
   // Add ESC key listener
   document.addEventListener('keydown', handleKeyDown);
 })
@@ -89,7 +88,6 @@ watch(
 
 onUnmounted(() => {
   removeCSS(props.cssUrl)
-
   // Cleanup ESC key listener
   document.removeEventListener('keydown', handleKeyDown);
 })
@@ -103,7 +101,6 @@ const handleKeyDown = (event: KeyboardEvent) => {
 
 const exportPage = ($event: Event) => {
   $event.preventDefault();
-
   emit('onSave', {
     renderList: renderList.value.map(({ component, optionComponent, icon, ...rest }: Block) => rest),
     settings: (({ optionComponent, component, icon, ...rest }: SettingBlock) => rest)(settings.value)
@@ -134,22 +131,18 @@ const exportPage = ($event: Event) => {
         </button>
       </div>
     </template>
-
     <!-- Preview Content Container -->
     <div class="bcpb:w-full bcpb:min-h-full bcpb:bg-white">
       <PagePreview :renderList="renderList"></PagePreview>
     </div>
   </div>
-
   <!-- Full editor -->
   <div v-else class="bcpb:flex bcpb:h-screen bcpb:bg-gray-50">
     <!-- Left Side - Canvas/Drop Zone -->
     <div class="bcpb:flex-1 bcpb:bg-white bcpb:border-r bcpb:border-gray-100 bcpb:flex bcpb:flex-col">
-
       <ToolBar @on-preview="mode = 'editor_preview'" @on-save="exportPage" @on-back="emit('onBack', true)"
         @on-settings="onItemSelect(settings)" @on-device="(event) => selectedDevice = event" :device="selectedDevice">
       </ToolBar>
-
       <!-- Canvas Area -->
       <div class="bcpb:flex-1 bcpb:p-4 bcpb:overflow-auto">
         <div :class="devices[selectedDevice]">
@@ -166,7 +159,6 @@ const exportPage = ($event: Event) => {
                 @onSelectChildElement="onSelectFormChildElement" @onDragOverChildElement="onDragOverChildElement"
                 @onDropChildElement="onDropChildElement" @click="onItemSelect(block)"></component>
             </div>
-
             <!-- Enhanced No Item State -->
             <div v-if="renderList.length == 0"
               class="no-item bcpb:absolute bcpb:inset-0 bcpb:flex bcpb:items-center bcpb:justify-center">
@@ -190,7 +182,6 @@ const exportPage = ($event: Event) => {
                     class="bcpb:absolute bcpb:-bottom-1 bcpb:-left-3 bcpb:w-3 bcpb:h-3 bcpb:bg-purple-400 bcpb:rounded-full bcpb:animate-pulse bcpb:delay-75">
                   </div>
                 </div>
-
                 <!-- Content -->
                 <div class="bcpb:space-y-4">
                   <h3 class="bcpb:text-xl bcpb:font-semibold bcpb:text-gray-800">{{ t('place_for_elements') }}</h3>
@@ -202,10 +193,8 @@ const exportPage = ($event: Event) => {
         </div>
       </div>
     </div>
-
     <!-- Sidebar portion where the element will be shown and user can modify selected elements-->
     <Sidebar></Sidebar>
-
     <!-- Options Panel with Transition -->
     <Transition name="slide-left">
       <div v-if="selectedOptionComponent"

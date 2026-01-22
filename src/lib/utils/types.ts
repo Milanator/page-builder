@@ -57,6 +57,8 @@ export type Language = 'sk' | 'en'
 
 export type Mode = 'editor' | 'editor_preview' | 'preview'
 
+export type Device = 'desktop' | 'tab' | 'mobile'
+
 interface UploaderConfig {
     url: string;
     headers?: Record<string, string>;
