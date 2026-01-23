@@ -11,7 +11,6 @@ import { Template2 } from "./utils/blocks/Template2Block.ts";
 import { SettingBlock } from "./utils/blocks/SettingBlock.ts";
 
 const draggedItem: Ref<Block | null> = ref(null)
-const renderList: Ref<Array<Block>> = ref([])
 const dragOverIndex: Ref<number | null> = ref(null)
 const dragOverDropZone: Ref<boolean> = ref(false)
 const innerDragElement: Ref<Block | null> = ref(null)
@@ -33,6 +32,8 @@ const blocks: Ref<Array<Block>> = ref([
 ])
 
 export function usePageBuilder() {
+    const renderList: Ref<Array<Block>> = ref([])
+
     const startDrag = ($event: DragEvent, item: Block) => {
         $event.dataTransfer?.setData('text/plain', JSON.stringify(item));
     }
