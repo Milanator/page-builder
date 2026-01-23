@@ -13,11 +13,13 @@ const config: Config = {
   // affect only if device = custom
   resolution: {
     width: '1000',
-    height: '1000'
+    height: '1300'
   }
 }
 
-const renderList: Block[] = []
+const renderList: Block[] = [
+
+]
 
 const mode: Mode = 'editor'
 

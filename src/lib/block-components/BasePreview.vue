@@ -16,8 +16,7 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="base-preview-item" :class="{'editor': inEditor}"
-       :style="{
+  <div class="base-preview-item" :class="{ 'editor': inEditor }" :style="{
     'background-image': backgroundImage ? 'url(' + backgroundImage + ')' : '',
     'background-color': backgroundColor ? backgroundColor : 'transparent',
   }">
@@ -32,6 +31,7 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss" scoped>
 .base-preview-item {
   background-color: white;
+  border: 1px solid transparent;
 }
 
 .editor {
