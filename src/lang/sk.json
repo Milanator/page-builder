@@ -48,5 +48,8 @@
   "image_height": "Výška obrázka",
   "stretch_image": "Natiahnuť na plnú šírku",
   "text_color": "Farba textu",
-  "settings": "Nastavenia"
+  "settings": "Nastavenia",
+  "width": "Šírka",
+  "custom": "Vlastný",
+  "height": "Výška"
 }

@@ -4,8 +4,6 @@ export type VueComponent = {
     new(): import("vue").Component;
 }
 
-export type BlockType = 'element' | 'ui-component' | 'layout' | 'setting';
-
 export interface Block {
     /**
      *  ID is not required for creating a draggable block,
@@ -55,19 +53,29 @@ export interface Block {
     type: BlockType
 }
 
+export type BlockType = 'element' | 'ui-component' | 'layout' | 'setting';
+
 export type Language = 'sk' | 'en'
 
 export type Mode = 'editor' | 'editor_preview' | 'preview'
 
-export type Device = 'desktop' | 'tab' | 'mobile'
+export type Device = 'desktop' | 'tab' | 'mobile' | 'custom'
 
 interface UploaderConfig {
     url: string;
     headers?: Record<string, string>;
 }
+
+interface Resolution {
+    width: String | number | number
+    height: String | number | number
+}
 export interface Config {
-    uploader?: UploaderConfig;
     language: Language;
+    uploader?: UploaderConfig;
+    resolution?: Resolution
+    device: Device
+    showDeviceBar?: boolean
 }
 
 export interface SavePayload {

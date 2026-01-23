@@ -3,7 +3,6 @@ import Sidebar from "./layouts/Sidebar.vue";
 import ToolBar from "./layouts/ToolBar.vue";
 import PagePreview from "./PagePreview.vue";
 import { usePageBuilder } from "./PageBuilder.ts";
-import { useLoadCSS } from "./useLoadCSS.ts";
 import { onMounted, onUnmounted, provide, ref, watch, watchEffect } from "vue";
 import { previewComponentMap, previewOptionMap } from "@/lib/utils/registry.ts";
 import { Mode, Block, Config, Device } from "@/lib/utils/types.ts";
@@ -13,31 +12,41 @@ import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
 
 interface Props {
   config: Config
-  cssUrl?: string
   renderList?: Block[]
   mode?: Mode
   settings?: SettingBlock
 }
 
+interface Emits {
+  (event: 'onSave', value: any): void,
+  (event: 'onBack', value: any): void,
+  (event: 'onPreview'): void,
+}
+
+const emit = defineEmits<Emits>()
+
 const props = withDefaults(defineProps<Props>(), {
-  cssUrl: '',
   mode: 'editor' as Mode,
+  config: () => ({
+    language: 'sk',
+    resolution: {},
+    device: 'desktop' as Device
+  }) as Config,
+  settings: () => new SettingBlock
 });
 
 const mode = ref<Mode>(props.mode);
-const selectedDevice = ref<Device>('desktop')
-const settings = ref<SettingBlock>(props.settings || new SettingBlock)
+const selectedDevice = ref<Device>(props.config.device)
+const settings = ref<SettingBlock>(props.settings)
+const height = ref<String | Number | undefined>(props.config.resolution?.height)
+const width = ref<String | Number | undefined>(props.config.resolution?.width)
 
 const devices: Record<Device, string> = {
   'desktop': 'bcpb:w-full',
   'tab': 'bcpb:w-4xl bcpb:mx-auto',
   'mobile': 'bcpb:w-full bcpb:max-w-sm bcpb:mx-auto bcpb:px-4',
+  'custom': 'bcpb:mx-auto'
 }
-
-const emit = defineEmits<{
-  (event: 'onSave', value: any): void,
-  (event: 'onBack', value: any): void,
-}>()
 
 const {
   renderList,
@@ -56,16 +65,12 @@ const {
   onDelete
 } = usePageBuilder()
 
-const { loadCSS, removeCSS } = useLoadCSS()
-
 provide(ConfigKey, props.config)
 
 const { t } = useTranslator(props.config.language);
 
 onMounted(() => {
-  loadCSS(props.cssUrl)
-  // Add ESC key listener
-  document.addEventListener('keydown', handleKeyDown);
+  document.addEventListener('keydown', handleKeyDown); // Add ESC key listener
 })
 
 watchEffect(() => {
@@ -93,7 +98,6 @@ watch(
 )
 
 onUnmounted(() => {
-  removeCSS(props.cssUrl)
   // Cleanup ESC key listener
   document.removeEventListener('keydown', handleKeyDown);
 })
@@ -115,7 +119,7 @@ const exportPage = ($event: Event) => {
 </script>
 <template>
   <!-- Preview (editor) -->
-  <div v-if="mode !== 'editor'" class="bcpb:bg-white bcpb:w-full bcpb:h-screen bcpb:z-[9999]"
+  <div v-if="mode !== 'editor'" class="bcpb:bg-white bcpb:w-fulk bcpb:z-[9999]"
     :class="{ 'bcpb:fixed bcpb:inset-0 bcpb:overflow-auto': mode === 'editor_preview' }">
     <template v-if="mode === 'editor_preview'">
       <!-- Floating Action Bar -->
@@ -138,7 +142,7 @@ const exportPage = ($event: Event) => {
       </div>
     </template>
     <!-- Preview Content Container -->
-    <div class="bcpb:w-full bcpb:min-h-full bcpb:bg-white">
+    <div class="bcpb:w-full bcpb:min-h-full bcpb:bg-white" :style="settings.options">
       <PagePreview :renderList="renderList"></PagePreview>
     </div>
   </div>
@@ -146,16 +150,41 @@ const exportPage = ($event: Event) => {
   <div v-else class="bcpb:flex bcpb:h-screen bcpb:bg-gray-50">
     <!-- Left Side - Drop Zone -->
     <div class="bcpb:flex-1 bcpb:bg-white bcpb:border-r bcpb:border-gray-100 bcpb:flex bcpb:flex-col">
-      <ToolBar @on-preview="mode = 'editor_preview'" @on-save="exportPage" @on-back="emit('onBack', true)"
-        @on-settings="onItemSelect(settings)" @on-device="(event) => selectedDevice = event" :device="selectedDevice">
+      <ToolBar :config="config" :device="selectedDevice" :show-device-toolbar="config.showDeviceBar"
+        @on-preview="emit('onPreview')" @on-save="exportPage" @on-back="emit('onBack', true)"
+        @on-device="selectedDevice = $event" @on-settings="onItemSelect(settings)">
       </ToolBar>
       <!-- Canvas Area -->
       <div class="bcpb:flex-1 bcpb:p-4 bcpb:overflow-auto">
-        <div :class="devices[selectedDevice]">
+        <!-- Customize size -->
+        <div v-if="config.showDeviceBar && selectedDevice === 'custom'"
+          class="flex bcpb:gap-4 bcpb:justify-center mb-4">
+          <div>
+            <label class="flex bcpb:items-center">
+              <span class="bcpb:pr-2">{{ t('width') }}:</span>
+              <input type="number" min="1" :placeholder="t('width')"
+                class="bcpb:w-24 bcpb:rounded-xl bcpb:bg-[#f9fafc] p-2" v-model="width">
+            </label>
+          </div>
+          <div>
+            <label class="flex bcpb:items-center">
+              <span class="bcpb:pr-2">{{ t('height') }}:</span>
+              <input type="number" min="1" :placeholder="t('height')"
+                class="bcpb:w-24 bcpb:rounded-xl bcpb:bg-[#f9fafc] p-2" v-model="height">
+            </label>
+          </div>
+        </div>
+
+        <div :class="devices[selectedDevice]" :style="selectedDevice === 'custom'
+          ? {
+            width: `${width}px`,
+            height: `${height}px`,
+          }
+          : {}">
           <!-- Drop Zone -->
           <div @drop="onDrop($event)" @dragenter.prevent @dragleave.prevent="onDragLeave()"
             @dragover.prevent="onDragOver($event)" :style="settings.options"
-            class="drop-zone bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300">
+            class="drop-zone bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300 bcpb:h-full">
             <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"
               @dragover="onDragOverItem($event, index)" @dragstart="startDragItem($event, block, index)">
               <div :class="{ 'drag-over': dragOverIndex == index && !dragOverChildElement }">

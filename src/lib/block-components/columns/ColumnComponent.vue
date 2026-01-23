@@ -130,8 +130,8 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 <template>
   <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
     :background-image="blockInfo.options.backgroundImage" :background-color="blockInfo.options.backgroundColor">
-    <div class="bc--page-builder-row" :style="[
-      inEditor ? { minHeight: '200px', margin: '20px 0' } : {},
+    <div class="bc--page-builder-row bcpb:py-4" :style="[
+      inEditor ? { minHeight: '40px' } : {},
       { flexDirection: blockInfo.options.switchCols ? 'row-reverse' : 'row' }
     ]">
       <div v-for="(index) in blockInfo.options.columns" :style="[

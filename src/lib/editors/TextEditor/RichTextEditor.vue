@@ -103,8 +103,6 @@ onBeforeUnmount(() => {
 /* TipTap Editor Styles */
 :deep(.ProseMirror) {
   width: 100%;
-  min-height: 120px;
-  padding: 12px 16px;
   line-height: 1.6;
   background-color: transparent;
   /* border: 1px solid #e5e7eb; */
