@@ -119,7 +119,7 @@ const exportPage = ($event: Event) => {
 </script>
 <template>
   <!-- Preview (editor) -->
-  <div v-if="mode !== 'editor'" class="bcpb:bg-white bcpb:w-fulk bcpb:z-[9999]"
+  <div v-if="mode !== 'editor'" class="bcpb:bg-white bcpb:w-fulk bcpb:z-[9999] h-full"
     :class="{ 'bcpb:fixed bcpb:inset-0 bcpb:overflow-auto': mode === 'editor_preview' }">
     <template v-if="mode === 'editor_preview'">
       <!-- Floating Action Bar -->
@@ -142,7 +142,7 @@ const exportPage = ($event: Event) => {
       </div>
     </template>
     <!-- Preview Content Container -->
-    <div class="bcpb:w-full bcpb:min-h-full bcpb:bg-white" :style="settings.options">
+    <div class="bcpb:w-full bcpb:min-h-full bcpb:bg-white h-full" :style="settings.options">
       <PagePreview :renderList="renderList"></PagePreview>
     </div>
   </div>
