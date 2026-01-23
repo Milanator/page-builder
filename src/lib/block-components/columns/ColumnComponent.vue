@@ -143,8 +143,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
         @drop="onDrop($event, index)" @dragenter.prevent @dragleave="onDragLeave" @dragover="onDragOverRow(index)">
 
         <template v-for="(item, columnIndex) of blockInfo.children[index]">
-          <div :style="inEditor ? { height: '10px', width: '100%' } : {}"
-            :class="{ 'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex }"></div>
+          <div :class="{ 'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex }"></div>
           <component :is="previewComponentMap[item.name]" :blockInfo="item" :inEditor="inEditor" :draggable="!!inEditor"
             @dragover="onDragOverColumn($event, columnIndex)" @dragstart="onDragStart($event, item, index, columnIndex)"
             @click="onRenderItemClick($event, item)"></component>
@@ -169,7 +168,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 .column-item {
   min-height: 40px;
   border: none;
-  padding: 10px 0;
+  /* padding: 10px 0; */
   position: relative;
   z-index: 10;
 

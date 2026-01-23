@@ -61,12 +61,12 @@ export type Mode = 'editor' | 'editor_preview' | 'preview'
 
 export type Device = 'desktop' | 'tab' | 'mobile' | 'custom'
 
-interface UploaderConfig {
+export interface UploaderConfig {
     url: string;
     headers?: Record<string, string>;
 }
 
-interface Resolution {
+export interface Resolution {
     width: String | number | number
     height: String | number | number
 }
