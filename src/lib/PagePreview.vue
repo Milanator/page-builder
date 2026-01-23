@@ -6,7 +6,7 @@ interface Props {
   renderList: Block[]
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 <template>
   <div v-for="(block, index) of renderList" :key="`r_item_${index}`">
