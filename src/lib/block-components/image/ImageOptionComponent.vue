@@ -2,6 +2,7 @@
 import BaseOption from '@/lib/block-components/BaseOption.vue';
 import OptionWidget from '@/lib/widgets/OptionWidget.vue';
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
+import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import { ImageBlock } from '@/lib/utils/blocks/ImageBlock.ts';
 import { ElUpload, ElIcon } from 'element-plus';
 import { UploadFilled } from '@element-plus/icons-vue';
@@ -59,6 +60,8 @@ const setImage = (url: string | undefined) => {
                 </template>
             </ElUpload>
         </OptionWidget>
+
+        <MarginOption :block-info="blockInfo" />
 
         <!-- Object fit -->
         <OptionWidget :title="t('stretch_image')">

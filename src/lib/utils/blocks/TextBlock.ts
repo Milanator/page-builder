@@ -1,10 +1,10 @@
-import { Block, BlockType, VueComponent } from "../types.ts";
+import { Block, BlockType, MarginOptions, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
 import { registerBlock } from "../registry.ts";
 import TextComponent from "../../block-components/text/TextComponent.vue";
 import TextOptionComponent from "../../block-components/text/TextOptionComponent.vue";
 
-type TextOptions = {
+type BaseOptions = {
     text: string;
     hasContainer: boolean;
     fontSize: number;
@@ -12,6 +12,8 @@ type TextOptions = {
     backgroundImage: string;
     styles: string;
 };
+
+type TextOptions = BaseOptions & MarginOptions
 
 export class TextBlock implements Block {
     name: string = 'text';
@@ -24,6 +26,10 @@ export class TextBlock implements Block {
         cssClasses: "",
         styles: "",
         fontSize: 1, //rem
+        marginTop: 0,
+        marginBottom: 0,
+        marginLeft: 0,
+        marginRight: 0
     }
     icon: string = `
         <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#4f39f6"><path d="M280-160v-520H80v-120h520v120H400v520H280Zm360 0v-320H520v-120h360v120H760v320H640Z"/></svg>

@@ -82,3 +82,10 @@ export interface SavePayload {
     renderList: Block[]
     settings: SettingBlock
 }
+
+export interface MarginOptions {
+    marginLeft?: string | number | undefined
+    marginRight?: string | number | undefined
+    marginTop?: string | number | undefined
+    marginBottom?: string | number | undefined
+}

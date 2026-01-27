@@ -6,6 +6,7 @@ import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import ColorInput from "@/lib/controls/ColorInput.vue";
 import { useTranslator } from '@/lib/Translator';
+import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 
 interface Props {
   blockInfo: ButtonBlock
@@ -26,6 +27,8 @@ const { t } = useTranslator();
       <option-widget :title="t('background_color')">
         <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
       </option-widget>
+
+      <MarginOption :block-info="blockInfo" />
 
       <option-widget :title="t('background_image')" align="vertical">
         <input type="url" v-model="blockInfo.options.backgroundImage" :placeholder="t('apply_image_url')"

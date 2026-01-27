@@ -1,14 +1,40 @@
-import { Block, BlockType, VueComponent } from "../types.ts";
+import { Block, BlockType, MarginOptions, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
 import ButtonComponent from "../../block-components/button/ButtonComponent.vue";
 import { registerBlock } from "../registry.ts";
 import ButtonOptionComponent from "../../block-components/button/ButtonOptionComponent.vue";
 
+type ButtonAlign = "left" | "center" | "right";
+
+type ButtonActionType = "link" | "route" | "submit" | null;
+
+interface ButtonAction {
+    type: ButtonActionType;
+    url: string;
+}
+
+interface BaseOptions {
+    style: string;
+    text: string;
+    hasContainer: boolean;
+
+    backgroundColor: string;
+    backgroundImage: string;
+
+    styleClass: string;
+    styles: string; // CSS string (supports &:hover, &:active, ...)
+
+    buttonAlign: ButtonAlign;
+    buttonAction: ButtonAction;
+}
+
+type ButtonOptions = BaseOptions & MarginOptions
+
 export class ButtonBlock implements Block {
     name: string = 'button';
     component: VueComponent = markRaw(ButtonComponent);
     optionComponent: VueComponent = markRaw(ButtonOptionComponent);
-    options: Record<string, any> = {
+    options: ButtonOptions = {
         style: "",
         text: "Button",
         hasContainer: false,
@@ -53,7 +79,11 @@ box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         buttonAction: {
             type: null,
             url: ""
-        }
+        },
+        marginTop: 0,
+        marginBottom: 0,
+        marginLeft: 0,
+        marginRight: 0
     }
     icon: string = `
         <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#4f39f6"><path d="M80-480v-80h120v80H80Zm136 222-56-58 84-84 58 56-86 86Zm28-382-84-84 56-58 86 86-58 56Zm476 480L530-350l-50 150-120-400 400 120-148 52 188 188-80 80ZM400-720v-120h80v120h-80Zm236 80-58-56 86-86 56 56-84 86Z"/></svg>

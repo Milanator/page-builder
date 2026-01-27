@@ -6,6 +6,7 @@ import { TextBlock } from "../../utils/blocks/TextBlock.ts";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';
 import RangeInput from "@/lib/controls/RangeInput.vue";
+import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 
 interface Props {
   blockInfo: TextBlock
@@ -31,6 +32,8 @@ const { t } = useTranslator();
         </div>
       </div>
     </option-widget>
+
+    <MarginOption :block-info="blockInfo" />
 
     <option-widget :title="t('background_image')" align="vertical">
       <input type="url" class="bg-page-builder-input" v-model="blockInfo.options.backgroundImage"

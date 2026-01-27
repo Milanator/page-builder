@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BasePreview from '@/lib/block-components/BasePreview.vue';
 import { ImageBlock } from '@/lib/utils/blocks/ImageBlock';
+import { marginStyles } from '@/lib/utils/style';
 import { watchEffect } from 'vue';
 
 const props = defineProps<{
@@ -14,7 +15,7 @@ watchEffect(() => {
 </script>
 <template>
     <BasePreview :in-editor="inEditor" :has-container="blockInfo.options.hasContainer">
-        <div class="image-container" :class="blockInfo.options.cssClasses">
+        <div class="image-container" :class="blockInfo.options.cssClasses" :style="marginStyles(blockInfo.options)">
             <img :src="props.blockInfo.options.mediaUrl" class="bcpb:object-cover"
                 :class="{ 'bcpb:w-full': blockInfo.options.stretched }" alt="Image url">
         </div>

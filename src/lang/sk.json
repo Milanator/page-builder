@@ -51,5 +51,10 @@
   "settings": "Nastavenia",
   "width": "Šírka",
   "custom": "Vlastný",
-  "height": "Výška"
+  "height": "Výška",
+  "indent": "Odsadenie (%)",
+  "top": "Hore",
+  "right": "Vpravo",
+  "bottom": "Dole",
+  "left": "Vľavo"
 }

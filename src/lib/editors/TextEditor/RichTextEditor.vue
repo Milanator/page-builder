@@ -189,6 +189,7 @@ onBeforeUnmount(() => {
 
 :deep(.ProseMirror p) {
   margin-bottom: 12px;
+  line-height: 1;
 }
 
 :deep(.ProseMirror p:last-child) {
