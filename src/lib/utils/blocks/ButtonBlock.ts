@@ -6,7 +6,7 @@ import ButtonOptionComponent from "../../block-components/button/ButtonOptionCom
 
 type ButtonAlign = "left" | "center" | "right";
 
-type ButtonActionType = "link" | "route" | "submit" | null;
+type ButtonActionType = "external_link" | "internal_link" | null;
 
 interface ButtonAction {
     type: ButtonActionType;
