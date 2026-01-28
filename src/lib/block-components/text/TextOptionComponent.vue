@@ -33,7 +33,7 @@ const { t } = useTranslator();
       </div>
     </option-widget>
 
-    <MarginOption :block-info="blockInfo" />
+    <MarginOption :options="blockInfo.options" />
 
     <option-widget :title="t('background_image')" align="vertical">
       <input type="url" class="bg-page-builder-input" v-model="blockInfo.options.backgroundImage"

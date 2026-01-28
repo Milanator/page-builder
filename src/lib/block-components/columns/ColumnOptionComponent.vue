@@ -7,6 +7,7 @@ import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import ColorInput from "@/lib/controls/ColorInput.vue";
 import { useTranslator } from '@/lib/Translator';
+import MarginOption from "../partials/MarginOption.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -36,7 +37,7 @@ watch(
             styleClass: 'bc-page-builder-col',
             backgroundColor: 'transparent',
             backgroundImage: '',
-            styles: 'padding: 10px'
+            styles: 'padding: 10px',
           };
         }
       }
@@ -111,6 +112,8 @@ watch(
         <textarea v-model="blockInfo.options.columnStyles[selectedColumn].styleClass" rows="2"
           class="bg-page-builder-input bg-page-builder-textarea"></textarea>
       </option-widget>
+
+      <MarginOption :options="blockInfo.options.columnStyles[selectedColumn]" />
 
       <option-widget :title="t('background_color')">
         <ColorInput v-model="blockInfo.options.columnStyles[selectedColumn].backgroundColor"></ColorInput>

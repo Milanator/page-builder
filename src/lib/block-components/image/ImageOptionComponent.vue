@@ -61,7 +61,7 @@ const setImage = (url: string | undefined) => {
             </ElUpload>
         </OptionWidget>
 
-        <MarginOption :block-info="blockInfo" />
+        <MarginOption :options="blockInfo.options" />
 
         <!-- Object fit -->
         <OptionWidget :title="t('stretch_image')">

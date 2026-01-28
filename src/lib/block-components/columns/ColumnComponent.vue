@@ -117,6 +117,11 @@ const onRenderItemClick = ($event: Event, block: Block): void => {
   emit('onSelectChildElement', block)
 }
 
+// nested column in column with children
+const onSelectNestedChildElement = (block: Block): void => {
+  emit('onSelectChildElement', block)
+}
+
 const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, blockIndex: number): void => {
   $event.stopPropagation();
   if (block) {
@@ -137,7 +142,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
     ]">
       <div v-for="(index) in blockInfo.options.columns" :style="[
         blockInfo.options.columnStyles[index]?.styles,
-        marginStyles(blockInfo.options.columnStyles[index]),
+        marginStyles(blockInfo.options.columnStyles[index] ?? {}),
         { 'background-color': blockInfo.options.columnStyles[index]?.backgroundColor },
         { 'background-image': 'url(' + blockInfo.options.columnStyles[index]?.backgroundImage + ')' },
       ]"
@@ -148,7 +153,8 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
           <div :class="{ 'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex }"></div>
           <component :is="previewComponentMap[item.name]" :blockInfo="item" :inEditor="inEditor" :draggable="!!inEditor"
             @dragover="onDragOverColumn($event, columnIndex)" @dragstart="onDragStart($event, item, index, columnIndex)"
-            @click="onRenderItemClick($event, item)"></component>
+            @click="onRenderItemClick($event, item)" @onSelectChildElement="onSelectNestedChildElement">
+          </component>
         </template>
 
       </div>

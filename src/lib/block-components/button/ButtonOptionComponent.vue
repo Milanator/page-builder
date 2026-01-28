@@ -28,7 +28,7 @@ const { t } = useTranslator();
         <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
       </option-widget>
 
-      <MarginOption :block-info="blockInfo" />
+      <MarginOption :options="blockInfo.options" />
 
       <option-widget :title="t('background_image')" align="vertical">
         <input type="url" v-model="blockInfo.options.backgroundImage" :placeholder="t('apply_image_url')"

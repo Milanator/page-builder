@@ -39,16 +39,17 @@ export function usePageBuilder() {
     }
 
     const onDrop = (event: DragEvent) => {
-        console.log('on drop', event)
         event.preventDefault();
         dragOverDropZone.value = false;
+
         if (innerDragElement.value) {
             if (innerDragElementIndex.value !== null) {
                 renderList.value.splice(innerDragElementIndex.value, 1)
             }
 
+            innerDragElement.value.id = uuidv4();
+
             if (dragOverIndex.value === null) {
-                innerDragElement.value.id = uuidv4()
                 renderList.value.push(innerDragElement.value)
             } else {
                 renderList.value.splice(dragOverIndex.value, 0, innerDragElement.value);
@@ -60,17 +61,8 @@ export function usePageBuilder() {
             const droppedItem = event.dataTransfer?.getData('text/plain');
             if (droppedItem) {
                 const _droppedItem = JSON.parse(droppedItem);
-                _droppedItem.id = uuidv4();
 
-                // set id for child blocks - solved delete issue
-                if (_droppedItem?.children && Object.keys(_droppedItem.children).length > 0) {
-                    for (const key in _droppedItem.children) {
-                        _droppedItem.children[key] = _droppedItem.children[key].map((child: Block) => ({
-                            ...child,
-                            id: uuidv4()
-                        }))
-                    }
-                }
+                assignBlockId(_droppedItem);
 
                 if (dragOverIndex.value === null) {
                     renderList.value.push(_droppedItem)
@@ -78,11 +70,25 @@ export function usePageBuilder() {
                     renderList.value.splice(dragOverIndex.value, 0, _droppedItem);
                 }
             }
+
             draggedItem.value = null;
             dragOverIndex.value = null;
         }
+    };
 
-    }
+    const assignBlockId = (block: Block) => {
+        block.id = uuidv4();
+
+        if (!block.children) return;
+
+        if (Array.isArray(block.children)) {
+            block.children.forEach(assignBlockId);
+        } else {
+            for (const key in block.children) {
+                block.children[key].forEach(assignBlockId);
+            }
+        }
+    };
 
     const onDropChildElement = () => {
         if (innerDragElementIndex.value != null) {
@@ -137,37 +143,117 @@ export function usePageBuilder() {
     }
 
     const onDelete = ($event: boolean) => {
-        if (selectedOptionComponent.value?.id && $event) {
-            const index = renderList.value.findIndex((block) => block.id === selectedOptionComponent.value?.id);
-            if (index !== -1) {
-                renderList.value.splice(index, 1);
-                selectedOptionComponent.value = null
-                return
-            }
+        if (!selectedOptionComponent.value?.id || !$event) return;
 
-            renderList.value.forEach((block: Block) => {
+        const deleteBlock = (blocks: Block[]): boolean => {
+            for (let i = 0; i < blocks.length; i++) {
+                const block = blocks[i];
+
+                // Ak nájdeme blok, vymažeme ho
+                if (block.id === selectedOptionComponent.value?.id) {
+                    blocks.splice(i, 1);
+                    selectedOptionComponent.value = null;
+                    return true;
+                }
+
+                // Rekurzívne pre deti
                 if (block.children) {
                     if (Array.isArray(block.children)) {
-                        const childIndex = block.children.findIndex((block) => block.id === selectedOptionComponent.value?.id);
-                        if (childIndex !== -1) {
-                            block.children.splice(childIndex, 1); // Remove the block
-                            selectedOptionComponent.value = null
-                            return true;
-                        }
+                        if (deleteBlock(block.children)) return true;
                     } else if (typeof block.children === 'object') {
                         for (const key in block.children) {
-                            const childIndex = block.children[key].findIndex((block) => block.id === selectedOptionComponent.value?.id);
-                            if (childIndex !== -1) {
-                                block.children[key].splice(childIndex, 1); // Remove the block
-                                selectedOptionComponent.value = null
-                                return true;
+                            if (Array.isArray(block.children[key])) {
+                                if (deleteBlock(block.children[key])) return true;
                             }
                         }
                     }
                 }
-            })
-        }
-    }
+            }
+            return false;
+        };
+
+        deleteBlock(renderList.value);
+    };
+
+    // old version - unable delete on nested custom blocks - e.g. template2block 
+    // const onDelete = ($event: boolean) => {
+    //     if (selectedOptionComponent.value?.id && $event) {
+    //         const index = renderList.value.findIndex((block) => block.id === selectedOptionComponent.value?.id);
+    //         if (index !== -1) {
+    //             renderList.value.splice(index, 1);
+    //             selectedOptionComponent.value = null
+    //             return
+    //         }
+
+    //         renderList.value.forEach((block: Block) => {
+    //             if (block.children) {
+    //                 if (Array.isArray(block.children)) {
+    //                     const childIndex = block.children.findIndex((block) => block.id === selectedOptionComponent.value?.id);
+    //                     if (childIndex !== -1) {
+    //                         block.children.splice(childIndex, 1); // Remove the block
+    //                         selectedOptionComponent.value = null
+    //                         return true;
+    //                     }
+    //                 } else if (typeof block.children === 'object') {
+    //                     for (const key in block.children) {
+    //                         const childIndex = block.children[key].findIndex((block) => block.id === selectedOptionComponent.value?.id);
+    //                         if (childIndex !== -1) {
+    //                             block.children[key].splice(childIndex, 1); // Remove the block
+    //                             selectedOptionComponent.value = null
+    //                             return true;
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         })
+    //     }
+    // }
+
+    // old version - unable drop on nested custom blocks - e.g. template2block 
+    // const onDrop = (event: DragEvent) => {
+    //     console.log('on drop', event)
+    //     event.preventDefault();
+    //     dragOverDropZone.value = false;
+    //     if (innerDragElement.value) {
+    //         if (innerDragElementIndex.value !== null) {
+    //             renderList.value.splice(innerDragElementIndex.value, 1)
+    //         }
+
+    //         if (dragOverIndex.value === null) {
+    //             innerDragElement.value.id = uuidv4()
+    //             renderList.value.push(innerDragElement.value)
+    //         } else {
+    //             renderList.value.splice(dragOverIndex.value, 0, innerDragElement.value);
+    //         }
+
+    //         innerDragElement.value = null;
+    //         dragOverIndex.value = null;
+    //     } else {
+    //         const droppedItem = event.dataTransfer?.getData('text/plain');
+    //         if (droppedItem) {
+    //             const _droppedItem = JSON.parse(droppedItem);
+    //             _droppedItem.id = uuidv4();
+
+    //             // set id for child blocks - solved delete issue
+    //             if (_droppedItem?.children && Object.keys(_droppedItem.children).length > 0) {
+    //                 for (const key in _droppedItem.children) {
+    //                     _droppedItem.children[key] = _droppedItem.children[key].map((child: Block) => ({
+    //                         ...child,
+    //                         id: uuidv4()
+    //                     }))
+    //                 }
+    //             }
+
+    //             if (dragOverIndex.value === null) {
+    //                 renderList.value.push(_droppedItem)
+    //             } else {
+    //                 renderList.value.splice(dragOverIndex.value, 0, _droppedItem);
+    //             }
+    //         }
+    //         draggedItem.value = null;
+    //         dragOverIndex.value = null;
+    //     }
+    // }
 
 
     return {

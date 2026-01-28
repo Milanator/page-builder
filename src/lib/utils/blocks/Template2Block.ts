@@ -1,15 +1,18 @@
 import { Block, BlockType } from "../types.ts";
 import { registerBlock } from "../registry.ts";
 import { TextBlock } from "./TextBlock.ts";
-import { ColumnBlock } from "./ColumnBlock.ts";
+import { ColumnBlock, ColumnOptions } from "./ColumnBlock.ts";
 
 export class Template2 extends ColumnBlock implements Block {
     name: string = 'template_2';
-    options: Record<string, any> = {
+    options: ColumnOptions = {
         columns: 1,
         switchCols: false,
         hasContainer: true,
         backgroundColor: '#e51c23',
+        backgroundImage: '',
+        styleClass: '',
+        styles: '',
         columnStyles: {
             1: {
                 styleClass: 'col',
@@ -34,13 +37,17 @@ export class Template2 extends ColumnBlock implements Block {
                     columns: 1,
                     switchCols: false,
                     hasContainer: true,
+                    backgroundColor: '',
+                    backgroundImage: '',
+                    styleClass: '',
+                    styles: '',
                     columnStyles: {
                         1: {
-                            backgroundColor: 'blue',
                             styleClass: 'col',
                             backgroundImage: '',
+                            backgroundColor: 'yellow',
                             marginLeft: 10,
-                            marginRight: 10
+                            marginRight: 10,
                         },
                     },
                 }, {

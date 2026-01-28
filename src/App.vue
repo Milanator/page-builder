@@ -26,7 +26,7 @@ const mode: Mode = 'editor'
 const settings = new SettingBlock
 
 const onSave = ({ renderList, settings }: SavePayload) => {
-  console.log(renderList, settings)
+  console.log(JSON.stringify(renderList), settings)
 }
 
 const onBack = () => { }

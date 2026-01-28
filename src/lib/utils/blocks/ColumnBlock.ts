@@ -13,7 +13,7 @@ type ColumnStyle = {
 
 type ColumnStyles = Partial<Record<number, ColumnStyle & MarginOptions>>
 
-type ColumnOptions = {
+export type ColumnOptions = {
     columns: number
     switchCols: boolean
     hasContainer: boolean
@@ -24,11 +24,15 @@ type ColumnOptions = {
     columnStyles: ColumnStyles
 }
 
-const DEFAULT_STYLES: ColumnStyle & MarginOptions = {
+export const DEFAULT_STYLES: ColumnStyle & MarginOptions = {
     styleClass: 'col',
     backgroundImage: '',
     backgroundColor: '',
     styles: 'padding: 10px',
+    marginBottom: 0,
+    marginTop: 0,
+    marginLeft: 0,
+    marginRight: 0
 }
 
 export class ColumnBlock implements Block {
