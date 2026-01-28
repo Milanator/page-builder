@@ -70,7 +70,7 @@ watch(
         <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
       </option-widget>
 
-      <BackgroundImageOption :block-info="blockInfo" />
+      <BackgroundImageOption :options="blockInfo.options" />
 
       <option-widget :title="t('columns')">
         <div class="bcpb:flex bcpb:flex-wrap bcpb:gap-2">
@@ -112,6 +112,8 @@ watch(
       </option-widget>
 
       <MarginOption :options="blockInfo.options.columnStyles[selectedColumn]" />
+
+      <BackgroundImageOption :options="blockInfo.options.columnStyles[selectedColumn]" />
 
       <option-widget :title="t('background_color')">
         <ColorInput v-model="blockInfo.options.columnStyles[selectedColumn].backgroundColor"></ColorInput>

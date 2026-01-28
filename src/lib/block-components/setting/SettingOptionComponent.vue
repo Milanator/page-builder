@@ -23,6 +23,6 @@ const { t } = useTranslator();
             </option-widget>
         </div>
 
-        <BackgroundImageOption :block-info="blockInfo" />
+        <BackgroundImageOption :options="blockInfo.options" />
     </BaseOption>
 </template>

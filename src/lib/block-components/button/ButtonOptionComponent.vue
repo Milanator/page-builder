@@ -31,7 +31,7 @@ const { t } = useTranslator();
 
       <MarginOption :options="blockInfo.options" />
 
-      <BackgroundImageOption :block-info="blockInfo" />
+      <BackgroundImageOption :options="blockInfo.options" />
 
       <option-widget :title="t('alignment')">
         <div class="bcpb:flex bcpb:rounded-lg bcpb:border bcpb:border-gray-300 bcpb:overflow-hidden">

@@ -36,7 +36,7 @@ const { t } = useTranslator();
 
     <MarginOption :options="blockInfo.options" />
 
-    <BackgroundImageOption :block-info="blockInfo" />
+    <BackgroundImageOption :options="blockInfo.options" />
 
     <option-widget :title="t('css_classes')" align="vertical" :is-expandable="true">
       <textarea class="bg-page-builder-input" v-model="blockInfo.options.cssClasses"></textarea>
