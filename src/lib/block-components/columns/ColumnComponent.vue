@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { marginStyles } from "@/lib/utils/style.ts";
 import { ColumnBlock } from "../../utils/blocks/ColumnBlock.ts";
 import { previewComponentMap } from "../../utils/registry.ts";
 import { Block } from "../../utils/types.ts";
@@ -136,6 +137,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
     ]">
       <div v-for="(index) in blockInfo.options.columns" :style="[
         blockInfo.options.columnStyles[index]?.styles,
+        marginStyles(blockInfo.options.columnStyles[index]),
         { 'background-color': blockInfo.options.columnStyles[index]?.backgroundColor },
         { 'background-image': 'url(' + blockInfo.options.columnStyles[index]?.backgroundImage + ')' },
       ]"

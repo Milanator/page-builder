@@ -1,14 +1,41 @@
-import { Block, BlockType, VueComponent } from "../types.ts";
+import { Block, BlockType, MarginOptions, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
 import ColumnComponent from "../../block-components/columns/ColumnComponent.vue";
 import { registerBlock } from "../registry.ts";
 import ColumnOptionComponent from "../../block-components/columns/ColumnOptionComponent.vue";
 
+type ColumnStyle = {
+    styleClass?: string
+    backgroundImage?: string
+    backgroundColor?: string
+    styles?: string
+}
+
+type ColumnStyles = Partial<Record<number, ColumnStyle & MarginOptions>>
+
+type ColumnOptions = {
+    columns: number
+    switchCols: boolean
+    hasContainer: boolean
+    backgroundColor: string
+    backgroundImage: string
+    styleClass: string
+    styles: string
+    columnStyles: ColumnStyles
+}
+
+const DEFAULT_STYLES: ColumnStyle & MarginOptions = {
+    styleClass: 'col',
+    backgroundImage: '',
+    backgroundColor: '',
+    styles: 'padding: 10px',
+}
+
 export class ColumnBlock implements Block {
     name: string = 'columns';
     component: VueComponent = markRaw(ColumnComponent);
     optionComponent: VueComponent = markRaw(ColumnOptionComponent);
-    options: Record<string, any> = {
+    options: ColumnOptions = {
         columns: 3,
         switchCols: false,
         hasContainer: false,
@@ -17,21 +44,9 @@ export class ColumnBlock implements Block {
         styleClass: '',
         styles: '',
         columnStyles: {
-            1: {
-                styleClass: 'col',
-                backgroundImage: '',
-                styles: 'padding: 10px'
-            },
-            2: {
-                styleClass: 'col',
-                backgroundImage: '',
-                styles: 'padding: 10px'
-            },
-            3: {
-                styleClass: 'col',
-                backgroundImage: '',
-                styles: 'padding: 10px'
-            }
+            1: DEFAULT_STYLES,
+            2: DEFAULT_STYLES,
+            3: DEFAULT_STYLES
         }
     }
     children: { [key: string | number]: Block[] } = {};
@@ -41,7 +56,7 @@ export class ColumnBlock implements Block {
     title: string = 'Columns';
     type: BlockType = 'layout';
 
-    constructor(options?: Record<string, any>, children?: { [key: string | number]: Block[] }) {
+    constructor(options?: ColumnOptions, children?: { [key: string | number]: Block[] }) {
         if (options) {
             this.options = {
                 ...this.options,
