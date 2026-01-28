@@ -34,7 +34,7 @@ const { t } = useTranslator();
       </div>
     </option-widget>
 
-    <MarginOption :block-info="blockInfo" />
+    <MarginOption :options="blockInfo.options" />
 
     <BackgroundImageOption :block-info="blockInfo" />
 

@@ -3,7 +3,7 @@ import OptionWidget from "../../widgets/OptionWidget.vue";
 import { useTranslator } from '@/lib/Translator';
 
 interface Props {
-    blockInfo: any
+    options: any
 }
 
 defineProps<Props>()
@@ -21,8 +21,7 @@ const MARGINS = [
     <option-widget :title="t('indent')">
         <div class="bcpb:grid-cols-2 grid bcpb:gap-1">
             <div v-for="margin in MARGINS">
-                <input type="number" step="1" class="bg-page-builder-input bcpb:w-8"
-                    v-model="blockInfo.options[margin.attr]" />
+                <input type="number" step="1" class="bg-page-builder-input bcpb:w-8" v-model="options[margin.attr]" />
                 <p class="bcpb:text-[0.7rem] bcpb:pl-2 bcpb:pt-1 bcpb:text-slate-400">{{ t(margin.key) }}</p>
             </div>
         </div>

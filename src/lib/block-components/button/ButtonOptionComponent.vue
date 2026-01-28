@@ -29,7 +29,7 @@ const { t } = useTranslator();
         <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
       </option-widget>
 
-      <MarginOption :block-info="blockInfo" />
+      <MarginOption :options="blockInfo.options" />
 
       <BackgroundImageOption :block-info="blockInfo" />
 

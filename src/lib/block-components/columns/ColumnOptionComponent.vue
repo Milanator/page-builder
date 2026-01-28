@@ -111,7 +111,7 @@ watch(
           class="bg-page-builder-input bg-page-builder-textarea"></textarea>
       </option-widget>
 
-      <MarginOption :block-info="blockInfo.options.columnStyles[selectedColumn]" />
+      <MarginOption :options="blockInfo.options.columnStyles[selectedColumn]" />
 
       <option-widget :title="t('background_color')">
         <ColorInput v-model="blockInfo.options.columnStyles[selectedColumn].backgroundColor"></ColorInput>
