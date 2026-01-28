@@ -5,6 +5,7 @@ import SettingOptionComponent from "@/lib/block-components/setting/SettingOption
 
 type SettingOptions = {
     backgroundColor: string
+    backgroundImage: string
 };
 
 export class SettingBlock implements Block {
@@ -12,7 +13,8 @@ export class SettingBlock implements Block {
     component: undefined;
     optionComponent: VueComponent = markRaw(SettingOptionComponent);
     options: SettingOptions = {
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        backgroundImage: ''
     };
     icon: string = '';
     title: string = 'Nastavenia';

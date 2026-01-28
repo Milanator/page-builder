@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
-import { SettingBlock } from "../../utils/blocks/SettingBlock.ts";
 import ColorInput from "@/lib/controls/ColorInput.vue";
+import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
+import { SettingBlock } from "../../utils/blocks/SettingBlock.ts";
 import { useTranslator } from '@/lib/Translator';
 
 interface Props {
@@ -21,5 +22,7 @@ const { t } = useTranslator();
                 <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
             </option-widget>
         </div>
+
+        <BackgroundImageOption :options="blockInfo.options" />
     </BaseOption>
 </template>

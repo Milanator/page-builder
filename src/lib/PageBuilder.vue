@@ -183,8 +183,11 @@ const exportPage = ($event: Event) => {
           : {}">
           <!-- Drop Zone -->
           <div @drop="onDrop($event)" @dragenter.prevent @dragleave.prevent="onDragLeave()"
-            @dragover.prevent="onDragOver($event)" :style="settings.options"
-            class="drop-zone bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300 bcpb:h-full">
+            @dragover.prevent="onDragOver($event)" :style="[
+              settings.options,
+              { 'background-image': `url(${settings.options.backgroundImage})` }
+            ]"
+            class="drop-zone bcpb:bg-center bcpb:bg-cover bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300 bcpb:h-full">
             <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"
               @dragover="onDragOverItem($event, index)" @dragstart="startDragItem($event, block, index)">
               <div :class="{ 'drag-over': dragOverIndex == index && !dragOverChildElement }">
