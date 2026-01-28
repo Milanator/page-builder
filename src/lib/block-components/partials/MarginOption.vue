@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import { useTranslator } from '@/lib/Translator';
-import { Block } from "@/lib/utils/types.ts";
 
 interface Props {
-    blockInfo: Block
+    blockInfo: any
 }
 
 defineProps<Props>()
