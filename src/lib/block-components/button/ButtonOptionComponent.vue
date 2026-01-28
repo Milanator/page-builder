@@ -7,7 +7,6 @@ import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import ColorInput from "@/lib/controls/ColorInput.vue";
 import { useTranslator } from '@/lib/Translator';
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
-import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
 
 interface Props {
   blockInfo: ButtonBlock
@@ -29,9 +28,12 @@ const { t } = useTranslator();
         <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
       </option-widget>
 
-      <MarginOption :options="blockInfo.options" />
+      <MarginOption :block-info="blockInfo" />
 
-      <BackgroundImageOption :options="blockInfo.options" />
+      <option-widget :title="t('background_image')" align="vertical">
+        <input type="url" v-model="blockInfo.options.backgroundImage" :placeholder="t('apply_image_url')"
+          class="bg-page-builder-input">
+      </option-widget>
 
       <option-widget :title="t('alignment')">
         <div class="bcpb:flex bcpb:rounded-lg bcpb:border bcpb:border-gray-300 bcpb:overflow-hidden">

@@ -2,7 +2,6 @@
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import ColorInput from "@/lib/controls/ColorInput.vue";
-import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
 import { SettingBlock } from "../../utils/blocks/SettingBlock.ts";
 import { useTranslator } from '@/lib/Translator';
 
@@ -23,6 +22,9 @@ const { t } = useTranslator();
             </option-widget>
         </div>
 
-        <BackgroundImageOption :options="blockInfo.options" />
+        <option-widget :title="t('background_image')" align="vertical">
+            <input type="url" :placeholder="t('apply_image_url')" v-model="blockInfo.options.backgroundImage"
+                class="bg-page-builder-input">
+        </option-widget>
     </BaseOption>
 </template>

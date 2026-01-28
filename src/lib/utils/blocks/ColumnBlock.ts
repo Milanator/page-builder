@@ -39,7 +39,7 @@ export class ColumnBlock implements Block {
     name: string = 'columns';
     component: VueComponent = markRaw(ColumnComponent);
     optionComponent: VueComponent = markRaw(ColumnOptionComponent);
-    options: ColumnOptions = {
+    options: Record<string, any> = {
         columns: 3,
         switchCols: false,
         hasContainer: false,
@@ -60,7 +60,7 @@ export class ColumnBlock implements Block {
     title: string = 'Columns';
     type: BlockType = 'layout';
 
-    constructor(options?: ColumnOptions, children?: { [key: string | number]: Block[] }) {
+    constructor(options?: Record<string, any>, children?: { [key: string | number]: Block[] }) {
         if (options) {
             this.options = {
                 ...this.options,
