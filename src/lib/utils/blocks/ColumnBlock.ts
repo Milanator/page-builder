@@ -12,26 +12,23 @@ export class ColumnBlock implements Block {
         columns: 3,
         switchCols: false,
         hasContainer: false,
-        backgroundColor: "#ffffff",
+        backgroundColor: "transparent",
         backgroundImage: '',
         styleClass: '',
         styles: '',
         columnStyles: {
             1: {
                 styleClass: 'col',
-                backgroundColor: '#ffffff',
                 backgroundImage: '',
                 styles: 'padding: 10px'
             },
             2: {
                 styleClass: 'col',
-                backgroundColor: '#ffffff',
                 backgroundImage: '',
                 styles: 'padding: 10px'
             },
             3: {
                 styleClass: 'col',
-                backgroundColor: '#ffffff',
                 backgroundImage: '',
                 styles: 'padding: 10px'
             }
@@ -43,6 +40,22 @@ export class ColumnBlock implements Block {
     `;
     title: string = 'Columns';
     type: BlockType = 'layout';
+
+    constructor(options?: Record<string, any>, children?: { [key: string | number]: Block[] }) {
+        if (options) {
+            this.options = {
+                ...this.options,
+                ...options,
+            };
+        }
+
+        if (children) {
+            this.children = {
+                ...this.children,
+                ...children,
+            };
+        }
+    }
 
 }
 

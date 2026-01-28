@@ -34,7 +34,7 @@ watch(
         if (!columnStyles[i]) {
           columnStyles[i] = {
             styleClass: 'bc-page-builder-col',
-            backgroundColor: '#ffffff',
+            backgroundColor: 'transparent',
             backgroundImage: '',
             styles: 'padding: 10px'
           };
