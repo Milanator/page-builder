@@ -96,3 +96,7 @@ export interface BorderRadiusOptions {
     borderTopRightRadius?: string | number | undefined
     borderTopLeftRadius?: string | number | undefined
 }
+
+export interface BackgroundOptions {
+    backgroundImage: string
+} 

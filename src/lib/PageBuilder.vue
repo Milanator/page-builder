@@ -9,6 +9,7 @@ import { Mode, Block, Config, Device } from "@/lib/utils/types.ts";
 import { useTranslator } from '@/lib/Translator';
 import { ConfigKey } from "@/store/Config.ts";
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
+import { background } from "./utils/style.ts";
 
 interface Props {
   config: Config
@@ -119,8 +120,11 @@ const exportPage = ($event: Event) => {
 </script>
 <template>
   <!-- Preview (editor) -->
-  <div v-if="mode !== 'editor'" class="bcpb:bg-white bcpb:w-fulk bcpb:z-[9999] h-full"
-    :class="{ 'bcpb:fixed bcpb:inset-0 bcpb:overflow-auto': mode === 'editor_preview' }">
+  <div v-if="mode !== 'editor'" class="bcpb:w-fulk bcpb:z-[9999] h-full"
+    :class="{ 'bcpb:fixed bcpb:inset-0 bcpb:overflow-auto': mode === 'editor_preview' }" :style="[
+      settings.options,
+      background(settings.options)
+    ]">
     <template v-if="mode === 'editor_preview'">
       <!-- Floating Action Bar -->
       <div class="floating-action-bar bcpb:fixed bcpb:bottom-6 bcpb:right-6 bcpb:z-[99998] bcpb:flex bcpb:gap-3">
@@ -142,7 +146,7 @@ const exportPage = ($event: Event) => {
       </div>
     </template>
     <!-- Preview Content Container -->
-    <div class="bcpb:w-full bcpb:min-h-full bcpb:bg-white h-full" :style="settings.options">
+    <div class="bcpb:w-full bcpb:min-h-full h-full">
       <PagePreview :renderList="renderList"></PagePreview>
     </div>
   </div>
@@ -185,7 +189,7 @@ const exportPage = ($event: Event) => {
           <div @drop="onDrop($event)" @dragenter.prevent @dragleave.prevent="onDragLeave()"
             @dragover.prevent="onDragOver($event)" :style="[
               settings.options,
-              { 'background-image': `url(${settings.options.backgroundImage})` }
+              background(settings.options)
             ]"
             class="drop-zone bcpb:bg-center bcpb:bg-cover bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300 bcpb:h-full">
             <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"

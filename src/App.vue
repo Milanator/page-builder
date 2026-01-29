@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Block, Config } from "@/lib/utils/types.ts";
 import { PageBuilder, SavePayload, Mode, SettingBlock } from "@/lib";
+import { ref } from "vue";
 
 const config: Config = {
   language: 'sk',
@@ -17,11 +18,9 @@ const config: Config = {
   }
 }
 
-const renderList: Block[] = [
+const renderList: Block[] = []
 
-]
-
-const mode: Mode = 'editor'
+const mode = ref<Mode>('editor')
 
 const settings = new SettingBlock
 
@@ -31,7 +30,8 @@ const onSave = ({ renderList, settings }: SavePayload) => {
 
 const onBack = () => { }
 
-const onPreview = () => { }
+const onPreview = () => {
+}
 </script>
 <template>
   <PageBuilder :config="config" :render-list="renderList" :mode="mode" :settings="settings" @onSave="onSave"

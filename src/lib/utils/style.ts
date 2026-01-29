@@ -1,4 +1,4 @@
-import { BorderRadiusOptions, MarginOptions } from "./types";
+import { BackgroundOptions, BorderRadiusOptions, MarginOptions } from "./types";
 
 export const marginStyles = (options: MarginOptions) => ({
     marginLeft: options.marginLeft ? `${options.marginLeft}%` : undefined,
@@ -12,4 +12,11 @@ export const borderRadiusStyles = (options: BorderRadiusOptions) => ({
     borderBottomRightRadius: options.borderBottomRightRadius ? `${options.borderBottomRightRadius}px` : undefined,
     borderTopRightRadius: options.borderTopRightRadius ? `${options.borderTopRightRadius}px` : undefined,
     borderTopLeftRadius: options.borderTopLeftRadius ? `${options.borderTopLeftRadius}px` : undefined,
+})
+
+export const background = (options: BackgroundOptions) => ({
+    backgroundImage: `url(${options.backgroundImage})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
 })
