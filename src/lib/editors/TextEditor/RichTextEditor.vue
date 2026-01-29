@@ -146,11 +146,7 @@ onBeforeUnmount(() => {
 
 /* Typography Improvements */
 :deep(.ProseMirror h1) {
-  font-size: 24px;
   font-weight: 700;
-  color: #111827;
-  margin-top: 24px;
-  margin-bottom: 16px;
 }
 
 :deep(.ProseMirror h1:first-child) {
@@ -158,11 +154,7 @@ onBeforeUnmount(() => {
 }
 
 :deep(.ProseMirror h2) {
-  font-size: 20px;
   font-weight: 600;
-  color: #111827;
-  margin-top: 20px;
-  margin-bottom: 12px;
 }
 
 :deep(.ProseMirror h2:first-child) {
@@ -170,11 +162,7 @@ onBeforeUnmount(() => {
 }
 
 :deep(.ProseMirror h3) {
-  font-size: 18px;
   font-weight: 500;
-  color: #111827;
-  margin-top: 16px;
-  margin-bottom: 8px;
 }
 
 :deep(.ProseMirror h3:first-child) {
@@ -182,11 +170,7 @@ onBeforeUnmount(() => {
 }
 
 :deep(.ProseMirror h4) {
-  font-size: 16px;
   font-weight: 500;
-  color: #111827;
-  margin-top: 12px;
-  margin-bottom: 8px;
 }
 
 :deep(.ProseMirror h4:first-child) {

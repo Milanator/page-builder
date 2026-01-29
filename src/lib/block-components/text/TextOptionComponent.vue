@@ -2,12 +2,11 @@
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { TextBlock } from "../../utils/blocks/TextBlock.ts";
-import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';
 import RangeInput from "@/lib/controls/RangeInput.vue";
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
-// import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
+import ContainerOptionComponent from "@/lib/block-components/partials/ContainerOptionComponent.vue";
 
 interface Props {
   blockInfo: TextBlock
@@ -20,9 +19,7 @@ const { t } = useTranslator();
 <template>
   <BaseOption title="Text">
 
-    <option-widget :title="t('has_container')">
-      <SliderToggle v-model="blockInfo.options.hasContainer" />
-    </option-widget>
+    <ContainerOptionComponent :options="blockInfo.options" />
 
     <option-widget :title="t('font_size')">
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">

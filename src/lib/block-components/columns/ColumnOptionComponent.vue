@@ -10,6 +10,7 @@ import BackgroundImageOption from "@/lib/block-components/partials/BackgroundIma
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.vue";
 import BorderRadiusOption from "@/lib/block-components/partials/BorderRadiusOption.vue";
+import ContainerOptionComponent from "@/lib/block-components/partials/ContainerOptionComponent.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -63,9 +64,7 @@ watch(
         <SliderToggle v-model="blockInfo.options.switchCols" />
       </OptionWidget>
 
-      <option-widget :title="t('has_container')">
-        <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
-      </option-widget>
+      <ContainerOptionComponent :options="blockInfo.options" />
 
       <BackgroundImageOption :options="blockInfo.options" />
 

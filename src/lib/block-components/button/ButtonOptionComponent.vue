@@ -2,12 +2,12 @@
 import { ButtonBlock } from "../../utils/blocks/ButtonBlock.ts";
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import BaseOption from "../BaseOption.vue";
-import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.vue";
+import ContainerOptionComponent from "@/lib/block-components/partials/ContainerOptionComponent.vue";
 
 interface Props {
   blockInfo: ButtonBlock
@@ -21,9 +21,7 @@ const { t } = useTranslator();
   <BaseOption :title="t('Button')">
     <!-- Basic Settings -->
     <div class="bcpb:space-y-1">
-      <option-widget :title="t('has_container')">
-        <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
-      </option-widget>
+      <ContainerOptionComponent :options="blockInfo.options" />
 
       <MarginOption :options="blockInfo.options" />
 
