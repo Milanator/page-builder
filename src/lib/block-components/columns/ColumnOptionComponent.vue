@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseOption from "../BaseOption.vue";
-import OptionWidget from "../../widgets/OptionWidget.vue";
+import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { ColumnBlock } from "../../utils/blocks/ColumnBlock.ts";
 import { ref, watch } from "vue";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
@@ -9,6 +9,7 @@ import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.vue";
+import BorderRadiusOption from "@/lib/block-components/partials/BorderRadiusOption.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -100,8 +101,9 @@ watch(
 
     <!-- Individual Column Settings -->
     <div class="bcpb:mt-4 bcpb:space-y-1">
-
       <MarginOption :options="blockInfo.options.columnStyles[selectedColumn]" />
+
+      <BorderRadiusOption :options="blockInfo.options.columnStyles[selectedColumn]" />
 
       <BackgroundImageOption :options="blockInfo.options.columnStyles[selectedColumn]" />
 

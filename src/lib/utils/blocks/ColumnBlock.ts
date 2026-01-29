@@ -1,4 +1,4 @@
-import { Block, BlockType, MarginOptions, VueComponent } from "../types.ts";
+import { Block, BlockType, BorderRadiusOptions, MarginOptions, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
 import ColumnComponent from "../../block-components/columns/ColumnComponent.vue";
 import { registerBlock } from "../registry.ts";
@@ -11,20 +11,9 @@ type ColumnStyle = {
     styles?: string
 }
 
-type ColumnStyles = Partial<Record<number, ColumnStyle & MarginOptions>>
+type ColumnOptions = ColumnStyle & MarginOptions & BorderRadiusOptions
 
-export type ColumnOptions = {
-    columns: number
-    switchCols: boolean
-    hasContainer: boolean
-    backgroundColor: string
-    backgroundImage: string
-    styleClass: string
-    styles: string
-    columnStyles: ColumnStyles
-}
-
-export const DEFAULT_STYLES: ColumnStyle & MarginOptions = {
+export const DEFAULT_STYLES: ColumnOptions = {
     styleClass: 'col',
     backgroundImage: '',
     backgroundColor: '',
@@ -32,7 +21,11 @@ export const DEFAULT_STYLES: ColumnStyle & MarginOptions = {
     marginBottom: 0,
     marginTop: 0,
     marginLeft: 0,
-    marginRight: 0
+    marginRight: 0,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderTopRightRadius: 0,
+    borderTopLeftRadius: 0
 }
 
 export class ColumnBlock implements Block {

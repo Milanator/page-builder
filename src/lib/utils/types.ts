@@ -89,3 +89,10 @@ export interface MarginOptions {
     marginTop?: string | number | undefined
     marginBottom?: string | number | undefined
 }
+
+export interface BorderRadiusOptions {
+    borderBottomLeftRadius?: string | number | undefined
+    borderBottomRightRadius?: string | number | undefined
+    borderTopRightRadius?: string | number | undefined
+    borderTopLeftRadius?: string | number | undefined
+}

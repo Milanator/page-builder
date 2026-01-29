@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { marginStyles } from "@/lib/utils/style.ts";
+import { borderRadiusStyles, marginStyles } from "@/lib/utils/style.ts";
 import { ColumnBlock } from "../../utils/blocks/ColumnBlock.ts";
 import { previewComponentMap } from "../../utils/registry.ts";
 import { Block } from "../../utils/types.ts";
@@ -143,12 +143,12 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
       <div v-for="(index) in blockInfo.options.columns" :style="[
         blockInfo.options.columnStyles[index]?.styles,
         marginStyles(blockInfo.options.columnStyles[index] ?? {}),
+        borderRadiusStyles(blockInfo.options.columnStyles[index] ?? {}),
         { 'background-color': blockInfo.options.columnStyles[index]?.backgroundColor },
         { 'background-image': 'url(' + blockInfo.options.columnStyles[index]?.backgroundImage + ')' },
       ]"
         :class="[{ 'column-item': inEditor, 'column-dragged-over': dragOverRow === index && inEditor }, blockInfo.options.columnStyles[index]?.styleClass]"
         @drop="onDrop($event, index)" @dragenter.prevent @dragleave="onDragLeave" @dragover="onDragOverRow(index)">
-
         <template v-for="(item, columnIndex) of blockInfo.children[index]">
           <div :class="{ 'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex }"></div>
           <component :is="previewComponentMap[item.name]" :blockInfo="item" :inEditor="inEditor" :draggable="!!inEditor"

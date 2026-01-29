@@ -56,5 +56,6 @@
   "top": "Hore",
   "right": "Vpravo",
   "bottom": "Dole",
-  "left": "Vľavo"
+  "left": "Vľavo",
+  "border_radius": "Zaoblenie okrajov (px)"
 }

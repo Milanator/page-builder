@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseOption from "../BaseOption.vue";
-import OptionWidget from "../../widgets/OptionWidget.vue";
+import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import { HtmlBlock } from "@/lib/utils/blocks/HtmlBlock.ts";
 import { useTranslator } from '@/lib/Translator.ts';

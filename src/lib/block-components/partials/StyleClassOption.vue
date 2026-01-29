@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import OptionWidget from "../../widgets/OptionWidget.vue";
+import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { useTranslator } from '@/lib/Translator';
 
 interface Props {

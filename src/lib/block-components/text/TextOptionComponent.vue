@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseOption from "../BaseOption.vue";
-import OptionWidget from "../../widgets/OptionWidget.vue";
+import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { TextBlock } from "../../utils/blocks/TextBlock.ts";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';
