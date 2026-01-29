@@ -23,6 +23,7 @@ defineProps<Props>()
           fontSize: `${blockInfo.options.fontSize}rem`,
           lineHeight: blockInfo.options.lineHeight,
           letterSpacing: `${blockInfo.options.letterSpacing}px`,
+          textColor: blockInfo.options.textColor
         }" />
       </div>
     </template>

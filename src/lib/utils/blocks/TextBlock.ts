@@ -13,6 +13,7 @@ type BaseOptions = {
     cssClasses: string;
     backgroundImage: string;
     styles: string;
+    textColor: string;
 };
 
 type TextOptions = BaseOptions & MarginOptions
@@ -30,6 +31,7 @@ export class TextBlock implements Block {
         lineHeight: 1.4,
         letterSpacing: 0,
         fontSize: 1, //rem
+        textColor: '#000',
         marginTop: 0,
         marginBottom: 0,
         marginLeft: 0,

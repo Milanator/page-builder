@@ -67,6 +67,7 @@ onBeforeUnmount(() => {
           '--editor-line-height': styles.lineHeight || 1,
           fontSize: styles.fontSize,
           letterSpacing: styles.letterSpacing,
+          color: styles.textColor,
         },
       ]" />
     </div>

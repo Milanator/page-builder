@@ -66,9 +66,6 @@ if (typeof window !== 'undefined') {
       </div>
     </div>
 
-    <!-- Separator -->
-    <div class="editor-separator"></div>
-
     <!-- Text Formatting -->
     <div class="editor-button-group">
       <button @click="editor.chain().focus().toggleBold().run()" class="editor-menu-button"
@@ -86,9 +83,6 @@ if (typeof window !== 'undefined') {
         <img src="@/assets/icons/strikethrough.svg" alt="Strikethrough">
       </button>
     </div>
-
-    <!-- Separator -->
-    <div class="editor-separator"></div>
 
     <div class="dropdown-container bcpb:relative">
       <button @click.stop="dropDownMenus.list = !dropDownMenus.list" class="editor-menu-button dropdown-trigger"
@@ -125,23 +119,6 @@ if (typeof window !== 'undefined') {
         <img src="@/assets/icons/bracket.svg" alt="Bracket">
       </button>
     </div>
-
-    <!-- Separator -->
-    <div class="editor-separator"></div>
-
-    <!-- Color Picker -->
-    <div class="editor-color-picker-container">
-      <div class="bcpb:relative">
-        <input type="color"
-          @input="(event) => editor.chain().focus().setColor((event.target as HTMLInputElement).value).run()"
-          :value="editor.getAttributes('textStyle').color || '#000000'" class="editor-color-input" title="Text Color">
-        <div class="editor-color-preview"
-          :style="{ backgroundColor: editor.getAttributes('textStyle').color || '#000000' }"></div>
-      </div>
-    </div>
-
-    <!-- Separator -->
-    <div class="editor-separator"></div>
 
     <div class="dropdown-container bcpb:relative">
       <button @click.stop="dropDownMenus.align = !dropDownMenus.align" class="editor-menu-button dropdown-trigger"

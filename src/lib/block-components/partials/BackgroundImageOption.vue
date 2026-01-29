@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
-import ColorInput from "@/lib/controls/ColorInput.vue";
 import { useTranslator } from '@/lib/Translator';
+import { ColorPicker } from "vue3-colorpicker";
 
 interface Props {
     options: any
@@ -18,6 +18,6 @@ const { t } = useTranslator();
     </option-widget>
 
     <option-widget :title="t('background_color')">
-        <ColorInput v-model="options.backgroundColor"></ColorInput>
+        <ColorPicker v-model:pureColor="options.backgroundColor" />
     </option-widget>
 </template>

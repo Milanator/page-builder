@@ -2,7 +2,6 @@ import PageBuilder from "./PageBuilder.vue";
 import OptionWidget from "./widgets/OptionWidget.vue";
 import RichTextEditor from "./editors/TextEditor/RichTextEditor.vue";
 import CodeMirrorEditor from "./editors/CodeMirrorEditor.vue";
-import ColorInput from "./controls/ColorInput.vue";
 import SliderToggle from "./controls/SliderToggle.vue";
 import PagePreview from "./PagePreview.vue";
 import BasePreview from "./block-components/BasePreview.vue";
@@ -20,7 +19,6 @@ export {
     CodeMirrorEditor,
     BasePreview,
     BaseOption,
-    ColorInput,
     SliderToggle,
     SettingBlock,
 }
