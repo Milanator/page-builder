@@ -136,7 +136,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 <template>
   <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
     :background-image="blockInfo.options.backgroundImage" :background-color="blockInfo.options.backgroundColor">
-    <div class="bc--page-builder-row bcpb:py-4" :style="[
+    <div class="bc--page-builder-row" :style="[
       inEditor ? { minHeight: '40px' } : {},
       { flexDirection: blockInfo.options.switchCols ? 'row-reverse' : 'row' }
     ]">

@@ -80,7 +80,7 @@ export class Template2 extends ColumnBlock implements Block {
         columns: 1,
         switchCols: false,
         hasContainer: true,
-        backgroundColor: 'transparent',
+        backgroundColor: '#fff',
         backgroundImage: '',
         styleClass: '',
         styles: '',
