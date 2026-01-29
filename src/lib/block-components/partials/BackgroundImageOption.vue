@@ -4,6 +4,8 @@ import { useTranslator } from '@/lib/Translator';
 import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker';
 import { ref } from "vue";
 
+import '@cyhnkckali/vue3-color-picker/dist/style.css'
+
 interface Props {
     options: any
 }
