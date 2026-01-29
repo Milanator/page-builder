@@ -35,6 +35,7 @@ export class Template1 extends ColumnBlock implements Block {
             new TextBlock({
                 text: 'Title',
                 fontSize: 2,
+                textColor: '#000',
                 hasContainer: true,
                 cssClasses: 'bcpb:pb-4 bcpb:px-4',
                 backgroundImage: '',
@@ -45,6 +46,7 @@ export class Template1 extends ColumnBlock implements Block {
             new TextBlock({
                 text: 'Text',
                 fontSize: 1,
+                textColor: '#000',
                 hasContainer: true,
                 cssClasses: 'bcpb:pb-4 bcpb:px-4',
                 backgroundImage: '',

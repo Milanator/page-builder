@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import OptionWidget from "@/lib/widgets/OptionWidget.vue";
-import SliderToggle from '@/lib/controls/SliderToggle.vue';
-import { useTranslator } from '@/lib/Translator';
+// import OptionWidget from "@/lib/widgets/OptionWidget.vue";
+// import SliderToggle from '@/lib/controls/SliderToggle.vue';
+// import { useTranslator } from '@/lib/Translator';
 
 interface Props {
   options: any
@@ -9,7 +9,7 @@ interface Props {
 
 defineProps<Props>()
 
-const { t } = useTranslator();
+// const { t } = useTranslator();
 </script>
 <template>
   <!-- <option-widget :title="t('has_container')">
