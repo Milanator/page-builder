@@ -23,7 +23,7 @@ const DEFAULT_COLUMN = new ColumnBlock(
                 borderBottomLeftRadius: 20,
                 borderBottomRightRadius: 20,
                 borderTopRightRadius: 20,
-                borderTopLeftRadius: 20
+                borderTopLeftRadius: 20,
             },
         },
     }, {
@@ -39,7 +39,8 @@ const DEFAULT_COLUMN = new ColumnBlock(
             marginTop: 6,
             marginLeft: 8,
             marginRight: 8,
-            lineHeight: 1
+            lineHeight: 1,
+            letterSpacing: 0,
         }),
         new TextBlock({
             text: 'Údržba spoločných priestorov,<br>rozpočet domu, opravy strechy,<br>výmena výťahu a správa fondu opráv.',
@@ -50,7 +51,8 @@ const DEFAULT_COLUMN = new ColumnBlock(
             styles: '',
             marginLeft: 8,
             marginRight: 8,
-            lineHeight: 1.4
+            lineHeight: 1.4,
+            letterSpacing: 1.5,
         }),
         new TextBlock({
             text: '17. 9. 2025 o 18:00',
@@ -63,7 +65,8 @@ const DEFAULT_COLUMN = new ColumnBlock(
             marginBottom: 6,
             marginLeft: 8,
             marginRight: 8,
-            lineHeight: 1
+            lineHeight: 1,
+            letterSpacing: 0,
         }),
     ]
 })
@@ -97,6 +100,7 @@ export class Template2 extends ColumnBlock implements Block {
                 marginBottom: 10,
                 marginTop: 10,
                 lineHeight: 1,
+                letterSpacing: 0,
             }),
             DEFAULT_COLUMN,
             DEFAULT_COLUMN

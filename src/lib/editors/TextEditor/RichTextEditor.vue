@@ -65,7 +65,8 @@ onBeforeUnmount(() => {
       <editor-content :editor="editor" class="editor-content" :style="[
         {
           '--editor-line-height': styles.lineHeight || 1,
-          fontSize: styles.fontSize
+          fontSize: styles.fontSize,
+          letterSpacing: styles.letterSpacing,
         },
       ]" />
     </div>

@@ -39,7 +39,8 @@ export class Template1 extends ColumnBlock implements Block {
                 cssClasses: 'bcpb:pb-4 bcpb:px-4',
                 backgroundImage: '',
                 styles: '',
-                lineHeight: 1
+                lineHeight: 1,
+                letterSpacing: 0,
             }),
             new TextBlock({
                 text: 'Text',
@@ -48,7 +49,8 @@ export class Template1 extends ColumnBlock implements Block {
                 cssClasses: 'bcpb:pb-4 bcpb:px-4',
                 backgroundImage: '',
                 styles: '',
-                lineHeight: 1
+                lineHeight: 1,
+                letterSpacing: 0,
             }),
         ],
     };

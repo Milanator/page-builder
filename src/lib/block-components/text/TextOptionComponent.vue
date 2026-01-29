@@ -6,7 +6,7 @@ import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';
 import RangeInput from "@/lib/controls/RangeInput.vue";
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
-import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
+// import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 
 interface Props {
@@ -29,7 +29,7 @@ const { t } = useTranslator();
         <div
           class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:p-2 bcpb:bg-gray-50 bcpb:rounded-lg bcpb:border bcpb:border-gray-200">
           <RangeInput v-model="blockInfo.options.fontSize" min="1" max="10" step="0.1" />
-          <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.fontSize }}rem</small>
+          <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.fontSize }}</small>
         </div>
       </div>
     </option-widget>
@@ -38,15 +38,23 @@ const { t } = useTranslator();
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
         <div
           class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:p-2 bcpb:bg-gray-50 bcpb:rounded-lg bcpb:border bcpb:border-gray-200">
-          <RangeInput v-model="blockInfo.options.lineHeight" min="1" max="10" step="0.1" />
+          <RangeInput v-model="blockInfo.options.lineHeight" min="1" max="5" step="0.1" />
           <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.lineHeight }}</small>
         </div>
       </div>
     </option-widget>
 
-    <MarginOption :options="blockInfo.options" />
+    <option-widget :title="t('letter_spacing')">
+      <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
+        <div
+          class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:p-2 bcpb:bg-gray-50 bcpb:rounded-lg bcpb:border bcpb:border-gray-200">
+          <RangeInput v-model="blockInfo.options.letterSpacing" min="1" max="15" step="0.1" />
+          <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.letterSpacing }}</small>
+        </div>
+      </div>
+    </option-widget>
 
-    <BackgroundImageOption :options="blockInfo.options" />
+    <MarginOption :options="blockInfo.options" />
 
     <option-widget :title="t('css_classes')" align="vertical" :is-expandable="true">
       <textarea class="bg-page-builder-input" v-model="blockInfo.options.cssClasses"></textarea>

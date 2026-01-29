@@ -21,7 +21,8 @@ defineProps<Props>()
       ]">
         <RichTextEditor v-model="blockInfo.options.text" :styles="{
           fontSize: `${blockInfo.options.fontSize}rem`,
-          lineHeight: blockInfo.options.lineHeight
+          lineHeight: blockInfo.options.lineHeight,
+          letterSpacing: `${blockInfo.options.letterSpacing}px`,
         }" />
       </div>
     </template>
@@ -29,7 +30,11 @@ defineProps<Props>()
       <div :class="blockInfo.options.cssClasses" :style="[
         blockInfo.options.styles,
         marginStyles(blockInfo.options),
-        { fontSize: `${blockInfo.options.fontSize}rem`, lineHeight: blockInfo.options.lineHeight }
+        {
+          fontSize: `${blockInfo.options.fontSize}rem`,
+          lineHeight: blockInfo.options.lineHeight,
+          letterSpacing: `${blockInfo.options.letterSpacing}px`,
+        }
       ]" v-html="blockInfo.options.text"></div>
     </template>
   </BasePreview>
