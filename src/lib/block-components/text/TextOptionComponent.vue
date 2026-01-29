@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
-import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import { TextBlock } from "../../utils/blocks/TextBlock.ts";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';
 import RangeInput from "@/lib/controls/RangeInput.vue";
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
+import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 
 interface Props {
   blockInfo: TextBlock
@@ -42,8 +42,6 @@ const { t } = useTranslator();
       <textarea class="bg-page-builder-input" v-model="blockInfo.options.cssClasses"></textarea>
     </option-widget>
 
-    <option-widget :title="t('custom_styles')" align="vertical" :is-expandable="true">
-      <CodeMirrorEditor v-model="blockInfo.options.styles"></CodeMirrorEditor>
-    </option-widget>
+    <StyleOption :options="blockInfo.options" />
   </BaseOption>
 </template>

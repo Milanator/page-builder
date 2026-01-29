@@ -61,6 +61,8 @@ export class Template2 extends ColumnBlock implements Block {
                         styles: '',
                         marginBottom: 7,
                         marginTop: 7,
+                        marginLeft: 8,
+                        marginRight: 8
                     }),
                     new TextBlock({
                         text: 'text',
@@ -69,6 +71,8 @@ export class Template2 extends ColumnBlock implements Block {
                         cssClasses: 'bcpb:text-center bcpb:text-white',
                         backgroundImage: '',
                         styles: '',
+                        marginLeft: 8,
+                        marginRight: 8
                     }),
                     new TextBlock({
                         text: 'text',
@@ -79,6 +83,8 @@ export class Template2 extends ColumnBlock implements Block {
                         styles: '',
                         marginTop: 7,
                         marginBottom: 7,
+                        marginLeft: 8,
+                        marginRight: 8
                     }),
                 ]
             }),

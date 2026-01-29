@@ -2,12 +2,12 @@
 import { ButtonBlock } from "../../utils/blocks/ButtonBlock.ts";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import BaseOption from "../BaseOption.vue";
-import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
-import ColorInput from "@/lib/controls/ColorInput.vue";
 import { useTranslator } from '@/lib/Translator';
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
+import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
+import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.vue";
 
 interface Props {
   blockInfo: ButtonBlock
@@ -23,10 +23,6 @@ const { t } = useTranslator();
     <div class="bcpb:space-y-1">
       <option-widget :title="t('has_container')">
         <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
-      </option-widget>
-
-      <option-widget :title="t('background_color')">
-        <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
       </option-widget>
 
       <MarginOption :options="blockInfo.options" />
@@ -93,14 +89,9 @@ const { t } = useTranslator();
           </div>
         </option-widget>
 
-        <option-widget :title="t('css_classes')" align="vertical">
-          <textarea v-model="blockInfo.options.styleClass" rows="3" :placeholder="t('enter_css_classes')"
-            class="bg-page-builder-input bg-page-builder-textarea"></textarea>
-        </option-widget>
+        <StyleClassOption :options="blockInfo.options" />
 
-        <option-widget :title="t('custom_styles')" align="vertical" :is-expandable="true">
-          <CodeMirrorEditor v-model="blockInfo.options.styles" language="text/css"></CodeMirrorEditor>
-        </option-widget>
+        <StyleOption :options="blockInfo.options" />
       </div>
     </div>
   </BaseOption>

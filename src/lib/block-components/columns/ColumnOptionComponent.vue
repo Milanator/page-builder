@@ -3,12 +3,12 @@ import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import { ColumnBlock } from "../../utils/blocks/ColumnBlock.ts";
 import { ref, watch } from "vue";
-import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
-import ColorInput from "@/lib/controls/ColorInput.vue";
 import { useTranslator } from '@/lib/Translator';
-import MarginOption from "../partials/MarginOption.vue";
+import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
+import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
+import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -66,10 +66,6 @@ watch(
         <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
       </option-widget>
 
-      <option-widget :title="t('background_color')">
-        <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
-      </option-widget>
-
       <BackgroundImageOption :options="blockInfo.options" />
 
       <option-widget :title="t('columns')">
@@ -85,9 +81,7 @@ watch(
         </div>
       </option-widget>
 
-      <option-widget :title="t('custom_styles')" align="vertical" :is-expandable="true">
-        <CodeMirrorEditor v-model="blockInfo.options.styles"></CodeMirrorEditor>
-      </option-widget>
+      <StyleOption :options="blockInfo.options" />
     </div>
 
     <!-- Column Tabs -->
@@ -106,27 +100,14 @@ watch(
 
     <!-- Individual Column Settings -->
     <div class="bcpb:mt-4 bcpb:space-y-1">
-      <option-widget :title="t('css_classes')" align="vertical">
-        <textarea v-model="blockInfo.options.columnStyles[selectedColumn].styleClass" rows="2"
-          class="bg-page-builder-input bg-page-builder-textarea"></textarea>
-      </option-widget>
 
       <MarginOption :options="blockInfo.options.columnStyles[selectedColumn]" />
 
       <BackgroundImageOption :options="blockInfo.options.columnStyles[selectedColumn]" />
 
-      <option-widget :title="t('background_color')">
-        <ColorInput v-model="blockInfo.options.columnStyles[selectedColumn].backgroundColor"></ColorInput>
-      </option-widget>
+      <StyleClassOption :options="blockInfo.options.columnStyles[selectedColumn]" />
 
-      <option-widget :title="t('background_image')" align="vertical">
-        <input type="url" :placeholder="t('apply_image_url')"
-          v-model="blockInfo.options.columnStyles[selectedColumn].backgroundImage" class="bg-page-builder-input">
-      </option-widget>
-
-      <option-widget :title="t('custom_styles')" align="vertical" :is-expandable="true">
-        <CodeMirrorEditor v-model="blockInfo.options.columnStyles[selectedColumn].styles"></CodeMirrorEditor>
-      </option-widget>
+      <StyleOption :options="blockInfo.options.columnStyles[selectedColumn]" />
     </div>
   </BaseOption>
 </template>
