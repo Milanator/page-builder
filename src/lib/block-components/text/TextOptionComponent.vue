@@ -3,7 +3,6 @@ import BaseOption from "../BaseOption.vue";
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { TextBlock } from "../../utils/blocks/TextBlock.ts";
 import { useTranslator } from '@/lib/Translator';
-import { ColorPicker } from "vue3-colorpicker";
 import RangeInput from "@/lib/controls/RangeInput.vue";
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
@@ -21,10 +20,6 @@ const { t } = useTranslator();
   <BaseOption title="Text">
 
     <ContainerOptionComponent :options="blockInfo.options" />
-
-    <option-widget :title="t('text_color')">
-      <ColorPicker v-model:pureColor="blockInfo.options.textColor" />
-    </option-widget>
 
     <option-widget :title="t('font_size')">
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
