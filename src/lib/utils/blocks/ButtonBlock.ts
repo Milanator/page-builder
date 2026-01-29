@@ -1,7 +1,7 @@
 import { Block, BlockType, MarginOptions, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
 import ButtonComponent from "../../block-components/button/ButtonComponent.vue";
-import { registerBlock } from "../registry.ts";
+import { registerBlock } from "@/lib/utils/registry.ts";
 import ButtonOptionComponent from "../../block-components/button/ButtonOptionComponent.vue";
 
 type ButtonAlign = "left" | "center" | "right";

@@ -1,7 +1,7 @@
 import { Block, BlockType, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
 import ListComponent from "../../block-components/list/ListComponent.vue";
-import { registerBlock } from "../registry.ts";
+import { registerBlock } from "@/lib/utils/registry.ts";
 import ListOptionComponent from "../../block-components/list/ListOptionComponent.vue";
 
 export class ListBlock implements Block {

@@ -1,7 +1,7 @@
 import { Block, BlockType, VueComponent } from "../types.ts";
 import CardOptionComponent from "../../ui-components/card/CardOptionComponent.vue";
 import CardComponent from "../../ui-components/card/CardComponent.vue";
-import { registerBlock } from "../registry.ts";
+import { registerBlock } from "@/lib/utils/registry.ts";
 
 export class CardUiComponent implements Block {
     component: VueComponent = CardComponent;

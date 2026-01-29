@@ -1,5 +1,5 @@
 import { Block, BlockType, VueComponent } from "../types.ts";
-import { registerBlock } from "../registry.ts";
+import { registerBlock } from "@/lib/utils/registry.ts";
 import { markRaw } from "vue";
 import SettingOptionComponent from "@/lib/block-components/setting/SettingOptionComponent.vue";
 

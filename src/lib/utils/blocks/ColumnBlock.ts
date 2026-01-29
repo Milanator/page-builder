@@ -1,7 +1,7 @@
 import { Block, BlockType, BorderRadiusOptions, MarginOptions, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
 import ColumnComponent from "../../block-components/columns/ColumnComponent.vue";
-import { registerBlock } from "../registry.ts";
+import { registerBlock } from "@/lib/utils/registry.ts";
 import ColumnOptionComponent from "../../block-components/columns/ColumnOptionComponent.vue";
 
 type ColumnStyle = {

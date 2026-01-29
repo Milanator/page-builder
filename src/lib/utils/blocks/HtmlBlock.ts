@@ -1,7 +1,7 @@
 import { Block, BlockType, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
 import HtmlComponent from "../../block-components/html/HtmlComponent.vue";
-import { registerBlock } from "../registry.ts";
+import { registerBlock } from "@/lib/utils/registry.ts";
 import HtmlOptionComponent from "../../block-components/html/HtmlOptionComponent.vue";
 
 export class HtmlBlock implements Block {

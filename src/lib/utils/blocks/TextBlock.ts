@@ -1,13 +1,14 @@
 import { Block, BlockType, MarginOptions, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
-import { registerBlock } from "../registry.ts";
-import TextComponent from "../../block-components/text/TextComponent.vue";
-import TextOptionComponent from "../../block-components/text/TextOptionComponent.vue";
+import { registerBlock } from "@/lib/utils/registry.ts";
+import TextComponent from "@/lib/block-components/text/TextComponent.vue";
+import TextOptionComponent from "@/lib/block-components/text/TextOptionComponent.vue";
 
 type BaseOptions = {
     text: string;
     hasContainer: boolean;
     fontSize: number;
+    lineHeight: number
     cssClasses: string;
     backgroundImage: string;
     styles: string;
@@ -25,6 +26,7 @@ export class TextBlock implements Block {
         backgroundImage: "",
         cssClasses: "",
         styles: "",
+        lineHeight: 1.4,
         fontSize: 1, //rem
         marginTop: 0,
         marginBottom: 0,

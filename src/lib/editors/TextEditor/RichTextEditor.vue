@@ -11,7 +11,7 @@ import { useTranslator } from '@/lib/Translator';
 
 interface Props {
   bubbleMenu?: boolean,
-  fontSize: number,
+  styles: any,
 }
 
 const model = defineModel()
@@ -62,7 +62,12 @@ onBeforeUnmount(() => {
 
     <!-- Editor Content -->
     <div class="editor-content-wrapper">
-      <editor-content :editor="editor" class="editor-content" :style="{ 'fontSize': `${fontSize}rem` }" />
+      <editor-content :editor="editor" class="editor-content" :style="[
+        {
+          '--editor-line-height': styles.lineHeight || 1,
+          fontSize: styles.fontSize
+        },
+      ]" />
     </div>
   </div>
 </template>
@@ -189,7 +194,7 @@ onBeforeUnmount(() => {
 
 :deep(.ProseMirror p) {
   margin-bottom: 12px;
-  line-height: 1;
+  line-height: var(--editor-line-height);
 }
 
 :deep(.ProseMirror p:last-child) {

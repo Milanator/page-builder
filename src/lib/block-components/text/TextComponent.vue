@@ -16,12 +16,15 @@ defineProps<Props>()
     :background-image="blockInfo.options.backgroundImage">
     <template v-if="inEditor">
       <div :class="blockInfo.options.cssClasses" :style="[blockInfo.options.styles, marginStyles(blockInfo.options)]">
-        <RichTextEditor v-model="blockInfo.options.text" :font-size="blockInfo.options.fontSize" />
+        <RichTextEditor v-model="blockInfo.options.text" :styles="{
+          fontSize: `${blockInfo.options.fontSize}rem`,
+          lineHeight: blockInfo.options.lineHeight
+        }" />
       </div>
     </template>
     <template v-else>
       <div :class="blockInfo.options.cssClasses"
-        :style="[blockInfo.options.styles, { fontSize: `${blockInfo.options.fontSize}rem` }]"
+        :style="[blockInfo.options.styles, { fontSize: `${blockInfo.options.fontSize}rem`, lineHeight: blockInfo.options.lineHeight }]"
         v-html="blockInfo.options.text"></div>
     </template>
   </BasePreview>

@@ -57,5 +57,6 @@
   "right": "Vpravo",
   "bottom": "Dole",
   "left": "Vľavo",
-  "border_radius": "Zaoblenie okrajov (px)"
+  "border_radius": "Zaoblenie okrajov (px)",
+  "line_height": "Výška riadku"
 }

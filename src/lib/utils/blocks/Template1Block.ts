@@ -1,5 +1,5 @@
 import { Block, BlockType } from "../types.ts";
-import { registerBlock } from "../registry.ts";
+import { registerBlock } from "@/lib/utils/registry.ts";
 import { TextBlock } from "./TextBlock.ts";
 import { ColumnBlock } from "./ColumnBlock.ts";
 import { ImageBlock } from "./ImageBlock.ts";
@@ -39,6 +39,7 @@ export class Template1 extends ColumnBlock implements Block {
                 cssClasses: 'bcpb:pb-4 bcpb:px-4',
                 backgroundImage: '',
                 styles: '',
+                lineHeight: 1
             }),
             new TextBlock({
                 text: 'Text',
@@ -47,6 +48,7 @@ export class Template1 extends ColumnBlock implements Block {
                 cssClasses: 'bcpb:pb-4 bcpb:px-4',
                 backgroundImage: '',
                 styles: '',
+                lineHeight: 1
             }),
         ],
     };

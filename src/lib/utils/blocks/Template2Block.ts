@@ -1,5 +1,5 @@
 import { Block, BlockType } from "../types.ts";
-import { registerBlock } from "../registry.ts";
+import { registerBlock } from "@/lib/utils/registry.ts";
 import { TextBlock } from "./TextBlock.ts";
 import { ColumnBlock } from "./ColumnBlock.ts";
 
@@ -38,7 +38,8 @@ const DEFAULT_COLUMN = new ColumnBlock(
             marginBottom: 6,
             marginTop: 6,
             marginLeft: 8,
-            marginRight: 8
+            marginRight: 8,
+            lineHeight: 1
         }),
         new TextBlock({
             text: 'Údržba spoločných priestorov,<br>rozpočet domu, opravy strechy,<br>výmena výťahu a správa fondu opráv.',
@@ -48,7 +49,8 @@ const DEFAULT_COLUMN = new ColumnBlock(
             backgroundImage: '',
             styles: '',
             marginLeft: 8,
-            marginRight: 8
+            marginRight: 8,
+            lineHeight: 1.4
         }),
         new TextBlock({
             text: '17. 9. 2025 o 18:00',
@@ -60,7 +62,8 @@ const DEFAULT_COLUMN = new ColumnBlock(
             marginTop: 6,
             marginBottom: 6,
             marginLeft: 8,
-            marginRight: 8
+            marginRight: 8,
+            lineHeight: 1
         }),
     ]
 })
@@ -85,6 +88,7 @@ export class Template2 extends ColumnBlock implements Block {
     children: { [key: string | number]: Block[] } = {
         1: [
             new TextBlock({
+                text: 'Oznamy',
                 fontSize: 4.5,
                 hasContainer: true,
                 cssClasses: 'bcpb:text-center',
@@ -92,7 +96,7 @@ export class Template2 extends ColumnBlock implements Block {
                 styles: '',
                 marginBottom: 12,
                 marginTop: 12,
-                text: 'Oznamy'
+                lineHeight: 1,
             }),
             DEFAULT_COLUMN,
             DEFAULT_COLUMN
