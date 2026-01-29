@@ -61,7 +61,7 @@ const onDeleteItem = ($event: Event) => {
     </div>
 
     <!-- Content -->
-    <div class="bcpb:max-h-[calc(100vh-64px)] bcpb:overflow-y-auto bcpb:px-3">
+    <div class="bcpb:h-[calc(100vh-64px)] bcpb:overflow-y-auto bcpb:px-3">
       <slot></slot>
     </div>
   </div>
