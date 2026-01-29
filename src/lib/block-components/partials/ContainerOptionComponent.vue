@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// import OptionWidget from "@/lib/widgets/OptionWidget.vue";
-// import SliderToggle from '@/lib/controls/SliderToggle.vue';
 // import { useTranslator } from '@/lib/Translator';
 
 interface Props {
