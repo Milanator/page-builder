@@ -16,17 +16,26 @@ const props = defineProps<Props>();
 
 const FONTS: FONT_TYPE[] = [
   {
-    label: 'Sans',
-    value: 'Arial, Helvetica, Trebuchet MS, sans-serif',
+    label: 'Poppins',
+    value: 'Poppins, system-ui, sans-serif',
   },
   {
-    label: 'Serif',
-    value: 'Georgia, Times New Roman, serif',
+    label: 'JetBrains Mono',
+    value: '"JetBrains Mono"'
   },
-  {
-    label: 'Monospace',
-    value: 'Courier New, monospace',
-  },
+  // 
+  // {
+  //   label: 'Sans',
+  //   value: 'Arial, Helvetica, Trebuchet MS, sans-serif',
+  // },
+  // {
+  //   label: 'Serif',
+  //   value: 'Georgia, Times New Roman, serif',
+  // },
+  // {
+  //   label: 'Monospace',
+  //   value: 'Courier New, monospace',
+  // },
   {
     label: 'Default',
     value: '',
@@ -91,7 +100,7 @@ if (typeof window !== 'undefined') {
         <!-- Inter -->
         <button v-for="font in FONTS" @click="onChangeFont(font)" class="editor-dropdown-item"
           :class="{ 'active': editor.isActive('textStyle', { fontFamily: font.value }) }">
-          <span class="bcpb:text-sm">{{ font.label }}</span>
+          <span class="bcpb:text-sm" :style="{ fontFamily: font.value }">{{ font.label }}</span>
         </button>
       </div>
     </div>
