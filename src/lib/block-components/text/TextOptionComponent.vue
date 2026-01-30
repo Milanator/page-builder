@@ -7,6 +7,7 @@ import RangeInput from "@/lib/controls/RangeInput.vue";
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 import ContainerOptionComponent from "@/lib/block-components/partials/ContainerOptionComponent.vue";
+import ColorPicker from "@/lib/block-components/partials/ColorPicker.vue";
 
 interface Props {
   blockInfo: TextBlock
@@ -21,11 +22,15 @@ const { t } = useTranslator();
 
     <ContainerOptionComponent :options="blockInfo.options" />
 
+    <option-widget :title="t('text_color')">
+      <ColorPicker v-model="blockInfo.options.textColor" />
+    </option-widget>
+
     <option-widget :title="t('font_size')">
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
         <div
           class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:p-2 bcpb:bg-gray-50 bcpb:rounded-lg bcpb:border bcpb:border-gray-200">
-          <RangeInput v-model="blockInfo.options.fontSize" min="1" max="10" step="0.1" />
+          <RangeInput v-model="blockInfo.options.fontSize" min="0" max="8" step="0.1" />
           <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.fontSize }}</small>
         </div>
       </div>

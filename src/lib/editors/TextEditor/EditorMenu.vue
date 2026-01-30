@@ -114,10 +114,10 @@ if (typeof window !== 'undefined') {
         <img src="@/assets/icons/quote.svg" alt="Quote">
       </button>
 
-      <button @click="editor.chain().focus().toggleCodeBlock().run()" class="editor-menu-button"
+      <!-- <button @click="editor.chain().focus().toggleCodeBlock().run()" class="editor-menu-button"
         :class="{ 'active': editor.isActive('codeBlock') }" title="Code Block">
         <img src="@/assets/icons/bracket.svg" alt="Bracket">
-      </button>
+      </button> -->
     </div>
 
     <div class="dropdown-container bcpb:relative">
