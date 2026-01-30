@@ -23,19 +23,19 @@ const FONTS: FONT_TYPE[] = [
     label: 'JetBrains Mono',
     value: '"JetBrains Mono"'
   },
+  {
+    label: 'Pacifico',
+    value: 'Pacifico, cursive'
+  },
+  {
+    label: 'Playfair',
+    value: '"Playfair Display", Georgia, serif'
+  },
+  {
+    label: 'Roboto Slab',
+    value: '"Roboto Slab", serif'
+  },
   // 
-  // {
-  //   label: 'Sans',
-  //   value: 'Arial, Helvetica, Trebuchet MS, sans-serif',
-  // },
-  // {
-  //   label: 'Serif',
-  //   value: 'Georgia, Times New Roman, serif',
-  // },
-  // {
-  //   label: 'Monospace',
-  //   value: 'Courier New, monospace',
-  // },
   {
     label: 'Default',
     value: '',
