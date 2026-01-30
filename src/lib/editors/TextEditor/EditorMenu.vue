@@ -110,11 +110,8 @@ if (typeof window !== 'undefined') {
     <!-- Color -->
     <div class="editor-color-picker-container">
       <div class="bcpb:relative">
-        <ColorPicker v-slot="{ onClick }" :color="editor.getAttributes('textStyle').color"
-          @onChange="($event: string) => editor.chain().focus().setColor($event).run()">
-          <div class="editor-color-preview"
-            :style="{ backgroundColor: editor.getAttributes('textStyle').color || '#000000' }" @click="onClick"></div>
-        </ColorPicker>
+        <ColorPicker :color="editor.getAttributes('textStyle').color"
+          @onChange="($event: string) => editor.chain().focus().setColor($event).run()" />
       </div>
     </div>
 

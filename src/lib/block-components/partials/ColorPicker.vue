@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker';
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref, watch } from "vue";
 
 import '@cyhnkckali/vue3-color-picker/dist/style.css'
 
@@ -13,9 +13,8 @@ interface Emits {
 }
 
 const emit = defineEmits<Emits>()
-const props = withDefaults(defineProps<Props>(), {
-    color: '#000'
-});
+const props = defineProps<Props>();
+const color = ref<string>(props.color || '#000')
 const open = ref<boolean>(false)
 const pickerEl = ref<HTMLElement>();
 
@@ -29,18 +28,13 @@ const onClickOutside = (event: Event) => {
     }
 }
 
-const onSave = (color: string | undefined) => {
-    if (!color) {
-        return;
-    }
-
-    emit('onChange', color)
-    closePicker()
-}
-
 const onOpen = () => {
     open.value = true
 }
+
+watch(() => color.value, (value) => {
+    emit('onChange', value)
+})
 
 onMounted(() => {
     document.addEventListener("mousedown", onClickOutside);
@@ -53,10 +47,13 @@ onUnmounted(() => {
 <template>
     <div>
         <div class="relative">
-            <slot :onClick="onOpen" />
+            <!-- Preview -->
+            <div class="bcpb:h-8 bcpb:w-8 bcpb:rounded-md bcpb:cursor-pointer bcpb:hover:opacity-90 bcpb:transition-colors"
+                :style="{ backgroundColor: color }" @click="onOpen" />
+            <!-- Picker -->
             <div ref="pickerEl" class="bcpb:absolute bcpb:right-0 bcpb:left-auto! bcpb:z-30">
                 <Vue3ColorPicker v-if="open" mode="solid" :showColorList="false" :showPickerMode="false"
-                    :showButtons="true" @onCancel="closePicker" @onSave="onSave" />
+                    v-model="color" />
             </div>
         </div>
     </div>
