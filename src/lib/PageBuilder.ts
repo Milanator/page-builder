@@ -25,9 +25,7 @@ const blocks: Ref<Array<Block>> = ref([
     new Template1(),
     new ColumnBlock(),
     new SettingBlock(),
-    // new ListBlock(),
     new HtmlBlock(),
-    // new CardUiComponent(),
     new ImageBlock()
 ])
 
