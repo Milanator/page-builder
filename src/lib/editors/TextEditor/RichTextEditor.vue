@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import EditorMenu from "./EditorMenu.vue";
+import { FontFamily } from '@tiptap/extension-font-family'
 import { BubbleMenu, Editor, EditorContent } from "@tiptap/vue-3";
 import { StarterKit } from "@tiptap/starter-kit";
 import { Placeholder } from "@tiptap/extension-placeholder";
 import { onBeforeUnmount } from "vue";
 import { TextStyle } from "@tiptap/extension-text-style";
 import { Color } from "@tiptap/extension-color";
-import EditorMenu from "./EditorMenu.vue";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { useTranslator } from '@/lib/Translator';
 
@@ -35,7 +36,10 @@ const editor = new Editor({
     Color,
     TextAlign.configure({
       types: ['heading', 'paragraph']
-    })
+    }),
+    FontFamily.configure({
+      types: ['textStyle'],
+    }),
   ],
   onUpdate: ({ editor }) => {
     model.value = editor.getHTML()

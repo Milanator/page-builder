@@ -2,16 +2,56 @@
 import { ref } from "vue";
 import type { Editor } from "@tiptap/vue-3";
 
-defineProps<{
+type FONT_TYPE = {
+  value: string
+  label: string
+}
+
+interface Props {
   editor: Editor;
   bubbleMenu: boolean;
-}>();
+}
+
+const props = defineProps<Props>();
+
+const FONTS: FONT_TYPE[] = [
+  {
+    label: 'Sans',
+    value: 'Arial, Helvetica, Trebuchet MS, sans-serif',
+  },
+  {
+    label: 'Serif',
+    value: 'Georgia, Times New Roman, serif',
+  },
+  {
+    label: 'Monospace',
+    value: 'Courier New, monospace',
+  },
+  {
+    label: 'Default',
+    value: '',
+  },
+]
 
 const dropDownMenus = ref<Record<string, boolean>>({
   paragraph: false,
+  fontFamily: false,
   list: false,
   align: false
 })
+
+const onChangeFont = (font: FONT_TYPE) => {
+  if (!props.editor) {
+    return
+  }
+
+  if (font.value === '') {
+    props.editor.chain().focus().unsetFontFamily().run()
+    return;
+  }
+
+  props.editor.chain().focus().setFontFamily(font.value).run()
+}
 
 const closeDropdowns = () => {
   for (const key in dropDownMenus.value) {
@@ -31,9 +71,30 @@ if (typeof window !== 'undefined') {
   document.addEventListener('click', handleClickOutside)
 }
 </script>
-
 <template>
   <div class="editor-menu" :class="{ 'bubble-menu': bubbleMenu, 'fixed-menu': !bubbleMenu }">
+
+    <div class="dropdown-container bcpb:relative">
+      <button @click.stop="dropDownMenus.fontFamily = !dropDownMenus.fontFamily"
+        class="editor-menu-button dropdown-trigger" :class="{ 'active': dropDownMenus.fontFamily }">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#6c7280">
+          <path
+            d="M256-240h84l44-122h192l44 122h84L522-720h-84L256-240Zm152-192 70-198h4l70 198H408ZM160-80q-33 0-56.5-23.5T80-160v-640q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v640q0 33-23.5 56.5T800-80H160Zm0-80h640v-640H160v640Zm0-640v640-640Z" />
+        </svg>
+        <svg class="bcpb:w-3 bcpb:h-3 bcpb:ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+
+      <!-- Dropdown Menu -->
+      <div v-show="dropDownMenus.fontFamily" class="editor-dropdown-menu" style="min-width: 160px;">
+        <!-- Inter -->
+        <button v-for="font in FONTS" @click="onChangeFont(font)" class="editor-dropdown-item"
+          :class="{ 'active': editor.isActive('textStyle', { fontFamily: font.value }) }">
+          <span class="bcpb:text-sm">{{ font.label }}</span>
+        </button>
+      </div>
+    </div>
 
     <!-- Text Format Dropdown -->
     <div class="dropdown-container bcpb:relative">
