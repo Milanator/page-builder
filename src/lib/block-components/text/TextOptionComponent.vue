@@ -7,7 +7,6 @@ import RangeInput from "@/lib/controls/RangeInput.vue";
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 import ContainerOptionComponent from "@/lib/block-components/partials/ContainerOptionComponent.vue";
-import ColorPicker from "@/lib/block-components/partials/ColorPicker.vue";
 
 interface Props {
   blockInfo: TextBlock
