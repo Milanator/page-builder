@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { Editor } from "@tiptap/vue-3";
+import ColorPicker from "@/lib/block-components/partials/ColorPicker.vue";
 
 type FONT_TYPE = {
   value: string
@@ -83,6 +84,7 @@ if (typeof window !== 'undefined') {
 <template>
   <div class="editor-menu" :class="{ 'bubble-menu': bubbleMenu, 'fixed-menu': !bubbleMenu }">
 
+    <!-- Font family -->
     <div class="dropdown-container bcpb:relative">
       <button @click.stop="dropDownMenus.fontFamily = !dropDownMenus.fontFamily"
         class="editor-menu-button dropdown-trigger" :class="{ 'active': dropDownMenus.fontFamily }">
@@ -102,6 +104,17 @@ if (typeof window !== 'undefined') {
           :class="{ 'active': editor.isActive('textStyle', { fontFamily: font.value }) }">
           <span class="bcpb:text-sm" :style="{ fontFamily: font.value }">{{ font.label }}</span>
         </button>
+      </div>
+    </div>
+
+    <!-- Color -->
+    <div class="editor-color-picker-container">
+      <div class="bcpb:relative">
+        <ColorPicker v-slot="{ onClick }" :color="editor.getAttributes('textStyle').color"
+          @onChange="($event: string) => editor.chain().focus().setColor($event).run()">
+          <div class="editor-color-preview"
+            :style="{ backgroundColor: editor.getAttributes('textStyle').color || '#000000' }" @click="onClick"></div>
+        </ColorPicker>
       </div>
     </div>
 

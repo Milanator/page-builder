@@ -31,7 +31,7 @@ const DEFAULT_COLUMN = new ColumnBlock(
         new TextBlock({
             text: 'SCHÔDZA VLASTNÍKOV BYTOV',
             fontSize: 2.4,
-            textColor: '#fff',
+            textColor: '#000',
             hasContainer: true,
             cssClasses: 'bcpb:text-center',
             backgroundImage: '',
@@ -46,7 +46,7 @@ const DEFAULT_COLUMN = new ColumnBlock(
         new TextBlock({
             text: 'Údržba spoločných priestorov,<br>rozpočet domu, opravy strechy,<br>výmena výťahu a správa fondu opráv.',
             fontSize: 1.8,
-            textColor: '#fff',
+            textColor: '#000',
             hasContainer: true,
             cssClasses: 'bcpb:text-center',
             backgroundImage: '',
@@ -59,7 +59,7 @@ const DEFAULT_COLUMN = new ColumnBlock(
         new TextBlock({
             text: '17. 9. 2025 o 18:00',
             fontSize: 2,
-            textColor: '#fff',
+            textColor: '#000',
             hasContainer: true,
             cssClasses: 'bcpb:text-center bcpb:font-bold',
             backgroundImage: '',
@@ -96,7 +96,7 @@ export class Template2 extends ColumnBlock implements Block {
             new TextBlock({
                 text: 'Oznamy',
                 fontSize: 4.5,
-                textColor: '#0086b5',
+                textColor: '#000',
                 hasContainer: true,
                 cssClasses: 'bcpb:text-center',
                 backgroundImage: '',

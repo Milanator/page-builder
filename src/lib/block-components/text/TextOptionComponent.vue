@@ -22,10 +22,6 @@ const { t } = useTranslator();
 
     <ContainerOptionComponent :options="blockInfo.options" />
 
-    <option-widget :title="t('text_color')">
-      <ColorPicker v-model="blockInfo.options.textColor" />
-    </option-widget>
-
     <option-widget :title="t('font_size')">
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
         <div
