@@ -13,7 +13,7 @@ export class SettingBlock implements Block {
     component: undefined;
     optionComponent: VueComponent = markRaw(SettingOptionComponent);
     options: SettingOptions = {
-        backgroundColor: '#fff',
+        backgroundColor: '',
         backgroundImage: ''
     };
     icon: string = '';

@@ -30,7 +30,6 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 .base-preview-item {
-  background-color: white;
   border: 1px solid transparent;
 }
 

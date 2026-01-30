@@ -10,7 +10,7 @@ export class Template1 extends ColumnBlock implements Block {
         columns: 2,
         switchCols: false,
         hasContainer: false,
-        backgroundColor: '#e51c23',
+        backgroundColor: '',
         columnStyles: {
             1: {
                 styleClass: 'col',

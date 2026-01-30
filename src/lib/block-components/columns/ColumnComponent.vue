@@ -148,7 +148,8 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
         background(blockInfo.options.columnStyles[index])
       ]"
         :class="[{ 'column-item': inEditor, 'column-dragged-over': dragOverRow === index && inEditor }, blockInfo.options.columnStyles[index]?.styleClass]"
-        @drop="onDrop($event, index)" @dragenter.prevent @dragleave="onDragLeave" @dragover="onDragOverRow(index)">
+        class="bcpb:py-4" @drop="onDrop($event, index)" @dragenter.prevent @dragleave="onDragLeave"
+        @dragover="onDragOverRow(index)">
         <template v-for="(item, columnIndex) of blockInfo.children[index]">
           <div :class="{ 'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex }"></div>
           <component :is="previewComponentMap[item.name]" :blockInfo="item" :inEditor="inEditor" :draggable="!!inEditor"

@@ -36,7 +36,7 @@ export class ColumnBlock implements Block {
         columns: 3,
         switchCols: false,
         hasContainer: false,
-        backgroundColor: "#fff",
+        backgroundColor: "",
         backgroundImage: '',
         styleClass: '',
         styles: '',
