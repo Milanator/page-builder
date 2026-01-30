@@ -2,17 +2,24 @@
 import { ref, Ref } from "vue";
 import { useTranslator } from '@/lib/Translator';
 
-defineProps<{
+interface Props {
   title: string,
+  canDelete?: boolean,
   hasContainer?: boolean,
   backgroundColor?: string,
   backgroundImage?: string
-}>()
+}
 
-const emit = defineEmits<{
+interface Emits {
   (event: 'onClose', state: boolean): void,
   (event: 'onDelete', state: boolean): void,
-}>()
+}
+
+withDefaults(defineProps<Props>(), {
+  canDelete: true
+})
+
+const emit = defineEmits<Emits>()
 
 const showDeletePopup: Ref<boolean> = ref(false)
 
@@ -47,7 +54,7 @@ const onDeleteItem = ($event: Event) => {
         </h3>
       </div>
       <div class="bcpb:flex bcpb:items-center bcpb:gap-1">
-        <button @click="showDeletePopup = true" type="button"
+        <button v-if="canDelete" @click="showDeletePopup = true" type="button"
           class="bcpb:p-2 bcpb:text-red-500 hover:bcpb:text-red-700 hover:bcpb:bg-red-50 bcpb:rounded-md bcpb:transition-colors bcpb:duration-200"
           title="Delete">
           <img src="@/assets/icons/trash.svg" alt="Trash" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">

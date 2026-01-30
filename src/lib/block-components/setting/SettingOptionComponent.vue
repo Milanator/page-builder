@@ -13,7 +13,7 @@ defineProps<Props>()
 const { t } = useTranslator();
 </script>
 <template>
-    <BaseOption :title="t('settings')">
+    <BaseOption :title="t('settings')" :can-delete="false">
         <BackgroundImageOption :options="blockInfo.options" />
     </BaseOption>
 </template>
