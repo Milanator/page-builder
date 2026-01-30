@@ -10,6 +10,7 @@ import { useTranslator } from '@/lib/Translator';
 import { ConfigKey } from "@/store/Config.ts";
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
 import { background } from "./utils/style.ts";
+import { sanitizeRenderList, sanitizeSettings } from "@/lib/utils/formatter.ts";
 
 interface Props {
   config: Config
@@ -113,8 +114,8 @@ const handleKeyDown = (event: KeyboardEvent) => {
 const exportPage = ($event: Event) => {
   $event.preventDefault();
   emit('onSave', {
-    renderList: renderList.value,
-    settings: settings.value
+    renderList: sanitizeRenderList(renderList.value),
+    settings: sanitizeSettings(settings.value)
   })
 }
 </script>
