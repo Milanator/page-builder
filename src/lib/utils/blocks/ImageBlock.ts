@@ -18,7 +18,7 @@ export class ImageBlock implements Block {
     component: VueComponent = markRaw(ImageComponent);
     optionComponent: VueComponent = markRaw(ImageOptionComponent);
     options: ImageOptions = {
-        hasContainer: true,
+        hasContainer: false,
         cssClasses: '',
         stretched: false,
         marginTop: 0,
