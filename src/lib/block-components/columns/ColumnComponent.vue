@@ -136,14 +136,15 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
     :background-color="blockInfo.options.backgroundColor">
     <div class="bc--page-builder-row" :style="[
       inEditor ? { minHeight: '40px' } : {},
-      { flexDirection: blockInfo.options.switchCols ? 'row-reverse' : 'row' }
+      { flexDirection: blockInfo.options.switchCols ? 'row-reverse' : 'row' },
+      blockInfo.options.styles
     ]">
       <div v-for="(index) in blockInfo.options.columns" :style="[
         blockInfo.options.columnStyles[index]?.styles,
         { 'background-color': blockInfo.options.columnStyles[index]?.backgroundColor },
         marginStyles(blockInfo.options.columnStyles[index] ?? {}),
         borderRadiusStyles(blockInfo.options.columnStyles[index] ?? {}),
-        background(blockInfo.options.columnStyles[index])
+        background(blockInfo.options.columnStyles[index] ?? {})
       ]"
         :class="[{ 'column-item': inEditor, 'column-dragged-over': dragOverRow === index && inEditor }, blockInfo.options.columnStyles[index]?.styleClass]"
         class="bcpb:py-4" @drop="onDrop($event, index)" @dragenter.prevent @dragleave="onDragLeave"

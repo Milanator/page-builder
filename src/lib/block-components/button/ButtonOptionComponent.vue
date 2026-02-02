@@ -94,7 +94,7 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
               :placeholder="t('enter_url')" class="bg-page-builder-input" @input="onChangeOption">
           </div>
         </option-widget>
-        <!-- Styles -->
+        <!-- Classes -->
         <StyleClassOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
         <!-- Styles -->
         <StyleOption v-model="blockInfo.options" @update:model-value="onChangeOption" />

@@ -19,7 +19,7 @@ interface Props {
 
 const emit = defineEmits<ChangeOptionEmit>()
 const props = defineProps<Props>()
-const selectedColumn = ref(1);
+const selectedColumn = ref<number>(1);
 const { t } = useTranslator();
 
 const onSelectColumn = (columnIndex: number) => {
@@ -39,7 +39,7 @@ watch(
           columnStyles[i] = {
             styleClass: 'bc-page-builder-col',
             backgroundColor: 'transparent',
-            backgroundImage: '',
+            backgroundImage: undefined,
             styles: 'padding: 10px',
           };
         }
@@ -56,20 +56,26 @@ watch(
 );
 
 const onChangeOption = debounce(() => emit('onChangeOption'))
+
+const onChangeColumns = (columnIndex: number) => {
+  props.blockInfo.options.columns = columnIndex
+  onChangeOption()
+}
 </script>
 <template>
   <BaseOption :title="t('Columns')">
     <!-- Main Column Settings -->
     <div class="bcpb:space-y-1">
+      <!-- Switch -->
       <OptionWidget :title="t('switch_columns')">
-        <SliderToggle v-model="blockInfo.options.switchCols" />
+        <SliderToggle v-model="blockInfo.options.switchCols" @update:model-value="onChangeOption" />
       </OptionWidget>
-
-      <BackgroundImageOption :options="blockInfo.options" />
-
+      <!-- Background -->
+      <BackgroundImageOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
+      <!-- Columns -->
       <option-widget :title="t('columns')">
         <div class="bcpb:flex bcpb:flex-wrap bcpb:gap-2">
-          <button v-for="colNum in 6" :key="colNum" @click="blockInfo.options.columns = colNum"
+          <button v-for="colNum in 6" :key="colNum" @click="onChangeColumns(colNum)"
             class="bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:rounded-md bcpb:border bcpb:transition-colors bcpb:duration-200 bcpb:min-w-[60px]"
             :class="{
               'bcpb:bg-blue-600 bcpb:text-white bcpb:border-blue-600': blockInfo.options.columns === colNum,
@@ -79,10 +85,9 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
           </button>
         </div>
       </option-widget>
-
+      <!-- Styles -->
       <StyleOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
     </div>
-
     <!-- Column Tabs -->
     <div class="bcpb:mt-6 bcpb:border-t bcpb:border-gray-100 bcpb:pt-4">
       <div class="bcpb:flex bcpb:overflow-x-auto scrollbar-hide bcpb:border-b bcpb:border-gray-200">
@@ -96,22 +101,23 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
         </button>
       </div>
     </div>
-
     <!-- Individual Column Settings -->
     <div class="bcpb:mt-4 bcpb:space-y-1">
+      <!-- Margin -->
       <MarginOption v-model="blockInfo.options.columnStyles[selectedColumn]" @update:model-value="onChangeOption" />
-
-      <BorderRadiusOption :options="blockInfo.options.columnStyles[selectedColumn]" />
-
-      <BackgroundImageOption :options="blockInfo.options.columnStyles[selectedColumn]" />
-
-      <StyleClassOption :options="blockInfo.options.columnStyles[selectedColumn]" />
-
+      <!-- Background -->
+      <BackgroundImageOption v-model="blockInfo.options.columnStyles[selectedColumn]"
+        @update:model-value="onChangeOption" />
+      <!-- Radius -->
+      <BorderRadiusOption v-model="blockInfo.options.columnStyles[selectedColumn]"
+        @update:model-value="onChangeOption" />
+      <!-- Classes -->
+      <StyleClassOption v-model="blockInfo.options.columnStyles[selectedColumn]" @update:model-value="onChangeOption" />
+      <!-- Styles -->
       <StyleOption v-model="blockInfo.options.columnStyles[selectedColumn]" @update:model-value="onChangeOption" />
     </div>
   </BaseOption>
 </template>
-
 <style scoped>
 /* Pure CSS only - no Tailwind utilities */
 .scrollbar-hide {

@@ -68,15 +68,14 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
                 </template>
             </ElUpload>
         </OptionWidget>
-
         <!-- Object fit -->
         <OptionWidget :title="t('stretch_image')">
-            <SliderToggle v-model="blockInfo.options.stretched" />
+            <SliderToggle v-model="blockInfo.options.stretched" @update:model-value="onChangeOption" />
         </OptionWidget>
-
+        <!-- Margin -->
         <MarginOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
-
-        <BorderRadiusOption :options="blockInfo.options" />
+        <!-- Border radius -->
+        <BorderRadiusOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
     </BaseOption>
 </template>
 <style scoped></style>
