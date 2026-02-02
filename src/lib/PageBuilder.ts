@@ -37,6 +37,7 @@ export function usePageBuilder() {
     }
 
     const onDrop = (event: DragEvent) => {
+        console.log('onDrop')
         event.preventDefault();
         dragOverDropZone.value = false;
 
@@ -89,6 +90,7 @@ export function usePageBuilder() {
     };
 
     const onDropChildElement = () => {
+        console.log('onDropChildElement')
         if (innerDragElementIndex.value != null) {
             renderList.value.splice(innerDragElementIndex.value, 1)
         }
@@ -99,7 +101,6 @@ export function usePageBuilder() {
         dragOverChildElement.value = true;
         innerDragElementIndex.value = null;
     }
-
 
     const onDragLeave = () => {
         dragOverDropZone.value = false;
@@ -141,6 +142,8 @@ export function usePageBuilder() {
     }
 
     const onDelete = ($event: boolean) => {
+        console.log('onDelete')
+
         if (!selectedOptionComponent.value?.id || !$event) return;
 
         const deleteBlock = (blocks: Block[]): boolean => {

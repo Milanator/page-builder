@@ -22,4 +22,4 @@ const sanitizeBlock = (block: Block) => ({
         : undefined
 })
 
-const deepClone = (obj: any) => JSON.parse(JSON.stringify(toRaw(obj)))
+export const deepClone = (obj: any) => JSON.parse(JSON.stringify(toRaw(obj)))

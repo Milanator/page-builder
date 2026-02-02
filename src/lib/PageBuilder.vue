@@ -11,6 +11,8 @@ import { ConfigKey } from "@/store/Config.ts";
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
 import { background } from "./utils/style.ts";
 import { sanitizeRenderList, sanitizeSettings } from "@/lib/utils/formatter.ts";
+import { EditorState, useHistory } from "./History.ts";
+
 
 interface Props {
   config: Config
@@ -66,12 +68,15 @@ const {
   onSelectFormChildElement,
   onDelete
 } = usePageBuilder()
+const { init: initHistory, commit, undo, redo } = useHistory()
 
 provide(ConfigKey, props.config)
 
 const { t } = useTranslator(props.config.language);
 
 onMounted(() => {
+  initHistory({ renderList: renderList.value, settings: settings.value })
+
   document.addEventListener('keydown', handleKeyDown); // Add ESC key listener
 })
 
@@ -118,6 +123,34 @@ const exportPage = ($event: Event) => {
     settings: sanitizeSettings(settings.value)
   })
 }
+
+const onUndo = () => {
+  const presentState: EditorState | void = undo()
+
+  if (presentState) {
+    updateHistory(presentState)
+  }
+}
+
+const onRedo = () => {
+  const presentState: EditorState | void = redo();
+  if (presentState) {
+    updateHistory(presentState)
+  }
+}
+
+const updateHistory = (state: EditorState) => {
+  renderList.value = state.renderList
+  settings.value = state.settings
+}
+
+const onChangeHistory = (fn: () => void) => {
+  fn()
+
+  console.log('onChangeHistory')
+
+  commit({ renderList: renderList.value, settings: settings.value })
+}
 </script>
 <template>
   <!-- Preview (editor) -->
@@ -157,7 +190,7 @@ const exportPage = ($event: Event) => {
     <div class="bcpb:flex-1 bcpb:bg-white bcpb:border-r bcpb:border-gray-100 bcpb:flex bcpb:flex-col">
       <ToolBar :config="config" :device="selectedDevice" :show-device-toolbar="config.showDeviceBar"
         @on-preview="emit('onPreview')" @on-save="exportPage" @on-back="emit('onBack', true)"
-        @on-device="selectedDevice = $event" @on-settings="onItemSelect(settings)">
+        @on-device="selectedDevice = $event" @on-settings="onItemSelect(settings)" @on-undo="onUndo" @on-redo="onRedo">
       </ToolBar>
       <!-- Canvas Area -->
       <div class="bcpb:flex-1 bcpb:p-4 bcpb:overflow-auto">
@@ -187,7 +220,7 @@ const exportPage = ($event: Event) => {
           }
           : {}">
           <!-- Drop Zone -->
-          <div @drop="onDrop($event)" @dragenter.prevent @dragleave.prevent="onDragLeave()"
+          <div @drop="onChangeHistory(() => onDrop($event))" @dragenter.prevent @dragleave.prevent="onDragLeave()"
             @dragover.prevent="onDragOver($event)" :style="[
               settings.options,
               background(settings.options)
@@ -199,7 +232,8 @@ const exportPage = ($event: Event) => {
               </div>
               <component :is="previewComponentMap[block.name]" :blockInfo="block" :inEditor="true"
                 @onSelectChildElement="onSelectFormChildElement" @onDragOverChildElement="onDragOverChildElement"
-                @onDropChildElement="onDropChildElement" @click="onItemSelect(block)"></component>
+                @onDropChildElement="onChangeHistory(() => onDropChildElement())" @click="onItemSelect(block)">
+              </component>
             </div>
             <!-- Enhanced No Item State -->
             <div v-if="renderList.length == 0"
@@ -244,7 +278,8 @@ const exportPage = ($event: Event) => {
         <!-- Content -->
         <div class="bcpb:flex-1 bcpb:overflow-y-auto">
           <component v-if="selectedOptionComponent" :is="previewOptionMap[selectedOptionComponent.name]"
-            :blockInfo="selectedOptionComponent" @onClose="selectedOptionComponent = null" @onDelete="onDelete">
+            :blockInfo="selectedOptionComponent" @onClose="selectedOptionComponent = null"
+            @onDelete="onChangeHistory(() => onDelete($event))">
           </component>
         </div>
       </div>

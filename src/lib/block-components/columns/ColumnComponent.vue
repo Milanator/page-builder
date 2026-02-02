@@ -29,8 +29,6 @@ const innerDragElementInbox: Ref<number | null> = ref(null)
 const onDrop = ($event: DragEvent, index: number): void => {
   $event.preventDefault();
   $event.stopPropagation();
-
-  console.log('Dropped on child component', $event);
   const droppedItem = $event.dataTransfer?.getData('text/plain');
 
   if (!droppedItem) return;
@@ -102,7 +100,6 @@ const onDragOverRow = (index: number): void => {
 
 const onDragOverColumn = ($event: DragEvent, index: number): void => {
   console.log('onDragOverColumn', $event)
-  console.log('onDragOverColumn', index)
   dragOverColumn.value = index
 }
 
