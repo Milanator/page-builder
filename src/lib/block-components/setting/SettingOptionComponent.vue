@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseOption from "../BaseOption.vue";
-import { SettingBlock } from "../../utils/blocks/SettingBlock.ts";
+import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
 import { useTranslator } from '@/lib/Translator';
 import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
 

@@ -6,7 +6,6 @@ import TextOptionComponent from "@/lib/block-components/text/TextOptionComponent
 
 type BaseOptions = {
     text: string;
-    hasContainer: boolean;
     fontSize: number;
     lineHeight: number
     letterSpacing: number
@@ -24,7 +23,6 @@ export class TextBlock implements Block {
     optionComponent: VueComponent = markRaw(TextOptionComponent);
     options: TextOptions = {
         text: "",
-        hasContainer: false,
         backgroundImage: "",
         cssClasses: "",
         styles: "",

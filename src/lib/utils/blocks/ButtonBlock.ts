@@ -16,7 +16,6 @@ interface ButtonAction {
 interface BaseOptions {
     style: string;
     text: string;
-    hasContainer: boolean;
 
     backgroundColor: string;
     backgroundImage: string;
@@ -37,7 +36,6 @@ export class ButtonBlock implements Block {
     options: ButtonOptions = {
         style: "",
         text: "Button",
-        hasContainer: false,
         backgroundColor: "#ffffff",
         backgroundImage: "",
         styleClass: "btn btn-primary",

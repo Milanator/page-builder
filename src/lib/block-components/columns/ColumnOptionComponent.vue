@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
-import { ColumnBlock } from "../../utils/blocks/ColumnBlock.ts";
+import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
 import { ref, watch } from "vue";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';
@@ -12,7 +12,6 @@ import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.v
 import BorderRadiusOption from "@/lib/block-components/partials/BorderRadiusOption.vue";
 import { debounce } from "@/lib/utils/helper.ts";
 import { ChangeOptionEmit } from "@/lib/utils/types.ts";
-// import ContainerOptionComponent from "@/lib/block-components/partials/ContainerOptionComponent.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -65,8 +64,6 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
       <OptionWidget :title="t('switch_columns')">
         <SliderToggle v-model="blockInfo.options.switchCols" />
       </OptionWidget>
-
-      <!-- <ContainerOptionComponent :options="blockInfo.options" /> -->
 
       <BackgroundImageOption :options="blockInfo.options" />
 

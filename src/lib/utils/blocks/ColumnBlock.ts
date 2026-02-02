@@ -35,7 +35,6 @@ export class ColumnBlock implements Block {
     options: Record<string, any> = {
         columns: 3,
         switchCols: false,
-        hasContainer: false,
         backgroundColor: "",
         backgroundImage: '',
         styleClass: '',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ButtonBlock } from "../../utils/blocks/ButtonBlock.ts";
+import { ButtonBlock } from "@/lib/utils/blocks/ButtonBlock.ts";
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import BaseOption from "../BaseOption.vue";
 import { useTranslator } from '@/lib/Translator';
@@ -9,7 +9,6 @@ import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.vue";
 import { ChangeOptionEmit } from "@/lib/utils/types.ts";
 import { debounce } from "@/lib/utils/helper.ts";
-// import ContainerOptionComponent from "@/lib/block-components/partials/ContainerOptionComponent.vue";
 
 type Direction = 'left' | 'center' | 'right'
 
@@ -32,14 +31,10 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
   <BaseOption :title="t('Button')">
     <!-- Basic Settings -->
     <div class="bcpb:space-y-1">
-      <!-- <ContainerOptionComponent :options="blockInfo.options" /> -->
-
       <!-- Margin -->
       <MarginOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
-
       <!-- Background -->
       <BackgroundImageOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
-
       <!-- Alignment -->
       <option-widget :title="t('alignment')">
         <div class="bcpb:flex bcpb:rounded-lg bcpb:border bcpb:border-gray-300 bcpb:overflow-hidden">
@@ -70,7 +65,6 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
         </div>
       </option-widget>
     </div>
-
     <div>
       <div class="bcpb:space-y-1">
         <!-- Button text -->
@@ -78,7 +72,6 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
           <input type="text" v-model="blockInfo.options.text" :placeholder="t('enter_button_text')"
             class="bg-page-builder-input" @input="onChangeOption">
         </option-widget>
-
         <option-widget :title="t('click_action')" align="vertical">
           <div class="bcpb:space-y-3">
             <div class="bcpb:relative">
@@ -96,16 +89,13 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
                 </svg>
               </div>
             </div>
-
             <!-- Action link -->
             <input v-if="blockInfo.options.buttonAction.type" type="url" v-model="blockInfo.options.buttonAction.url"
               :placeholder="t('enter_url')" class="bg-page-builder-input" @input="onChangeOption">
           </div>
         </option-widget>
-
         <!-- Styles -->
         <StyleClassOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
-
         <!-- Styles -->
         <StyleOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
       </div>

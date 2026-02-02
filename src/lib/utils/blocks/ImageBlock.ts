@@ -5,7 +5,6 @@ import ImageOptionComponent from "@/lib/block-components/image/ImageOptionCompon
 import ImageComponent from "@/lib/block-components/image/ImageComponent.vue";
 
 type BaseOptions = {
-    hasContainer: boolean;
     cssClasses: string;
     stretched: boolean;
     mediaUrl?: string;
@@ -18,7 +17,6 @@ export class ImageBlock implements Block {
     component: VueComponent = markRaw(ImageComponent);
     optionComponent: VueComponent = markRaw(ImageOptionComponent);
     options: ImageOptions = {
-        hasContainer: false,
         cssClasses: '',
         stretched: false,
         marginTop: 0,

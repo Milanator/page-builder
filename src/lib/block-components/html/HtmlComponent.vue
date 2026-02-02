@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import BasePreview from "../BasePreview.vue";
-import {HtmlBlock} from "../../utils/blocks/HtmlBlock.ts";
-import {onBeforeUnmount, onMounted, ref, watchEffect} from "vue";
-import {VHtmlEditor} from "@binarycastle/vue-html-editor"
+import { HtmlBlock } from "@/lib/utils/blocks/HtmlBlock.ts";
+import { onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
+import { VHtmlEditor } from "@binarycastle/vue-html-editor"
 
 import '@binarycastle/vue-html-editor/dist/vue-html-editor.css'
 
@@ -50,14 +50,10 @@ watchEffect(() => {
   updateStyleElement(props.blockInfo.options.css);
 });
 </script>
-
 <template>
   <BasePreview :inEditor="inEditor">
-    <VHtmlEditor v-if="inEditor" v-model="props.blockInfo.options.html"
-                 :css="props.blockInfo.options.css"></VHtmlEditor>
+    <VHtmlEditor v-if="inEditor" v-model="props.blockInfo.options.html" :css="props.blockInfo.options.css">
+    </VHtmlEditor>
     <div v-else :class="instanceId" v-html="props.blockInfo.options.html"></div>
   </BasePreview>
 </template>
-
-<style scoped>
-</style>

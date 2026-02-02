@@ -1,14 +1,12 @@
 <script setup lang="ts">
 interface Props {
   inEditor?: boolean
-  hasContainer?: boolean
   backgroundColor?: string | null
   backgroundImage?: string | null
 }
 
 withDefaults(defineProps<Props>(), {
   inEditor: true,
-  hasContainer: false,
   backgroundImage: null,
   backgroundColor: null
 })
@@ -20,10 +18,7 @@ withDefaults(defineProps<Props>(), {
     'background-image': backgroundImage ? 'url(' + backgroundImage + ')' : '',
     'background-color': backgroundColor ? backgroundColor : 'transparent',
   }">
-    <div v-if="hasContainer" class="container">
-      <slot></slot>
-    </div>
-    <slot v-else></slot>
+    <slot></slot>
   </div>
 
 </template>

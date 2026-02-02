@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
-import { TextBlock } from "../../utils/blocks/TextBlock.ts";
+import { TextBlock } from "@/lib/utils/blocks/TextBlock.ts";
 import { useTranslator } from '@/lib/Translator';
 import RangeInput from "@/lib/controls/RangeInput.vue";
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
@@ -21,7 +21,7 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
 </script>
 <template>
   <BaseOption title="Text">
-
+    <!-- Font size -->
     <option-widget :title="t('font_size')">
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
         <div
@@ -32,7 +32,7 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
         </div>
       </div>
     </option-widget>
-
+    <!-- Line height -->
     <option-widget :title="t('line_height')">
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
         <div
@@ -43,7 +43,7 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
         </div>
       </div>
     </option-widget>
-
+    <!-- Letter spacing -->
     <option-widget :title="t('letter_spacing')">
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
         <div
@@ -54,14 +54,12 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
         </div>
       </div>
     </option-widget>
-
+    <!-- Margin -->
     <MarginOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
-
     <!-- Classes -->
     <option-widget :title="t('css_classes')" align="vertical" :is-expandable="true">
       <textarea class="bg-page-builder-input" v-model="blockInfo.options.cssClasses" @input="onChangeOption"></textarea>
     </option-widget>
-
     <!-- Styles -->
     <StyleOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
   </BaseOption>

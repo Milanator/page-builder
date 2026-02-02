@@ -10,11 +10,6 @@ interface Emit {
 const emit = defineEmits<Emit>()
 const model = defineModel()
 const { t } = useTranslator();
-
-const onChangeBackgroundColor = ($event: string) => {
-    model.value.backgroundColor = $event
-    emit('update:modelValue', model.value)
-}
 </script>
 <template>
     <!-- Background image -->
@@ -22,9 +17,8 @@ const onChangeBackgroundColor = ($event: string) => {
         <input type="url" class="bg-page-builder-input" v-model="model.backgroundImage"
             :placeholder="t('apply_image_url')" @input="emit('update:modelValue', model)" />
     </option-widget>
-
     <!-- Background color -->
     <option-widget :title="t('background_color')">
-        <ColorPicker :color="model.backgroundColor" @onChange="onChangeBackgroundColor" />
+        <ColorPicker v-model="model.backgroundColor" @onChange="emit('update:modelValue', model)" />
     </option-widget>
 </template>

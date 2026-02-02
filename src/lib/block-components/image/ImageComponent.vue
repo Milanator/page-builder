@@ -14,7 +14,7 @@ watchEffect(() => {
 })
 </script>
 <template>
-    <BasePreview :in-editor="inEditor" :has-container="blockInfo.options.hasContainer">
+    <BasePreview :in-editor="inEditor">
         <div class="image-container bcpb:overflow-hidden" :class="blockInfo.options.cssClasses" :style="[
             marginStyles(blockInfo.options),
             borderRadiusStyles(blockInfo.options),

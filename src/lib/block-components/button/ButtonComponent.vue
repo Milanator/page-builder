@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { marginStyles } from "@/lib/utils/style.ts";
-import { ButtonBlock } from "../../utils/blocks/ButtonBlock.ts";
+import { ButtonBlock } from "@/lib/utils/blocks/ButtonBlock.ts";
 import BasePreview from "../BasePreview.vue";
 
 interface Props {
@@ -26,8 +26,8 @@ const onClick = ($event: Event) => {
 
 <template>
 
-  <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
-    :background-color="blockInfo.options.backgroundColor" :background-image="blockInfo.options.backgroundImage">
+  <BasePreview :inEditor="inEditor" :background-color="blockInfo.options.backgroundColor"
+    :background-image="blockInfo.options.backgroundImage">
     <div :style="[{ 'text-align': blockInfo.options.buttonAlign }, marginStyles(blockInfo.options)]">
       <button @click="onClick" :class="blockInfo.options.styleClass" :style="blockInfo.options.styles">
         {{ blockInfo.options.text }}

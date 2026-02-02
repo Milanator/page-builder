@@ -9,7 +9,6 @@ export class Template1 extends ColumnBlock implements Block {
     options: Record<string, any> = {
         columns: 2,
         switchCols: false,
-        hasContainer: false,
         backgroundColor: '',
         columnStyles: {
             1: {
@@ -26,7 +25,6 @@ export class Template1 extends ColumnBlock implements Block {
     children: { [key: string | number]: Block[] } = {
         1: [
             new ImageBlock({
-                hasContainer: false,
                 cssClasses: 'px-4',
                 stretched: false,
             })
@@ -36,7 +34,6 @@ export class Template1 extends ColumnBlock implements Block {
                 text: 'Title',
                 fontSize: 2,
                 textColor: '#000',
-                hasContainer: false,
                 cssClasses: 'bcpb:pb-4 bcpb:px-4',
                 backgroundImage: '',
                 styles: '',
@@ -47,7 +44,6 @@ export class Template1 extends ColumnBlock implements Block {
                 text: 'Text',
                 fontSize: 1,
                 textColor: '#000',
-                hasContainer: false,
                 cssClasses: 'bcpb:pb-4 bcpb:px-4',
                 backgroundImage: '',
                 styles: '',

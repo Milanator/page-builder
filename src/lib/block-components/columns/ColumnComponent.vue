@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { background, borderRadiusStyles, marginStyles } from "@/lib/utils/style.ts";
-import { ColumnBlock } from "../../utils/blocks/ColumnBlock.ts";
-import { previewComponentMap } from "../../utils/registry.ts";
-import { Block } from "../../utils/types.ts";
+import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { previewComponentMap } from "@/lib/utils/registry.ts";
+import { Block } from "@/lib/utils/types.ts";
 import BasePreview from "../BasePreview.vue";
 import { v4 as uuidv4 } from "uuid";
 import { ref, Ref } from "vue";
@@ -132,8 +132,8 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 </script>
 
 <template>
-  <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
-    :background-image="blockInfo.options.backgroundImage" :background-color="blockInfo.options.backgroundColor">
+  <BasePreview :inEditor="inEditor" :background-image="blockInfo.options.backgroundImage"
+    :background-color="blockInfo.options.backgroundColor">
     <div class="bc--page-builder-row" :style="[
       inEditor ? { minHeight: '40px' } : {},
       { flexDirection: blockInfo.options.switchCols ? 'row-reverse' : 'row' }

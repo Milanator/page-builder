@@ -4,17 +4,13 @@ import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue';
 
 import '@cyhnkckali/vue3-color-picker/dist/style.css'
 
-interface Props {
-    color?: string | undefined;
-}
-
 interface Emits {
-    (event: 'onChange', value: string): any,
+    (event: 'onChange', value: string | undefined): any,
+    (event: 'update:modelValue', value: unknown): void
 }
 
 const emit = defineEmits<Emits>()
-const props = defineProps<Props>()
-const color = ref(props.color || '#000')
+const model = defineModel<string | undefined>()
 const open = ref(false)
 const previewEl = ref<HTMLElement>()
 const pickerEl = ref<HTMLElement>()
@@ -62,7 +58,7 @@ const onOpen = () => {
     nextTick(() => setPickerPosition())
 }
 
-watch(() => color.value, (value) => emit('onChange', value))
+watch(() => model.value, (value) => emit('onChange', value))
 
 onMounted(() => {
     document.addEventListener('mousedown', onClickOutside)
@@ -76,13 +72,14 @@ onUnmounted(() => {
 </script>
 <template>
     <div>
+        <!-- trigger -->
         <div ref="previewEl"
             class="bcpb:h-8 bcpb:w-8 bcpb:rounded-md bcpb:cursor-pointer bcpb:hover:opacity-90 bcpb:transition-colors bcpb:border bcpb:border-gray-300"
-            :style="{ backgroundColor: color }" @click="onOpen" />
-
+            :style="{ backgroundColor: model }" @click="onOpen" />
+        <!-- picker -->
         <Teleport to="body">
             <div v-if="open" ref="pickerEl" class="bcpb:absolute bcpb:z-9999">
-                <Vue3ColorPicker mode="solid" :showColorList="false" :showPickerMode="false" v-model="color" />
+                <Vue3ColorPicker mode="solid" :showColorList="false" :showPickerMode="false" v-model="model" />
             </div>
         </Teleport>
     </div>

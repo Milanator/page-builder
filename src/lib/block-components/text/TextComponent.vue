@@ -18,8 +18,7 @@ defineProps<Props>()
 const emit = defineEmits<Emits>()
 </script>
 <template>
-  <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
-    :background-image="blockInfo.options.backgroundImage">
+  <BasePreview :inEditor="inEditor" :background-image="blockInfo.options.backgroundImage">
     <template v-if="inEditor">
       <div :class="blockInfo.options.cssClasses" :style="[
         blockInfo.options.styles,

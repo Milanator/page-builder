@@ -5,7 +5,6 @@ import { useTranslator } from '@/lib/Translator';
 interface Props {
   title: string,
   canDelete?: boolean,
-  hasContainer?: boolean,
   backgroundColor?: string,
   backgroundImage?: string
 }
