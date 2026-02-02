@@ -30,8 +30,7 @@ const onSave = ({ renderList, settings }: SavePayload) => {
 
 const onBack = () => { }
 
-const onPreview = () => {
-}
+const onPreview = () => { }
 </script>
 <template>
   <PageBuilder :config="config" :render-list="renderList" :mode="mode" :settings="settings" @onSave="onSave"

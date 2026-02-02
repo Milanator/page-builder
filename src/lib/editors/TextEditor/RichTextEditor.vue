@@ -17,14 +17,16 @@ interface Props {
 }
 
 interface Emits {
-  (event: 'onTextChange', value: string | undefined): any,
+  (event: 'onTextChange', value: EditorText): any,
 }
+
+type EditorText = string | undefined
 
 withDefaults(defineProps<Props>(), {
   bubbleMenu: true
 })
 
-const model = defineModel<string | undefined>()
+const model = defineModel<EditorText>()
 const emit = defineEmits<Emits>()
 
 let isEditorChange = false
@@ -49,6 +51,10 @@ const editor = new Editor({
     }),
   ],
   onUpdate: ({ editor }) => {
+    if (textContainsJson(editor.getHTML())) {
+      return
+    }
+
     isEditorChange = true
     model.value = editor.getHTML()
     debounceText(editor.getHTML())
@@ -57,26 +63,27 @@ const editor = new Editor({
 })
 
 const debounceText = debounce((value: string) => {
-  console.log('changing text: ' + editor.getHTML())
   emit('onTextChange', value)
 }, 800)
 
 // detect change from parents
 watch(
   () => model.value,
-  (value: string | undefined) => {
-    if (!editor || isEditorChange) return
-    if (value !== editor.getHTML()) {
-      editor.commands.setContent(value || '', false)
+  (value: EditorText) => {
+    if ((!editor || isEditorChange) || value === editor.getHTML()) {
+      return
     }
+
+    editor.commands.setContent(value || '', false)
   }
 )
+
+const textContainsJson = (html: EditorText) => html?.includes(`{"name":`)
 
 onBeforeUnmount(() => {
   editor.destroy()
 })
 </script>
-
 <template>
   <div class="rich-text-editor">
     <!-- Bubble Menu (floating toolbar) -->

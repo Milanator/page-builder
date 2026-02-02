@@ -31,6 +31,10 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss" scoped>
 .base-preview-item {
   border: 1px solid transparent;
+
+  &.editor {
+    padding: 10px 0 0 0;
+  }
 }
 
 .editor {

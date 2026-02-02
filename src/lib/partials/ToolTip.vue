@@ -18,7 +18,7 @@ const visible = ref<boolean>(false)
 
 const style = ref<Record<string, string>>({})
 
-const updatePosition = async () => {
+const setTooltipPosition = async () => {
     await nextTick()
 
     if (!triggerEl.value || !tooltipEl.value) return
@@ -69,7 +69,7 @@ const updatePosition = async () => {
 
 const show = async () => {
     visible.value = true
-    await updatePosition()
+    await setTooltipPosition()
 }
 
 const hide = () => {
@@ -77,13 +77,13 @@ const hide = () => {
 }
 
 onMounted(() => {
-    window.addEventListener('scroll', updatePosition, true)
-    window.addEventListener('resize', updatePosition)
+    window.addEventListener('scroll', setTooltipPosition, true)
+    window.addEventListener('resize', setTooltipPosition)
 })
 
 onBeforeUnmount(() => {
-    window.removeEventListener('scroll', updatePosition, true)
-    window.removeEventListener('resize', updatePosition)
+    window.removeEventListener('scroll', setTooltipPosition, true)
+    window.removeEventListener('resize', setTooltipPosition)
 })
 </script>
 <template>

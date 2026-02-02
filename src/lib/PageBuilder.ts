@@ -58,6 +58,7 @@ export function usePageBuilder() {
             dragOverIndex.value = null;
         } else {
             const droppedItem = event.dataTransfer?.getData('text/plain');
+
             if (droppedItem) {
                 const _droppedItem = JSON.parse(droppedItem);
 
