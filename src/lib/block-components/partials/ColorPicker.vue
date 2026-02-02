@@ -77,7 +77,7 @@ onUnmounted(() => {
 <template>
     <div>
         <div ref="previewEl"
-            class="bcpb:h-8 bcpb:w-8 bcpb:rounded-md bcpb:cursor-pointer bcpb:hover:opacity-90 bcpb:transition-colors"
+            class="bcpb:h-8 bcpb:w-8 bcpb:rounded-md bcpb:cursor-pointer bcpb:hover:opacity-90 bcpb:transition-colors bcpb:border bcpb:border-gray-300"
             :style="{ backgroundColor: color }" @click="onOpen" />
 
         <Teleport to="body">

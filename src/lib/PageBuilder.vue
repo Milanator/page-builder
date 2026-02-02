@@ -74,12 +74,6 @@ provide(ConfigKey, props.config)
 
 const { t } = useTranslator(props.config.language);
 
-onMounted(() => {
-  initHistory({ renderList: renderList.value, settings: settings.value })
-
-  document.addEventListener('keydown', handleKeyDown); // Add ESC key listener
-})
-
 watchEffect(() => {
   renderList.value = props.renderList ? [...props.renderList] : []
 })
@@ -103,6 +97,12 @@ watch(
     }
   }
 )
+
+onMounted(() => {
+  initHistory({ renderList: renderList.value, settings: settings.value, selectedOptionComponent: selectedOptionComponent.value })
+
+  document.addEventListener('keydown', handleKeyDown); // Add ESC key listener
+})
 
 onUnmounted(() => {
   // Cleanup ESC key listener
@@ -142,14 +142,13 @@ const onRedo = () => {
 const updateHistory = (state: EditorState) => {
   renderList.value = state.renderList
   settings.value = state.settings
+  selectedOptionComponent.value = state.selectedOptionComponent
 }
 
 const onChangeHistory = (fn: () => void) => {
   fn()
-
   console.log('onChangeHistory')
-
-  commit({ renderList: renderList.value, settings: settings.value })
+  commit({ renderList: renderList.value, settings: settings.value, selectedOptionComponent: selectedOptionComponent.value })
 }
 </script>
 <template>
@@ -280,7 +279,7 @@ const onChangeHistory = (fn: () => void) => {
         <div class="bcpb:flex-1 bcpb:overflow-y-auto">
           <component v-if="selectedOptionComponent" :is="previewOptionMap[selectedOptionComponent.name]"
             :blockInfo="selectedOptionComponent" @onClose="selectedOptionComponent = null"
-            @onDelete="onChangeHistory(() => onDelete($event))">
+            @onDelete="onChangeHistory(() => onDelete($event))" @onChangeOption="onChangeHistory(() => { })">
           </component>
         </div>
       </div>

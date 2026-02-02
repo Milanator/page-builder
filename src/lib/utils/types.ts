@@ -99,4 +99,8 @@ export interface BorderRadiusOptions {
 
 export interface BackgroundOptions {
     backgroundImage: string
-} 
+}
+
+export interface ChangeOptionEmit {
+    (event: 'onChangeOption'): void,
+}

@@ -6,26 +6,28 @@ import { useTranslator } from '@/lib/Translator';
 import RangeInput from "@/lib/controls/RangeInput.vue";
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
-import ContainerOptionComponent from "@/lib/block-components/partials/ContainerOptionComponent.vue";
+import { ChangeOptionEmit } from "@/lib/utils/types.ts";
+import { debounce } from "@/lib/utils/helper.ts";
 
 interface Props {
   blockInfo: TextBlock
 }
 
-defineProps<Props>()
-
+const props = defineProps<Props>()
+const emit = defineEmits<ChangeOptionEmit>()
 const { t } = useTranslator();
+
+const onChangeOption = debounce(() => emit('onChangeOption'))
 </script>
 <template>
   <BaseOption title="Text">
-
-    <ContainerOptionComponent :options="blockInfo.options" />
 
     <option-widget :title="t('font_size')">
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
         <div
           class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:p-2 bcpb:bg-gray-50 bcpb:rounded-lg bcpb:border bcpb:border-gray-200">
-          <RangeInput v-model="blockInfo.options.fontSize" min="0" max="8" step="0.1" />
+          <RangeInput v-model="blockInfo.options.fontSize" @update:model-value="onChangeOption" min="0" max="8"
+            step="0.1" />
           <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.fontSize }}</small>
         </div>
       </div>
@@ -35,7 +37,8 @@ const { t } = useTranslator();
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
         <div
           class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:p-2 bcpb:bg-gray-50 bcpb:rounded-lg bcpb:border bcpb:border-gray-200">
-          <RangeInput v-model="blockInfo.options.lineHeight" min="1" max="5" step="0.1" />
+          <RangeInput v-model="blockInfo.options.lineHeight" @update:model-value="onChangeOption" min="1" max="5"
+            step="0.1" />
           <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.lineHeight }}</small>
         </div>
       </div>
@@ -45,18 +48,21 @@ const { t } = useTranslator();
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
         <div
           class="bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:p-2 bcpb:bg-gray-50 bcpb:rounded-lg bcpb:border bcpb:border-gray-200">
-          <RangeInput v-model="blockInfo.options.letterSpacing" min="1" max="15" step="0.1" />
+          <RangeInput v-model="blockInfo.options.letterSpacing" @update:model-value="onChangeOption" min="1" max="15"
+            step="0.1" />
           <small class="text-muted text-xs bcpb:w-12">{{ blockInfo.options.letterSpacing }}</small>
         </div>
       </div>
     </option-widget>
 
-    <MarginOption :options="blockInfo.options" />
+    <MarginOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
 
+    <!-- Classes -->
     <option-widget :title="t('css_classes')" align="vertical" :is-expandable="true">
-      <textarea class="bg-page-builder-input" v-model="blockInfo.options.cssClasses"></textarea>
+      <textarea class="bg-page-builder-input" v-model="blockInfo.options.cssClasses" @input="onChangeOption"></textarea>
     </option-widget>
 
-    <StyleOption :options="blockInfo.options" />
+    <!-- Styles -->
+    <StyleOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
   </BaseOption>
 </template>

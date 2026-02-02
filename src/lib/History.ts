@@ -6,6 +6,7 @@ import { deepClone } from "@/lib/utils/formatter"
 export type EditorState = {
     renderList: Block[]
     settings: SettingBlock
+    selectedOptionComponent: Block | null
 }
 
 const past = ref<EditorState[]>([])
@@ -33,7 +34,7 @@ export const useHistory = () => {
     }
 
     const undo = (): EditorState | void => {
-        console.log('undo')
+        console.log('undo', `stack: ${past.value.length}`)
         if (!past.value.length) return
 
         future.value.unshift(deepClone(present.value as EditorState))
@@ -43,7 +44,7 @@ export const useHistory = () => {
     }
 
     const redo = (): EditorState | void => {
-        console.log('redo')
+        console.log('redo', `stack: ${future.value.length}`)
         if (!future.value.length) return
 
         past.value.push(deepClone(present.value as EditorState))

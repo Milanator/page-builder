@@ -10,15 +10,19 @@ import { UploadFilled } from '@element-plus/icons-vue';
 import { ref } from 'vue';
 import { useTranslator } from '@/lib/Translator';
 import { useConfig } from '@/store/Config.ts';
+import { debounce } from '@/lib/utils/helper';
+import { ChangeOptionEmit } from '@/lib/utils/types';
 
 import 'element-plus/dist/index.css';
 
-const props = defineProps<{
+interface Props {
     blockInfo: ImageBlock;
-}>();
+}
 
+const props = defineProps<Props>();
+
+const emit = defineEmits<ChangeOptionEmit>()
 const background = ref([]);
-
 const { t } = useTranslator();
 const { uploader: Config } = useConfig()
 
@@ -37,7 +41,10 @@ const onImageRemove = () => {
 const setImage = (url: string | undefined) => {
     // @ts-ignore
     props.blockInfo.options.mediaUrl = url;
+    onChangeOption()
 };
+
+const onChangeOption = debounce(() => emit('onChangeOption'))
 </script>
 <template>
     <BaseOption title="Obrázok">
@@ -67,7 +74,7 @@ const setImage = (url: string | undefined) => {
             <SliderToggle v-model="blockInfo.options.stretched" />
         </OptionWidget>
 
-        <MarginOption :options="blockInfo.options" />
+        <MarginOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
 
         <BorderRadiusOption :options="blockInfo.options" />
     </BaseOption>

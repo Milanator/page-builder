@@ -1,4 +1,4 @@
-export const debounce = (fn: (...args: any[]) => void, delay = 300) => {
+export const debounce = (fn: (...args: any[]) => void, delay = 700) => {
     let t: number
 
     return (...args: any[]) => {

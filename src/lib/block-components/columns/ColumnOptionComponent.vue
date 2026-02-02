@@ -10,16 +10,17 @@ import BackgroundImageOption from "@/lib/block-components/partials/BackgroundIma
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.vue";
 import BorderRadiusOption from "@/lib/block-components/partials/BorderRadiusOption.vue";
-import ContainerOptionComponent from "@/lib/block-components/partials/ContainerOptionComponent.vue";
+import { debounce } from "@/lib/utils/helper.ts";
+import { ChangeOptionEmit } from "@/lib/utils/types.ts";
+// import ContainerOptionComponent from "@/lib/block-components/partials/ContainerOptionComponent.vue";
 
 interface Props {
   blockInfo: ColumnBlock
 }
 
+const emit = defineEmits<ChangeOptionEmit>()
 const props = defineProps<Props>()
-
 const selectedColumn = ref(1);
-
 const { t } = useTranslator();
 
 const onSelectColumn = (columnIndex: number) => {
@@ -54,8 +55,9 @@ watch(
     }
   }
 );
-</script>
 
+const onChangeOption = debounce(() => emit('onChangeOption'))
+</script>
 <template>
   <BaseOption :title="t('Columns')">
     <!-- Main Column Settings -->
@@ -64,7 +66,7 @@ watch(
         <SliderToggle v-model="blockInfo.options.switchCols" />
       </OptionWidget>
 
-      <ContainerOptionComponent :options="blockInfo.options" />
+      <!-- <ContainerOptionComponent :options="blockInfo.options" /> -->
 
       <BackgroundImageOption :options="blockInfo.options" />
 
@@ -81,7 +83,7 @@ watch(
         </div>
       </option-widget>
 
-      <StyleOption :options="blockInfo.options" />
+      <StyleOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
     </div>
 
     <!-- Column Tabs -->
@@ -100,7 +102,7 @@ watch(
 
     <!-- Individual Column Settings -->
     <div class="bcpb:mt-4 bcpb:space-y-1">
-      <MarginOption :options="blockInfo.options.columnStyles[selectedColumn]" />
+      <MarginOption v-model="blockInfo.options.columnStyles[selectedColumn]" @update:model-value="onChangeOption" />
 
       <BorderRadiusOption :options="blockInfo.options.columnStyles[selectedColumn]" />
 
@@ -108,7 +110,7 @@ watch(
 
       <StyleClassOption :options="blockInfo.options.columnStyles[selectedColumn]" />
 
-      <StyleOption :options="blockInfo.options.columnStyles[selectedColumn]" />
+      <StyleOption v-model="blockInfo.options.columnStyles[selectedColumn]" @update:model-value="onChangeOption" />
     </div>
   </BaseOption>
 </template>

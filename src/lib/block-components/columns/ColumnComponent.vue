@@ -100,7 +100,7 @@ const onDragOverRow = (index: number): void => {
 }
 
 const onDragOverColumn = ($event: DragEvent, index: number): void => {
-  // console.log('onDragOverColumn', $event)
+  console.log('onDragOverColumn', $event)
   dragOverColumn.value = index
 }
 

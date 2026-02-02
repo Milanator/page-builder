@@ -3,21 +3,28 @@ import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { useTranslator } from '@/lib/Translator';
 import ColorPicker from "@/lib/block-components/partials/ColorPicker.vue";
 
-interface Props {
-    options: any
+interface Emit {
+    (event: 'update:modelValue', value: unknown): void
 }
 
-defineProps<Props>()
-
+const emit = defineEmits<Emit>()
+const model = defineModel()
 const { t } = useTranslator();
+
+const onChangeBackgroundColor = ($event: string) => {
+    model.value.backgroundColor = $event
+    emit('update:modelValue', model.value)
+}
 </script>
 <template>
+    <!-- Background image -->
     <option-widget :title="t('background_image')" align="vertical">
-        <input type="url" class="bg-page-builder-input" v-model="options.backgroundImage"
-            :placeholder="t('apply_image_url')">
+        <input type="url" class="bg-page-builder-input" v-model="model.backgroundImage"
+            :placeholder="t('apply_image_url')" @input="emit('update:modelValue', model)" />
     </option-widget>
 
+    <!-- Background color -->
     <option-widget :title="t('background_color')">
-        <ColorPicker @onChange="($event: string) => options.backgroundColor = $event" />
+        <ColorPicker :color="model.backgroundColor" @onChange="onChangeBackgroundColor" />
     </option-widget>
 </template>

@@ -150,14 +150,13 @@ export function usePageBuilder() {
             for (let i = 0; i < blocks.length; i++) {
                 const block = blocks[i];
 
-                // Ak nájdeme blok, vymažeme ho
                 if (block.id === selectedOptionComponent.value?.id) {
                     blocks.splice(i, 1);
                     selectedOptionComponent.value = null;
                     return true;
                 }
 
-                // Rekurzívne pre deti
+                // recursive finding
                 if (block.children) {
                     if (Array.isArray(block.children)) {
                         if (deleteBlock(block.children)) return true;
