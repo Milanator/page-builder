@@ -17,8 +17,9 @@ const { t } = useTranslator();
         <input type="url" class="bg-page-builder-input" v-model="model.backgroundImage"
             :placeholder="t('apply_image_url')" @input="emit('update:modelValue', model)" />
     </option-widget>
+
     <!-- Background color -->
     <option-widget :title="t('background_color')">
-        <ColorPicker v-model="model.backgroundColor" @onChange="emit('update:modelValue', model)" />
+        <ColorPicker v-model="model.backgroundColor" @update:modelValue="emit('update:modelValue', model)" />
     </option-widget>
 </template>

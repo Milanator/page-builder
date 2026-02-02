@@ -28,7 +28,6 @@ withDefaults(defineProps<Props>(), {
 
 const model = defineModel<EditorText>()
 const emit = defineEmits<Emits>()
-
 let isEditorChange = false
 const { t } = useTranslator();
 
@@ -62,9 +61,9 @@ const editor = new Editor({
   }
 })
 
-const debounceText = debounce((value: string) => {
-  emit('onTextChange', value)
-}, 800)
+const debounceText = debounce((value: string) => emit('onTextChange', value), 800)
+
+const textContainsJson = (html: EditorText) => html?.includes(`{"name":`)
 
 // detect change from parents
 watch(
@@ -77,8 +76,6 @@ watch(
     editor.commands.setContent(value || '', false)
   }
 )
-
-const textContainsJson = (html: EditorText) => html?.includes(`{"name":`)
 
 onBeforeUnmount(() => {
   editor.destroy()

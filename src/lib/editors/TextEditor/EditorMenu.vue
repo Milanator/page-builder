@@ -14,6 +14,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const color = ref<string | undefined>(props.editor.getAttributes('textStyle').color)
 
 const FONTS: FONT_TYPE[] = [
   {
@@ -110,8 +111,7 @@ if (typeof window !== 'undefined') {
     <!-- Color -->
     <div class="editor-color-picker-container">
       <div class="bcpb:relative">
-        <ColorPicker :color="editor.getAttributes('textStyle').color"
-          @onChange="($event: string) => editor.chain().focus().setColor($event).run()" />
+        <ColorPicker v-model="color" @update:model-value="editor.chain().focus().setColor($event).run()" />
       </div>
     </div>
 

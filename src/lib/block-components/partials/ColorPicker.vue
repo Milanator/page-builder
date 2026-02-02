@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker';
-import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue';
+import { ref, nextTick, onMounted, onUnmounted } from 'vue';
 
 import '@cyhnkckali/vue3-color-picker/dist/style.css'
 
 interface Emits {
-    (event: 'onChange', value: string | undefined): any,
     (event: 'update:modelValue', value: unknown): void
 }
 
@@ -35,15 +34,12 @@ const setPickerPosition = () => {
     const pickerRect = pickerEl.value.getBoundingClientRect()
     const viewportHeight = window.innerHeight
     const viewportWidth = window.innerWidth
-
     let top = rect.bottom
     let left = rect.left
-
     // verical
     if (rect.bottom + pickerRect.height > viewportHeight) {
         top = rect.top - pickerRect.height
     }
-
     // horizontal
     if (rect.left + pickerRect.width > viewportWidth) {
         left = viewportWidth - pickerRect.width - 8 // margin
@@ -57,8 +53,6 @@ const onOpen = () => {
     open.value = true
     nextTick(() => setPickerPosition())
 }
-
-watch(() => model.value, (value) => emit('onChange', value))
 
 onMounted(() => {
     document.addEventListener('mousedown', onClickOutside)

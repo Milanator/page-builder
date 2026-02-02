@@ -21,11 +21,8 @@ const onClick = ($event: Event) => {
     window.open(props.blockInfo.options.buttonAction.url)
   }
 }
-
 </script>
-
 <template>
-
   <BasePreview :inEditor="inEditor" :background-color="blockInfo.options.backgroundColor"
     :background-image="blockInfo.options.backgroundImage">
     <div :style="[{ 'text-align': blockInfo.options.buttonAlign }, marginStyles(blockInfo.options)]">
@@ -33,10 +30,5 @@ const onClick = ($event: Event) => {
         {{ blockInfo.options.text }}
       </button>
     </div>
-
   </BasePreview>
-
-
 </template>
-
-<style scoped></style>
