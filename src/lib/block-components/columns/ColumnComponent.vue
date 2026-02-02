@@ -18,6 +18,7 @@ const emit = defineEmits<{
   (event: 'onSelectChildElement', value: Block): void;
   (event: 'onDragOverChildElement', value: boolean): void;
   (event: 'onDropChildElement', value: boolean): void;
+  (event: 'onTextChange', value: string | undefined): any,
 }>();
 
 const dragOverRow: Ref<number | null> = ref(null)
@@ -99,7 +100,7 @@ const onDragOverRow = (index: number): void => {
 }
 
 const onDragOverColumn = ($event: DragEvent, index: number): void => {
-  console.log('onDragOverColumn', $event)
+  // console.log('onDragOverColumn', $event)
   dragOverColumn.value = index
 }
 
@@ -151,7 +152,8 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
           <div :class="{ 'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex }"></div>
           <component :is="previewComponentMap[item.name]" :blockInfo="item" :inEditor="inEditor" :draggable="!!inEditor"
             @dragover="onDragOverColumn($event, columnIndex)" @dragstart="onDragStart($event, item, index, columnIndex)"
-            @click="onRenderItemClick($event, item)" @onSelectChildElement="onSelectNestedChildElement">
+            @click="onRenderItemClick($event, item)" @onSelectChildElement="onSelectNestedChildElement"
+            @onTextChange="emit('onTextChange', $event)">
           </component>
         </template>
       </div>

@@ -9,7 +9,13 @@ interface Props {
   inEditor?: boolean
 }
 
+interface Emits {
+  (event: 'onTextChange', value: string | undefined): any,
+}
+
 defineProps<Props>()
+
+const emit = defineEmits<Emits>()
 </script>
 <template>
   <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
@@ -24,7 +30,7 @@ defineProps<Props>()
           lineHeight: blockInfo.options.lineHeight,
           letterSpacing: `${blockInfo.options.letterSpacing}px`,
           textColor: blockInfo.options.textColor
-        }" />
+        }" @onTextChange="emit('onTextChange', $event)" />
       </div>
     </template>
     <template v-else>

@@ -110,7 +110,6 @@ export function usePageBuilder() {
     const startDragItem = ($event: DragEvent, item: Block, index: number) => {
         innerDragElement.value = item
         innerDragElementIndex.value = index
-        console.log(JSON.stringify(item))
         $event.dataTransfer?.setData('text/plain', JSON.stringify(item));
     }
 

@@ -232,7 +232,8 @@ const onChangeHistory = (fn: () => void) => {
               </div>
               <component :is="previewComponentMap[block.name]" :blockInfo="block" :inEditor="true"
                 @onSelectChildElement="onSelectFormChildElement" @onDragOverChildElement="onDragOverChildElement"
-                @onDropChildElement="onChangeHistory(() => onDropChildElement())" @click="onItemSelect(block)">
+                @onDropChildElement="onChangeHistory(() => onDropChildElement())" @click="onItemSelect(block)"
+                @onTextChange="onChangeHistory(() => { })">
               </component>
             </div>
             <!-- Enhanced No Item State -->

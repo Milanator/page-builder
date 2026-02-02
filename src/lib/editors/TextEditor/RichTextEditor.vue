@@ -4,23 +4,30 @@ import { FontFamily } from '@tiptap/extension-font-family'
 import { BubbleMenu, Editor, EditorContent } from "@tiptap/vue-3";
 import { StarterKit } from "@tiptap/starter-kit";
 import { Placeholder } from "@tiptap/extension-placeholder";
-import { onBeforeUnmount } from "vue";
+import { onBeforeUnmount, watch } from "vue";
 import { TextStyle } from "@tiptap/extension-text-style";
 import { Color } from "@tiptap/extension-color";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { useTranslator } from '@/lib/Translator';
+import { debounce } from "@/lib/utils/helper";
 
 interface Props {
   bubbleMenu?: boolean,
   styles: any,
 }
 
-const model = defineModel()
+interface Emits {
+  (event: 'onTextChange', value: string | undefined): any,
+}
 
 withDefaults(defineProps<Props>(), {
   bubbleMenu: true
 })
 
+const model = defineModel<string | undefined>()
+const emit = defineEmits<Emits>()
+
+let isEditorChange = false
 const { t } = useTranslator();
 
 const editor = new Editor({
@@ -42,9 +49,28 @@ const editor = new Editor({
     }),
   ],
   onUpdate: ({ editor }) => {
+    isEditorChange = true
     model.value = editor.getHTML()
+    debounceText(editor.getHTML())
+    isEditorChange = false
   }
 })
+
+const debounceText = debounce((value: string) => {
+  console.log('changing text: ' + editor.getHTML())
+  emit('onTextChange', value)
+}, 800)
+
+// detect change from parents
+watch(
+  () => model.value,
+  (value: string | undefined) => {
+    if (!editor || isEditorChange) return
+    if (value !== editor.getHTML()) {
+      editor.commands.setContent(value || '', false)
+    }
+  }
+)
 
 onBeforeUnmount(() => {
   editor.destroy()
@@ -58,12 +84,10 @@ onBeforeUnmount(() => {
       v-if="bubbleMenu" class="bubble-menu-container">
       <EditorMenu :editor="editor" :bubble-menu="bubbleMenu" />
     </bubble-menu>
-
     <!-- Fixed Menu (toolbar above editor) -->
     <div v-else class="fixed-menu-container">
       <EditorMenu :editor="editor" :bubble-menu="bubbleMenu" />
     </div>
-
     <!-- Editor Content -->
     <div class="editor-content-wrapper">
       <editor-content :editor="editor" class="editor-content" :style="[
