@@ -68,7 +68,7 @@ const {
   onSelectFormChildElement,
   onDelete
 } = usePageBuilder()
-const { init: initHistory, commit, undo, redo } = useHistory()
+const { init: initHistory, commit, undo, redo, canUndo, canRedo } = useHistory()
 
 provide(ConfigKey, props.config)
 
@@ -189,9 +189,9 @@ const onChangeHistory = (fn: () => void) => {
     <!-- Left Side - Drop Zone -->
     <div class="bcpb:flex-1 bcpb:bg-white bcpb:border-r bcpb:border-gray-100 bcpb:flex bcpb:flex-col">
       <ToolBar :config="config" :device="selectedDevice" :show-device-toolbar="config.showDeviceBar"
-        @on-preview="emit('onPreview')" @on-save="exportPage" @on-back="emit('onBack', true)"
-        @on-device="selectedDevice = $event" @on-settings="onItemSelect(settings)" @on-undo="onUndo" @on-redo="onRedo">
-      </ToolBar>
+        :can-undo="Boolean(canUndo())" :can-redo="Boolean(canRedo())" @on-preview="emit('onPreview')"
+        @on-save="exportPage" @on-back="emit('onBack', true)" @on-device="selectedDevice = $event"
+        @on-settings="onItemSelect(settings)" @on-undo="onUndo" @on-redo="onRedo" />
       <!-- Canvas Area -->
       <div class="bcpb:flex-1 bcpb:p-4 bcpb:overflow-auto">
         <!-- Customize size -->
