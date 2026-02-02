@@ -39,7 +39,7 @@ const onDeleteItem = ($event: Event) => {
   <div class="bcpb:h-full bcpb:flex bcpb:flex-col bcpb:bg-white">
     <!-- Header -->
     <div
-      class="bcpb:flex bcpb:items-center bcpb:justify-between bcpb:px-4 bcpb:py-3 bcpb:border-b bcpb:border-gray-100 bcpb:bg-gray-50/50">
+      class="bcpb:flex bcpb:items-center bcpb:justify-between bcpb:px-4 bcpb:py-[1.35rem] bcpb:border-b bcpb:border-gray-100 bcpb:bg-gray-50/50">
       <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
         <button @click="closeOptionDrawer($event)"
           class="bcpb:p-2 bcpb:text-gray-400 hover:bcpb:text-gray-600 hover:bcpb:bg-gray-100 bcpb:rounded-md bcpb:transition-colors bcpb:duration-200"

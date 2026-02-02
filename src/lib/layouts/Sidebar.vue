@@ -64,7 +64,7 @@ const filteredUIComponents = computed(() => {
   <!-- Right Side - Elements Panel -->
   <div class="bcpb:w-100 bcpb:bg-white bcpb:flex bcpb:flex-col bcpb:border-l bcpb:border-gray-100">
     <!-- Panel Header -->
-    <div class="bcpb:px-6 bcpb:py-3 bcpb:border-b bcpb:border-gray-100 bcpb:h-20">
+    <div class="bcpb:px-6 bcpb:py-3 bcpb:border-b bcpb:border-gray-100 bcpb:h-20 bcpb:bg-gray-50/50">
       <h2 class="bcpb:text-xl bcpb:font-semibold bcpb:text-gray-900 bcpb:mb-1">{{ t('elements') }}</h2>
       <p class="bcpb:text-xs bcpb:text-gray-400">{{ t('drag_components') }}</p>
     </div>

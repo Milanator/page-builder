@@ -87,7 +87,7 @@ onBeforeUnmount(() => {
 })
 </script>
 <template>
-    <span ref="triggerEl" @mouseenter="show" @mouseleave="hide" @focus="show" @blur="hide">
+    <span ref="triggerEl" class="bcpb:m-0" @mouseenter="show" @mouseleave="hide" @focus="show" @blur="hide">
         <slot />
     </span>
 

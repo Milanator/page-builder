@@ -39,11 +39,11 @@ const { t } = useTranslator();
   <!-- Toolbar -->
   <div
     class="bcpb:bg-white bcpb:border-b bcpb:border-gray-100 bcpb:px-8 bcpb:py-4 bcpb:flex bcpb:items-center bcpb:justify-between bcpb:h-20">
-    <div class="bcpb:flex bcpb:items-center bcpb:space-x-6">
+    <div class="bcpb:flex bcpb:items-center bcpb:gap-2">
       <button type="button" @click="emit('onBack')"
-        class="bcpb:cursor-pointer bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-black hover:bcpb:text-gray-900 hover:bcpb:bg-gray-50 bcpb:rounded-lg bcpb:transition-colors bcpb:duration-200">
+        class="bcpb:mr-3 flex bcpb:items-center bcpb:gap-1 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"
-          class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer bcpb:mr-1">
+          class="bcpb:w-4 bcpb:h-4 bcpb:cursor-pointer">
           <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
         </svg>
         {{ t('back') }}
@@ -101,7 +101,7 @@ const { t } = useTranslator();
       <!-- Settings Button -->
       <ToolTip :text="t('settings_tooltip')">
         <button type="button" @click="emit('onSettings', true)"
-          class="bcpb:mr-0 flex bcpb:items-center bcpb:gap-2 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer">
+          class="bcpb:mr-0 flex bcpb:items-center bcpb:gap-1 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer">
           <svg class="bcpb:w-4 bcpb:h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000000">
             <path
               d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z" />
@@ -113,14 +113,14 @@ const { t } = useTranslator();
       <!-- Undo/redo -->
       <ToolTip :text="t('undo_tooltip')">
         <button type="button" :class="{ 'bcpb:pointer-events-none bcpb:opacity-50': !canUndo }"
-          class="bcpb:mr-0 flex bcpb:items-center bcpb:gap-2 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer"
+          class="bcpb:mr-0 flex bcpb:items-center bcpb:hover:bg-slate-50 bcpb:px-2 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer"
           @click="emit('onUndo')">
           <img src="@/assets/icons/undo.svg" alt="Undo" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer bcpb:mr-1">
         </button>
       </ToolTip>
       <ToolTip :text="t('redo_tooltip')">
         <button type="button" :class="{ 'bcpb:pointer-events-none bcpb:opacity-50': !canRedo }"
-          class="bcpb:mr-0 flex bcpb:items-center bcpb:gap-2 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer"
+          class="bcpb:mr-0 flex bcpb:items-center bcpb:hover:bg-slate-50 bcpb:px-2 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer"
           @click="emit('onRedo')">
           <img src="@/assets/icons/redo.svg" alt="Redo" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer bcpb:mr-1">
         </button>
@@ -131,7 +131,7 @@ const { t } = useTranslator();
       <!-- Preview Button -->
       <ToolTip :text="t('preview_tooltip')">
         <button type="button" @click="emit('onPreview', true)"
-          class="bcpb:mr-0 flex bcpb:items-center bcpb:gap-2 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer">
+          class="bcpb:mr-0 flex bcpb:items-center bcpb:gap-1 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer">
           <svg class="bcpb:w-4 bcpb:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -145,7 +145,7 @@ const { t } = useTranslator();
       <!-- Publish Button -->
       <ToolTip :text="t('save_tooltip')">
         <button type="button" @click="emit('onSave', $event)"
-          class="bcpb:cursor-pointer bcpb:flex bcpb:items-center bcpb:gap-2 bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:bg-blue-600 bcpb:text-white bcpb:rounded-lg hover:bcpb:bg-blue-700 focus:bcpb:ring-2 focus:bcpb:ring-blue-500/20 bcpb:transition-all bcpb:duration-200 bcpb:shadow-sm">
+          class="bcpb:cursor-pointer bcpb:flex bcpb:items-center bcpb:gap-1 bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:bg-blue-600 bcpb:text-white bcpb:rounded-lg hover:bcpb:bg-blue-700 focus:bcpb:ring-2 focus:bcpb:ring-blue-500/20 bcpb:transition-all bcpb:duration-200 bcpb:shadow-sm">
           <svg class="bcpb:w-4 bcpb:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />

@@ -80,10 +80,10 @@ onUnmounted(() => {
             class="bcpb:h-8 bcpb:w-8 bcpb:rounded-md bcpb:cursor-pointer bcpb:hover:opacity-90 bcpb:transition-colors"
             :style="{ backgroundColor: color }" @click="onOpen" />
 
-        <teleport to="body">
+        <Teleport to="body">
             <div v-if="open" ref="pickerEl" class="bcpb:absolute bcpb:z-9999">
                 <Vue3ColorPicker mode="solid" :showColorList="false" :showPickerMode="false" v-model="color" />
             </div>
-        </teleport>
+        </Teleport>
     </div>
 </template>
