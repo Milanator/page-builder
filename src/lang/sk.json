@@ -61,5 +61,10 @@
   "line_height": "Výška riadku",
   "letter_spacing": "Medzery medzi písmenami",
   "menu": "Menu",
-  "select": "Výber"
+  "select": "Výber",
+  "preview_tooltip": "Náhľad výslednej stránky",
+  "undo_tooltip": "Krok späť",
+  "redo_tooltip": "Krok vpred",
+  "save_tooltip": "Uložiť stránku",
+  "settings_tooltip": "Globálne nastavenia stránky"
 }

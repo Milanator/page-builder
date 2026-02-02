@@ -1,7 +1,7 @@
 import { ref } from "vue"
-import { SettingBlock } from "./utils/blocks/SettingBlock"
-import { Block } from "./utils/types"
-import { deepClone } from "./utils/formatter"
+import { SettingBlock } from "@/lib/utils/blocks/SettingBlock"
+import { Block } from "@/lib/utils/types"
+import { deepClone } from "@/lib/utils/formatter"
 
 export type EditorState = {
     renderList: Block[]
