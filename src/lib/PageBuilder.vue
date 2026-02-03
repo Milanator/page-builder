@@ -63,9 +63,10 @@ const {
   onDragOverChildElement,
   onItemSelect,
   onSelectFormChildElement,
-  onDelete
+  onDelete,
+  findBlockById
 } = usePageBuilder()
-const { init: initHistory, commit, undo, redo, canUndo, canRedo } = useHistory()
+const { init: initHistory, commit, undo, redo, canUndo, canRedo, } = useHistory()
 
 provide(ConfigKey, props.config)
 
@@ -142,10 +143,24 @@ const onRedo = () => {
   }
 }
 
+const getCustomWidth = () => (selectedDevice.value === 'custom'
+  ? {
+    width: `${width}px`,
+    height: `${height}px`,
+  }
+  : {})
+
 const updateHistory = (state: EditorState) => {
-  renderList.value = state.renderList
-  settings.value = state.settings
-  selectedOptionComponent.value = state.selectedOptionComponent
+  renderList.value = sanitizeRenderList(state.renderList) as Block[]
+  settings.value = sanitizeSettings(state.settings) as SettingBlock
+  // fix - problem with references on render list item and selectedOptionComponent
+  if (!state.selectedOptionComponent?.id) {
+    selectedOptionComponent.value = null;
+  } else if (state.selectedOptionComponent.type === 'setting') {
+    selectedOptionComponent.value = settings.value
+  } else if (state.selectedOptionComponent.id) {
+    selectedOptionComponent.value = findBlockById(renderList.value, state.selectedOptionComponent.id)
+  }
 }
 
 const onChangeHistory = (fn: () => void) => {
@@ -214,12 +229,7 @@ const onChangeHistory = (fn: () => void) => {
           </div>
         </div>
 
-        <div :class="devices[selectedDevice]" :style="selectedDevice === 'custom'
-          ? {
-            width: `${width}px`,
-            height: `${height}px`,
-          }
-          : {}">
+        <div :class="devices[selectedDevice]" :style="getCustomWidth()">
           <!-- Drop Zone -->
           <div @drop="onChangeHistory(() => onDrop($event))" @dragenter.prevent @dragleave.prevent="onDragLeave()"
             @dragover.prevent="onDragOver($event)" :style="[

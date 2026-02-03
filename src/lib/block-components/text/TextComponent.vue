@@ -25,10 +25,10 @@ const emit = defineEmits<Emits>()
         marginStyles(blockInfo.options)
       ]">
         <RichTextEditor v-model="blockInfo.options.text" :styles="{
-          fontSize: `${blockInfo.options.fontSize}rem`,
+          fontSize: blockInfo.options.fontSize,
+          letterSpacing: blockInfo.options.letterSpacing,
+          textColor: blockInfo.options.textColor,
           lineHeight: blockInfo.options.lineHeight,
-          letterSpacing: `${blockInfo.options.letterSpacing}px`,
-          textColor: blockInfo.options.textColor
         }" @onTextChange="emit('onTextChange', $event)" />
       </div>
     </template>
@@ -37,9 +37,9 @@ const emit = defineEmits<Emits>()
         blockInfo.options.styles,
         marginStyles(blockInfo.options),
         {
-          fontSize: `${blockInfo.options.fontSize}rem`,
+          fontSize: blockInfo.options.fontSize,
           lineHeight: blockInfo.options.lineHeight,
-          letterSpacing: `${blockInfo.options.letterSpacing}px`,
+          letterSpacing: blockInfo.options.letterSpacing,
         }
       ]" v-html="blockInfo.options.text"></div>
     </template>

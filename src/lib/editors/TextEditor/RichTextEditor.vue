@@ -4,7 +4,7 @@ import { FontFamily } from '@tiptap/extension-font-family'
 import { BubbleMenu, Editor, EditorContent } from "@tiptap/vue-3";
 import { StarterKit } from "@tiptap/starter-kit";
 import { Placeholder } from "@tiptap/extension-placeholder";
-import { onBeforeUnmount, watch } from "vue";
+import { computed, onBeforeUnmount, watch } from "vue";
 import { TextStyle } from "@tiptap/extension-text-style";
 import { Color } from "@tiptap/extension-color";
 import { TextAlign } from "@tiptap/extension-text-align";
@@ -22,7 +22,7 @@ interface Emits {
 
 type EditorText = string | undefined
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   bubbleMenu: true
 })
 const model = defineModel<EditorText>()
@@ -59,9 +59,17 @@ const editor = new Editor({
   }
 })
 
+const textStyles = computed(() => getTextStyles())
+
 const debounceText = debounce((value: string) => emit('onTextChange', value), 800)
 
 const textContainsJson = (html: EditorText) => html?.includes(`{"name":`)
+
+const getTextStyles = () => ({
+  '--editor-line-height': props.styles.lineHeight || 1,
+  fontSize: props.styles.fontSize ? `${props.styles.fontSize}rem` : undefined,
+  letterSpacing: props.styles.letterSpacing ? `${props.styles.letterSpacing}px` : undefined,
+})
 
 // detect change from parents
 watch(
@@ -92,13 +100,7 @@ onBeforeUnmount(() => {
     </div>
     <!-- Editor Content -->
     <div class="editor-content-wrapper">
-      <editor-content :editor="editor" class="editor-content" :style="[
-        {
-          '--editor-line-height': styles.lineHeight || 1,
-          fontSize: styles.fontSize,
-          letterSpacing: styles.letterSpacing,
-        },
-      ]" />
+      <editor-content :editor="editor" class="editor-content" :style="textStyles" />
     </div>
   </div>
 </template>
