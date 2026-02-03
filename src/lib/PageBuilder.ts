@@ -175,6 +175,36 @@ export function usePageBuilder() {
         deleteBlock(renderList.value);
     };
 
+    const findBlockById = (blocks: Block[], findId: string): Block | null => {
+        for (let i = 0; i < blocks.length; i++) {
+            const block = blocks[i]
+
+            if (block.id === findId) {
+                return block
+            }
+
+            if (block.children) {
+                if (Array.isArray(block.children)) {
+                    const found = findBlockById(block.children, findId)
+                    if (found) {
+                        return found
+                    }
+                }
+
+                else {
+                    for (const key in block.children) {
+                        const found = findBlockById(block.children[key], findId)
+                        if (found) {
+                            return found
+                        }
+                    }
+                }
+            }
+        }
+
+        return null
+    }
+
     return {
         blocks,
         renderList,
@@ -194,5 +224,6 @@ export function usePageBuilder() {
         onItemSelect,
         onSelectFormChildElement,
         onDelete,
+        findBlockById,
     }
 }
