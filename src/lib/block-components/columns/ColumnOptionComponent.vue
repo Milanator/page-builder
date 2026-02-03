@@ -7,6 +7,7 @@ import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
+import BackgroundColorOption from "@/lib/block-components/partials/BackgroundColorOption.vue";
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.vue";
 import BorderRadiusOption from "@/lib/block-components/partials/BorderRadiusOption.vue";
@@ -71,7 +72,8 @@ const onChangeColumns = (columnIndex: number) => {
         <SliderToggle v-model="blockInfo.options.switchCols" @update:model-value="onChangeOption" />
       </OptionWidget>
       <!-- Background -->
-      <BackgroundImageOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
+      <BackgroundImageOption v-model="blockInfo.options.backgroundImage" @update:model-value="onChangeOption" />
+      <BackgroundColorOption v-model="blockInfo.options.backgroundColor" @update:model-value="onChangeOption" />
       <!-- Columns -->
       <option-widget :title="t('column_count')" align="vertical">
         <div class="bcpb:grid bcpb:gap-2 bcpb:grid-cols-6">
@@ -92,7 +94,7 @@ const onChangeColumns = (columnIndex: number) => {
     <div class="bcpb:mt-6 bcpb:border-t bcpb:border-gray-100 bcpb:pt-4">
       <div class="bcpb:flex bcpb:overflow-x-auto scrollbar-hide bcpb:border-b bcpb:border-gray-200">
         <button v-for="column of blockInfo.options.columns" :key="column" @click="onSelectColumn(column)"
-          class="bcpb:flex-shrink-0 bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:transition-colors bcpb:duration-200 bcpb:border-b-2 bcpb:whitespace-nowrap"
+          class="bcpb:shrink-0 bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:transition-colors bcpb:duration-200 bcpb:border-b-2 bcpb:whitespace-nowrap"
           :class="{
             'bcpb:text-blue-600 bcpb:border-blue-600 bcpb:bg-blue-50': selectedColumn === column,
             'bcpb:text-gray-500 bcpb:border-transparent hover:bcpb:text-gray-700 hover:bcpb:border-gray-300': selectedColumn !== column
@@ -106,7 +108,9 @@ const onChangeColumns = (columnIndex: number) => {
       <!-- Margin -->
       <MarginOption v-model="blockInfo.options.columnStyles[selectedColumn]" @update:model-value="onChangeOption" />
       <!-- Background -->
-      <BackgroundImageOption v-model="blockInfo.options.columnStyles[selectedColumn]"
+      <BackgroundImageOption v-model="blockInfo.options.columnStyles[selectedColumn].backgroundImage"
+        @update:model-value="onChangeOption" />
+      <BackgroundColorOption v-model="blockInfo.options.columnStyles[selectedColumn].backgroundColor"
         @update:model-value="onChangeOption" />
       <!-- Radius -->
       <BorderRadiusOption v-model="blockInfo.options.columnStyles[selectedColumn]"
@@ -121,7 +125,6 @@ const onChangeColumns = (columnIndex: number) => {
   </BaseOption>
 </template>
 <style scoped>
-/* Pure CSS only - no Tailwind utilities */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -5,6 +5,7 @@ import BaseOption from "../BaseOption.vue";
 import { useTranslator } from '@/lib/Translator';
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";
+import BackgroundColorOption from "@/lib/block-components/partials/BackgroundColorOption.vue";
 import StyleOption from "@/lib/block-components/partials/StyleOption.vue";
 import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.vue";
 import { ChangeOptionEmit } from "@/lib/utils/types.ts";
@@ -34,7 +35,8 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
       <!-- Margin -->
       <MarginOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
       <!-- Background -->
-      <BackgroundImageOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
+      <BackgroundImageOption v-model="blockInfo.options.backgroundImage" @update:model-value="onChangeOption" />
+      <BackgroundColorOption v-model="blockInfo.options.backgroundColor" @update:model-value="onChangeOption" />
       <!-- Alignment -->
       <option-widget :title="t('alignment')">
         <div class="bcpb:flex bcpb:rounded-lg bcpb:border bcpb:border-gray-300 bcpb:overflow-hidden">
