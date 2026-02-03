@@ -98,7 +98,6 @@ watch(
 
 onMounted(() => {
   initHistory({ renderList: renderList.value, settings: settings.value, selectedOptionComponent: selectedOptionComponent.value })
-
   document.addEventListener('keydown', handleKeyDown); // Add ESC key listener
 })
 
