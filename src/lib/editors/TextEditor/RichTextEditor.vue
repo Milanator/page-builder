@@ -22,7 +22,7 @@ interface Emits {
 
 type EditorText = string | undefined
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   bubbleMenu: true
 })
 const model = defineModel<EditorText>()
@@ -31,11 +31,6 @@ const { t } = useTranslator();
 let isEditorChange = false
 const editor = new Editor({
   content: model.value || "",
-  editorProps: {
-    attributes: {
-      textColor: props.styles.textColor,
-    },
-  },
   extensions: [
     StarterKit,
     Placeholder.configure({
@@ -89,11 +84,11 @@ onBeforeUnmount(() => {
     <!-- Bubble Menu (floating toolbar) -->
     <bubble-menu :editor="editor" :tippy-options="{ duration: 100, theme: 'light-border', maxWidth: 400 }"
       v-if="bubbleMenu" class="bubble-menu-container">
-      <EditorMenu :editor="editor" :bubble-menu="bubbleMenu" />
+      <EditorMenu :editor="editor" :styles="styles" :bubble-menu="bubbleMenu" />
     </bubble-menu>
     <!-- Fixed Menu (toolbar above editor) -->
     <div v-else class="fixed-menu-container">
-      <EditorMenu :editor="editor" :bubble-menu="bubbleMenu" />
+      <EditorMenu :editor="editor" :styles="styles" :bubble-menu="bubbleMenu" />
     </div>
     <!-- Editor Content -->
     <div class="editor-content-wrapper">
@@ -102,7 +97,6 @@ onBeforeUnmount(() => {
           '--editor-line-height': styles.lineHeight || 1,
           fontSize: styles.fontSize,
           letterSpacing: styles.letterSpacing,
-          color: styles.textColor
         },
       ]" />
     </div>

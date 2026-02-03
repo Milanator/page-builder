@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import type { Editor } from "@tiptap/vue-3";
 import ColorPicker from "@/lib/block-components/partials/ColorPicker.vue";
 
@@ -11,6 +11,7 @@ type FONT_TYPE = {
 interface Props {
   editor: Editor;
   bubbleMenu: boolean;
+  styles: any
 }
 
 const FONTS: FONT_TYPE[] = [
@@ -34,7 +35,6 @@ const FONTS: FONT_TYPE[] = [
     label: 'Roboto Slab',
     value: '"Roboto Slab", serif'
   },
-  // 
   {
     label: 'Default',
     value: '',
@@ -42,7 +42,7 @@ const FONTS: FONT_TYPE[] = [
 ]
 
 const props = defineProps<Props>();
-const color = ref<string | undefined>(props.editor.options.editorProps?.attributes?.styles ?? '#fff')
+const color = ref<string>(props.styles.textColor)
 const dropDownMenus = ref<Record<string, boolean>>({
   paragraph: false,
   fontFamily: false,
@@ -76,10 +76,18 @@ const handleClickOutside = (event: Event) => {
   }
 }
 
+const setColor = (event: string) => {
+  props.editor.chain().focus().setColor(event as string).run()
+}
+
 // Add event listener for click outside
 if (typeof window !== 'undefined') {
   document.addEventListener('click', handleClickOutside)
 }
+
+onMounted(() => {
+  setColor(color.value)
+})
 </script>
 <template>
   <div class="editor-menu" :class="{ 'bubble-menu': bubbleMenu, 'fixed-menu': !bubbleMenu }">
@@ -110,7 +118,7 @@ if (typeof window !== 'undefined') {
     <!-- Color -->
     <div class="editor-color-picker-container">
       <div class="bcpb:relative">
-        <ColorPicker v-model="color" @update:model-value="editor.chain().focus().setColor($event as string).run()" />
+        <ColorPicker v-model="color" @update:model-value="setColor($event as string)" />
       </div>
     </div>
 
