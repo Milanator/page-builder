@@ -5,7 +5,7 @@ import PagePreview from "./PagePreview.vue";
 import { usePageBuilder } from "./PageBuilder.ts";
 import { onMounted, onUnmounted, provide, ref, watch, watchEffect } from "vue";
 import { previewComponentMap, previewOptionMap } from "@/lib/utils/registry.ts";
-import { Mode, Block, Config, Device, SavePayload } from "@/lib/utils/types.ts";
+import { Mode, Block, Config, Device } from "@/lib/utils/types.ts";
 import { useTranslator } from '@/lib/Translator';
 import { ConfigKey } from "@/store/Config.ts";
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
