@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, Ref } from "vue";
 import { useTranslator } from '@/lib/Translator';
+import ToolTip from "@/lib/partials/ToolTip.vue";
 
 interface Props {
   title: string,
@@ -19,9 +20,7 @@ withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<Emits>()
-
-const showDeletePopup: Ref<boolean> = ref(false)
-
+const showDeleteModal: Ref<boolean> = ref(false)
 const { t } = useTranslator();
 
 const closeOptionDrawer = ($event: Event) => {
@@ -53,16 +52,19 @@ const onDeleteItem = ($event: Event) => {
         </h3>
       </div>
       <div class="bcpb:flex bcpb:items-center bcpb:gap-1">
-        <button v-if="canDelete" @click="showDeletePopup = true" type="button"
-          class="bcpb:p-2 bcpb:text-red-500 hover:bcpb:text-red-700 hover:bcpb:bg-red-50 bcpb:rounded-md bcpb:transition-colors bcpb:duration-200"
-          title="Delete">
-          <img src="@/assets/icons/trash.svg" alt="Trash" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">
-        </button>
-        <button @click="closeOptionDrawer($event)"
-          class="bcpb:p-2 bcpb:text-gray-400 hover:bcpb:text-gray-600 hover:bcpb:bg-gray-100 bcpb:rounded-md bcpb:transition-colors bcpb:duration-200"
-          title="Close">
-          <img src="@/assets/icons/cancel.svg" alt="Cancel" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">
-        </button>
+        <ToolTip :text="t('delete_item')">
+          <button v-if="canDelete" @click="showDeleteModal = true" type="button"
+            class="bcpb:p-2 bcpb:text-red-500 hover:bcpb:text-red-700 hover:bcpb:bg-red-50 bcpb:rounded-md bcpb:transition-colors bcpb:duration-200"
+            title="Delete">
+            <img src="@/assets/icons/trash.svg" alt="Trash" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">
+          </button>
+        </ToolTip>
+        <ToolTip :text="t('close_item')">
+          <button @click="closeOptionDrawer($event)"
+            class="bcpb:p-2 bcpb:text-gray-400 hover:bcpb:text-gray-600 hover:bcpb:bg-gray-100 bcpb:rounded-md bcpb:transition-colors bcpb:duration-200">
+            <img src="@/assets/icons/cancel.svg" alt="Cancel" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer">
+          </button>
+        </ToolTip>
       </div>
     </div>
 
@@ -73,27 +75,25 @@ const onDeleteItem = ($event: Event) => {
   </div>
 
   <!-- Delete Confirmation Modal -->
-  <div v-if="showDeletePopup"
+  <div v-if="showDeleteModal"
     class="bcpb:fixed bcpb:inset-0 bcpb:z-50 bcpb:flex bcpb:items-center bcpb:justify-center bcpb:p-4 bcpb:bg-black/20 bcpb:backdrop-blur-sm"
-    @click.self="showDeletePopup = false">
+    @click.self="showDeleteModal = false">
     <div
       class="bcpb:w-full bcpb:max-w-md bcpb:bg-white bcpb:rounded-xl bcpb:shadow-xl bcpb:border bcpb:border-gray-100 bcpb:overflow-hidden">
       <!-- Modal Header -->
       <div class="bcpb:px-6 bcpb:py-4 bcpb:border-b bcpb:border-gray-100">
         <h3 class="bcpb:text-lg bcpb:font-semibold bcpb:text-gray-900">{{ t('confirm_deletion') }}</h3>
       </div>
-
       <!-- Modal Content -->
       <div class="bcpb:px-6 bcpb:py-4">
         <p class="bcpb:text-sm bcpb:text-gray-600 bcpb:leading-relaxed">
           {{ t('deletion_text') }}
         </p>
       </div>
-
       <!-- Modal Actions -->
       <div
         class="bcpb:px-6 bcpb:py-4 bcpb:bg-gray-50 bcpb:border-t bcpb:border-gray-100 bcpb:flex bcpb:justify-end bcpb:gap-3">
-        <button @click="showDeletePopup = false"
+        <button @click="showDeleteModal = false"
           class="bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-gray-700 bcpb:bg-white bcpb:border bcpb:border-gray-300 bcpb:rounded-lg hover:bcpb:bg-gray-50 focus:bcpb:outline-none focus:bcpb:ring-2 focus:bcpb:ring-gray-200 bcpb:transition-colors bcpb:duration-200">
           {{ t('cancel') }}
         </button>

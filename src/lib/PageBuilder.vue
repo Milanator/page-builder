@@ -24,6 +24,7 @@ interface Emits {
   (event: 'onSave', value: any): void,
   (event: 'onBack', value: any): void,
   (event: 'onPreview'): void,
+  (event: 'onSaveAndBack'): void
 }
 
 const emit = defineEmits<Emits>()

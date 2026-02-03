@@ -1,25 +1,15 @@
 <script setup lang="ts">
 import { useTranslator } from '@/lib/Translator';
-import { PropType } from 'vue';
 import { Device } from "@/lib/utils/types.ts";
-import ToolTip from '../partials/ToolTip.vue';
+import ToolTip from "@/lib/partials/ToolTip.vue";
+import { ref } from 'vue';
 
-defineProps({
-  showDeviceToolbar: {
-    type: Boolean,
-    default: true,
-  },
-  device: {
-    type: String as PropType<Device>,
-    default: 'desktop',
-  },
-  canUndo: {
-    type: Boolean
-  },
-  canRedo: {
-    type: Boolean
-  },
-})
+interface Props {
+  showDeviceToolbar?: boolean
+  device?: Device
+  canUndo?: boolean
+  canRedo?: boolean
+}
 
 interface Emits {
   (event: 'onPreview', value: boolean): void,
@@ -29,10 +19,15 @@ interface Emits {
   (event: 'onDevice', value: Device): void,
   (event: 'onUndo'): void,
   (event: 'onRedo'): void,
+  (event: 'onSaveAndBack'): void
 }
 
+withDefaults(defineProps<Props>(), {
+  showDeviceToolbar: true,
+  device: 'desktop',
+})
 const emit = defineEmits<Emits>()
-
+const showExitModal = ref<boolean>(false)
 const { t } = useTranslator();
 </script>
 <template>
@@ -40,13 +35,13 @@ const { t } = useTranslator();
   <div
     class="bcpb:bg-white bcpb:border-b bcpb:border-gray-100 bcpb:px-8 bcpb:py-4 bcpb:flex bcpb:items-center bcpb:justify-between bcpb:h-20">
     <div class="bcpb:flex bcpb:items-center bcpb:gap-2">
-      <button type="button" @click="emit('onBack')"
+      <button type="button" @click="showExitModal = true"
         class="bcpb:mr-3 flex bcpb:items-center bcpb:gap-1 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"
           class="bcpb:w-4 bcpb:h-4 bcpb:cursor-pointer">
           <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
         </svg>
-        {{ t('back') }}
+        {{ t('exit') }}
       </button>
 
       <!-- Device Selector -->
@@ -153,6 +148,47 @@ const { t } = useTranslator();
           {{ t('save') }}
         </button>
       </ToolTip>
+    </div>
+  </div>
+
+  <!-- Exit modal -->
+  <div v-if="showExitModal"
+    class="bcpb:fixed bcpb:inset-0 bcpb:z-50 bcpb:flex bcpb:items-center bcpb:justify-center bcpb:p-4 bcpb:bg-black/20 bcpb:backdrop-blur-sm"
+    @click.self="showExitModal = false">
+    <div
+      class="bcpb:w-full bcpb:max-w-md bcpb:bg-white bcpb:rounded-xl bcpb:shadow-xl bcpb:border bcpb:border-gray-100 bcpb:overflow-hidden">
+      <!-- Modal Header -->
+      <div class="bcpb:px-6 bcpb:py-4 bcpb:border-b bcpb:border-gray-100">
+        <h3 class="bcpb:text-lg bcpb:font-semibold bcpb:text-gray-900">{{ t('exit_modal_title') }}</h3>
+      </div>
+      <!-- Modal Content -->
+      <div class="bcpb:px-6 bcpb:py-4">
+        <p class="bcpb:text-sm bcpb:text-gray-600 bcpb:leading-relaxed">
+          {{ t('exit_modal_text') }}
+        </p>
+      </div>
+      <!-- Modal Actions -->
+      <div
+        class="bcpb:px-6 bcpb:py-4 bcpb:bg-gray-50 bcpb:border-t bcpb:border-gray-100 bcpb:flex bcpb:justify-end bcpb:gap-2">
+        <!-- Discard -->
+        <button type="button"
+          class="bcpb:cursor-pointer bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-gray-700 bcpb:rounded-lg bcpb:transition-colors bcpb:duration-200 bcpb:border-0 bcpb:hover:bg-white"
+          @click="emit('onBack')">
+          {{ t('discard_and_back') }}
+        </button>
+        <!-- Continue -->
+        <button type="button"
+          class="bcpb:cursor-pointer bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-gray-700 bcpb:bg-white bcpb:border bcpb:border-gray-300 bcpb:rounded-lg hover:bcpb:bg-gray-50 focus:bcpb:outline-none focus:bcpb:ring-2 focus:bcpb:ring-gray-200 bcpb:transition-colors bcpb:duration-200"
+          @click="showExitModal = false">
+          {{ t('close_window') }}
+        </button>
+        <!-- Save and exit -->
+        <button type="button"
+          class="bcpb:cursor-pointer bcpb:px-4 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:text-white bcpb:bg-blue-600 bcpb:border bcpb:border-blue-600 bcpb:rounded-lg hover:bcpb:bg-blue-700 focus:bcpb:outline-none focus:bcpb:ring-2 focus:bcpb:ring-blue-200 bcpb:transition-colors bcpb:duration-200"
+          @click="emit('onSaveAndBack')">
+          {{ t('save_and_back') }}
+        </button>
+      </div>
     </div>
   </div>
 </template>

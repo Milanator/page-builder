@@ -72,7 +72,7 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
           <input type="text" v-model="blockInfo.options.text" :placeholder="t('enter_button_text')"
             class="bg-page-builder-input" @input="onChangeOption">
         </option-widget>
-        <option-widget :title="t('click_action')" align="vertical">
+        <option-widget :title="t('click_action')">
           <div class="bcpb:space-y-3">
             <div class="bcpb:relative">
               <!-- Action type -->

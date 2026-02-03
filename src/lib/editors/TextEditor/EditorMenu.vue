@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import type { Editor } from "@tiptap/vue-3";
 import ColorPicker from "@/lib/block-components/partials/ColorPicker.vue";
 
@@ -42,7 +42,7 @@ const FONTS: FONT_TYPE[] = [
 ]
 
 const props = defineProps<Props>();
-const color = ref<string | undefined>(props.editor.options.editorProps?.attributes?.textColor ?? '#fff')
+const color = ref<string | undefined>(props.editor.options.editorProps?.attributes?.styles ?? '#fff')
 const dropDownMenus = ref<Record<string, boolean>>({
   paragraph: false,
   fontFamily: false,
@@ -110,7 +110,7 @@ if (typeof window !== 'undefined') {
     <!-- Color -->
     <div class="editor-color-picker-container">
       <div class="bcpb:relative">
-        <ColorPicker v-model="color" @update:model-value="editor.chain().focus().setColor($event).run()" />
+        <ColorPicker v-model="color" @update:model-value="editor.chain().focus().setColor($event as string).run()" />
       </div>
     </div>
 

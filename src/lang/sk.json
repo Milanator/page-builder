@@ -66,5 +66,14 @@
   "undo_tooltip": "Krok späť",
   "redo_tooltip": "Krok vpred",
   "save_tooltip": "Uložiť stránku",
-  "settings_tooltip": "Globálne nastavenia stránky"
+  "settings_tooltip": "Globálne nastavenia stránky",
+  "column_count": "Počet stĺpcov",
+  "delete_item": "Odstrániť položku",
+  "close_item": "Zavrieť",
+  "exit": "Odísť",
+  "discard_and_back": "Neukladať",
+  "save_and_back": "Uložiť",
+  "exit_modal_title": "Uloženie zmien",
+  "exit_modal_text": "Odchodom bez uloženia sa všetky zmeny, ktoré zostali neuložené natrvalo odstránia.",
+  "close_window": "Pokračovať v zmenách"
 }

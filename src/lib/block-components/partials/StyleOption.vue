@@ -13,6 +13,6 @@ const { t } = useTranslator();
 </script>
 <template>
     <option-widget :title="t('custom_styles')" align="vertical" :is-expandable="true">
-        <CodeMirrorEditor v-model="model.styles" @update:model-value="emit('update:modelValue', model)" />
+        <CodeMirrorEditor v-model="model?.styles" @update:model-value="emit('update:modelValue', model)" />
     </option-widget>
 </template>

@@ -19,8 +19,8 @@ const MARGINS = [
 ]
 </script>
 <template>
-    <option-widget :title="t('indent')">
-        <div class="bcpb:grid-cols-2 grid bcpb:gap-1">
+    <option-widget :title="t('indent')" align="vertical">
+        <div class="bcpb:grid-cols-4 grid bcpb:gap-2">
             <div v-for="margin in MARGINS">
                 <input type="number" step="1" class="bg-page-builder-input bcpb:w-8" v-model="model[margin.attr]"
                     @input="emit('update:modelValue', model)" />

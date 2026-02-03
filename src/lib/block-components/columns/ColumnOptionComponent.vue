@@ -73,15 +73,15 @@ const onChangeColumns = (columnIndex: number) => {
       <!-- Background -->
       <BackgroundImageOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
       <!-- Columns -->
-      <option-widget :title="t('columns')">
-        <div class="bcpb:flex bcpb:flex-wrap bcpb:gap-2">
+      <option-widget :title="t('column_count')" align="vertical">
+        <div class="bcpb:grid bcpb:gap-2 bcpb:grid-cols-6">
           <button v-for="colNum in 6" :key="colNum" @click="onChangeColumns(colNum)"
-            class="bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:rounded-md bcpb:border bcpb:transition-colors bcpb:duration-200 bcpb:min-w-[60px]"
+            class="bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:rounded-md bcpb:border bcpb:transition-colors bcpb:duration-200 bcpb:cursor-pointer"
             :class="{
               'bcpb:bg-blue-600 bcpb:text-white bcpb:border-blue-600': blockInfo.options.columns === colNum,
               'bcpb:bg-white bcpb:text-gray-700 bcpb:border-gray-300 hover:bcpb:bg-gray-50 hover:bcpb:border-gray-400': blockInfo.options.columns !== colNum
             }">
-            {{ colNum }} {{ t('columns') }}
+            {{ colNum }}
           </button>
         </div>
       </option-widget>
