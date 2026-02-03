@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import type { Editor } from "@tiptap/vue-3";
 import ColorPicker from "@/lib/block-components/partials/ColorPicker.vue";
 
@@ -12,9 +12,6 @@ interface Props {
   editor: Editor;
   bubbleMenu: boolean;
 }
-
-const props = defineProps<Props>();
-const color = ref<string | undefined>(props.editor.getAttributes('textStyle').color)
 
 const FONTS: FONT_TYPE[] = [
   {
@@ -44,6 +41,8 @@ const FONTS: FONT_TYPE[] = [
   },
 ]
 
+const props = defineProps<Props>();
+const color = ref<string | undefined>(props.editor.options.editorProps?.attributes?.textColor ?? '#fff')
 const dropDownMenus = ref<Record<string, boolean>>({
   paragraph: false,
   fontFamily: false,

@@ -22,17 +22,20 @@ interface Emits {
 
 type EditorText = string | undefined
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   bubbleMenu: true
 })
-
 const model = defineModel<EditorText>()
 const emit = defineEmits<Emits>()
-let isEditorChange = false
 const { t } = useTranslator();
-
+let isEditorChange = false
 const editor = new Editor({
   content: model.value || "",
+  editorProps: {
+    attributes: {
+      textColor: props.styles.textColor,
+    },
+  },
   extensions: [
     StarterKit,
     Placeholder.configure({
@@ -99,7 +102,7 @@ onBeforeUnmount(() => {
           '--editor-line-height': styles.lineHeight || 1,
           fontSize: styles.fontSize,
           letterSpacing: styles.letterSpacing,
-          color: styles.textColor,
+          color: styles.textColor
         },
       ]" />
     </div>
