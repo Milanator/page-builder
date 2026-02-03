@@ -256,7 +256,7 @@ const config: Config = {
 //   "type": "setting"
 // }
 
-const mode = ref<Mode>('editor')
+const mode = ref<Mode>('preview')
 const settings = new SettingBlock;
 const renderList: Block[] = []
 
