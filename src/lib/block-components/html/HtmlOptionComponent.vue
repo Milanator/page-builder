@@ -21,12 +21,11 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
 <template>
   <BaseOption title="HTML">
     <option-widget title="HTML" align="vertical" :is-expandable="true">
-      <CodeMirrorEditor v-model="blockInfo.options.html" language="text/html" @update:model-value="onChangeOption">
-      </CodeMirrorEditor>
+      <CodeMirrorEditor v-model="blockInfo.options.html" language="text/html" @update:model-value="onChangeOption" />
     </option-widget>
 
     <option-widget :title="t('custom_styles')" align="vertical" :is-expandable="true">
-      <CodeMirrorEditor v-model="blockInfo.options.css" @update:model-value="onChangeOption"></CodeMirrorEditor>
+      <CodeMirrorEditor v-model="blockInfo.options.css" @update:model-value="onChangeOption" />
     </option-widget>
   </BaseOption>
 </template>

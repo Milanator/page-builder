@@ -13,7 +13,6 @@ import { background } from "./utils/style.ts";
 import { sanitizeRenderList, sanitizeSettings } from "@/lib/utils/formatter.ts";
 import { EditorState, useHistory } from "./History.ts";
 
-
 interface Props {
   config: Config
   renderList?: Block[]
@@ -28,7 +27,6 @@ interface Emits {
 }
 
 const emit = defineEmits<Emits>()
-
 const props = withDefaults(defineProps<Props>(), {
   mode: 'editor' as Mode,
   config: () => ({
@@ -38,13 +36,11 @@ const props = withDefaults(defineProps<Props>(), {
   }) as Config,
   settings: () => new SettingBlock
 });
-
 const mode = ref<Mode>(props.mode);
 const selectedDevice = ref<Device>(props.config.device)
 const settings = ref<SettingBlock>(props.settings)
 const height = ref<String | Number | undefined>(props.config.resolution?.height)
 const width = ref<String | Number | undefined>(props.config.resolution?.width)
-
 const devices: Record<Device, string> = {
   'desktop': 'bcpb:w-full',
   'tab': 'bcpb:w-4xl bcpb:mx-auto',
@@ -126,7 +122,6 @@ const exportPage = ($event: Event) => {
 
 const onUndo = () => {
   const presentState: EditorState | void = undo()
-
   if (presentState) {
     updateHistory(presentState)
   }
@@ -147,7 +142,6 @@ const updateHistory = (state: EditorState) => {
 
 const onChangeHistory = (fn: () => void) => {
   fn()
-  console.log('onChangeHistory')
   commit({ renderList: renderList.value, settings: settings.value, selectedOptionComponent: selectedOptionComponent.value })
 }
 </script>

@@ -21,6 +21,8 @@ export const useHistory = () => {
     }
 
     const commit = (nextState: EditorState) => {
+        console.log('onChangeHistory')
+
         if (present.value) {
             past.value.push(deepClone(present.value as EditorState))
         }
