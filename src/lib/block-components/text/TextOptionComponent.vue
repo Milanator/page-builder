@@ -13,7 +13,8 @@ interface Props {
   blockInfo: TextBlock
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
+
 const emit = defineEmits<ChangeOptionEmit>()
 const { t } = useTranslator();
 
@@ -61,6 +62,6 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
       <textarea class="bg-page-builder-input" v-model="blockInfo.options.cssClasses" @input="onChangeOption"></textarea>
     </option-widget>
     <!-- Styles -->
-    <StyleOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
+    <StyleOption v-model="blockInfo.options.styles" @update:model-value="onChangeOption" />
   </BaseOption>
 </template>

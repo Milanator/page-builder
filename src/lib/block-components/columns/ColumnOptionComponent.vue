@@ -86,7 +86,7 @@ const onChangeColumns = (columnIndex: number) => {
         </div>
       </option-widget>
       <!-- Styles -->
-      <StyleOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
+      <StyleOption v-model="blockInfo.options.styles" @update:model-value="onChangeOption" />
     </div>
     <!-- Column Tabs -->
     <div class="bcpb:mt-6 bcpb:border-t bcpb:border-gray-100 bcpb:pt-4">
@@ -112,9 +112,11 @@ const onChangeColumns = (columnIndex: number) => {
       <BorderRadiusOption v-model="blockInfo.options.columnStyles[selectedColumn]"
         @update:model-value="onChangeOption" />
       <!-- Classes -->
-      <StyleClassOption v-model="blockInfo.options.columnStyles[selectedColumn]" @update:model-value="onChangeOption" />
+      <StyleClassOption v-model="blockInfo.options.columnStyles[selectedColumn].styleClass"
+        @update:model-value="onChangeOption" />
       <!-- Styles -->
-      <StyleOption v-model="blockInfo.options.columnStyles[selectedColumn]" @update:model-value="onChangeOption" />
+      <StyleOption v-model="blockInfo.options.columnStyles[selectedColumn].styles"
+        @update:model-value="onChangeOption" />
     </div>
   </BaseOption>
 </template>

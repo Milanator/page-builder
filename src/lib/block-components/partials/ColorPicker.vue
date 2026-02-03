@@ -8,7 +8,7 @@ interface Emits {
     (event: 'update:modelValue', value: unknown): void
 }
 
-const emit = defineEmits<Emits>()
+defineEmits<Emits>()
 const model = defineModel<string | undefined>()
 const open = ref(false)
 const previewEl = ref<HTMLElement>()

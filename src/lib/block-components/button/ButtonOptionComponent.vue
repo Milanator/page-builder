@@ -95,9 +95,9 @@ const onChangeOption = debounce(() => emit('onChangeOption'))
           </div>
         </option-widget>
         <!-- Classes -->
-        <StyleClassOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
+        <StyleClassOption v-model="blockInfo.options.styleClass" @update:model-value="onChangeOption" />
         <!-- Styles -->
-        <StyleOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
+        <StyleOption v-model="blockInfo.options.styles" @update:model-value="onChangeOption" />
       </div>
     </div>
   </BaseOption>
