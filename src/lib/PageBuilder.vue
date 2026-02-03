@@ -5,7 +5,7 @@ import PagePreview from "./PagePreview.vue";
 import { usePageBuilder } from "./PageBuilder.ts";
 import { onMounted, onUnmounted, provide, ref, watch, watchEffect } from "vue";
 import { previewComponentMap, previewOptionMap } from "@/lib/utils/registry.ts";
-import { Mode, Block, Config, Device } from "@/lib/utils/types.ts";
+import { Mode, Block, Config, Device, SavePayload } from "@/lib/utils/types.ts";
 import { useTranslator } from '@/lib/Translator';
 import { ConfigKey } from "@/store/Config.ts";
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
@@ -24,7 +24,7 @@ interface Emits {
   (event: 'onSave', value: any): void,
   (event: 'onBack', value: any): void,
   (event: 'onPreview'): void,
-  (event: 'onSaveAndBack'): void
+  (event: 'onSaveAndBack', payload: any): void,
 }
 
 const emit = defineEmits<Emits>()
@@ -121,6 +121,13 @@ const exportPage = ($event: Event) => {
   })
 }
 
+const onSaveAndBack = () => {
+  emit('onSaveAndBack', {
+    renderList: sanitizeRenderList(renderList.value),
+    settings: sanitizeSettings(settings.value)
+  })
+}
+
 const onUndo = () => {
   const presentState: EditorState | void = undo()
   if (presentState) {
@@ -185,8 +192,7 @@ const onChangeHistory = (fn: () => void) => {
       <ToolBar :config="config" :device="selectedDevice" :show-device-toolbar="config.showDeviceBar"
         :can-undo="Boolean(canUndo())" :can-redo="Boolean(canRedo())" @on-preview="emit('onPreview')"
         @on-save="exportPage" @on-back="emit('onBack', true)" @on-device="selectedDevice = $event"
-        @on-settings="onItemSelect(settings)" @on-undo="onUndo" @on-redo="onRedo"
-        @on-save-and-back="emit('onSaveAndBack')" />
+        @on-settings="onItemSelect(settings)" @on-undo="onUndo" @on-redo="onRedo" @on-save-and-back="onSaveAndBack" />
       <!-- Canvas Area -->
       <div class="bcpb:flex-1 bcpb:p-4 bcpb:overflow-auto">
         <!-- Customize size -->
