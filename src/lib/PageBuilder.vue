@@ -185,7 +185,8 @@ const onChangeHistory = (fn: () => void) => {
       <ToolBar :config="config" :device="selectedDevice" :show-device-toolbar="config.showDeviceBar"
         :can-undo="Boolean(canUndo())" :can-redo="Boolean(canRedo())" @on-preview="emit('onPreview')"
         @on-save="exportPage" @on-back="emit('onBack', true)" @on-device="selectedDevice = $event"
-        @on-settings="onItemSelect(settings)" @on-undo="onUndo" @on-redo="onRedo" />
+        @on-settings="onItemSelect(settings)" @on-undo="onUndo" @on-redo="onRedo"
+        @on-save-and-back="emit('onSaveAndBack')" />
       <!-- Canvas Area -->
       <div class="bcpb:flex-1 bcpb:p-4 bcpb:overflow-auto">
         <!-- Customize size -->
