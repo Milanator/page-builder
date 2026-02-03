@@ -144,8 +144,8 @@ const onRedo = () => {
 
 const getCustomWidth = () => (selectedDevice.value === 'custom'
   ? {
-    width: `${width}px`,
-    height: `${height}px`,
+    width: `${width.value}px`,
+    height: `${height.value}px`,
   }
   : {})
 
