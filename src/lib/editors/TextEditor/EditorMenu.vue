@@ -86,6 +86,7 @@ if (typeof window !== 'undefined') {
 }
 
 onMounted(() => {
+  color.value = props.editor.getAttributes('textStyle').color ?? props.styles.textColor
   setColor(color.value)
 })
 </script>
