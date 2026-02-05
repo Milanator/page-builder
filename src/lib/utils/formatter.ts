@@ -1,6 +1,6 @@
 import { toRaw } from "vue"
-import { SettingBlock } from "./blocks/SettingBlock"
-import { Block } from "./types"
+import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
+import { Block } from "@/lib/utils/types"
 
 export const sanitizeSettings = (settings: SettingBlock) => ((({ optionComponent, component, icon, ...rest }: SettingBlock) => rest)(settings))
 

@@ -1,4 +1,4 @@
-import { SettingBlock } from "./blocks/SettingBlock";
+import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
 
 export type VueComponent = {
     new(): import("vue").Component;

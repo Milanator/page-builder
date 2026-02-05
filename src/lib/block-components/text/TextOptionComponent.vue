@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseOption from "../BaseOption.vue";
+import BaseOption from '@/lib/block-components/BaseOption.vue';
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { TextBlock } from "@/lib/utils/blocks/TextBlock.ts";
 import { useTranslator } from '@/lib/Translator';

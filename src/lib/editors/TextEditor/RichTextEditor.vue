@@ -67,6 +67,7 @@ const textContainsJson = (html: EditorText) => html?.includes(`{"name":`)
 
 const getTextStyles = () => ({
   '--editor-line-height': props.styles.lineHeight || 1,
+  color: props.styles.textColor ? props.styles.textColor : undefined,
   fontSize: props.styles.fontSize ? `${props.styles.fontSize}rem` : undefined,
   letterSpacing: props.styles.letterSpacing ? `${props.styles.letterSpacing}px` : undefined,
 })

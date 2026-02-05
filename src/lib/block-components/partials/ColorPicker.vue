@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker';
 import { ref, nextTick, onMounted, onUnmounted } from 'vue';
-
 import '@cyhnkckali/vue3-color-picker/dist/style.css'
 
-interface Emits {
-    (event: 'update:modelValue', value: unknown): void
-}
-
-defineEmits<Emits>()
 const model = defineModel<string | undefined>()
-const open = ref(false)
+const open = ref<boolean>(false)
 const previewEl = ref<HTMLElement>()
 const pickerEl = ref<HTMLElement>()
 

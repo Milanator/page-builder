@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseOption from "../BaseOption.vue";
+import BaseOption from '@/lib/block-components/BaseOption.vue';
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
 import { ref, watch } from "vue";

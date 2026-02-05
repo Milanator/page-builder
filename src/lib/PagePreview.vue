@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Block } from "./utils/types.ts";
+import { Block } from "@/lib/utils/types"
 import { previewComponentMap } from "./utils/registry.ts";
 
 interface Props {

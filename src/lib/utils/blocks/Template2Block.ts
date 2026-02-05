@@ -1,7 +1,7 @@
 import { Block, BlockType } from "../types.ts";
 import { registerBlock } from "@/lib/utils/registry.ts";
-import { TextBlock } from "./TextBlock.ts";
-import { ColumnBlock } from "./ColumnBlock.ts";
+import { TextBlock } from "@/lib/utils/blocks/TextBlock.ts";
+import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
 
 const DEFAULT_COLUMN = new ColumnBlock(
     {

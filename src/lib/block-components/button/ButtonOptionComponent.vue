@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ButtonBlock } from "@/lib/utils/blocks/ButtonBlock.ts";
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
-import BaseOption from "../BaseOption.vue";
+import BaseOption from '@/lib/block-components/BaseOption.vue';
 import { useTranslator } from '@/lib/Translator';
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
 import BackgroundImageOption from "@/lib/block-components/partials/BackgroundImageOption.vue";

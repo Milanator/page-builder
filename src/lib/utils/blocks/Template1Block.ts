@@ -1,8 +1,8 @@
 import { Block, BlockType } from "../types.ts";
 import { registerBlock } from "@/lib/utils/registry.ts";
-import { TextBlock } from "./TextBlock.ts";
-import { ColumnBlock } from "./ColumnBlock.ts";
-import { ImageBlock } from "./ImageBlock.ts";
+import { TextBlock } from "@/lib/utils/blocks/TextBlock.ts";
+import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { ImageBlock } from "@/lib/utils/blocks/ImageBlock.ts";
 
 export class Template1 extends ColumnBlock implements Block {
     name: string = 'template_1';
