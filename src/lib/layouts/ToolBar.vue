@@ -104,7 +104,6 @@ const { t } = useTranslator();
           {{ t('settings') }}
         </button>
       </ToolTip>
-
       <!-- Undo/redo -->
       <ToolTip :text="t('undo_tooltip')">
         <button type="button" :class="{ 'bcpb:pointer-events-none bcpb:opacity-50': !canUndo }"
@@ -119,6 +118,10 @@ const { t } = useTranslator();
           @click="emit('onRedo')">
           <img src="@/assets/icons/redo.svg" alt="Redo" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer bcpb:mr-1">
         </button>
+      </ToolTip>
+      <!-- Info -->
+      <ToolTip :text="t('editor_info_tooltip')">
+        <img src="@/assets/icons/info.svg" alt="Info" class="bcpb:w-5 bcpb:h-5 bcpb:cursor-pointer bcpb:ml-2">
       </ToolTip>
     </div>
 

@@ -75,5 +75,6 @@
   "save_and_back": "Uložiť",
   "exit_modal_title": "Uloženie zmien",
   "exit_modal_text": "Odchodom bez uloženia sa všetky zmeny, ktoré zostali neuložené natrvalo odstránia.",
-  "close_window": "Pokračovať v zmenách"
+  "close_window": "Pokračovať v zmenách",
+  "editor_info_tooltip": "Rozloženie stránky v editore je orientačné. Presné zobrazenie nájdete v Náhľade."
 }
