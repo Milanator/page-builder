@@ -8,7 +8,6 @@ interface Props {
   blockInfo: TextBlock
   inEditor?: boolean
 }
-
 interface Emits {
   (event: 'onTextChange', value: string | undefined): any,
 }
@@ -38,6 +37,7 @@ const emit = defineEmits<Emits>()
         marginStyles(blockInfo.options),
         {
           fontSize: blockInfo.options.fontSize ? `${blockInfo.options.fontSize}rem` : undefined,
+          color: blockInfo.options.textColor,
           lineHeight: blockInfo.options.lineHeight,
           letterSpacing: blockInfo.options.letterSpacing ? `${blockInfo.options.letterSpacing}px` : undefined,
         }
