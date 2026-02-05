@@ -37,9 +37,9 @@ const emit = defineEmits<Emits>()
         blockInfo.options.styles,
         marginStyles(blockInfo.options),
         {
-          fontSize: blockInfo.options.fontSize,
+          fontSize: blockInfo.options.fontSize ? `${blockInfo.options.fontSize}rem` : undefined,
           lineHeight: blockInfo.options.lineHeight,
-          letterSpacing: blockInfo.options.letterSpacing,
+          letterSpacing: blockInfo.options.letterSpacing ? `${blockInfo.options.letterSpacing}px` : undefined,
         }
       ]" v-html="blockInfo.options.text"></div>
     </template>
