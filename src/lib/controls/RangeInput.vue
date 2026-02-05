@@ -15,9 +15,7 @@ const defaultValue = ref<ModelType>(1)
 const model = defineModel<ModelType>()
 defaultValue.value = model.value
 
-const onReset = () => {
-  model.value = defaultValue.value
-}
+const onReset = () => model.value = defaultValue.value
 </script>
 <template>
   <div class="bcpb:inline-flex bcpb:items-center">
