@@ -20,3 +20,7 @@ export const background = (options: BackgroundOptions) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center'
 })
+
+export const backgroundColorOverlay = (options: { backgroundColor: string | undefined | null }) => (options?.backgroundColor ? {
+    boxShadow: `inset 0 0 0 1000px ${options.backgroundColor}`
+} : {})

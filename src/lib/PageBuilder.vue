@@ -9,7 +9,7 @@ import { Mode, Block, Config, Device } from "@/lib/utils/types.ts";
 import { useTranslator } from '@/lib/Translator';
 import { ConfigKey } from "@/store/Config.ts";
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
-import { background } from "./utils/style.ts";
+import { background, backgroundColorOverlay } from "./utils/style.ts";
 import { sanitizeRenderList, sanitizeSettings } from "@/lib/utils/formatter.ts";
 import { EditorState, useHistory } from "./History.ts";
 
@@ -195,7 +195,7 @@ const onChangeHistory = (fn: () => void) => {
       </div>
     </template>
     <!-- Preview Content Container -->
-    <div class="bcpb:w-full bcpb:min-h-full h-full">
+    <div class="bcpb:w-full bcpb:min-h-full h-full" :style="[backgroundColorOverlay(settings.options)]">
       <PagePreview :renderList="renderList"></PagePreview>
     </div>
   </div>
@@ -233,7 +233,8 @@ const onChangeHistory = (fn: () => void) => {
           <div @drop="onChangeHistory(() => onDrop($event))" @dragenter.prevent @dragleave.prevent="onDragLeave()"
             @dragover.prevent="onDragOver($event)" :style="[
               settings.options,
-              background(settings.options)
+              background(settings.options),
+              backgroundColorOverlay(settings.options),
             ]"
             class="drop-zone bcpb:bg-center bcpb:bg-cover bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300 bcpb:h-full">
             <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"
@@ -253,7 +254,7 @@ const onChangeHistory = (fn: () => void) => {
                 <!-- Icon Container -->
                 <div class="bcpb:relative bcpb:mb-6">
                   <div
-                    class="bcpb:w-24 bcpb:h-24 bcpb:mx-auto bcpb:bg-gradient-to-br bcpb:from-blue-100 bcpb:to-purple-100 bcpb:rounded-full bcpb:flex bcpb:items-center bcpb:justify-center bcpb:shadow-lg">
+                    class="bcpb:w-24 bcpb:h-24 bcpb:mx-auto bcpb:bg-linear-to-br bcpb:from-blue-100 bcpb:to-purple-100 bcpb:rounded-full bcpb:flex bcpb:items-center bcpb:justify-center bcpb:shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#155dfc"
                       class="bi bi-info-circle" viewBox="0 0 16 16">
                       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />

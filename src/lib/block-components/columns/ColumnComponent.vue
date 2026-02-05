@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { background, borderRadiusStyles, marginStyles } from "@/lib/utils/style.ts";
+import { background, backgroundColorOverlay, borderRadiusStyles, marginStyles } from "@/lib/utils/style.ts";
 import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
 import { previewComponentMap } from "@/lib/utils/registry.ts";
 import { Block } from "@/lib/utils/types.ts";
@@ -144,7 +144,8 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
         { 'background-color': blockInfo.options.columnStyles[index]?.backgroundColor },
         marginStyles(blockInfo.options.columnStyles[index] ?? {}),
         borderRadiusStyles(blockInfo.options.columnStyles[index] ?? {}),
-        background(blockInfo.options.columnStyles[index] ?? {})
+        background(blockInfo.options.columnStyles[index] ?? {}),
+        backgroundColorOverlay(blockInfo.options.columnStyles[index] ?? {})
       ]"
         :class="[{ 'column-item': inEditor, 'column-dragged-over': dragOverRow === index && inEditor }, blockInfo.options.columnStyles[index]?.styleClass]"
         class="bcpb:py-4" @drop="onDrop($event, index)" @dragenter.prevent @dragleave="onDragLeave"

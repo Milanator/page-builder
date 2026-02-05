@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { backgroundColorOverlay } from '../utils/style';
+
 interface Props {
   inEditor?: boolean
   backgroundColor?: string | null
@@ -14,10 +16,10 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="base-preview-item" :class="{ 'editor': inEditor }" :style="{
-    'background-image': backgroundImage ? 'url(' + backgroundImage + ')' : '',
-    'background-color': backgroundColor ? backgroundColor : 'transparent',
-  }">
+  <div class="base-preview-item" :class="{ 'editor': inEditor }" :style="[
+    { 'background-image': backgroundImage ? `url(${backgroundImage})` : '' },
+    backgroundColorOverlay({ backgroundColor })
+  ]">
     <slot></slot>
   </div>
 
