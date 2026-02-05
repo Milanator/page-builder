@@ -23,8 +23,7 @@ const onClick = ($event: Event) => {
 }
 </script>
 <template>
-  <BasePreview :inEditor="inEditor" :background-color="blockInfo.options.backgroundColor"
-    :background-image="blockInfo.options.backgroundImage">
+  <BasePreview :inEditor="inEditor">
     <div :style="[{ 'text-align': blockInfo.options.buttonAlign }, marginStyles(blockInfo.options)]">
       <button @click="onClick" :class="blockInfo.options.styleClass" :style="blockInfo.options.styles">
         {{ blockInfo.options.text }}

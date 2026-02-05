@@ -10,7 +10,6 @@ type BaseOptions = {
     lineHeight: number
     letterSpacing: number
     cssClasses: string;
-    backgroundImage: string;
     styles: string;
     textColor: string;
 };
@@ -23,7 +22,6 @@ export class TextBlock implements Block {
     optionComponent: VueComponent = markRaw(TextOptionComponent);
     options: TextOptions = {
         text: "",
-        backgroundImage: "",
         cssClasses: "",
         styles: "",
         lineHeight: 1.4,

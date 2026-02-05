@@ -6,8 +6,6 @@ import ToolTip from "@/lib/partials/ToolTip.vue";
 interface Props {
   title: string,
   canDelete?: boolean,
-  backgroundColor?: string,
-  backgroundImage?: string
 }
 
 interface Emits {

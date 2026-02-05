@@ -16,13 +16,8 @@ interface ButtonAction {
 interface BaseOptions {
     style: string;
     text: string;
-
-    backgroundColor: string;
-    backgroundImage: string;
-
     styleClass: string;
-    styles: string; // CSS string (supports &:hover, &:active, ...)
-
+    styles: string;
     buttonAlign: ButtonAlign;
     buttonAction: ButtonAction;
 }
@@ -36,8 +31,6 @@ export class ButtonBlock implements Block {
     options: ButtonOptions = {
         style: "",
         text: "Button",
-        backgroundColor: "#ffffff",
-        backgroundImage: "",
         styleClass: "btn btn-primary",
         styles: `
 font-size: 16px;
