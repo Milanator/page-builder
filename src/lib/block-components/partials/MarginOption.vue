@@ -2,33 +2,17 @@
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { useTranslator } from '@/lib/Translator';
 import { MarginOptions } from "@/lib/utils/types";
-import { reactive, watch } from "vue";
 
-interface Emit {
-    (event: 'update:modelValue', value: unknown): void
-}
+type MarginType = { attr: keyof MarginOptions; key: string }[];
 
-interface Props {
-    modelValue: MarginOptions
-}
-
-interface ModelType extends MarginOptions {
-    [key: string]: string | number | undefined
-}
-
-const MARGINS = [
+const model = defineModel<MarginOptions>({ required: true })
+const { t } = useTranslator();
+const MARGINS: MarginType = [
     { attr: 'marginLeft', key: 'left' },
     { attr: 'marginRight', key: 'right' },
     { attr: 'marginTop', key: 'top' },
     { attr: 'marginBottom', key: 'bottom' },
 ]
-
-const emit = defineEmits<Emit>()
-const props = defineProps<Props>()
-const model = reactive<ModelType>({ ...props.modelValue })
-const { t } = useTranslator();
-
-watch(model, (val) => emit('update:modelValue', val), { deep: true })
 </script>
 <template>
     <option-widget :title="t('indent')" align="vertical">

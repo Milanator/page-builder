@@ -2,33 +2,17 @@
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { useTranslator } from '@/lib/Translator';
 import { BorderRadiusOptions } from "@/lib/utils/types";
-import { reactive, watch } from "vue";
 
-interface Emit {
-    (event: 'update:modelValue', value: unknown): void
-}
+type BorderRadiusType = { attr: keyof BorderRadiusOptions; key: string }[];
 
-interface Props {
-    modelValue: BorderRadiusOptions
-}
-// [key: string] as build fix
-interface ModelType extends BorderRadiusOptions {
-    [key: string]: string | number | undefined
-}
-
-const BORDER_RADIUS = [
+const model = defineModel<BorderRadiusOptions>({ required: true })
+const { t } = useTranslator();
+const BORDER_RADIUS: BorderRadiusType = [
     { attr: 'borderBottomLeftRadius', key: 'left' },
     { attr: 'borderBottomRightRadius', key: 'right' },
     { attr: 'borderTopRightRadius', key: 'top' },
     { attr: 'borderTopLeftRadius', key: 'bottom' },
 ]
-
-const emit = defineEmits<Emit>()
-const props = defineProps<Props>()
-const model = reactive<ModelType>({ ...props.modelValue })
-const { t } = useTranslator();
-
-watch(model, (val) => emit('update:modelValue', val), { deep: true })
 </script>
 <template>
     <option-widget :title="t('border_radius')" align="vertical">

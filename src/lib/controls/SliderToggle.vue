@@ -1,16 +1,11 @@
 <script setup lang="ts">
-interface Emit {
-  (event: 'update:modelValue', value: unknown): void
-}
-
-const emit = defineEmits<Emit>()
 const model = defineModel<boolean>()
 </script>
 <template>
   <div class="bcpb:inline-flex bcpb:items-center">
     <label class="bcpb:relative bcpb:inline-flex bcpb:items-center bcpb:cursor-pointer">
       <!-- Hidden Checkbox -->
-      <input type="checkbox" v-model="model" class="bcpb:sr-only bcpb:peer" @change="emit('update:modelValue', model)">
+      <input type="checkbox" v-model="model" class="bcpb:sr-only bcpb:peer">
       <!-- Toggle Track -->
       <div
         class="bcpb:relative bcpb:w-11 bcpb:h-6 bcpb:bg-gray-200 bcpb:rounded-full bcpb:transition-colors bcpb:duration-200 bcpb:ease-in-out bcpb:peer-checked:bg-blue-600 bcpb:peer-focus:ring-2 bcpb:peer-focus:ring-blue-300 bcpb:peer-focus:ring-opacity-50">
