@@ -20,6 +20,10 @@ const FONTS: FONT_TYPE[] = [
     value: 'Poppins, system-ui, sans-serif',
   },
   {
+    label: 'Montserrat',
+    value: "'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  },
+  {
     label: 'JetBrains Mono',
     value: '"JetBrains Mono"'
   },
