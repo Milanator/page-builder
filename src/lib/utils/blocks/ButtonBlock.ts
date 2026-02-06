@@ -4,12 +4,8 @@ import ButtonComponent from "../../block-components/button/ButtonComponent.vue";
 import { registerBlock } from "@/lib/utils/registry.ts";
 import ButtonOptionComponent from "../../block-components/button/ButtonOptionComponent.vue";
 
-type ButtonAlign = "left" | "center" | "right";
-
-type ButtonActionType = "external_link" | "internal_link" | null;
-
 interface ButtonAction {
-    type: ButtonActionType;
+    type: "external_link" | "internal_link" | null;
     url: string;
 }
 
@@ -18,7 +14,7 @@ interface BaseOptions {
     text: string;
     styleClass: string;
     styles: string;
-    buttonAlign: ButtonAlign;
+    buttonAlign: "left" | "center" | "right";
     buttonAction: ButtonAction;
 }
 
