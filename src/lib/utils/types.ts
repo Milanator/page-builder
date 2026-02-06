@@ -90,6 +90,13 @@ export interface MarginOptions {
     marginBottom?: string | number | undefined
 }
 
+export interface PaddingOptions {
+    paddingLeft?: string | number | undefined
+    paddingRight?: string | number | undefined
+    paddingTop?: string | number | undefined
+    paddingBottom?: string | number | undefined
+}
+
 export interface BorderRadiusOptions {
     borderBottomLeftRadius?: string | number | undefined
     borderBottomRightRadius?: string | number | undefined

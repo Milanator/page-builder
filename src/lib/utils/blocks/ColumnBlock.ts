@@ -1,4 +1,4 @@
-import { BackgroundOptions, Block, BlockType, BorderRadiusOptions, MarginOptions, VueComponent } from "../types.ts";
+import { BackgroundOptions, Block, BlockType, BorderRadiusOptions, MarginOptions, PaddingOptions, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
 import ColumnComponent from "../../block-components/columns/ColumnComponent.vue";
 import { registerBlock } from "@/lib/utils/registry.ts";
@@ -9,7 +9,7 @@ type ColumnStyles = MarginOptions & BorderRadiusOptions & BackgroundOptions & {
     styles?: string
 }
 
-export type ColumnOptions = BackgroundOptions & {
+export type ColumnOptions = BackgroundOptions & PaddingOptions & BorderRadiusOptions & {
     columns: number
     switchCols: boolean
     styleClass?: string

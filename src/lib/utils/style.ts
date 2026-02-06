@@ -1,10 +1,17 @@
-import { BackgroundOptions, BorderRadiusOptions, MarginOptions } from "./types";
+import { BackgroundOptions, BorderRadiusOptions, MarginOptions, PaddingOptions } from "./types";
 
 export const marginStyles = (options: MarginOptions) => ({
     marginLeft: options.marginLeft ? `${options.marginLeft}%` : undefined,
     marginRight: options.marginRight ? `${options.marginRight}%` : undefined,
     marginTop: options.marginTop ? `${options.marginTop}%` : undefined,
     marginBottom: options.marginBottom ? `${options.marginBottom}%` : undefined,
+})
+
+export const paddingStyles = (options: PaddingOptions) => ({
+    paddingLeft: options.paddingLeft ? `${options.paddingLeft}%` : undefined,
+    paddingRight: options.paddingRight ? `${options.paddingRight}%` : undefined,
+    paddingTop: options.paddingTop ? `${options.paddingTop}%` : undefined,
+    paddingBottom: options.paddingBottom ? `${options.paddingBottom}%` : undefined,
 })
 
 export const borderRadiusStyles = (options: BorderRadiusOptions) => ({

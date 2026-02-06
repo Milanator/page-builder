@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { background, backgroundColorOverlay, borderRadiusStyles, marginStyles } from "@/lib/utils/style.ts";
+import { background, backgroundColorOverlay, borderRadiusStyles, marginStyles, paddingStyles } from "@/lib/utils/style.ts";
 import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
 import { previewComponentMap } from "@/lib/utils/registry.ts";
 import { Block } from "@/lib/utils/types.ts";
@@ -133,11 +133,12 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 
 <template>
   <BasePreview :inEditor="inEditor" :background-image="blockInfo.options.backgroundImage"
-    :background-color="blockInfo.options.backgroundColor">
+    :background-color="blockInfo.options.backgroundColor" :style="borderRadiusStyles(blockInfo.options ?? {})">
     <div class="bc--page-builder-row" :style="[
       inEditor ? { minHeight: '40px' } : {},
       { flexDirection: blockInfo.options.switchCols ? 'row-reverse' : 'row' },
-      blockInfo.options.styles
+      blockInfo.options.styles,
+      paddingStyles(blockInfo.options ?? {}),
     ]">
       <div v-for="(index) in blockInfo.options.columns" :style="[
         blockInfo.options.columnStyles[index]?.styles,

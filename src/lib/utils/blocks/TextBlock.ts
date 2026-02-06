@@ -7,11 +7,11 @@ import TextOptionComponent from "@/lib/block-components/text/TextOptionComponent
 type BaseOptions = {
     text: string;
     fontSize: number;
-    lineHeight: number
-    letterSpacing: number
-    cssClasses: string;
-    styles?: string;
     textColor: string;
+    cssClasses: string;
+    lineHeight?: number
+    letterSpacing?: number
+    styles?: string;
 };
 
 type TextOptions = BaseOptions & MarginOptions

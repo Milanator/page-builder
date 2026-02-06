@@ -13,6 +13,7 @@ import StyleClassOption from "@/lib/block-components/partials/StyleClassOption.v
 import BorderRadiusOption from "@/lib/block-components/partials/BorderRadiusOption.vue";
 import { debounce } from "@/lib/utils/helper.ts";
 import { ChangeOptionEmit } from "@/lib/utils/types.ts";
+import PaddingOption from '@/lib/block-components/partials/PaddingOption.vue';
 
 interface Props {
   blockInfo: ColumnBlock
@@ -71,6 +72,9 @@ const onChangeColumns = (columnIndex: number) => {
       <OptionWidget :title="t('switch_columns')">
         <SliderToggle v-model="blockInfo.options.switchCols" @update:model-value="onChangeOption" />
       </OptionWidget>
+      <PaddingOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
+      <!-- Border radius -->
+      <BorderRadiusOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
       <!-- Background -->
       <BackgroundImageOption v-model="blockInfo.options.backgroundImage" @update:model-value="onChangeOption" />
       <BackgroundColorOption v-model="blockInfo.options.backgroundColor" @update:model-value="onChangeOption" />
