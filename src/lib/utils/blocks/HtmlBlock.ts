@@ -4,11 +4,16 @@ import HtmlComponent from "../../block-components/html/HtmlComponent.vue";
 import { registerBlock } from "@/lib/utils/registry.ts";
 import HtmlOptionComponent from "../../block-components/html/HtmlOptionComponent.vue";
 
+interface HtmlOptions {
+    html: string
+    css: string
+}
+
 export class HtmlBlock implements Block {
     name: string = 'html';
     component: VueComponent = markRaw(HtmlComponent);
     optionComponent: VueComponent = markRaw(HtmlOptionComponent);
-    options: Record<string, any> = {
+    options: HtmlOptions = {
         html: `
 <div class="hero-section">
     <div class="hero-content">
