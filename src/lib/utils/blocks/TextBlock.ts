@@ -41,10 +41,7 @@ export class TextBlock implements Block {
 
     constructor(options?: TextOptions) {
         if (options) {
-            this.options = {
-                ...this.options,
-                ...options,
-            };
+            this.options = { ...this.options, ...options };
         }
     }
 }

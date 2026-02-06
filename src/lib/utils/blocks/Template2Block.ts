@@ -1,7 +1,7 @@
 import { Block, BlockType } from "../types.ts";
 import { registerBlock } from "@/lib/utils/registry.ts";
 import { TextBlock } from "@/lib/utils/blocks/TextBlock.ts";
-import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { ColumnBlock, ColumnOptions } from "@/lib/utils/blocks/ColumnBlock.ts";
 
 const DEFAULT_COLUMN = new ColumnBlock(
     {
@@ -69,7 +69,7 @@ const DEFAULT_COLUMN = new ColumnBlock(
 
 export class Template2 extends ColumnBlock implements Block {
     name: string = 'template_2';
-    options: Record<string, any> = {
+    options: ColumnOptions = {
         columns: 1,
         switchCols: false,
         backgroundColor: '',
@@ -80,6 +80,7 @@ export class Template2 extends ColumnBlock implements Block {
             1: {
                 styleClass: 'col',
                 backgroundImage: '',
+                backgroundColor: ''
             },
         },
     }

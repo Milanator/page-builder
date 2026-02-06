@@ -3,7 +3,7 @@ import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker';
 import { ref, nextTick, onMounted, onUnmounted } from 'vue';
 import '@cyhnkckali/vue3-color-picker/dist/style.css'
 
-const model = defineModel<string | undefined>()
+const model = defineModel<string | null>()
 const open = ref<boolean>(false)
 const previewEl = ref<HTMLElement>()
 const pickerEl = ref<HTMLElement>()
@@ -63,7 +63,7 @@ onUnmounted(() => {
         <!-- trigger -->
         <div ref="previewEl"
             class="bcpb:h-8 bcpb:w-8 bcpb:rounded-md bcpb:cursor-pointer bcpb:hover:opacity-90 bcpb:transition-colors bcpb:border bcpb:border-gray-300"
-            :style="{ backgroundColor: model }" @click="onOpen" />
+            :style="{ backgroundColor: model ?? undefined }" @click="onOpen" />
         <!-- picker -->
         <Teleport to="body">
             <div v-if="open" ref="pickerEl" class="bcpb:absolute bcpb:z-9999">

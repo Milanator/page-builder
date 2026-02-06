@@ -98,7 +98,8 @@ export interface BorderRadiusOptions {
 }
 
 export interface BackgroundOptions {
-    backgroundImage: string
+    backgroundImage?: string | null
+    backgroundColor?: string | null
 }
 
 export interface ChangeOptionEmit {

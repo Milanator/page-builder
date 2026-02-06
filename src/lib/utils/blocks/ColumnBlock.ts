@@ -1,19 +1,23 @@
-import { Block, BlockType, BorderRadiusOptions, MarginOptions, VueComponent } from "../types.ts";
+import { BackgroundOptions, Block, BlockType, BorderRadiusOptions, MarginOptions, VueComponent } from "../types.ts";
 import { markRaw } from "vue";
 import ColumnComponent from "../../block-components/columns/ColumnComponent.vue";
 import { registerBlock } from "@/lib/utils/registry.ts";
 import ColumnOptionComponent from "../../block-components/columns/ColumnOptionComponent.vue";
 
-type ColumnStyle = {
+type ColumnStyles = MarginOptions & BorderRadiusOptions & BackgroundOptions & {
     styleClass?: string
-    backgroundImage?: string
-    backgroundColor?: string
     styles?: string
 }
 
-type ColumnOptions = ColumnStyle & MarginOptions & BorderRadiusOptions
+export type ColumnOptions = BackgroundOptions & {
+    columns: number
+    switchCols: boolean
+    styleClass?: string
+    styles?: string
+    columnStyles: Record<number, ColumnStyles>
+}
 
-export const DEFAULT_STYLES: ColumnOptions = {
+export const DEFAULT_STYLES: ColumnStyles = {
     styleClass: 'col',
     backgroundImage: '',
     backgroundColor: '',
@@ -32,7 +36,7 @@ export class ColumnBlock implements Block {
     name: string = 'columns';
     component: VueComponent = markRaw(ColumnComponent);
     optionComponent: VueComponent = markRaw(ColumnOptionComponent);
-    options: Record<string, any> = {
+    options: ColumnOptions = {
         columns: 3,
         switchCols: false,
         backgroundColor: "",
@@ -54,17 +58,11 @@ export class ColumnBlock implements Block {
 
     constructor(options?: Record<string, any>, children?: { [key: string | number]: Block[] }) {
         if (options) {
-            this.options = {
-                ...this.options,
-                ...options,
-            };
+            this.options = { ...this.options, ...options };
         }
 
         if (children) {
-            this.children = {
-                ...this.children,
-                ...children,
-            };
+            this.children = { ...this.children, ...children };
         }
     }
 

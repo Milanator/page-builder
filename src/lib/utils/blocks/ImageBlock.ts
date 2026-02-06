@@ -34,10 +34,7 @@ export class ImageBlock implements Block {
 
     constructor(options?: ImageOptions) {
         if (options) {
-            this.options = {
-                ...this.options,
-                ...options,
-            };
+            this.options = { ...this.options, ...options };
         }
     }
 }

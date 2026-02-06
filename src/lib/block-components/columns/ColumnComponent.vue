@@ -141,7 +141,6 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
     ]">
       <div v-for="(index) in blockInfo.options.columns" :style="[
         blockInfo.options.columnStyles[index]?.styles,
-        { 'background-color': blockInfo.options.columnStyles[index]?.backgroundColor },
         marginStyles(blockInfo.options.columnStyles[index] ?? {}),
         borderRadiusStyles(blockInfo.options.columnStyles[index] ?? {}),
         background(blockInfo.options.columnStyles[index] ?? {}),

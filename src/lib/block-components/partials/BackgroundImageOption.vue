@@ -2,7 +2,7 @@
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { useTranslator } from '@/lib/Translator';
 
-const model = defineModel<string | undefined>()
+const model = defineModel<string | null>()
 const { t } = useTranslator();
 </script>
 <template>
