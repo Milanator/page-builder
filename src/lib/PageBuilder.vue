@@ -200,7 +200,7 @@ const onChangeHistory = (fn: () => void) => {
     </div>
   </div>
   <!-- Full editor -->
-  <div v-else class="bcpb:flex bcpb:h-screen bcpb:bg-gray-50">
+  <div v-else class="bcpb:flex bcpb:h-screen bcpb:bg-gray-50 bcpb:overflow-x-scroll">
     <!-- Left Side - Drop Zone -->
     <div class="bcpb:flex-1 bcpb:bg-white bcpb:border-r bcpb:border-gray-100 bcpb:flex bcpb:flex-col">
       <ToolBar :config="config" :device="selectedDevice" :show-device-toolbar="config.showDeviceBar"
