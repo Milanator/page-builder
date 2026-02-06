@@ -171,8 +171,8 @@ const onChangeHistory = (fn: () => void) => {
   <!-- Preview (editor) -->
   <div v-if="mode !== 'editor'" class="bcpb:w-fulk bcpb:z-[9999] h-full"
     :class="{ 'bcpb:fixed bcpb:inset-0 bcpb:overflow-auto': mode === 'editor_preview' }" :style="[
-      settings.options,
-      background(settings.options)
+      background(settings.options),
+      backgroundColorOverlay(settings.options)
     ]">
     <template v-if="mode === 'editor_preview'">
       <!-- Floating Action Bar -->
@@ -232,7 +232,6 @@ const onChangeHistory = (fn: () => void) => {
           <!-- Drop Zone -->
           <div @drop="onChangeHistory(() => onDrop($event))" @dragenter.prevent @dragleave.prevent="onDragLeave()"
             @dragover.prevent="onDragOver($event)" :style="[
-              settings.options,
               background(settings.options),
               backgroundColorOverlay(settings.options),
             ]"

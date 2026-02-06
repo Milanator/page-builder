@@ -1,7 +1,7 @@
 import { Block, BlockType } from "../types.ts";
 import { registerBlock } from "@/lib/utils/registry.ts";
 import { TextBlock } from "@/lib/utils/blocks/TextBlock.ts";
-import { ColumnBlock, ColumnOptions } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { ColumnBlock, ColumnChildren, ColumnOptions } from "@/lib/utils/blocks/ColumnBlock.ts";
 import { ImageBlock } from "@/lib/utils/blocks/ImageBlock.ts";
 
 export class Template1 extends ColumnBlock implements Block {
@@ -9,19 +9,16 @@ export class Template1 extends ColumnBlock implements Block {
     options: ColumnOptions = {
         columns: 2,
         switchCols: false,
-        backgroundColor: '',
         columnStyles: {
             1: {
                 styleClass: 'col',
-                backgroundImage: '',
             },
             2: {
                 styleClass: 'col z-300',
-                backgroundImage: '',
             },
         },
     }
-    children: { [key: string | number]: Block[] } = {
+    children: ColumnChildren = {
         1: [
             new ImageBlock({
                 cssClasses: 'px-4',
@@ -34,7 +31,6 @@ export class Template1 extends ColumnBlock implements Block {
                 fontSize: 2,
                 textColor: '#000',
                 cssClasses: 'bcpb:pb-4 bcpb:px-4',
-                styles: '',
                 lineHeight: 1,
                 letterSpacing: 0,
             }),
@@ -43,7 +39,6 @@ export class Template1 extends ColumnBlock implements Block {
                 fontSize: 1,
                 textColor: '#000',
                 cssClasses: 'bcpb:pb-4 bcpb:px-4',
-                styles: '',
                 lineHeight: 1,
                 letterSpacing: 0,
             }),

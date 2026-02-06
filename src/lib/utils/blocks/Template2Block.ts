@@ -1,7 +1,7 @@
 import { Block, BlockType } from "../types.ts";
 import { registerBlock } from "@/lib/utils/registry.ts";
 import { TextBlock } from "@/lib/utils/blocks/TextBlock.ts";
-import { ColumnBlock, ColumnOptions } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { ColumnBlock, ColumnChildren, ColumnOptions } from "@/lib/utils/blocks/ColumnBlock.ts";
 
 const DEFAULT_COLUMN = new ColumnBlock(
     {
@@ -14,7 +14,6 @@ const DEFAULT_COLUMN = new ColumnBlock(
         columnStyles: {
             1: {
                 styleClass: 'col',
-                backgroundImage: '',
                 backgroundColor: '#0a0a0a69',
                 marginLeft: 5,
                 marginRight: 5,
@@ -32,7 +31,6 @@ const DEFAULT_COLUMN = new ColumnBlock(
             fontSize: 2.4,
             textColor: '#fff',
             cssClasses: 'bcpb:text-center',
-            styles: '',
             marginBottom: 6,
             marginTop: 6,
             marginLeft: 8,
@@ -45,7 +43,6 @@ const DEFAULT_COLUMN = new ColumnBlock(
             fontSize: 1.8,
             textColor: '#fff',
             cssClasses: 'bcpb:text-center',
-            styles: '',
             marginLeft: 8,
             marginRight: 8,
             lineHeight: 1.4,
@@ -56,7 +53,6 @@ const DEFAULT_COLUMN = new ColumnBlock(
             fontSize: 2,
             textColor: '#fff',
             cssClasses: 'bcpb:text-center bcpb:font-bold',
-            styles: '',
             marginTop: 6,
             marginBottom: 6,
             marginLeft: 8,
@@ -79,19 +75,16 @@ export class Template2 extends ColumnBlock implements Block {
         columnStyles: {
             1: {
                 styleClass: 'col',
-                backgroundImage: '',
-                backgroundColor: ''
             },
         },
     }
-    children: { [key: string | number]: Block[] } = {
+    children: ColumnChildren = {
         1: [
             new TextBlock({
                 text: 'Oznamy',
                 fontSize: 4.5,
                 textColor: '#000',
                 cssClasses: 'bcpb:text-center',
-                styles: '',
                 marginBottom: 10,
                 marginTop: 10,
                 lineHeight: 1,
