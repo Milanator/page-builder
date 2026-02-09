@@ -8,14 +8,12 @@ const DEFAULT_COLUMN = new ColumnBlock(
     {
         columns: 1,
         switchCols: false,
-        backgroundColor: '',
-        backgroundImage: '',
-        styleClass: '',
-        styles: '',
         paddingLeft: 5,
         paddingRight: 5,
         columnStyles: {
-            1: {},
+            1: {
+                marginBottom: 4
+            },
         },
     }, {
     1: [
@@ -23,10 +21,8 @@ const DEFAULT_COLUMN = new ColumnBlock(
             {
                 columns: 2,
                 switchCols: false,
+                verticalAlign: 'top',
                 backgroundColor: '#00000036',
-                backgroundImage: '',
-                styleClass: '',
-                styles: '',
                 paddingLeft: 0.5,
                 paddingRight: 0.5,
                 paddingTop: 0.5,
@@ -38,10 +34,12 @@ const DEFAULT_COLUMN = new ColumnBlock(
                 columnStyles: {
                     1: {
                         marginLeft: 2,
+                        width: 38
                     },
                     2: {
                         marginLeft: 2,
                         marginRight: 2,
+                        width: 62
                     },
                 },
             },
@@ -58,7 +56,21 @@ const DEFAULT_COLUMN = new ColumnBlock(
                 2: [
                     new TextBlock({
                         text: 'BIELA NOC',
-                        fontSize: 1.8,
+                        fontSize: 2,
+                        textColor: '#fff',
+                        cssClasses: '',
+                    }),
+                    new TextBlock({
+                        text: '10.-12.10.2025 | KOŠICE',
+                        fontSize: 1.5,
+                        textColor: '#fff',
+                        cssClasses: '',
+                        marginBottom: 1,
+                        marginTop: 1
+                    }),
+                    new TextBlock({
+                        text: 'Biela Noc 2025 je 16. ročník medzinárodného festivalu súčasného umenia v Košiciach, ktorý sa bude konať 10. – 12. októbra, každý deň od 19:00 do polnoci.',
+                        fontSize: 1.2,
                         textColor: '#fff',
                         cssClasses: '',
                     }),
@@ -73,10 +85,7 @@ export class Template3Block extends ColumnBlock implements Block {
     options: ColumnOptions = {
         columns: 1,
         switchCols: false,
-        backgroundColor: '',
-        backgroundImage: '',
-        styleClass: '',
-        styles: '',
+        verticalAlign: 'start',
         columnStyles: {
             1: {
                 styleClass: 'col',
@@ -95,6 +104,8 @@ export class Template3Block extends ColumnBlock implements Block {
                 lineHeight: 1,
                 letterSpacing: 0,
             }),
+            DEFAULT_COLUMN,
+            DEFAULT_COLUMN,
             DEFAULT_COLUMN,
         ],
     };

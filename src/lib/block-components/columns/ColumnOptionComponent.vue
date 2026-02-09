@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BaseOption from '@/lib/block-components/BaseOption.vue';
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
-import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { ColumnBlock, VerticalAlign } from "@/lib/utils/blocks/ColumnBlock.ts";
 import { ref, watch } from "vue";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';
@@ -59,9 +59,17 @@ watch(
 
 const onChangeOption = debounce(() => emit('onChangeOption'))
 
+const onChangeAlign = (align: VerticalAlign) => {
+  props.blockInfo.options.verticalAlign = align
+  onChangeOption()
+}
+
 const onChangeColumns = (columnIndex: number) => {
   props.blockInfo.options.columns = columnIndex
   onChangeOption()
+  for (const key in props.blockInfo.options.columnStyles) {
+    props.blockInfo.options.columnStyles[key].width = 100 / columnIndex
+  }
 }
 </script>
 <template>
@@ -72,6 +80,36 @@ const onChangeColumns = (columnIndex: number) => {
       <OptionWidget :title="t('switch_columns')">
         <SliderToggle v-model="blockInfo.options.switchCols" @update:model-value="onChangeOption" />
       </OptionWidget>
+      <!-- Alignment -->
+      <option-widget :title="t('alignment')">
+        <div class="bcpb:flex bcpb:rounded-lg bcpb:border bcpb:border-gray-300 bcpb:overflow-hidden">
+          <button @click="onChangeAlign('start')"
+            class="bcpb:cursor-pointer bcpb:flex-1 bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:transition-colors bcpb:duration-200 bcpb:flex bcpb:items-center bcpb:justify-center"
+            :class="{
+              'bcpb:bg-blue-600 bcpb:text-white': blockInfo.options.verticalAlign === 'start',
+              'bcpb:bg-white bcpb:text-gray-700 hover:bcpb:bg-gray-50': blockInfo.options.verticalAlign !== 'start'
+            }" :title="t('align_left')">
+            <img src="@/assets/icons/v-align-top.svg" alt="Align start" class="bcpb:w- bcpb:h-4">
+          </button>
+          <button @click="onChangeAlign('center')"
+            class="bcpb:cursor-pointer bcpb:flex-1 bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:transition-colors bcpb:duration-200 bcpb:flex bcpb:items-center bcpb:justify-center bcpb:border-x bcpb:border-gray-300"
+            :class="{
+              'bcpb:bg-blue-600 bcpb:text-white': blockInfo.options.verticalAlign === 'center',
+              'bcpb:bg-white bcpb:text-gray-700 hover:bcpb:bg-gray-50': blockInfo.options.verticalAlign !== 'center'
+            }" :title="t('align_center')">
+            <img src="@/assets/icons/v-align-center.svg" alt="Align center" class="bcpb:w- bcpb:h-4">
+          </button>
+          <button @click="onChangeAlign('end')"
+            class="bcpb:cursor-pointer bcpb:flex-1 bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:font-medium bcpb:transition-colors bcpb:duration-200 bcpb:flex bcpb:items-center bcpb:justify-center"
+            :class="{
+              'bcpb:bg-blue-600 bcpb:text-white': blockInfo.options.verticalAlign === 'end',
+              'bcpb:bg-white bcpb:text-gray-700 hover:bcpb:bg-gray-50': blockInfo.options.verticalAlign !== 'end'
+            }" :title="t('align_end')">
+            <img src="@/assets/icons/v-align-bottom.svg" alt="Align end" class="bcpb:w- bcpb:h-4">
+          </button>
+        </div>
+      </option-widget>
+      <!-- Padding -->
       <PaddingOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
       <!-- Border radius -->
       <BorderRadiusOption v-model="blockInfo.options" @update:model-value="onChangeOption" />
@@ -109,6 +147,11 @@ const onChangeColumns = (columnIndex: number) => {
     </div>
     <!-- Individual Column Settings -->
     <div class="bcpb:mt-4 bcpb:space-y-1">
+      <!-- Font size -->
+      <option-widget :title="t('width_percent')">
+        <input type="number" min="0" step="1" max="100" class="bg-page-builder-input bcpb:w-24!"
+          v-model.number="blockInfo.options.columnStyles[selectedColumn].width" @update:model-value="onChangeOption" />
+      </option-widget>
       <!-- Margin -->
       <MarginOption v-model="blockInfo.options.columnStyles[selectedColumn]" @update:model-value="onChangeOption" />
       <!-- Background -->

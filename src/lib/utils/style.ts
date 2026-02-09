@@ -1,3 +1,4 @@
+import { VerticalAlign } from "./blocks/ColumnBlock";
 import { BackgroundOptions, BorderRadiusOptions, MarginOptions, PaddingOptions } from "./types";
 
 export const marginStyles = (options: MarginOptions) => ({
@@ -31,3 +32,11 @@ export const background = (options: BackgroundOptions) => ({
 export const backgroundColorOverlay = (options: { backgroundColor?: string | null }) => (options?.backgroundColor ? {
     boxShadow: `inset 0 0 0 1000px ${options.backgroundColor}`
 } : {})
+
+export const width = (options: { width: string | number | null }) => ({
+    width: options?.width ? `${options.width}%` : '100%',
+})
+
+export const verticalAlign = (options: { verticalAlign: VerticalAlign }) => ({
+    alignItems: options?.verticalAlign ? options?.verticalAlign : 'start',
+})

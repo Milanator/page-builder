@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { background, backgroundColorOverlay, borderRadiusStyles, marginStyles, paddingStyles } from "@/lib/utils/style.ts";
+import { background, backgroundColorOverlay, borderRadiusStyles, marginStyles, paddingStyles, verticalAlign, width } from "@/lib/utils/style.ts";
 import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
 import { previewComponentMap } from "@/lib/utils/registry.ts";
 import { Block } from "@/lib/utils/types.ts";
@@ -130,7 +130,6 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
   }
 }
 </script>
-
 <template>
   <BasePreview :inEditor="inEditor" :background-image="blockInfo.options.backgroundImage"
     :background-color="blockInfo.options.backgroundColor" :style="borderRadiusStyles(blockInfo.options ?? {})">
@@ -139,13 +138,15 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
       { flexDirection: blockInfo.options.switchCols ? 'row-reverse' : 'row' },
       blockInfo.options.styles,
       paddingStyles(blockInfo.options ?? {}),
+      verticalAlign(blockInfo.options ?? {}),
     ]">
       <div v-for="(index) in blockInfo.options.columns" :style="[
         blockInfo.options.columnStyles[index]?.styles,
         marginStyles(blockInfo.options.columnStyles[index] ?? {}),
         borderRadiusStyles(blockInfo.options.columnStyles[index] ?? {}),
         background(blockInfo.options.columnStyles[index] ?? {}),
-        backgroundColorOverlay(blockInfo.options.columnStyles[index] ?? {})
+        backgroundColorOverlay(blockInfo.options.columnStyles[index] ?? {}),
+        width(blockInfo.options.columnStyles[index] ?? {})
       ]"
         :class="[{ 'column-item': inEditor, 'column-dragged-over': dragOverRow === index && inEditor }, blockInfo.options.columnStyles[index]?.styleClass]"
         class="bcpb:py-4" @drop="onDrop($event, index)" @dragenter.prevent @dragleave="onDragLeave"
@@ -161,9 +162,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
       </div>
     </div>
   </BasePreview>
-
 </template>
-
 <style scoped lang="scss">
 .bc--page-builder-row {
   display: flex;
@@ -173,11 +172,9 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
   width: 100%;
 }
 
-
 .column-item {
   min-height: 40px;
   border: none;
-  /* padding: 10px 0; */
   position: relative;
   z-index: 10;
 

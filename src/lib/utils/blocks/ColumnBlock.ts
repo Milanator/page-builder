@@ -4,14 +4,18 @@ import ColumnComponent from "../../block-components/columns/ColumnComponent.vue"
 import { registerBlock } from "@/lib/utils/registry.ts";
 import ColumnOptionComponent from "../../block-components/columns/ColumnOptionComponent.vue";
 
+export type VerticalAlign = 'start' | 'center' | 'end'
+
 type ColumnStyles = MarginOptions & BorderRadiusOptions & BackgroundOptions & {
     styleClass?: string
     styles?: string
+    width?: string | number
 }
 
 export type ColumnOptions = BackgroundOptions & PaddingOptions & BorderRadiusOptions & {
     columns: number
     switchCols: boolean
+    verticalAlign?: VerticalAlign
     styleClass?: string
     styles?: string
     columnStyles: Record<number, ColumnStyles>
@@ -22,6 +26,7 @@ export type ColumnChildren = { [key: string | number]: Block[] }
 export const DEFAULT_STYLES: ColumnStyles = {
     styleClass: 'col',
     styles: 'padding: 10px',
+    width: 33
 }
 
 export class ColumnBlock implements Block {
@@ -31,6 +36,7 @@ export class ColumnBlock implements Block {
     options: ColumnOptions = {
         columns: 3,
         switchCols: false,
+        verticalAlign: 'start',
         columnStyles: {
             1: DEFAULT_STYLES,
             2: DEFAULT_STYLES,

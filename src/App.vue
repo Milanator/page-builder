@@ -13,8 +13,8 @@ const config: Config = {
   device: 'custom',
   // affect only if device = custom
   resolution: {
-    width: '1000',
-    height: '1300'
+    width: '768',
+    height: '1366'
   }
 }
 

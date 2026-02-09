@@ -68,10 +68,6 @@ export class Template2 extends ColumnBlock implements Block {
     options: ColumnOptions = {
         columns: 1,
         switchCols: false,
-        backgroundColor: '',
-        backgroundImage: '',
-        styleClass: '',
-        styles: '',
         columnStyles: {
             1: {
                 styleClass: 'col',
