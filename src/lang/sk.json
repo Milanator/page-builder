@@ -77,5 +77,7 @@
   "exit_modal_text": "Odchodom bez uloženia sa všetky zmeny, ktoré zostali neuložené natrvalo odstránia.",
   "close_window": "Pokračovať v zmenách",
   "editor_info_tooltip": "Rozloženie stránky v editore je orientačné. Presné zobrazenie nájdete v Náhľade.",
-  "width_percent": "Šírka (%)"
+  "width_percent": "Šírka (%)",
+  "Preview": "Náhľad",
+  "preview_image_tooltip": "Náhľad možného obsahu elementu"
 }

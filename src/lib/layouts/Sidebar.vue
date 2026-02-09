@@ -7,6 +7,7 @@ import { useTranslator } from '@/lib/Translator';
 
 const { startDrag } = usePageBuilder()
 const { t } = useTranslator();
+const exampleDialog = ref<string | undefined>(undefined)
 
 // Search functionality
 const searchTerm = ref('')
@@ -110,10 +111,18 @@ const filteredUIComponents = computed(() => {
                   class="bcpb:text-blue-600 group-hover:bcpb:text-blue-700 group-hover:bcpb:scale-110 bcpb:transition-all bcpb:duration-300"
                   v-html="element.icon"></div>
               </div>
-              <div class="bcpb:flex-1">
+              <div class="bcpb:flex-1 bcpb:flex bcpb:justify-between bcpb:items-center">
                 <p
                   class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-indigo-900 bcpb:transition-colors bcpb:duration-200">
-                  {{ t(element.title) }}</p>
+                  {{ t(element.title) }}
+                </p>
+                <ToolTip v-if="element.exampleImage" :text="t('preview_image_tooltip')">
+                  <button type="button"
+                    class="bcpb:mr-0 flex bcpb:items-center bcpb:gap-1 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer"
+                    @click="exampleDialog = element.exampleImage">
+                    <img src="@/assets/icons/visibility.svg" alt="Eye" class="bcpb:w-4 bcpb:h-4">
+                  </button>
+                </ToolTip>
               </div>
             </div>
           </div>
@@ -160,6 +169,33 @@ const filteredUIComponents = computed(() => {
         </div>
         <h3 class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 bcpb:mb-1">No elements found</h3>
         <p class="bcpb:text-sm bcpb:text-gray-500">Try searching for something else</p>
+      </div>
+
+      <!-- Example modal -->
+      <div v-if="exampleDialog"
+        class="bcpb:fixed bcpb:inset-0 bcpb:z-50 bcpb:flex bcpb:items-center bcpb:justify-center bcpb:p-4 bcpb:bg-black/20 bcpb:backdrop-blur-sm"
+        @click.self="exampleDialog = undefined">
+        <div
+          class="bcpb:w-full bcpb:max-w-md bcpb:bg-white bcpb:rounded-xl bcpb:shadow-xl bcpb:border bcpb:border-gray-100 bcpb:overflow-hidden">
+          <!-- Modal Header -->
+          <div class="bcpb:px-6 bcpb:py-4 bcpb:border-b bcpb:border-gray-100">
+            <h3 class="bcpb:text-lg bcpb:font-semibold bcpb:text-gray-900">{{ t('exit_modal_title') }}</h3>
+          </div>
+          <!-- Modal Content -->
+          <div class="bcpb:px-6 bcpb:py-4 bcpb:flex bcpb:justify-center">
+            <img :src="exampleDialog" alt="Example image" class="bcpb:max-h-125">
+          </div>
+          <!-- Modal Actions -->
+          <div
+            class="bcpb:px-6 bcpb:py-4 bcpb:bg-gray-50 bcpb:border-t bcpb:border-gray-100 bcpb:flex bcpb:justify-end bcpb:gap-2">
+            <!-- Continue -->
+            <button type="button"
+              class="bcpb:cursor-pointer bcpb:p-2 bcpb:text-sm bcpb:font-medium bcpb:text-gray-700 bcpb:bg-white bcpb:border bcpb:border-gray-300 bcpb:rounded-lg hover:bcpb:bg-gray-50 focus:bcpb:outline-none focus:bcpb:ring-2 focus:bcpb:ring-gray-200 bcpb:transition-colors bcpb:duration-200"
+              @click="exampleDialog = undefined">
+              {{ t('close_item') }}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
