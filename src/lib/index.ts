@@ -7,6 +7,7 @@ import PagePreview from "./PagePreview.vue";
 import BasePreview from "./block-components/BasePreview.vue";
 import BaseOption from '@/lib/block-components/BaseOption.vue';
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
+import { sanitizeRenderList, sanitizeSettings } from "./utils/formatter";
 
 export * from "./utils/types";
 export * from "./utils/registry";
@@ -21,4 +22,6 @@ export {
     BaseOption,
     SliderToggle,
     SettingBlock,
+    sanitizeRenderList,
+    sanitizeSettings
 }
