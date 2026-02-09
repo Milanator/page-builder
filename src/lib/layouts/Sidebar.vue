@@ -4,6 +4,7 @@ import { usePageBuilder } from "../PageBuilder.ts";
 import { blockRegistry } from "../utils/registry.ts";
 import type { Block } from "../utils/types.ts";
 import { useTranslator } from '@/lib/Translator';
+import ToolTip from "@/lib/partials/ToolTip.vue";
 
 const { startDrag } = usePageBuilder()
 const { t } = useTranslator();

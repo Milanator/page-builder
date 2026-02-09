@@ -3,7 +3,7 @@ import { registerBlock } from "@/lib/utils/registry.ts";
 import { markRaw } from "vue";
 import SettingOptionComponent from "@/lib/block-components/setting/SettingOptionComponent.vue";
 
-type SettingOptions = BackgroundOptions;
+interface SettingOptions extends BackgroundOptions { }
 
 export class SettingBlock implements Block {
     id?: string;

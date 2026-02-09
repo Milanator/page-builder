@@ -6,28 +6,34 @@ export const sanitizeSettings = (settings: SettingBlock) => sanitizeSetting(sett
 
 export const sanitizeRenderList = (renderList: Block[]) => renderList.map((item) => sanitizeBlock(item))
 
-const sanitizeBlock = (block: Block) => ({
-    id: block.id,
-    name: block.name,
-    type: block.type,
-    title: block.title,
-    options: deepClone(block.options),
-    children: block.children
-        ? Object.fromEntries(
-            Object.entries(block.children).map(([key, children]) => [
-                key,
-                children.map(sanitizeBlock)
-            ])
-        )
-        : undefined
-})
+const sanitizeBlock = (block: Block) => {
+    return {
+        id: block.id,
+        name: block.name,
+        type: block.type,
+        title: block.title,
+        options: getOptions(block),
+        children: block.children
+            ? Object.fromEntries(
+                Object.entries(block.children).map(([key, children]) => [
+                    key,
+                    children.map(sanitizeBlock)
+                ])
+            )
+            : undefined
+    }
+}
 
-const sanitizeSetting = (block: SettingBlock) => ({
-    id: block.id,
-    name: block.name,
-    type: block.type,
-    title: block.title,
-    options: deepClone(block.options)
-})
+const sanitizeSetting = (block: SettingBlock) => {
+    return {
+        id: block.id,
+        name: block.name,
+        type: block.type,
+        title: block.title,
+        options: getOptions(block)
+    };
+}
+
+const getOptions = (block: Block | SettingBlock) => Array.isArray(block.options) && block.options.length === 0 ? {} : deepClone(block.options ?? {})
 
 export const deepClone = (obj: any) => JSON.parse(JSON.stringify(toRaw(obj)))
