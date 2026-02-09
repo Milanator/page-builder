@@ -1,5 +1,5 @@
-import { VerticalAlign } from "./blocks/ColumnBlock";
-import { BackgroundOptions, BorderRadiusOptions, MarginOptions, PaddingOptions } from "./types";
+import { VerticalAlign } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { BackgroundOptions, BorderRadiusOptions, MarginOptions, PaddingOptions } from "@/lib/utils/types"
 
 export const marginStyles = (options: MarginOptions) => ({
     marginLeft: options.marginLeft ? `${options.marginLeft}%` : undefined,
