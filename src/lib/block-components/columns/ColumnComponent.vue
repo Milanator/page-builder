@@ -176,8 +176,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
   min-height: 40px;
   border: none;
   position: relative;
-  z-index: 10;
-
+  /* z-index: 10; */
 
   &:not(:last-child) {
     border-right: 1px dashed blue;
