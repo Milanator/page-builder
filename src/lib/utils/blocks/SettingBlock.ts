@@ -6,6 +6,7 @@ import SettingOptionComponent from "@/lib/block-components/setting/SettingOption
 type SettingOptions = BackgroundOptions;
 
 export class SettingBlock implements Block {
+    id?: string;
     name: string = 'setting';
     component: undefined;
     optionComponent: VueComponent = markRaw(SettingOptionComponent);
