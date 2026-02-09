@@ -10,6 +10,7 @@ import { ImageBlock } from "@/lib/utils/blocks/ImageBlock.ts";
 import { Template2 } from "@/lib/utils/blocks/Template2Block.ts";
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
 import { Template3Block } from "@/lib/utils/blocks/Template3Block";
+import { Template4Block } from "./utils/blocks/Template4Block";
 
 const draggedItem: Ref<Block | null> = ref(null)
 const dragOverIndex: Ref<number | null> = ref(null)
@@ -23,6 +24,7 @@ const blocks: Ref<Array<Block>> = ref([
     new ButtonBlock(),
     new TextBlock(),
     new Template2(),
+    new Template4Block(),
     new Template1(),
     new Template3Block(),
     new ColumnBlock(),
