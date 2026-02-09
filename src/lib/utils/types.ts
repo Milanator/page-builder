@@ -51,6 +51,8 @@ export interface Block {
     previewImg?: string;
 
     type: BlockType
+
+    exampleImage?: string
 }
 
 export type BlockType = 'element' | 'ui-component' | 'layout' | 'setting';

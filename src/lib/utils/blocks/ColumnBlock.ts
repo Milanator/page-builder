@@ -49,6 +49,7 @@ export class ColumnBlock implements Block {
     `;
     title: string = 'Columns';
     type: BlockType = 'layout';
+    exampleImage?: string;
 
     constructor(options?: Record<string, any>, children?: ColumnChildren) {
         if (options) {
