@@ -6,10 +6,10 @@ import ColumnOptionComponent from "../../block-components/columns/ColumnOptionCo
 
 export type VerticalAlign = 'start' | 'center' | 'end'
 
-type ColumnStyles = MarginOptions & BorderRadiusOptions & BackgroundOptions & {
+export type ColumnStyles = MarginOptions & BorderRadiusOptions & BackgroundOptions & {
     styleClass?: string
     styles?: string
-    width?: string | number
+    width?: string | number | null
 }
 
 export type ColumnOptions = BackgroundOptions & PaddingOptions & BorderRadiusOptions & {

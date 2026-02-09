@@ -2,7 +2,7 @@
 import BaseOption from '@/lib/block-components/BaseOption.vue';
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
 import { ColumnBlock, VerticalAlign } from "@/lib/utils/blocks/ColumnBlock.ts";
-import { ref, watch } from "vue";
+import { nextTick, ref, watch } from "vue";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';
 import MarginOption from "@/lib/block-components/partials/MarginOption.vue";
@@ -64,12 +64,30 @@ const onChangeAlign = (align: VerticalAlign) => {
   onChangeOption()
 }
 
-const onChangeColumns = (columnIndex: number) => {
+const onChangeColumns = async (columnIndex: number) => {
   props.blockInfo.options.columns = columnIndex
-  onChangeOption()
+  await nextTick()
   for (const key in props.blockInfo.options.columnStyles) {
     props.blockInfo.options.columnStyles[key].width = 100 / columnIndex
   }
+
+  onChangeOption()
+}
+
+const onChangeWidthOption = () => {
+  // recalculate next/previous column on recalculcation specified column
+  if (Object.values(props.blockInfo.options.columnStyles).length > 1) {
+    let widthSum = 0
+    for (const key in props.blockInfo.options.columnStyles) {
+      widthSum += Number(props.blockInfo.options.columnStyles[key].width) ?? 0
+    }
+
+    // recalculate next or previous col
+    const toRecalculateColumn = props.blockInfo.options.columnStyles[selectedColumn.value + 1] ?? props.blockInfo.options.columnStyles[selectedColumn.value - 1]
+    toRecalculateColumn.width = Number(toRecalculateColumn.width) + (100 - widthSum)
+  }
+
+  onChangeOption()
 }
 </script>
 <template>
@@ -150,7 +168,8 @@ const onChangeColumns = (columnIndex: number) => {
       <!-- Font size -->
       <option-widget :title="t('width_percent')">
         <input type="number" min="0" step="1" max="100" class="bg-page-builder-input bcpb:w-24!"
-          v-model.number="blockInfo.options.columnStyles[selectedColumn].width" @update:model-value="onChangeOption" />
+          v-model.number="blockInfo.options.columnStyles[selectedColumn].width"
+          @update:model-value="onChangeWidthOption" />
       </option-widget>
       <!-- Margin -->
       <MarginOption v-model="blockInfo.options.columnStyles[selectedColumn]" @update:model-value="onChangeOption" />

@@ -33,10 +33,10 @@ export const backgroundColorOverlay = (options: { backgroundColor?: string | nul
     boxShadow: `inset 0 0 0 1000px ${options.backgroundColor}`
 } : {})
 
-export const width = (options: { width: string | number | null }) => ({
+export const width = (options: { width?: string | number | null }) => ({
     width: options?.width ? `${options.width}%` : '100%',
 })
 
-export const verticalAlign = (options: { verticalAlign: VerticalAlign }) => ({
+export const verticalAlign = (options: { verticalAlign?: VerticalAlign }) => ({
     alignItems: options?.verticalAlign ? options?.verticalAlign : 'start',
 })
