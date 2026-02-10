@@ -22,20 +22,30 @@ interface Emits {
   (event: 'onSaveAndBack'): void
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   showDeviceToolbar: true,
   device: 'desktop',
 })
 const emit = defineEmits<Emits>()
 const showExitModal = ref<boolean>(false)
 const { t } = useTranslator();
+
+const onClickExit = () => {
+  // no changes - skip modal
+  if (!props.canUndo) {
+    emit('onBack')
+    return
+  }
+
+  showExitModal.value = true
+}
 </script>
 <template>
   <!-- Toolbar -->
   <div
     class="bcpb:bg-white bcpb:border-b bcpb:border-gray-100 bcpb:px-8 bcpb:py-4 bcpb:flex bcpb:items-center bcpb:justify-between bcpb:h-20">
     <div class="bcpb:flex bcpb:items-center bcpb:gap-2">
-      <button type="button" @click="showExitModal = true"
+      <button type="button" @click="onClickExit"
         class="bcpb:mr-3 flex bcpb:items-center bcpb:gap-1 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"
           class="bcpb:w-4 bcpb:h-4 bcpb:cursor-pointer">
