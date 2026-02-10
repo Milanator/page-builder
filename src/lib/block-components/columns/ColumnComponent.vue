@@ -43,23 +43,27 @@ const onDrop = ($event: DragEvent, index: number): void => {
   const { value: innerColumn } = innerDragColumn;
   const { value: innerElementInbox } = innerDragElementInbox;
 
+  console.log(`source: ${innerElementInbox} , target: ${dragOverColumn.value}`)
+
   // Handle inner drag item
   if (innerElement && innerColumn != null && innerElementInbox != null) {
     console.log("it's an inner drag item dropped");
-
     props.blockInfo.children[index] = props.blockInfo.children[index] || [];
     const targetColumn = props.blockInfo.children[index];
-
+    if (innerElementInbox === dragOverColumn.value) {
+      // drag element and put into same order as before - keep same block as before
+      targetColumn.splice(dragOverColumn.value, 0, props.blockInfo.children[index]);
+      resetInnerDragState();
+      return
+    }
     // Remove the dragged item from its original location
     props.blockInfo.children[innerColumn].splice(innerElementInbox, 1);
-
     // Insert the dragged item into the new location
     if (dragOverColumn.value === null) {
       targetColumn.push(parsedItem);
     } else {
       targetColumn.splice(dragOverColumn.value, 0, parsedItem);
     }
-
     // Reset drag states
     resetInnerDragState();
     return;
@@ -72,8 +76,10 @@ const onDrop = ($event: DragEvent, index: number): void => {
 
   if (dragOverColumn.value === null) {
     targetColumn.push(parsedItem);
+    console.log('push')
   } else {
     targetColumn.splice(dragOverColumn.value, 0, parsedItem);
+    console.log('splice')
   }
 
   // Reset drag states
