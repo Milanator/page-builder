@@ -1,4 +1,4 @@
-import { Block, BlockType } from "../types.ts";
+import { Block, BlockType } from "@/lib/utils/types"
 import { registerBlock } from "@/lib/utils/registry.ts";
 import { TextBlock } from "@/lib/utils/blocks/TextBlock.ts";
 import { ColumnBlock, ColumnChildren, ColumnOptions } from "@/lib/utils/blocks/ColumnBlock.ts";

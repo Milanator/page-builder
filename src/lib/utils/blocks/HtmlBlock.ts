@@ -1,4 +1,4 @@
-import { Block, BlockType, VueComponent } from "../types.ts";
+import { Block, BlockType, VueComponent } from "@/lib/utils/types"
 import { markRaw } from "vue";
 import HtmlComponent from "../../block-components/html/HtmlComponent.vue";
 import { registerBlock } from "@/lib/utils/registry.ts";

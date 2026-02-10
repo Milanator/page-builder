@@ -1,4 +1,4 @@
-import { Block, BlockType, MarginOptions, VueComponent } from "../types.ts";
+import { Block, BlockType, MarginOptions, VueComponent } from "@/lib/utils/types"
 import { markRaw } from "vue";
 import ButtonComponent from "../../block-components/button/ButtonComponent.vue";
 import { registerBlock } from "@/lib/utils/registry.ts";

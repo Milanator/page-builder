@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Block } from "@/lib/utils/types"
-import { previewComponentMap } from "./utils/registry.ts";
+import { previewComponentMap } from "@/lib/utils/registry";
 
 interface Props {
   renderList: Block[]
