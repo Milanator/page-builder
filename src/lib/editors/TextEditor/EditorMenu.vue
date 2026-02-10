@@ -2,51 +2,17 @@
 import { onMounted, ref } from "vue";
 import type { Editor } from "@tiptap/vue-3";
 import ColorPicker from "@/lib/block-components/partials/ColorPicker.vue";
-
-type FONT_TYPE = {
-  value: string
-  label: string
-}
+import { TextOptions, FONT_TYPE, FONTS, TextAlign } from "@/lib/utils/blocks/TextBlock";
 
 interface Props {
   editor: Editor;
   bubbleMenu: boolean;
-  styles: any
+  options: TextOptions
 }
 
-const FONTS: FONT_TYPE[] = [
-  {
-    label: 'Poppins',
-    value: 'Poppins, system-ui, sans-serif',
-  },
-  {
-    label: 'Montserrat',
-    value: "'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif"
-  },
-  {
-    label: 'JetBrains Mono',
-    value: '"JetBrains Mono"'
-  },
-  {
-    label: 'Pacifico',
-    value: 'Pacifico, cursive'
-  },
-  {
-    label: 'Playfair',
-    value: '"Playfair Display", Georgia, serif'
-  },
-  {
-    label: 'Roboto Slab',
-    value: '"Roboto Slab", serif'
-  },
-  {
-    label: 'Default',
-    value: '',
-  },
-]
-
 const props = defineProps<Props>();
-const color = ref<string>(props.styles.textColor)
+const textColor = ref<string>(props.options.textColor)
+const fontFamily = ref<FONT_TYPE>()
 const dropDownMenus = ref<Record<string, boolean>>({
   paragraph: false,
   fontFamily: false,
@@ -65,6 +31,15 @@ const onChangeFont = (font: FONT_TYPE) => {
   }
 
   props.editor.chain().focus().setFontFamily(font.value).run()
+  fontFamily.value = font
+}
+
+const onChangeAlignment = (alignment: TextAlign) => {
+  if (!props.editor) {
+    return
+  }
+
+  props.editor.chain().focus().setTextAlign(alignment).run()
 }
 
 const closeDropdowns = () => {
@@ -80,7 +55,7 @@ const handleClickOutside = (event: Event) => {
   }
 }
 
-const setColor = (event: string) => {
+const onChangeColor = (event: string) => {
   props.editor.chain().focus().setColor(event as string).run()
 }
 
@@ -90,13 +65,21 @@ if (typeof window !== 'undefined') {
 }
 
 onMounted(() => {
-  color.value = props.editor.getAttributes('textStyle').color ?? props.styles.textColor
-  setColor(color.value)
+  textColor.value = props.editor.getAttributes('textStyle').color ?? props.options.textColor
+  fontFamily.value = props.options.fontFamily ?? FONTS[FONTS.length - 1]
+  onChangeColor(textColor.value)
+  onChangeFont(fontFamily.value)
+  onChangeAlignment(props.options.textAlign ?? 'left')
 })
 </script>
 <template>
   <div class="editor-menu" :class="{ 'bubble-menu': bubbleMenu, 'fixed-menu': !bubbleMenu }">
-
+    <!-- Color -->
+    <div class="editor-color-picker-container">
+      <div class="bcpb:relative">
+        <ColorPicker v-model="textColor" @update:model-value="onChangeColor($event as string)" />
+      </div>
+    </div>
     <!-- Font family -->
     <div class="dropdown-container bcpb:relative">
       <button @click.stop="dropDownMenus.fontFamily = !dropDownMenus.fontFamily"
@@ -109,24 +92,14 @@ onMounted(() => {
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
         </svg>
       </button>
-
       <!-- Dropdown Menu -->
       <div v-show="dropDownMenus.fontFamily" class="editor-dropdown-menu" style="min-width: 160px;">
-        <!-- Inter -->
         <button v-for="font in FONTS" @click="onChangeFont(font)" class="editor-dropdown-item"
-          :class="{ 'active': editor.isActive('textStyle', { fontFamily: font.value }) }">
+          :class="{ 'active': fontFamily?.label === font.label }">
           <span class="bcpb:text-sm" :style="{ fontFamily: font.value }">{{ font.label }}</span>
         </button>
       </div>
     </div>
-
-    <!-- Color -->
-    <div class="editor-color-picker-container">
-      <div class="bcpb:relative">
-        <ColorPicker v-model="color" @update:model-value="setColor($event as string)" />
-      </div>
-    </div>
-
     <!-- Text Format Dropdown -->
     <div class="dropdown-container bcpb:relative">
       <button @click.stop="dropDownMenus.paragraph = !dropDownMenus.paragraph"
@@ -205,11 +178,6 @@ onMounted(() => {
         :class="{ 'active': editor.isActive('blockquote') }" title="Blockquote">
         <img src="@/assets/icons/quote.svg" alt="Quote">
       </button>
-
-      <!-- <button @click="editor.chain().focus().toggleCodeBlock().run()" class="editor-menu-button"
-        :class="{ 'active': editor.isActive('codeBlock') }" title="Code Block">
-        <img src="@/assets/icons/bracket.svg" alt="Bracket">
-      </button> -->
     </div>
 
     <div class="dropdown-container bcpb:relative">
@@ -223,17 +191,17 @@ onMounted(() => {
 
       <!-- Dropdown Menu -->
       <div v-show="dropDownMenus.align" class="editor-dropdown-menu">
-        <button @click="editor.chain().focus().setTextAlign('left').run()" class="editor-menu-button"
+        <button @click="onChangeAlignment('left')" class="editor-menu-button"
           :class="{ 'active': editor.isActive({ textAlign: 'left' }) }" title="Align Left">
           <img src="@/assets/icons/align-left.svg" alt="Align left" />
         </button>
 
-        <button @click="editor.chain().focus().setTextAlign('center').run()" class="editor-menu-button"
+        <button @click="onChangeAlignment('center')" class="editor-menu-button"
           :class="{ 'active': editor.isActive({ textAlign: 'center' }) }" title="Align Center">
           <img src="@/assets/icons/align-center.svg" alt="Align center" />
         </button>
 
-        <button @click="editor.chain().focus().setTextAlign('right').run()" class="editor-menu-button"
+        <button @click="onChangeAlignment('right')" class="editor-menu-button"
           :class="{ 'active': editor.isActive({ textAlign: 'right' }) }" title="Align Right">
           <img src="@/assets/icons/align-right.svg" alt="Align right" />
         </button>

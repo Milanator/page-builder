@@ -1,7 +1,7 @@
 import { Block, BlockType } from "@/lib/utils/types"
 import { registerBlock } from "@/lib/utils/registry.ts";
 import { TextBlock } from "@/lib/utils/blocks/TextBlock.ts";
-import { ColumnBlock, ColumnChildren, ColumnOptions } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { ColumnBlock, ColumnChildren, ColumnOptions } from "@/lib/utils/blocks/layouts/ColumnBlock.ts";
 import { ImageBlock } from "@/lib/utils/blocks/ImageBlock.ts";
 import Template1Image from '@/assets/img/template_1.png'
 

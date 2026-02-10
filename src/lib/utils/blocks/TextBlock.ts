@@ -4,17 +4,60 @@ import { registerBlock } from "@/lib/utils/registry.ts";
 import TextComponent from "@/lib/block-components/text/TextComponent.vue";
 import TextOptionComponent from "@/lib/block-components/text/TextOptionComponent.vue";
 
-type BaseOptions = {
-    text: string;
-    fontSize: number;
+export type FONT_TYPE = {
+    value: string
+    label: string
+}
+
+export const FONTS: FONT_TYPE[] = [
+    {
+        label: 'Montserrat',
+        value: "'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+    },
+    {
+        label: 'Poppins',
+        value: 'Poppins, system-ui, sans-serif',
+    },
+    {
+        label: 'JetBrains Mono',
+        value: '"JetBrains Mono"'
+    },
+    {
+        label: 'Pacifico',
+        value: 'Pacifico, cursive'
+    },
+    {
+        label: 'Playfair',
+        value: '"Playfair Display", Georgia, serif'
+    },
+    {
+        label: 'Roboto Slab',
+        value: '"Roboto Slab", serif'
+    },
+    {
+        label: 'Default',
+        value: '',
+    },
+]
+
+export type EditorOptions = {
     textColor: string;
-    cssClasses: string;
+    textAlign?: TextAlign
+    fontSize: number;
     lineHeight?: number
     letterSpacing?: number
+    fontFamily?: FONT_TYPE
+}
+
+type BaseOptions = {
+    text: string;
+    cssClasses: string;
     styles?: string;
 };
 
-type TextOptions = BaseOptions & MarginOptions
+export type TextAlign = 'left' | 'center' | 'right'
+
+export type TextOptions = BaseOptions & MarginOptions & EditorOptions
 
 export class TextBlock implements Block {
     name: string = 'text';
@@ -24,6 +67,7 @@ export class TextBlock implements Block {
         text: "",
         cssClasses: "",
         styles: "",
+        textAlign: 'left',
         lineHeight: 1.4,
         letterSpacing: 0,
         fontSize: 1, //rem

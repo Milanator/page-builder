@@ -1,16 +1,17 @@
 import { ref, Ref } from "vue";
 import { v4 as uuidv4 } from 'uuid';
 import { ButtonBlock } from "@/lib/utils/blocks/ButtonBlock.ts";
-import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { ColumnBlock } from "@/lib/utils/blocks/layouts/ColumnBlock.ts";
 import { Block } from "@/lib/utils/types"
 import { HtmlBlock } from "@/lib/utils/blocks/HtmlBlock.ts";
 import { TextBlock } from "@/lib/utils/blocks/TextBlock.ts";
-import { Template1 } from "@/lib/utils/blocks/Template1Block.ts";
+import { Template1 } from "@/lib/utils/blocks/layouts/Template1Block";
 import { ImageBlock } from "@/lib/utils/blocks/ImageBlock.ts";
-import { Template2 } from "@/lib/utils/blocks/Template2Block.ts";
+import { Template2 } from "@/lib/utils/blocks/layouts/Template2Block";
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
-import { Template3Block } from "@/lib/utils/blocks/Template3Block";
-import { Template4Block } from "./utils/blocks/Template4Block";
+import { Template3Block } from "@/lib/utils/blocks/layouts/Template3Block";
+import { Template4Block } from "@/lib/utils/blocks/layouts/Template4Block";
+import { HeaderBlock } from "@/lib/utils/blocks/ui-components/HeaderBlock";
 
 const draggedItem: Ref<Block | null> = ref(null)
 const dragOverIndex: Ref<number | null> = ref(null)
@@ -30,7 +31,8 @@ const blocks: Ref<Array<Block>> = ref([
     new ColumnBlock(),
     new SettingBlock(),
     new HtmlBlock(),
-    new ImageBlock()
+    new ImageBlock(),
+    new HeaderBlock()
 ])
 
 export function usePageBuilder() {

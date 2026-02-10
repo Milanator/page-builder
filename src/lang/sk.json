@@ -80,5 +80,6 @@
   "width_percent": "Šírka (%)",
   "Preview": "Náhľad",
   "preview_image_tooltip": "Náhľad možného obsahu elementu",
-  "example_modal_title": "Šablóna"
+  "example_modal_title": "Šablóna",
+  "components": "Komponenty"
 }

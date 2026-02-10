@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { background, backgroundColorOverlay, borderRadiusStyles, marginStyles, paddingStyles, verticalAlign, width } from "@/lib/utils/style.ts";
-import { ColumnBlock } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { ColumnBlock } from "@/lib/utils/blocks/layouts/ColumnBlock.ts";
 import { previewComponentMap } from "@/lib/utils/registry.ts";
 import { Block } from "@/lib/utils/types.ts";
 import BasePreview from "../BasePreview.vue";

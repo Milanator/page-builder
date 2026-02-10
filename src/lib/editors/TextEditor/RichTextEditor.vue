@@ -4,16 +4,17 @@ import { FontFamily } from '@tiptap/extension-font-family'
 import { BubbleMenu, Content, Editor, EditorContent } from "@tiptap/vue-3";
 import { StarterKit } from "@tiptap/starter-kit";
 import { Placeholder } from "@tiptap/extension-placeholder";
-import { computed, onBeforeUnmount, watch } from "vue";
+import { onBeforeUnmount, watch } from "vue";
 import { TextStyle } from "@tiptap/extension-text-style";
 import { Color } from "@tiptap/extension-color";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { useTranslator } from '@/lib/Translator';
 import { debounce } from "@/lib/utils/helper";
+import { FONTS, TextOptions } from "@/lib/utils/blocks/TextBlock";
 
 interface Props {
   bubbleMenu?: boolean,
-  styles: any,
+  options: TextOptions,
 }
 
 interface Emits {
@@ -61,20 +62,20 @@ const editor = new Editor({
   }
 })
 
-const textStyles = computed(() => getTextStyles())
-
 const debounceText = debounce(() => emit('onTextChange', model.value), 800)
 
 const textContainsJson = (html: EditorText) => html?.includes(`{"name":`) || html?.includes(`{"id":`)
 
-const getTextStyles = () => ({
-  '--editor-line-height': props.styles.lineHeight || 1,
-  color: props.styles.textColor ? props.styles.textColor : undefined,
-  fontSize: props.styles.fontSize ? `${props.styles.fontSize}rem` : undefined,
-  letterSpacing: props.styles.letterSpacing ? `${props.styles.letterSpacing}px` : undefined,
-})
-
 const updateEditorText = (text: String | Content) => editor.commands.setContent(text, false)
+
+const getEditorTextStyles = () => ({
+  '--editor-line-height': props.options.lineHeight || 1,
+  color: props.options.textColor ? props.options.textColor : undefined,
+  fontSize: props.options.fontSize ? `${props.options.fontSize}rem` : undefined,
+  letterSpacing: props.options.letterSpacing ? `${props.options.letterSpacing}px` : undefined,
+  textAlign: props.options.textAlign ?? 'left',
+  fontFamily: (props.options.fontFamily ?? FONTS[FONTS.length - 1]).value
+})
 
 // detect change from parents
 watch(
@@ -94,18 +95,13 @@ onBeforeUnmount(() => {
 </script>
 <template>
   <div class="rich-text-editor">
-    <!-- Bubble Menu (floating toolbar) -->
     <bubble-menu :editor="editor" :tippy-options="{ duration: 100, theme: 'light-border', maxWidth: 400 }"
       v-if="bubbleMenu" class="bubble-menu-container">
-      <EditorMenu :editor="editor" :styles="styles" :bubble-menu="bubbleMenu" />
+      <EditorMenu :editor="editor" :options="options" :bubble-menu="bubbleMenu" />
     </bubble-menu>
-    <!-- Fixed Menu (toolbar above editor) -->
-    <div v-else class="fixed-menu-container">
-      <EditorMenu :editor="editor" :styles="styles" :bubble-menu="bubbleMenu" />
-    </div>
     <!-- Editor Content -->
     <div class="editor-content-wrapper">
-      <editor-content :editor="editor" class="editor-content" :style="textStyles" />
+      <EditorContent :editor="editor" class="editor-content" :style="getEditorTextStyles()" />
     </div>
   </div>
 </template>

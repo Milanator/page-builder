@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BaseOption from '@/lib/block-components/BaseOption.vue';
 import OptionWidget from "@/lib/widgets/OptionWidget.vue";
-import { ColumnBlock, VerticalAlign } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { ColumnBlock, VerticalAlign } from "@/lib/utils/blocks/layouts/ColumnBlock.ts";
 import { nextTick, ref, watch } from "vue";
 import SliderToggle from '@/lib/controls/SliderToggle.vue';
 import { useTranslator } from '@/lib/Translator';

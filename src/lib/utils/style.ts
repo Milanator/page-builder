@@ -1,4 +1,4 @@
-import { VerticalAlign } from "@/lib/utils/blocks/ColumnBlock.ts";
+import { VerticalAlign } from "@/lib/utils/blocks/layouts/ColumnBlock.ts";
 import { BackgroundOptions, BorderRadiusOptions, MarginOptions, PaddingOptions } from "@/lib/utils/types"
 
 export const marginStyles = (options: MarginOptions) => ({

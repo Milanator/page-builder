@@ -130,11 +130,10 @@ const filteredUIComponents = computed(() => {
 
         </div>
       </div>
-
       <!-- Components -->
       <div v-if="filteredUIComponents.length > 0" class="bcpb:px-6 bcpb:py-6 bcpb:border-t bcpb:border-gray-100">
         <h3 class="bcpb:text-sm bcpb:font-semibold bcpb:text-gray-900 bcpb:mb-4 bcpb:uppercase bcpb:tracking-wide">
-          Components</h3>
+          {{ t('components') }}</h3>
         <div class="bcpb:space-y-3">
           <div v-for="element in filteredUIComponents" :key="element.id" draggable="true"
             @dragstart="handleDragStart($event, element)" @dragend="handleDragEnd"
@@ -148,10 +147,17 @@ const filteredUIComponents = computed(() => {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </div>
-              <div class="bcpb:flex-1">
+              <div class="bcpb:flex-1 bcpb:flex bcpb:justify-between bcpb:items-center">
                 <p
                   class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-teal-900 bcpb:transition-colors bcpb:duration-200">
                   {{ element.title }}</p>
+                <ToolTip v-if="element.exampleImage" :text="t('preview_image_tooltip')">
+                  <button type="button"
+                    class="bcpb:mr-0 flex bcpb:items-center bcpb:gap-1 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer"
+                    @click="exampleModal = element.exampleImage">
+                    <img src="@/assets/icons/visibility.svg" alt="Eye" class="bcpb:w-4 bcpb:h-4">
+                  </button>
+                </ToolTip>
               </div>
             </div>
           </div>

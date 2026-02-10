@@ -1,8 +1,8 @@
 import { BackgroundOptions, Block, BlockType, BorderRadiusOptions, MarginOptions, PaddingOptions, VueComponent } from "@/lib/utils/types"
 import { markRaw } from "vue";
-import ColumnComponent from "../../block-components/columns/ColumnComponent.vue";
+import ColumnComponent from "@/lib/block-components/columns/ColumnComponent.vue";
 import { registerBlock } from "@/lib/utils/registry.ts";
-import ColumnOptionComponent from "../../block-components/columns/ColumnOptionComponent.vue";
+import ColumnOptionComponent from "@/lib/block-components/columns/ColumnOptionComponent.vue";
 
 export type VerticalAlign = 'start' | 'center' | 'end'
 

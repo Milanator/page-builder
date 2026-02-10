@@ -12,9 +12,21 @@ interface Emits {
   (event: 'onTextChange', value: string | undefined): any,
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const emit = defineEmits<Emits>()
+
+const getPreviewStyles = () => ([
+  props.blockInfo.options.styles,
+  marginStyles(props.blockInfo.options),
+  {
+    fontSize: props.blockInfo.options.fontSize ? `${props.blockInfo.options.fontSize}rem` : undefined,
+    color: props.blockInfo.options.textColor,
+    lineHeight: props.blockInfo.options.lineHeight,
+    textAlign: props.blockInfo.options?.textAlign ?? 'left',
+    letterSpacing: props.blockInfo.options.letterSpacing ? `${props.blockInfo.options.letterSpacing}px` : undefined,
+  }
+])
 </script>
 <template>
   <BasePreview :inEditor="inEditor">
@@ -23,25 +35,12 @@ const emit = defineEmits<Emits>()
         blockInfo.options.styles,
         marginStyles(blockInfo.options)
       ]">
-        <RichTextEditor v-model="blockInfo.options.text" :styles="{
-          fontSize: blockInfo.options.fontSize,
-          letterSpacing: blockInfo.options.letterSpacing,
-          textColor: blockInfo.options.textColor,
-          lineHeight: blockInfo.options.lineHeight,
-        }" @onTextChange="emit('onTextChange', $event)" />
+        <RichTextEditor v-model="blockInfo.options.text" :options="blockInfo.options"
+          @onTextChange="emit('onTextChange', $event)" />
       </div>
     </template>
     <template v-else>
-      <div :class="blockInfo.options.cssClasses" :style="[
-        blockInfo.options.styles,
-        marginStyles(blockInfo.options),
-        {
-          fontSize: blockInfo.options.fontSize ? `${blockInfo.options.fontSize}rem` : undefined,
-          color: blockInfo.options.textColor,
-          lineHeight: blockInfo.options.lineHeight,
-          letterSpacing: blockInfo.options.letterSpacing ? `${blockInfo.options.letterSpacing}px` : undefined,
-        }
-      ]" v-html="blockInfo.options.text"></div>
+      <div :class="blockInfo.options.cssClasses" :style="getPreviewStyles()" v-html="blockInfo.options.text"></div>
     </template>
   </BasePreview>
 </template>
