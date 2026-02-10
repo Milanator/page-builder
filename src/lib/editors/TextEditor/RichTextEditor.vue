@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import EditorMenu from "./EditorMenu.vue";
 import { FontFamily } from '@tiptap/extension-font-family'
-import { BubbleMenu, Editor, EditorContent } from "@tiptap/vue-3";
+import { BubbleMenu, Content, Editor, EditorContent } from "@tiptap/vue-3";
 import { StarterKit } from "@tiptap/starter-kit";
 import { Placeholder } from "@tiptap/extension-placeholder";
 import { computed, onBeforeUnmount, watch } from "vue";
@@ -49,19 +49,21 @@ const editor = new Editor({
   ],
   onUpdate: ({ editor }) => {
     if (textContainsJson(editor.getHTML())) {
+      // set previous value
+      updateEditorText(model.value as Content)
       return
     }
 
     isEditorChange = true
     model.value = editor.getHTML()
-    debounceText(editor.getHTML())
+    debounceText()
     isEditorChange = false
   }
 })
 
 const textStyles = computed(() => getTextStyles())
 
-const debounceText = debounce((value: string) => emit('onTextChange', value), 800)
+const debounceText = debounce(() => emit('onTextChange', model.value), 800)
 
 const textContainsJson = (html: EditorText) => html?.includes(`{"name":`)
 
@@ -72,6 +74,8 @@ const getTextStyles = () => ({
   letterSpacing: props.styles.letterSpacing ? `${props.styles.letterSpacing}px` : undefined,
 })
 
+const updateEditorText = (text: String | Content) => editor.commands.setContent(text, false)
+
 // detect change from parents
 watch(
   () => model.value,
@@ -80,7 +84,7 @@ watch(
       return
     }
 
-    editor.commands.setContent(value || '', false)
+    updateEditorText(value || '')
   }
 )
 

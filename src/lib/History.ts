@@ -1,7 +1,7 @@
 import { ref } from "vue"
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock"
 import { Block } from "@/lib/utils/types"
-import { deepClone } from "@/lib/utils/formatter"
+import { deepClone, sanitizeRenderList, sanitizeSettings } from "@/lib/utils/formatter"
 
 export type EditorState = {
     renderList: Block[]
@@ -31,7 +31,11 @@ export const useHistory = () => {
             past.value.shift()
         }
 
-        present.value = deepClone(nextState)
+        present.value = deepClone({
+            settings: sanitizeSettings(nextState.settings),
+            renderList: sanitizeRenderList(nextState.renderList),
+            selectedOptionComponent: nextState.selectedOptionComponent
+        })
         future.value = []
     }
 

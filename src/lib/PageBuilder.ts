@@ -94,11 +94,16 @@ export function usePageBuilder() {
         }
     };
 
-    const onDropChildElement = () => {
+    const onDropChildElement = (oldBlockId: string) => {
         console.log('onDropChildElement')
         if (innerDragElementIndex.value != null) {
             renderList.value.splice(innerDragElementIndex.value, 1)
         }
+
+        if (oldBlockId) {
+            deleteBlock(renderList.value, oldBlockId)
+        }
+
         draggedItem.value = null;
         dragOverIndex.value = null;
         innerDragElement.value = null;
@@ -147,36 +152,35 @@ export function usePageBuilder() {
 
     const onDelete = ($event: boolean) => {
         console.log('onDelete')
-
         if (!selectedOptionComponent.value?.id || !$event) return;
 
-        const deleteBlock = (blocks: Block[]): boolean => {
-            for (let i = 0; i < blocks.length; i++) {
-                const block = blocks[i];
+        deleteBlock(renderList.value, selectedOptionComponent.value.id);
+    };
 
-                if (block.id === selectedOptionComponent.value?.id) {
-                    blocks.splice(i, 1);
-                    selectedOptionComponent.value = null;
-                    return true;
-                }
+    const deleteBlock = (blocks: Block[], blockId: string): boolean => {
+        for (let i = 0; i < blocks.length; i++) {
+            const block = blocks[i];
 
-                // recursive finding
-                if (block.children) {
-                    if (Array.isArray(block.children)) {
-                        if (deleteBlock(block.children)) return true;
-                    } else if (typeof block.children === 'object') {
-                        for (const key in block.children) {
-                            if (Array.isArray(block.children[key])) {
-                                if (deleteBlock(block.children[key])) return true;
-                            }
+            if (block.id === blockId) {
+                blocks.splice(i, 1);
+                selectedOptionComponent.value = null;
+                return true;
+            }
+
+            // recursive finding
+            if (block.children) {
+                if (Array.isArray(block.children)) {
+                    if (deleteBlock(block.children, blockId)) return true;
+                } else if (typeof block.children === 'object') {
+                    for (const key in block.children) {
+                        if (Array.isArray(block.children[key])) {
+                            if (deleteBlock(block.children[key], blockId)) return true;
                         }
                     }
                 }
             }
-            return false;
-        };
-
-        deleteBlock(renderList.value);
+        }
+        return false;
     };
 
     const findBlockById = (blocks: Block[], findId: string): Block | null => {

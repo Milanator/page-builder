@@ -11,16 +11,15 @@ interface Props {
   blockInfo: ColumnBlock
   inEditor?: boolean
 }
-
-const props = defineProps<Props>()
-
-const emit = defineEmits<{
+interface Emits {
   (event: 'onSelectChildElement', value: Block): void;
   (event: 'onDragOverChildElement', value: boolean): void;
-  (event: 'onDropChildElement', value: boolean): void;
+  (event: 'onDropChildElement', blockId: string): void;
   (event: 'onTextChange', value: string | undefined): any,
-}>();
+}
 
+const props = defineProps<Props>()
+const emit = defineEmits<Emits>();
 const dragOverRow: Ref<number | null> = ref(null)
 const dragOverColumn: Ref<number | null> = ref(null)
 const innerDragElement: Ref<Block | null> = ref(null)
@@ -28,66 +27,105 @@ const innerDragColumn: Ref<number | null> = ref(null)
 const innerDragElementInbox: Ref<number | null> = ref(null)
 
 const onDrop = ($event: DragEvent, index: number): void => {
-  $event.preventDefault();
-  $event.stopPropagation();
-  const droppedItem = $event.dataTransfer?.getData('text/plain');
+  $event.preventDefault()
+  $event.stopPropagation()
+  const droppedData = $event.dataTransfer?.getData('text/plain')
+  if (!droppedData) return
 
-  if (!droppedItem) return;
+  const droppedBlock: Block = JSON.parse(droppedData)
+  const oldId = droppedBlock.id
+  // blocks with children cannot be dropped
+  if (droppedBlock.children) return
 
-  const parsedItem: Block = JSON.parse(droppedItem);
+  const targetColumn = (props.blockInfo.children[index] ??= [])
+  const insertAt = dragOverColumn.value
 
-  // If the dropped item has children, exit early
-  if (parsedItem.children) return;
+  const insertBlock = (block: Block) => {
+    if (insertAt == null) {
+      targetColumn.push(block)
+    } else {
+      targetColumn.splice(insertAt, 0, block)
+    }
+  }
 
-  const { value: innerElement } = innerDragElement;
-  const { value: innerColumn } = innerDragColumn;
-  const { value: innerElementInbox } = innerDragElementInbox;
-
-  console.log(`source: ${innerElementInbox} , target: ${dragOverColumn.value}`)
-
-  // Handle inner drag item
-  if (innerElement && innerColumn != null && innerElementInbox != null) {
-    console.log("it's an inner drag item dropped");
-    props.blockInfo.children[index] = props.blockInfo.children[index] || [];
-    const targetColumn = props.blockInfo.children[index];
-    if (innerElementInbox === dragOverColumn.value) {
-      // drag element and put into same order as before - keep same block as before
-      targetColumn.splice(dragOverColumn.value, 0, props.blockInfo.children[index]);
-      resetInnerDragState();
+  // inner drag - same column
+  if (innerDragElement.value && innerDragColumn.value != null && innerDragElementInbox.value != null) {
+    console.log("inner drag drop", `source: ${innerDragElementInbox.value}, target: ${insertAt}`)
+    if (innerDragElementInbox.value === insertAt) {
+      resetInnerDragState()
       return
     }
-    // Remove the dragged item from its original location
-    props.blockInfo.children[innerColumn].splice(innerElementInbox, 1);
-    // Insert the dragged item into the new location
-    if (dragOverColumn.value === null) {
-      targetColumn.push(parsedItem);
-    } else {
-      targetColumn.splice(dragOverColumn.value, 0, parsedItem);
-    }
-    // Reset drag states
-    resetInnerDragState();
-    return;
+
+    emit('onDropChildElement', oldId)
+    insertBlock(droppedBlock)
+    resetInnerDragState()
+    return
   }
 
-  // Handle external drag item
-  parsedItem.id = uuidv4();
-  props.blockInfo.children[index] = props.blockInfo.children[index] || [];
-  const targetColumn = props.blockInfo.children[index];
+  // drop between columns
+  droppedBlock.id = uuidv4()
+  insertBlock(droppedBlock)
 
-  if (dragOverColumn.value === null) {
-    targetColumn.push(parsedItem);
-    console.log('push')
-  } else {
-    targetColumn.splice(dragOverColumn.value, 0, parsedItem);
-    console.log('splice')
-  }
+  resetDragStates()
+  emit('onDropChildElement', oldId)
+  emit('onDragOverChildElement', false)
+}
 
-  // Reset drag states
-  resetDragStates();
+// const onDrop = ($event: DragEvent, index: number): void => {
+//   $event.preventDefault();
+//   $event.stopPropagation();
+//   const droppedItem = $event.dataTransfer?.getData('text/plain');
 
-  emit('onDropChildElement', true);
-  emit('onDragOverChildElement', false);
-};
+//   if (!droppedItem) return;
+
+//   const parsedItem: Block = JSON.parse(droppedItem);
+
+//   // If the dropped item has children, exit early
+//   if (parsedItem.children) return;
+
+//   const { value: innerElement } = innerDragElement;
+//   const { value: innerColumn } = innerDragColumn;
+//   const { value: innerElementInbox } = innerDragElementInbox;
+
+//   // Handle inner drag item
+//   if (innerElement && innerColumn != null && innerElementInbox != null) {
+//     console.log("it's an inner drag item dropped");
+
+//     props.blockInfo.children[index] = props.blockInfo.children[index] || [];
+//     const targetColumn = props.blockInfo.children[index];
+
+//     // Remove the dragged item from its original location
+//     props.blockInfo.children[innerColumn].splice(innerElementInbox, 1);
+
+//     // Insert the dragged item into the new location
+//     if (dragOverColumn.value === null) {
+//       targetColumn.push(parsedItem);
+//     } else {
+//       targetColumn.splice(dragOverColumn.value, 0, parsedItem);
+//     }
+
+//     // Reset drag states
+//     resetInnerDragState();
+//     return;
+//   }
+
+//   // Handle external drag item
+//   parsedItem.id = uuidv4();
+//   props.blockInfo.children[index] = props.blockInfo.children[index] || [];
+//   const targetColumn = props.blockInfo.children[index];
+
+//   if (dragOverColumn.value === null) {
+//     targetColumn.push(parsedItem);
+//   } else {
+//     targetColumn.splice(dragOverColumn.value, 0, parsedItem);
+//   }
+
+//   // Reset drag states
+//   resetDragStates();
+
+//   emit('onDropChildElement', true);
+//   emit('onDragOverChildElement', false);
+// };
 
 const resetInnerDragState = () => {
   innerDragElement.value = null;
@@ -162,7 +200,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
           <component :is="previewComponentMap[item.name]" :blockInfo="item" :inEditor="inEditor" :draggable="!!inEditor"
             @dragover="onDragOverColumn($event, columnIndex)" @dragstart="onDragStart($event, item, index, columnIndex)"
             @click="onRenderItemClick($event, item)" @onSelectChildElement="onSelectNestedChildElement"
-            @onTextChange="emit('onTextChange', $event)">
+            @onTextChange="emit('onTextChange', $event)" @onDropChildElement="emit('onDropChildElement', $event)">
           </component>
         </template>
       </div>
