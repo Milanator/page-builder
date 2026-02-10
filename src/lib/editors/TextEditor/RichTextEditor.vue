@@ -65,7 +65,7 @@ const textStyles = computed(() => getTextStyles())
 
 const debounceText = debounce(() => emit('onTextChange', model.value), 800)
 
-const textContainsJson = (html: EditorText) => html?.includes(`{"name":`)
+const textContainsJson = (html: EditorText) => html?.includes(`{"name":`) || html?.includes(`{"id":`)
 
 const getTextStyles = () => ({
   '--editor-line-height': props.styles.lineHeight || 1,
