@@ -14,8 +14,8 @@ interface Props {
 interface Emits {
   (event: 'onSelectChildElement', value: Block): void;
   (event: 'onDragOverChildElement', value: boolean): void;
-  (event: 'onDropChildElement', blockId: string): void;
-  (event: 'onTextChange', value: string | undefined): any,
+  (event: 'onDropChildElement', value: string): void;
+  (event: 'onTextChange', value: string): any,
 }
 
 const props = defineProps<Props>()
@@ -56,7 +56,10 @@ const onDrop = ($event: DragEvent, index: number): void => {
       return
     }
 
-    emit('onDropChildElement', oldId)
+    if (oldId) {
+      emit('onDropChildElement', oldId)
+    }
+
     insertBlock(droppedBlock)
     resetInnerDragState()
     return
@@ -67,8 +70,10 @@ const onDrop = ($event: DragEvent, index: number): void => {
   insertBlock(droppedBlock)
 
   resetDragStates()
-  emit('onDropChildElement', oldId)
   emit('onDragOverChildElement', false)
+  if (oldId) {
+    emit('onDropChildElement', oldId)
+  }
 }
 
 // const onDrop = ($event: DragEvent, index: number): void => {
