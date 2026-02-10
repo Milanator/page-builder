@@ -8,8 +8,8 @@ import BasePreview from "./block-components/BasePreview.vue";
 import BaseOption from '@/lib/block-components/BaseOption.vue';
 import { SettingBlock } from "@/lib/utils/blocks/SettingBlock.ts";
 
-export * from "./utils/types";
-export * from "./utils/registry";
+export * from "@/lib/utils/types"
+export * from "@/lib/utils/registry";
 
 export {
     PageBuilder,

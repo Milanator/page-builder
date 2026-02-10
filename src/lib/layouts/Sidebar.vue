@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { usePageBuilder } from "../PageBuilder.ts";
-import { blockRegistry } from "../utils/registry.ts";
-import type { Block } from "../utils/types.ts";
+import { blockRegistry } from "@/lib/utils/registry";
+import type { Block } from "@/lib/utils/types"
 import { useTranslator } from '@/lib/Translator';
+import ToolTip from "@/lib/partials/ToolTip.vue";
 
 const { startDrag } = usePageBuilder()
 const { t } = useTranslator();

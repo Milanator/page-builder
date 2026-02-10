@@ -1,4 +1,4 @@
-import { Block, BlockType, BorderRadiusOptions, MarginOptions, VueComponent } from "../types.ts";
+import { Block, BlockType, BorderRadiusOptions, MarginOptions, VueComponent } from "@/lib/utils/types"
 import { registerBlock } from "@/lib/utils/registry.ts";
 import { markRaw } from "vue";
 import ImageOptionComponent from "@/lib/block-components/image/ImageOptionComponent.vue";

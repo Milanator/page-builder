@@ -1,4 +1,4 @@
-import { BackgroundOptions, Block, BlockType, VueComponent } from "../types.ts";
+import { BackgroundOptions, Block, BlockType, VueComponent } from "@/lib/utils/types"
 import { registerBlock } from "@/lib/utils/registry.ts";
 import { markRaw } from "vue";
 import SettingOptionComponent from "@/lib/block-components/setting/SettingOptionComponent.vue";

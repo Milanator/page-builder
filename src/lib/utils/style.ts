@@ -22,12 +22,12 @@ export const borderRadiusStyles = (options: BorderRadiusOptions) => ({
     borderTopLeftRadius: options.borderTopLeftRadius ? `${options.borderTopLeftRadius}px` : undefined,
 })
 
-export const background = (options: BackgroundOptions) => ({
+export const background = (options: BackgroundOptions) => (options?.backgroundImage ? {
     backgroundImage: `url(${options.backgroundImage})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center'
-})
+} : {})
 
 export const backgroundColorOverlay = (options: { backgroundColor?: string | null }) => (options?.backgroundColor ? {
     boxShadow: `inset 0 0 0 1000px ${options.backgroundColor}`

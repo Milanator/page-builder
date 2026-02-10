@@ -1,5 +1,5 @@
 import { Ref, ref } from 'vue';
-import { Block, VueComponent } from "./types.ts";
+import { Block, VueComponent } from "@/lib/utils/types"
 
 // Registry to store registered blocks
 export const blockRegistry: Ref<Block[]> = ref<Block[]>([]);

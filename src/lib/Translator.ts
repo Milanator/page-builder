@@ -1,6 +1,6 @@
 import sk from '../lang/sk.json'
 import en from '../lang/en.json'
-import { Language } from './utils/types'
+import { Language } from "@/lib/utils/types"
 import { useConfig } from '@/store/Config.ts';
 
 interface MessageSet {
