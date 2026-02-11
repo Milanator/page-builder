@@ -73,7 +73,7 @@ const getEditorTextStyles = () => ({
   color: props.options.textColor ? props.options.textColor : undefined,
   fontSize: props.options.fontSize ? `${props.options.fontSize}rem` : undefined,
   letterSpacing: props.options.letterSpacing ? `${props.options.letterSpacing}px` : undefined,
-  textAlign: props.options.textAlign ?? 'left',
+  // textAlign: props.options.textAlign ?? 'left',
   fontFamily: (props.options.fontFamily ?? FONTS[FONTS.length - 1]).value
 })
 

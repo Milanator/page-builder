@@ -42,7 +42,7 @@ export const FONTS: FONT_TYPE[] = [
 
 export type EditorOptions = {
     textColor: string;
-    textAlign?: TextAlign
+    // textAlign?: TextAlign
     fontSize: number;
     lineHeight?: number
     letterSpacing?: number
@@ -55,8 +55,6 @@ type BaseOptions = {
     styles?: string;
 };
 
-export type TextAlign = 'left' | 'center' | 'right'
-
 export type TextOptions = BaseOptions & MarginOptions & EditorOptions
 
 export class TextBlock implements Block {
@@ -67,7 +65,7 @@ export class TextBlock implements Block {
         text: "",
         cssClasses: "",
         styles: "",
-        textAlign: 'left',
+        // textAlign: 'left',
         lineHeight: 1.4,
         letterSpacing: 0,
         fontSize: 1, //rem

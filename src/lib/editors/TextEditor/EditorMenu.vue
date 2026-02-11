@@ -2,13 +2,15 @@
 import { onMounted, ref } from "vue";
 import type { Editor } from "@tiptap/vue-3";
 import ColorPicker from "@/lib/block-components/partials/ColorPicker.vue";
-import { TextOptions, FONT_TYPE, FONTS, TextAlign } from "@/lib/utils/blocks/TextBlock";
+import { TextOptions, FONT_TYPE, FONTS } from "@/lib/utils/blocks/TextBlock";
 
 interface Props {
   editor: Editor;
   bubbleMenu: boolean;
   options: TextOptions
 }
+
+export type TextAlign = 'left' | 'center' | 'right'
 
 const props = defineProps<Props>();
 const textColor = ref<string>(props.options.textColor)
@@ -68,8 +70,8 @@ onMounted(() => {
   textColor.value = props.editor.getAttributes('textStyle').color ?? props.options.textColor
   fontFamily.value = props.options.fontFamily ?? FONTS[FONTS.length - 1]
   onChangeColor(textColor.value)
-  onChangeFont(fontFamily.value)
-  onChangeAlignment(props.options.textAlign ?? 'left')
+  // onChangeFont(fontFamily.value)
+  // onChangeAlignment(props.options.textAlign ?? 'left')
 })
 </script>
 <template>

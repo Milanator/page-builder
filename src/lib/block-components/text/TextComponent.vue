@@ -23,7 +23,7 @@ const getPreviewStyles = () => ([
     fontSize: props.blockInfo.options.fontSize ? `${props.blockInfo.options.fontSize}rem` : undefined,
     color: props.blockInfo.options.textColor,
     lineHeight: props.blockInfo.options.lineHeight,
-    textAlign: props.blockInfo.options?.textAlign ?? 'left',
+    // textAlign: props.blockInfo.options?.textAlign ?? 'left',
     letterSpacing: props.blockInfo.options.letterSpacing ? `${props.blockInfo.options.letterSpacing}px` : undefined,
   }
 ])

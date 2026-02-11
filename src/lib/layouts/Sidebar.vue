@@ -42,18 +42,8 @@ const filteredBasicElements = computed(() => {
   )
 })
 
-const filteredLayoutElements = computed(() => {
+const filteredLayoutComponents = computed(() => {
   const elements = blockRegistry.value.filter((el: Block) => el.type === 'layout')
-  if (!searchTerm.value.trim()) return elements
-
-  const search = searchTerm.value.toLowerCase()
-  return elements.filter((element: Block) =>
-    element.name.toLowerCase().includes(search)
-  )
-})
-
-const filteredUIComponents = computed(() => {
-  const elements = blockRegistry.value.filter((el: Block) => el.type === 'ui-component')
   if (!searchTerm.value.trim()) return elements
 
   const search = searchTerm.value.toLowerCase()
@@ -98,44 +88,12 @@ const filteredUIComponents = computed(() => {
         </div>
       </div>
 
-      <!-- Layout Elements -->
-      <div v-if="filteredLayoutElements.length > 0" class="bcpb:px-6 bcpb:py-6 bcpb:border-t bcpb:border-gray-100">
-        <h3 class="bcpb:text-xs bcpb:text-gray-400 bcpb:mb-4 bcpb:tracking-wide">{{ t('Layout') }}</h3>
-        <div class="bcpb:space-y-3">
-          <div v-for="element in filteredLayoutElements" :key="element.id" draggable="true"
-            @dragstart="handleDragStart($event, element)" @dragend="handleDragEnd" :class="`element-${element.name}`"
-            class="drag-item group bcpb:bg-white bcpb:border bcpb:border-gray-100 bcpb:rounded-xl bcpb:p-4 bcpb:cursor-grab hover:bcpb:cursor-grab active:bcpb:cursor-grabbing hover:bcpb:border-indigo-300 hover:bcpb:bg-gradient-to-r hover:bcpb:from-indigo-50/70 hover:bcpb:to-indigo-100/50 hover:bcpb:shadow-md hover:bcpb:shadow-indigo-100/50 hover:bcpb:-translate-y-1 hover:bcpb:scale-[1.02] bcpb:transition-all bcpb:duration-300 bcpb:ease-out active:bcpb:scale-[0.98] active:bcpb:shadow-lg active:bcpb:shadow-indigo-200/60 active:bcpb:border-indigo-400">
-            <div class="bcpb:flex bcpb:items-center bcpb:space-x-3">
-              <div
-                class="bcpb:w-10 bcpb:h-10 bcpb:bg-gradient-to-br bcpb:from-indigo-50 bcpb:to-indigo-100 bcpb:rounded-lg bcpb:flex bcpb:items-center bcpb:justify-center group-hover:bcpb:from-indigo-100 group-hover:bcpb:to-indigo-200 group-hover:bcpb:shadow-sm bcpb:transition-all bcpb:duration-300">
-                <div
-                  class="bcpb:text-blue-600 group-hover:bcpb:text-blue-700 group-hover:bcpb:scale-110 bcpb:transition-all bcpb:duration-300"
-                  v-html="element.icon"></div>
-              </div>
-              <div class="bcpb:flex-1 bcpb:flex bcpb:justify-between bcpb:items-center">
-                <p
-                  class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-indigo-900 bcpb:transition-colors bcpb:duration-200">
-                  {{ t(element.title) }}
-                </p>
-                <ToolTip v-if="element.exampleImage" :text="t('preview_image_tooltip')">
-                  <button type="button"
-                    class="bcpb:mr-0 flex bcpb:items-center bcpb:gap-1 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer"
-                    @click="exampleModal = element.exampleImage">
-                    <img src="@/assets/icons/visibility.svg" alt="Eye" class="bcpb:w-4 bcpb:h-4">
-                  </button>
-                </ToolTip>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
       <!-- Components -->
-      <div v-if="filteredUIComponents.length > 0" class="bcpb:px-6 bcpb:py-6 bcpb:border-t bcpb:border-gray-100">
-        <h3 class="bcpb:text-sm bcpb:font-semibold bcpb:text-gray-900 bcpb:mb-4 bcpb:uppercase bcpb:tracking-wide">
+      <div v-if="filteredLayoutComponents.length > 0" class="bcpb:px-6 bcpb:py-6 bcpb:border-t bcpb:border-gray-100">
+        <h3 class="bcpb:text-xs bcpb:text-gray-400 bcpb:mb-4 bcpb:tracking-wide">
           {{ t('components') }}</h3>
         <div class="bcpb:space-y-3">
-          <div v-for="element in filteredUIComponents" :key="element.id" draggable="true"
+          <div v-for="element in filteredLayoutComponents" :key="element.id" draggable="true"
             @dragstart="handleDragStart($event, element)" @dragend="handleDragEnd"
             class="drag-item group bcpb:bg-white bcpb:border bcpb:border-gray-100 bcpb:rounded-xl bcpb:p-4 bcpb:cursor-grab hover:bcpb:cursor-grab active:bcpb:cursor-grabbing hover:bcpb:border-teal-300 hover:bcpb:bg-gradient-to-r hover:bcpb:from-teal-50/70 hover:bcpb:to-teal-100/50 hover:bcpb:shadow-md hover:bcpb:shadow-teal-100/50 hover:bcpb:-translate-y-1 hover:bcpb:scale-[1.02] bcpb:transition-all bcpb:duration-300 bcpb:ease-out active:bcpb:scale-[0.98] active:bcpb:shadow-lg active:bcpb:shadow-teal-200/60 active:bcpb:border-teal-400">
             <div class="bcpb:flex bcpb:items-center bcpb:space-x-3">
@@ -150,7 +108,7 @@ const filteredUIComponents = computed(() => {
               <div class="bcpb:flex-1 bcpb:flex bcpb:justify-between bcpb:items-center">
                 <p
                   class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-teal-900 bcpb:transition-colors bcpb:duration-200">
-                  {{ element.title }}</p>
+                  {{ t(element.title) }}</p>
                 <ToolTip v-if="element.exampleImage" :text="t('preview_image_tooltip')">
                   <button type="button"
                     class="bcpb:mr-0 flex bcpb:items-center bcpb:gap-1 bcpb:hover:bg-slate-50 bcpb:px-4 bcpb:py-2 bcpb:rounded-md bcpb:transition-all bcpb:duration-200 bcpb:text-black hover:bcpb:text-gray-900 bcpb:text-sm bcpb:font-medium bcpb:cursor-pointer"
@@ -165,8 +123,7 @@ const filteredUIComponents = computed(() => {
       </div>
 
       <!-- No results message -->
-      <div
-        v-if="searchTerm.trim() && filteredBasicElements.length === 0 && filteredLayoutElements.length === 0 && filteredUIComponents.length === 0"
+      <div v-if="searchTerm.trim() && filteredBasicElements.length === 0 && filteredLayoutComponents.length === 0"
         class="bcpb:px-6 bcpb:py-12 bcpb:text-center">
         <div class="bcpb:text-gray-400 bcpb:mb-3">
           <svg class="bcpb:w-12 bcpb:h-12 bcpb:mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
